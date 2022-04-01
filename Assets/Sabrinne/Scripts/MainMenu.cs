@@ -13,28 +13,28 @@ public class MainMenu : MonoBehaviour
     //Carrega a cena da primeira fase
     public void PlayLevel1()
     {
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene(1);
     }
 
-    //Carrega painel de configurações
+    //Carrega painel de configuraï¿½ï¿½es
     public void Options()
     {
         OptionsPanel.SetActive(true);
     }
 
-    //Fecha painel de configurações
+    //Fecha painel de configuraï¿½ï¿½es
     public void CloseOptions()
     {
         OptionsPanel.SetActive(false);
     }
 
-    //Carrega painel de créditos
+    //Carrega painel de crï¿½ditos
     public void Credits()
     {
         CreditsPanel.SetActive(true);
     }
 
-    //Fecha painel de crétidos
+    //Fecha painel de crï¿½tidos
     public void CloseCredits()
     {
         CreditsPanel.SetActive(false);

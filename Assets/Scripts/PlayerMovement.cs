@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -16,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _velocity;
     private Vector3 _desiredVelocity;
+    private bool isAttacking;
+    [SerializeField] private Animator _animator;
     
     private void Awake()
     {
@@ -38,7 +42,27 @@ public class PlayerMovement : MonoBehaviour
         {
             _desiredVelocity = new Vector3(playerInput.x, 0, playerInput.y) * maxSpeed;
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack();
+        }
         Turning();
+    }
+
+    private void Attack()
+    {
+        Debug.Log("Trying to attack");
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            _animator.SetTrigger("Attack");
+        }
+    }
+
+    public void SetEndAnimationAttack()
+    {
+        isAttacking = false;
     }
     private void FixedUpdate()
     {
