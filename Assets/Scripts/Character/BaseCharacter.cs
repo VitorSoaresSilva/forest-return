@@ -1,111 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using UnityEngine;
+using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Attributes;
-using DefaultNamespace.UI;
-using Interactable;
-using UnityEngine;
-using Weapons;
 using Attribute = Attributes.Attribute;
 
 namespace Character 
 {
-    // [RequireComponent(typeof(WeaponManager))]
     public class BaseCharacter : MonoBehaviour, IDamageable
     {
         public Attribute[] attributes;
-        public CharacterStatScriptableObject characterStats; //flag 
-        public AttributeModifier[] _baseModifiers;
-        [SerializeField] private int CurrentHealth = 0;
-        [SerializeField] private int CurrentMana = 0;
-        [SerializeField] private int CurrentStamina = 0;
-        [SerializeField] private int CurrentDamage = 0;
-        [SerializeField] private int CurrentTrueDamage = 0;
-        private WeaponManager _weaponManager;
+        [SerializeField] private CharacterStatScriptableObject characterStats; 
+        [SerializeField] private AttributeModifier[] baseModifiers;
+        public int CurrentHealth
+        {
+            get => attributes[(int) AttributeType.Health].CurrentValue;
+            private set => attributes[(int) AttributeType.Health].CurrentValue = value;
+        }
+        public int CurrentStamina
+        {
+            get => attributes[(int) AttributeType.Stamina].CurrentValue;
+            private set => attributes[(int) AttributeType.Stamina].CurrentValue = value;
+        }
+        public int CurrentMana
+        {
+            get => attributes[(int) AttributeType.Mana].CurrentValue;
+            private set => attributes[(int) AttributeType.Mana].CurrentValue = value;
+        }
 
-        public UiManager UiManager;
-        // [SerializeField] private Animator _animator;
-        
-        private void Awake()    
+        protected virtual void Awake()    
         {
             attributes = new Attribute[(int) AttributeType.COUNT];
+            // Create the Attributes based on enum: AttributeType
             for (int i = 0; i < (int)AttributeType.COUNT; ++i)
             {
                 int value = 0;
                 var field = typeof(CharacterStatScriptableObject).GetField(
-                    Enum.GetName(typeof(AttributeType), (AttributeType) i), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly  | BindingFlags.IgnoreCase);
+                    Enum.GetName(typeof(AttributeType), (AttributeType) i)!, BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly  | BindingFlags.IgnoreCase);
                 if (field!=null)
                 {
                     value = (int) (field.GetValue(characterStats) ?? 0);
                 }
-                attributes[i] = new Attribute(value);
+                attributes[i] = new Attribute(value,(AttributeType)i);
             }
-            for (int i = 0; i < _baseModifiers.Length; i++)
+            // Add base modifiers set on Inspector
+            for (int i = 0; i < baseModifiers.Length; i++)
             {
-                attributes[(int)_baseModifiers[i].type].AddModifier(_baseModifiers[i].value);
+                attributes[(int)baseModifiers[i].type].AddModifier(baseModifiers[i].value);
             }
-            _weaponManager = GetComponent<WeaponManager>();
-            attributes[(int) AttributeType.Health].changedValue.AddListener(HandleHealthChanged);
-            attributes[(int) AttributeType.Mana].changedValue.AddListener(HandleManaChanged);
-            attributes[(int) AttributeType.Stamina].changedValue.AddListener(HandleStaminaChanged);
-            attributes[(int) AttributeType.Attack].changedValue.AddListener(HandleDamageChanged);
-            attributes[(int) AttributeType.TrueDamageAttack].changedValue.AddListener(HandleTrueDamageChanged);
-           
-            HandleHealthChanged();
-            HandleManaChanged();
-            HandleStaminaChanged();
-            HandleTrueDamageChanged();
-            HandleDamageChanged();
-            
         }
-
+        
         public void TakeDamage(DataDamage dataDamage)
         {
-            int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].CurrentValue;
+            int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
             CurrentHealth -= (damageTaken + dataDamage.trueDamage);
             if (CurrentHealth <= 0)
             {
                 Debug.Log("Dead");
-            }
-        }
-
-        public void HandleHealthChanged()
-        {
-            CurrentHealth = attributes[(int) AttributeType.Health].CurrentValue;
-            UiManager.health.text = "Health :" + CurrentHealth;
-        }
-        public void HandleManaChanged()
-        {
-            CurrentMana = attributes[(int) AttributeType.Mana].CurrentValue;
-            UiManager.mana.text = "Mana :" + CurrentMana;
-        }
-        public void HandleStaminaChanged()
-        {
-            CurrentStamina = attributes[(int) AttributeType.Stamina].CurrentValue;
-            UiManager.stamina.text = "Stamina :" + CurrentStamina;
-        }
-        public void HandleDamageChanged()
-        {
-            CurrentDamage = attributes[(int) AttributeType.Attack].CurrentValue;
-            UiManager.damage.text = "Damage :" + CurrentDamage;
-        }
-        public void HandleTrueDamageChanged()
-        {
-            CurrentTrueDamage = attributes[(int) AttributeType.TrueDamageAttack].CurrentValue;
-            UiManager.trueDamage.text = "True Damage :" + CurrentTrueDamage;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out IDamageable component))
-            {
-                component.TakeDamage(_weaponManager.DataDamage);
-            }else if (other.TryGetComponent(out IInteractable interactable))
-            {
-                interactable.Interact();
             }
         }
     }
