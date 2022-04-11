@@ -7,38 +7,60 @@ using UnityEngine.Events;
 namespace Attributes
 {
     [Serializable]
-    public struct Attribute
+    public class Attribute
     {
-        public int BaseValue { get; set; }
-        public int CurrentValue { get; set; }
+        public AttributeType Type { get; private set; }
+        public delegate void ChangedValue(Attribute attribute);
+        public ChangedValue ChangedMaxValue;
+        public ChangedValue ChangedCurrentValue;
         private List<int> _modifiers;
-        public UnityEvent changedValue;
-        public Attribute(int baseValue)
+        public int BaseValue { get; private set; }
+        private int _maxValue;
+        public int MaxValue
         {
-            BaseValue = baseValue;
-            CurrentValue = baseValue;
-            _modifiers = new List<int>();
-            changedValue = new UnityEvent();
-            UpdateValue();
-        }
-        private void UpdateValue()
-        {
-            CurrentValue = Mathf.Max(BaseValue + _modifiers.Sum(),0);
-            changedValue?.Invoke();
+            get => _maxValue;
+            private set
+            {
+                _maxValue = Mathf.Max(value,0);
+                ChangedMaxValue?.Invoke(this);                
+            }
         }
 
+        private int _currentValue;
+        public int CurrentValue
+        {
+            get => _currentValue;
+            set
+            {
+                _currentValue = Mathf.Clamp(value,0,MaxValue);
+                ChangedCurrentValue?.Invoke(this);
+            }
+        }
+        public Attribute(int baseValue, AttributeType type)
+        {
+            BaseValue = MaxValue = CurrentValue = baseValue;
+            Type = type;
+            _modifiers = new List<int>();
+            UpdateMaxValue();
+        }
+        
+        private void UpdateMaxValue()
+        {
+            int oldValue = MaxValue;
+            MaxValue = BaseValue + _modifiers.Sum();
+            CurrentValue += MaxValue - oldValue;
+        }
         public void AddModifier(int newModifier)
         {
             if (newModifier == 0) return;
             _modifiers.Add(newModifier);
-            UpdateValue();
+            UpdateMaxValue();
         }
-
         public void RemoveModifier(int newModifier)
         {
             if (newModifier == 0) return;
             _modifiers.Remove(newModifier);
-            UpdateValue();
+            UpdateMaxValue();
         }
     }
 }
