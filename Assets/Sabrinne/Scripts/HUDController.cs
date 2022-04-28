@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HUDController : MonoBehaviour
 {
+    public GameObject InventarioPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,15 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OpenInventario()
+    {
+        InventarioPanel.SetActive(true);
+    }
+
+    public void CloseInventario()
+    {
+        InventarioPanel.SetActive(false);
     }
 }

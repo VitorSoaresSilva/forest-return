@@ -242,30 +242,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224782304001939320, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 3968686431655333820, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1617253227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bde5bc055529b6f4daa84d7e864c5cdf, type: 3}
 --- !u!224 &364622220 stripped
@@ -354,7 +334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 371931454}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1617253227}
+        m_TargetAssemblyTypeName: HUDController, Assembly-CSharp
+        m_MethodName: OpenInventario
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &371931454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -72, y: 55.299988}
+  m_AnchoredPosition: {x: -72, y: 55.30005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458922822
@@ -1233,6 +1225,7 @@ GameObject:
   - component: {fileID: 1617253225}
   - component: {fileID: 1617253224}
   - component: {fileID: 1617253223}
+  - component: {fileID: 1617253227}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -1324,6 +1317,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1617253227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617253222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447d46aaadc2f9f4e88b65a153e713a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventarioPanel: {fileID: 1364507329}
 --- !u!1 &1819410771
 GameObject:
   m_ObjectHideFlags: 0
