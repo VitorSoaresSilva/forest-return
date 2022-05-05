@@ -1,0 +1,62 @@
+Spawn de inimigos
+
+
+Quero que algumas salas já possuam inimigos 
+
+
+Melee
+Range de ataque dele é pequeno
+
+range ataque: 2
+
+
+min: 5
+max: 8
+
+
+
+ficar seguindo o player
+quando puder atacar, ele vai entrar no modo de ataque e se aproximar
+
+
+
+O NavMeshAgent
+StopDistance
+
+MinDistance
+
+
+
+
+Ativei o Chasing
+Pegar a posição do inimigo
+a posição do player
+vetor de direção
+
+sortear uma posição num range enter o min e o max
+
+
+
+
+Inimigo percebeu o player?
+    - avisar os outros inimigos da sala (depois)
+tenta se aproximar
+chegou no range de ataque & pode atacar -> ataque
+    - diminuir o StopingDistance
+    - atacar
+    
+    
+    
+    
+State machine Rode com frequencia baixa
+    
+IDLE
+    Ao perceber a presença do player
+    Vou pegar um ponto proximo ao player - Stopping Distance - Fique preso
+        Pegar um ponto e um float de tempo
+            Quando o tempo acabar
+                Sortear um "atacar" || "Mover"
+    
+    
+
+

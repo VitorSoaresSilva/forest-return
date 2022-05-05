@@ -20,7 +20,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _desiredVelocity;
     private bool isAttacking;
     [SerializeField] private Animator _animator;
-    
+    private PlayerInput _playerInput;
+
+    private const string IsWalking = "isWalking";
+    private const string AnimatorVelocity = "Direction";
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -28,26 +31,57 @@ public class PlayerMovement : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
+
+        if (playerInputSpace == null)
+        {
+            playerInputSpace.position = new Vector3(Vector3.forward.x, 0, Vector3.right.z);
+        }
+        _playerInput = new PlayerInput();
     }
+
+    private void OnEnable()
+    {
+        _playerInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.Disable();
+    }
+
     void Update()
     {
-        Vector2 playerInput;
-        playerInput.x = Input.GetAxis("Horizontal");
-        playerInput.y = Input.GetAxis("Vertical");
+        // Vector2 playerInput;
+        // playerInput.x = Input.GetAxis("Horizontal");
+        // playerInput.y = Input.GetAxis("Vertical");
+        var playerInput = _playerInput.gameplay.move.ReadValue<Vector2>();
         playerInput = Vector2.ClampMagnitude(playerInput, 1);
-        if (playerInputSpace)
-        {
-            _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
-        }else
-        {
-            _desiredVelocity = new Vector3(playerInput.x, 0, playerInput.y) * maxSpeed;
-        }
+        _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
+        
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        // if (Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     Attack();
+        // }
+
+        // Move(playerInput);
+        _animator.SetBool(IsWalking,_velocity.magnitude > 0.01f);
+        _animator.SetFloat(AnimatorVelocity,Vector3.Dot(_desiredVelocity.normalized,playerInputSpace.forward));
+        // Turning();
+    }
+
+    private void Move(Vector2 direction)
+    {
+        if (direction.sqrMagnitude < 0.01)
         {
-            Attack();
+            return;
         }
-        Turning();
+        var scaledMoveSpeed = maxSpeed * Time.deltaTime;
+        // var move = Quate
+        // var move = Quate
+        // Debug.Log("opa " + scaledMoveSpeed);
+        var move = Quaternion.Euler(0, transform.eulerAngles.y, 0) * new Vector3(direction.x, 0, direction.y);
+        transform.position += move * scaledMoveSpeed;
     }
 
     private void Attack()
