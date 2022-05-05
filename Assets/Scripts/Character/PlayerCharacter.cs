@@ -22,11 +22,17 @@ namespace Character
         #region  HandleChangeValues
             private void HandleAttributeMaxValueChanged(Attribute attribute)
             {
-                UiManager.Instance.UpdateMaxValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
+                if (UiManager.Instance != null)
+                {
+                    UiManager.Instance.UpdateMaxValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
+                }
             }
             private void HandleAttributeCurrentValueChanged(Attribute attribute)
             {
-                UiManager.Instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
+                if (UiManager.Instance != null)
+                {
+                    UiManager.Instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
+                }
             }
         #endregion
 
