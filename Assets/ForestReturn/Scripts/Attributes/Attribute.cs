@@ -32,13 +32,18 @@ namespace Attributes
             get => _currentValue;
             set
             {
-                _currentValue = Mathf.Clamp(value,0,MaxValue);
+                _currentValue = value;
+                // Debug.Log(MaxValue + " " + CurrentValue + " " +value);
+                // _currentValue = Mathf.Max(value,0);
+                // _currentValue = Mathf.Min(_currentValue, MaxValue);
                 ChangedCurrentValue?.Invoke(this);
             }
         }
         public Attribute(int baseValue, AttributeType type)
         {
-            BaseValue = MaxValue = CurrentValue = baseValue;
+            BaseValue = baseValue;
+            MaxValue = baseValue;
+            CurrentValue = baseValue;
             Type = type;
             _modifiers = new List<int>();
             UpdateMaxValue();

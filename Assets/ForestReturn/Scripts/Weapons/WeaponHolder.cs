@@ -6,6 +6,7 @@ using Artifacts;
 using Attributes;
 using DefaultNamespace.UI;
 using Utilities;
+using Attribute = Attributes.Attribute;
 
 namespace Weapons
 {
@@ -18,10 +19,10 @@ namespace Weapons
         public Weapon Weapon { get =>  _weapon;
             set => _weapon = value;
         }
-        private DataDamage _dataDamage;
+        // private DataDamage _dataDamage;
         public DataDamage DataDamage {  
-            get => _dataDamage;
-            private set => _dataDamage = value;
+            get => new(_baseCharacter.attributes[(int)AttributeType.Attack].CurrentValue,
+                _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].CurrentValue);
         }
         protected void Awake()
         {

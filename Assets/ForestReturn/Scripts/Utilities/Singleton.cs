@@ -4,27 +4,30 @@ namespace Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public static T Instance { get; protected set; }
+        public static T instance { get; protected set; }
 
-        public static bool InstanceExists => Instance != null;
+        public static bool instanceExists
+        {
+            get => instance != null;
+        }
 
         protected virtual void Awake()
         {
-            if (InstanceExists)
+            if (instanceExists)
             {
                 Destroy(gameObject);
             }
             else
             {
-                Instance = (T)this;
+                instance = (T)this;
             }
         }
 
         protected virtual void OnDestroy()
         {
-            if (Instance == this)
+            if (instance == this)
             {
-                Instance = null;
+                instance = null;
             }
         }
     }

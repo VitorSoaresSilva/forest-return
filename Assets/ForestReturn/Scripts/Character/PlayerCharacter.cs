@@ -18,21 +18,24 @@ namespace Character
                HandleAttributeCurrentValueChanged(attribute);
            }
        }
-       
-        #region  HandleChangeValues
+
+       #region  HandleChangeValues
             private void HandleAttributeMaxValueChanged(Attribute attribute)
             {
-                if (UiManager.Instance != null)
-                {
-                    UiManager.Instance.UpdateMaxValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
-                }
+                Debug.Log(UiManager.instance.slots.Length);
+                UiManager.instance.UpdateMaxValueAttribute(attribute.Type, attributes[(int)attribute.Type].MaxValue);
+                // if (UiManager.Instance != null)
+                // {
+                // Debug.Log("HandleAttributeMaxValueChanged");
+                // }
             }
             private void HandleAttributeCurrentValueChanged(Attribute attribute)
             {
-                if (UiManager.Instance != null)
-                {
-                    UiManager.Instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
-                }
+                UiManager.instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
+                // if (UiManager.Instance != null)
+                // {
+                // Debug.Log("HandleAttributeCurrentValueChanged");
+                // }
             }
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using System.Reflection;
 using Attributes;
 using Attribute = Attributes.Attribute;
@@ -11,6 +12,7 @@ namespace Character
         public Attribute[] attributes;
         [SerializeField] private CharacterStatScriptableObject characterStats; 
         [SerializeField] private AttributeModifier[] baseModifiers;
+        private bool isIntangible = false;
         public int CurrentHealth
         {
             get => attributes[(int) AttributeType.Health].CurrentValue;
@@ -51,13 +53,26 @@ namespace Character
         
         public void TakeDamage(DataDamage dataDamage)
         {
+            if (isIntangible) return;
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
-            CurrentHealth -= (damageTaken + dataDamage.trueDamage);
-            if (CurrentHealth <= 0)
+            var damage = (damageTaken + dataDamage.trueDamage);
+            if (damage > 0)
             {
-                Debug.Log("Dead");
+                CurrentHealth -= damage;
+                StartCoroutine(nameof(IntangibleCooldown));
+                isIntangible = true;
+                if (CurrentHealth <= 0)
+                {
+                    Debug.Log("Dead");
+                }
             }
+        }
+
+        private IEnumerator IntangibleCooldown()
+        {
+            yield return new WaitForSeconds(2);
+            isIntangible = false;
         }
     }
 }
