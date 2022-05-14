@@ -57,6 +57,7 @@ namespace Character
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
             var damage = (damageTaken + dataDamage.trueDamage);
+            Debug.Log(damage);
             if (damage > 0)
             {
                 CurrentHealth -= damage;

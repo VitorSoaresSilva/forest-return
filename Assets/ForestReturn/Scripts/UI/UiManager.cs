@@ -17,10 +17,20 @@ namespace DefaultNamespace.UI
             public AttributeType type;
             public TextMeshProUGUI text;
             public string suffix;
-
-            public void ChangeText(int currentValue)
+            public string prefix;
+            public Slider slider;
+            public float currentValue;
+            public void ChangeText(int value)
             {
-                text.text = $"{suffix}: {currentValue}";
+                if (text != null)
+                {
+                    text.text = $"{suffix}{value}{prefix}";
+                }
+                if (slider != null)
+                {
+                    // lerp
+                    slider.value = value;
+                }
             }
 
             public int CompareTo(object obj)
@@ -48,6 +58,7 @@ namespace DefaultNamespace.UI
 
         public void UpdateMaxValueAttribute(AttributeType type, int value)
         {
+            
             attributesMax[(int) type].ChangeText(value);
         }
         public void UpdateCurrentValueAttribute(AttributeType type, int value)

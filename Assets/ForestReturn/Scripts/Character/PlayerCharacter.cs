@@ -32,10 +32,6 @@ namespace Character
             private void HandleAttributeCurrentValueChanged(Attribute attribute)
             {
                 UiManager.instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
-                // if (UiManager.Instance != null)
-                // {
-                // Debug.Log("HandleAttributeCurrentValueChanged");
-                // }
             }
         #endregion
 
