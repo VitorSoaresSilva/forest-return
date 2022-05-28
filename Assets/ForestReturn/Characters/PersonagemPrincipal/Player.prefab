@@ -3868,6 +3868,10 @@ GameObject:
   - component: {fileID: 1793335308211853643}
   - component: {fileID: 1793335308211853638}
   - component: {fileID: 1793335308211853639}
+  - component: {fileID: 5406269005323122186}
+  - component: {fileID: 1880011213474449047}
+  - component: {fileID: 4426115686716169999}
+  - component: {fileID: 5803109368422552634}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3958,14 +3962,15 @@ MonoBehaviour:
   maxSpeed: 5
   maxAcceleration: 8
   playerInputSpace: {fileID: 0}
-  _lastMouseRotation: {x: 0, y: 0, z: 0, w: 0}
+  lastMouseRotation: {x: 0, y: 0, z: 0, w: 0}
   rotationRatio: 0.1
-  mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 0}
   camRayLength: 100
   floorMask:
     serializedVersion: 2
     m_Bits: 64
-  _animator: {fileID: 1450824454397332856}
+  sphereInteractionRadius: 0
+  offsetInteract: {x: 0, y: 0, z: 0}
 --- !u!114 &1793335308211853638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3994,6 +3999,93 @@ MonoBehaviour:
   attributes: []
   characterStats: {fileID: 11400000, guid: 8be38213f0cdbac4e95bdaae208b0d1d, type: 2}
   baseModifiers: []
+--- !u!114 &5406269005323122186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793335308211853642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 142722722
+      Data2: 1267622678
+      Data3: 22499218
+      Data4: -1708293729
+    Path: event:/ambient/standard
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 0
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1880011213474449047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793335308211853642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: FloorCalm
+  Emitters:
+  - Target: {fileID: 5406269005323122186}
+    Params:
+    - Name: situation
+      Value: 0
+  TriggerEvent: 3
+--- !u!114 &4426115686716169999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793335308211853642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: floorBattle
+  Emitters:
+  - Target: {fileID: 5406269005323122186}
+    Params:
+    - Name: situation
+      Value: 1
+  TriggerEvent: 3
+--- !u!114 &5803109368422552634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793335308211853642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Enemi01
+  Emitters:
+  - Target: {fileID: 5406269005323122186}
+    Params:
+    - Name: Danger
+      Value: 30.4
+  TriggerEvent: 3
 --- !u!1 &1820226400175674434
 GameObject:
   m_ObjectHideFlags: 0
