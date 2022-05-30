@@ -1,4 +1,4 @@
-﻿namespace Attributes
+namespace Attributes
 {
     public enum AttributeType
     {

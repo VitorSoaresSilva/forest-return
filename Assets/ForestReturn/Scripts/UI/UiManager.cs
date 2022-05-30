@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Utilities;
 using Attribute = Attributes.Attribute;
 
-namespace DefaultNamespace.UI
+namespace UI
 {
     public class UiManager : Singleton<UiManager>
     {
@@ -17,19 +17,12 @@ namespace DefaultNamespace.UI
             public AttributeType type;
             public TextMeshProUGUI text;
             public string suffix;
-            public string prefix;
-            public Slider slider;
-            public float currentValue;
-            public void ChangeText(int value)
+
+            public void ChangeText(int currentValue)
             {
                 if (text != null)
                 {
-                    text.text = $"{suffix}{value}{prefix}";
-                }
-                if (slider != null)
-                {
-                    // lerp
-                    slider.value = value;
+                    text.text = $"{suffix}: {currentValue}";
                 }
             }
 
@@ -58,12 +51,17 @@ namespace DefaultNamespace.UI
 
         public void UpdateMaxValueAttribute(AttributeType type, int value)
         {
-            
-            attributesMax[(int) type].ChangeText(value);
+            if (attributesMax.Length > (int)type)
+            {
+                attributesMax[(int) type].ChangeText(value);
+            }
         }
         public void UpdateCurrentValueAttribute(AttributeType type, int value)
         {
-            attributesCurrent[(int) type].ChangeText(value);
+            if (attributesCurrent.Length > (int)type)
+            {
+                attributesCurrent[(int) type].ChangeText(value);
+            }
         }
     }
 }

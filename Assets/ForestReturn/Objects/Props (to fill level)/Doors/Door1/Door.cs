@@ -1,4 +1,4 @@
-using Interactable;
+// using Interactable;
 using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Door : MonoBehaviour
@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     [SerializeField] private bool isClosed;
     private static readonly int CloseDoor = Animator.StringToHash("CloseDoor");
     private static readonly int OpenDoor = Animator.StringToHash("OpenDoor");
-    [SerializeField] private KeysScriptableObject[] keysNeededToOpen;
+    // [SerializeField] private KeysScriptableObject[] keysNeededToOpen;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -28,24 +28,24 @@ public class Door : MonoBehaviour
         isClosed = true;
     }
 
-    public bool OpenWithKey(KeysScriptableObject[] keysPlayer)
-    {
-        foreach (var key in keysNeededToOpen)
-        {
-            var hasKey = false;
-            foreach (var keyPlayer in keysPlayer)
-            {
-                if (key == null || key.Equals(keyPlayer))
-                {
-                    hasKey = true;
-                }
-            }
-            if (!hasKey)
-            {
-                return false;
-            }
-        }
-        Open();
-        return true;
-    }
+    // public bool OpenWithKey(KeysScriptableObject[] keysPlayer)
+    // {
+    //     foreach (var key in keysNeededToOpen)
+    //     {
+    //         var hasKey = false;
+    //         foreach (var keyPlayer in keysPlayer)
+    //         {
+    //             if (key == null || key.Equals(keyPlayer))
+    //             {
+    //                 hasKey = true;
+    //             }
+    //         }
+    //         if (!hasKey)
+    //         {
+    //             return false;
+    //         }
+    //     }
+    //     Open();
+    //     return true;
+    // }
 }
