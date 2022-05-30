@@ -1,18 +1,18 @@
-﻿using UnityEngine;
 using System;
 using System.Collections;
 using System.Reflection;
+using UnityEngine;
 using Attributes;
 using Attribute = Attributes.Attribute;
 
-namespace Character 
+namespace Character
 {
-    public class BaseCharacter : MonoBehaviour, IDamageable
+    public class BaseCharacter : MonoBehaviour
     {
         public Attribute[] attributes;
         [SerializeField] private CharacterStatScriptableObject characterStats; 
         [SerializeField] private AttributeModifier[] baseModifiers;
-        private bool isIntangible = false;
+        protected bool isIntangible = false;
         public int CurrentHealth
         {
             get => attributes[(int) AttributeType.Health].CurrentValue;

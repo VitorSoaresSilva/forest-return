@@ -1,4 +1,4 @@
-using ForestReturn.Scripts.Managers;
+using Managers;
 using UnityEngine;
 
 namespace Interactable
@@ -9,7 +9,7 @@ namespace Interactable
         
         public void Interact()
         {
-            GameManager.instance.Player.HandleTeleportActivated(pointToTeleport.position);
+            GameManager.instance.PlayerMain.HandleTeleportActivated(pointToTeleport.position);
         }
         /*
          * Um broto no chão, que ao me aproximar dele e interagir, vou ter teletransportado para o outro ponto
