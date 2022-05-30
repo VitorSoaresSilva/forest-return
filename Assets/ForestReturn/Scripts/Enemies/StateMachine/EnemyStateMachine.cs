@@ -74,7 +74,8 @@ namespace Enemies.StateMachine
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<PlayerMain>(out var playerCharacter))
+            var playerCharacter = other.GetComponentInParent<PlayerMain>();
+            if (playerCharacter != null)
             {
                 if (canCauseDamage)
                 {
@@ -91,7 +92,8 @@ namespace Enemies.StateMachine
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent<PlayerMain>(out var playerCharacter))
+            var playerCharacter = other.GetComponentInParent<PlayerMain>();
+            if (playerCharacter != null)
             {
                 if (canCauseDamage)
                 {
