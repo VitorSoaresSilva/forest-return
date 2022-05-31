@@ -1,6 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8155919640597242933
+--- !u!114 &-8837546258092972318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/waterBubble
+  m_EditorClassIdentifier: 
+  Path: event:/waterBubble
+  Guid:
+    Data1: 121521532
+    Data2: 1191106305
+    Data3: 1046778011
+    Data4: 1374228559
+  Banks:
+  - {fileID: -6351121336962839538}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 124625
+--- !u!114 &-8655069995379791171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,15 +37,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: ../../fmod/waalk_run/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 637892446344580128
+  Path: waalk_run/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637895894292228716
   FileSizes:
   - Name: Desktop
-    Value: 10057568
+    Value: 1216
   Exists: 1
 --- !u!114 &-7438981866514030238
 MonoBehaviour:
@@ -44,7 +71,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-5660134333992044242
+--- !u!114 &-6351121336962839538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,15 +81,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
+  m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: 
-  Path: ../../fmod/waalk_run/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637892446334868957
+  Path: waalk_run/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 637895894303291368
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 10379680
   Exists: 1
 --- !u!114 &-5377690793794013788
 MonoBehaviour:
@@ -83,7 +110,7 @@ MonoBehaviour:
     Data3: -1980549457
     Data4: -1071148576
   Banks:
-  - {fileID: -8155919640597242933}
+  - {fileID: -6351121336962839538}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -93,7 +120,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2586476841839426009
+--- !u!114 &-3070706774919345097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,17 +129,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/fan
   m_EditorClassIdentifier: 
-  Path: ../../fmod/waalk_run/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637892446334898888
-  FileSizes:
-  - Name: Desktop
-    Value: 1136
-  Exists: 1
+  Path: event:/SFX/fan
+  Guid:
+    Data1: 470168690
+    Data2: 1233739504
+    Data3: -454503257
+    Data4: 487275844
+  Banks:
+  - {fileID: -6351121336962839538}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3765
 --- !u!114 &-461442391812802151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +171,26 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-405359940032345755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: waalk_run/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637895894292188837
+  FileSizes:
+  - Name: Desktop
+    Value: 1036
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,19 +204,21 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -2586476841839426009}
-  - {fileID: -5660134333992044242}
-  - {fileID: -8155919640597242933}
+  - {fileID: -8655069995379791171}
+  - {fileID: -405359940032345755}
+  - {fileID: -6351121336962839538}
   EditorEvents:
   - {fileID: 3093085885824607628}
   - {fileID: -5377690793794013788}
   - {fileID: 8141628737618813367}
+  - {fileID: -3070706774919345097}
+  - {fileID: -8837546258092972318}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -5660134333992044242}
+  - {fileID: -405359940032345755}
   StringsBanks:
-  - {fileID: -2586476841839426009}
-  cacheTime: 637892446344580128
+  - {fileID: -8655069995379791171}
+  cacheTime: 637895894303291368
   cacheVersion: 10
 --- !u!114 &429589329178989189
 MonoBehaviour:
@@ -207,7 +263,7 @@ MonoBehaviour:
     Data3: 22499218
     Data4: -1708293729
   Banks:
-  - {fileID: -8155919640597242933}
+  - {fileID: -6351121336962839538}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -285,7 +341,7 @@ MonoBehaviour:
     Data3: 2028395427
     Data4: -1188183537
   Banks:
-  - {fileID: -8155919640597242933}
+  - {fileID: -6351121336962839538}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
