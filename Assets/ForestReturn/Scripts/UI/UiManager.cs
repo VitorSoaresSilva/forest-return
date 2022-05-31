@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Utilities;
 using Attribute = Attributes.Attribute;
 
-namespace DefaultNamespace.UI
+namespace UI
 {
     public class UiManager : Singleton<UiManager>
     {
@@ -20,7 +20,10 @@ namespace DefaultNamespace.UI
 
             public void ChangeText(int currentValue)
             {
-                text.text = $"{suffix}: {currentValue}";
+                if (text != null)
+                {
+                    text.text = $"{suffix}: {currentValue}";
+                }
             }
 
             public int CompareTo(object obj)
@@ -48,11 +51,17 @@ namespace DefaultNamespace.UI
 
         public void UpdateMaxValueAttribute(AttributeType type, int value)
         {
-            attributesMax[(int) type].ChangeText(value);
+            if (attributesMax.Length > (int)type)
+            {
+                attributesMax[(int) type].ChangeText(value);
+            }
         }
         public void UpdateCurrentValueAttribute(AttributeType type, int value)
         {
-            attributesCurrent[(int) type].ChangeText(value);
+            if (attributesCurrent.Length > (int)type)
+            {
+                attributesCurrent[(int) type].ChangeText(value);
+            }
         }
     }
 }

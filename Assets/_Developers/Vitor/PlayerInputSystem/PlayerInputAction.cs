@@ -53,6 +53,24 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e481739-a0c6-4c8e-9c7d-7642f41ecbf4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a4ba6e3-4486-4ffe-ae07-66cc5b16e0a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +172,39 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d5a62f4-a7e0-4cea-9580-06249e139b00"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b229e68c-f7cb-4916-92e8-5b686a69a15e"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a231c1d6-b0b4-4a9b-94fd-df56db87e9d9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -193,6 +244,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_Attack = m_gameplay.FindAction("Attack", throwIfNotFound: true);
         m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
         m_gameplay_Interact = m_gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_gameplay_dash = m_gameplay.FindAction("dash", throwIfNotFound: true);
+        m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -255,6 +308,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_Attack;
     private readonly InputAction m_gameplay_move;
     private readonly InputAction m_gameplay_Interact;
+    private readonly InputAction m_gameplay_dash;
+    private readonly InputAction m_gameplay_pause;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -262,6 +317,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_gameplay_Attack;
         public InputAction @move => m_Wrapper.m_gameplay_move;
         public InputAction @Interact => m_Wrapper.m_gameplay_Interact;
+        public InputAction @dash => m_Wrapper.m_gameplay_dash;
+        public InputAction @pause => m_Wrapper.m_gameplay_pause;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -280,6 +337,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -293,6 +356,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @dash.started += instance.OnDash;
+                @dash.performed += instance.OnDash;
+                @dash.canceled += instance.OnDash;
+                @pause.started += instance.OnPause;
+                @pause.performed += instance.OnPause;
+                @pause.canceled += instance.OnPause;
             }
         }
     }
@@ -320,5 +389,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

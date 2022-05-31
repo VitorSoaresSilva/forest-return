@@ -27,4 +27,12 @@ public class HUDController : MonoBehaviour
     {
         InventarioPanel.SetActive(false);
     }
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    public void OnMouseEnter()
+    {
+        Debug.Log("opa");
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+    }
 }

@@ -1,18 +1,18 @@
-﻿using UnityEngine;
 using System;
 using System.Collections;
 using System.Reflection;
+using UnityEngine;
 using Attributes;
 using Attribute = Attributes.Attribute;
 
-namespace Character 
+namespace Character
 {
     public class BaseCharacter : MonoBehaviour, IDamageable
     {
         public Attribute[] attributes;
         [SerializeField] private CharacterStatScriptableObject characterStats; 
         [SerializeField] private AttributeModifier[] baseModifiers;
-        private bool isIntangible = false;
+        protected bool isIntangible = false;
         public int CurrentHealth
         {
             get => attributes[(int) AttributeType.Health].CurrentValue;
@@ -57,6 +57,7 @@ namespace Character
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
             var damage = (damageTaken + dataDamage.trueDamage);
+            Debug.Log(damage);
             if (damage > 0)
             {
                 CurrentHealth -= damage;

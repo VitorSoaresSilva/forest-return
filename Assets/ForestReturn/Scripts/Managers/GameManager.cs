@@ -1,19 +1,20 @@
 using System;
 using Character;
+using Player;
 using UnityEngine;
 using Utilities;
 
-namespace ForestReturn.Scripts.Managers
+namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        [field: SerializeField] public PlayerMovement Player { get; private set; }
+        [field: SerializeField] public PlayerMain PlayerMain { get; private set; }
 
         private void Start()
         {
-            if (Player == null)
+            if (PlayerMain == null)
             {
-                Player = FindObjectOfType<PlayerMovement>();
+                PlayerMain = FindObjectOfType<PlayerMain>();
             }
         }
     }

@@ -1,12 +1,7 @@
-﻿using System;
-using Character;
+﻿using Character;
 using UnityEngine;
-using System.Collections.Generic;
 using Artifacts;
 using Attributes;
-using DefaultNamespace.UI;
-using Utilities;
-using Attribute = Attributes.Attribute;
 
 namespace Weapons
 {

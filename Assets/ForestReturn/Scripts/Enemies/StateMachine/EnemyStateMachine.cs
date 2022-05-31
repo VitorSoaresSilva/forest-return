@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Character;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
@@ -73,7 +74,8 @@ namespace Enemies.StateMachine
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<PlayerCharacter>(out var playerCharacter))
+            var playerCharacter = other.GetComponentInParent<PlayerMain>();
+            if (playerCharacter != null)
             {
                 if (canCauseDamage)
                 {
@@ -90,7 +92,8 @@ namespace Enemies.StateMachine
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent<PlayerCharacter>(out var playerCharacter))
+            var playerCharacter = other.GetComponentInParent<PlayerMain>();
+            if (playerCharacter != null)
             {
                 if (canCauseDamage)
                 {

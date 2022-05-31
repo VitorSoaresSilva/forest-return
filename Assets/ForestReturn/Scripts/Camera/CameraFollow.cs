@@ -1,20 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+namespace ForestReturn.Scripts.Camera
 {
-    [SerializeField] private Transform target;
-    private Vector3 offset;
-    public float maxDistance;
-    private void Start()
+    public class CameraFollow : MonoBehaviour
     {
-        offset = transform.position - target.position;
-    }
+        [SerializeField] private Transform target;
+        private Vector3 offset;
+        public float maxDistance;
+        private void Start()
+        {
+            offset = transform.position - target.position;
+        }
 
-    private void LateUpdate()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.position + offset, maxDistance);
+        private void LateUpdate()
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position + offset, maxDistance);
+        }
     }
 }
