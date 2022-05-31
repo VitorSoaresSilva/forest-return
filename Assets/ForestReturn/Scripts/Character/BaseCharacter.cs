@@ -7,7 +7,7 @@ using Attribute = Attributes.Attribute;
 
 namespace Character
 {
-    public class BaseCharacter : MonoBehaviour
+    public class BaseCharacter : MonoBehaviour, IDamageable
     {
         public Attribute[] attributes;
         [SerializeField] private CharacterStatScriptableObject characterStats; 
