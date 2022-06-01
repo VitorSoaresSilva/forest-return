@@ -88,19 +88,20 @@ namespace Player
         {
             isDashing = true;
             
-            var playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
+            Vector2 playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
             // var rot = Quaternion.Slerp(_rb.transform.rotation, Quaternion.LookRotation(playerInput.normalized, Vector3.up),10).normalized;
             // _rb.MoveRotation(rot);
-            if (playerInput.magnitude == 0)
+            Vector3 dir = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y);
+            if (dir.magnitude == 0)
             {
-                playerInput = _rb.transform.forward;
+                dir = transform.forward;
             }
             _playerInputAction.gameplay.Disable();
-            _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeedDash;
+            _desiredVelocity = dir * maxSpeedDash;
             _animator.SetTrigger(Dash);
         }
 
-        public void HandleAnimationEnd()
+        public void HandleAnimationDashEnd()
         {
             isDashing = false;
             _playerInputAction.gameplay.Enable();
@@ -166,6 +167,12 @@ namespace Player
         }
 
         public void HandleTeleportActivated(Vector3 position)
+        {
+            _playerInputAction.gameplay.Disable();
+            _animator.SetTrigger("TelePortPart");
+        }
+
+        public void HandleAnimationTeleportPartOneEnd()
         {
             
         }
