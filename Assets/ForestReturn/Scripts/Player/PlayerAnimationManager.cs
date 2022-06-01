@@ -19,7 +19,12 @@ namespace Player
 
         public void SetEndAnimationDash()
         {
-            playerMainRef.HandleAnimationEnd();
+            playerMainRef.HandleAnimationDashEnd();
+        }
+
+        public void SetEndAnimationTeleportPartOne()
+        {
+            playerMainRef.HandleAnimationTeleportPartOneEnd();
         }
     }
 }
