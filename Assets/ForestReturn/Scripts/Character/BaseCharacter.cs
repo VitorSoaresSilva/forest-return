@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Reflection;
+using Artifacts;
 using UnityEngine;
 using Attributes;
+using Weapons;
 using Attribute = Attributes.Attribute;
 
 namespace Character
@@ -13,6 +15,16 @@ namespace Character
         [SerializeField] private CharacterStatScriptableObject characterStats; 
         [SerializeField] private AttributeModifier[] baseModifiers;
         protected bool isIntangible = false;
+        public Weapon weapon { get; protected set; }
+        public WeaponsScriptableObject initialWeaponData;
+        public ArtifactsScriptableObject[] initialArtifactsToWeapon;
+
+        public DataDamage DataDamage
+        {
+            get => new DataDamage(attributes[(int)AttributeType.Attack].CurrentValue,
+                attributes[(int)AttributeType.TrueDamageAttack].CurrentValue);
+        }
+
         public int CurrentHealth
         {
             get => attributes[(int) AttributeType.Health].CurrentValue;
@@ -49,6 +61,11 @@ namespace Character
             {
                 attributes[(int)baseModifiers[i].type].AddModifier(baseModifiers[i].value);
             }
+
+            weapon = (initialArtifactsToWeapon == null || initialArtifactsToWeapon.Length == 0)
+                ? new Weapon(this, initialWeaponData)
+                : new Weapon(this, initialWeaponData, initialArtifactsToWeapon); 
+            
         }
         
         public void TakeDamage(DataDamage dataDamage)

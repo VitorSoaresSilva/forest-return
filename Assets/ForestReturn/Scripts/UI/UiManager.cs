@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using Weapons;
 using Attribute = Attributes.Attribute;
 
 namespace UI
@@ -17,12 +18,22 @@ namespace UI
             public AttributeType type;
             public TextMeshProUGUI text;
             public string suffix;
+            public string prefix;
+            public Slider slider;
 
             public void ChangeText(int currentValue)
             {
                 if (text != null)
                 {
-                    text.text = $"{suffix}: {currentValue}";
+                    text.text = $"{prefix}{currentValue}{suffix}";
+                }
+            }
+
+            public void ChangeSlider(int currentValue, int maxValue)
+            {
+                if (slider != null)
+                {
+                    slider.value = (float)currentValue / (float)maxValue;
                 }
             }
 
@@ -34,6 +45,7 @@ namespace UI
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
         public Image[] slots;
+        public ItemPopUp itemPopUp;
 
         protected override void Awake()
         {
@@ -49,19 +61,25 @@ namespace UI
             }
         }
 
-        public void UpdateMaxValueAttribute(AttributeType type, int value)
+        public void UpdateMaxValueAttribute(Attribute attribute)
         {
-            if (attributesMax.Length > (int)type)
+            if (attributesMax.Length > (int)attribute.Type)
             {
-                attributesMax[(int) type].ChangeText(value);
+                attributesMax[(int) attribute.Type].ChangeText(attribute.MaxValue);
             }
         }
-        public void UpdateCurrentValueAttribute(AttributeType type, int value)
+        public void UpdateCurrentValueAttribute(Attribute attribute)
         {
-            if (attributesCurrent.Length > (int)type)
+            if (attributesCurrent.Length > (int)attribute.Type)
             {
-                attributesCurrent[(int) type].ChangeText(value);
+                attributesCurrent[(int) attribute.Type].ChangeText(attribute.CurrentValue);
+                attributesCurrent[(int) attribute.Type].ChangeSlider(attribute.CurrentValue,attribute.MaxValue);
             }
+        }
+
+        public void ShowItem(Weapon weapon)
+        {
+            itemPopUp.Show(weapon);
         }
     }
 }

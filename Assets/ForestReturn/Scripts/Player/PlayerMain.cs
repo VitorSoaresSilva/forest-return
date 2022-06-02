@@ -39,13 +39,6 @@ namespace Player
         protected override void Awake()
         {
             base.Awake();
-            foreach (var attribute in attributes)
-            {
-                attribute.ChangedMaxValue += HandleAttributeMaxValueChanged;
-                attribute.ChangedCurrentValue += HandleAttributeCurrentValueChanged;
-                HandleAttributeMaxValueChanged(attribute);
-                HandleAttributeCurrentValueChanged(attribute);
-            }
             _rb = GetComponentInChildren<Rigidbody>();
             _animator = GetComponentInChildren<Animator>();
             _playerInputAction = new PlayerInputAction();
@@ -58,21 +51,31 @@ namespace Player
                 _mainCamera = Camera.main;
             }
         }
+
+        private void Start()
+        {
+            foreach (var attribute in attributes)
+            {
+                attribute.ChangedMaxValue += HandleAttributeMaxValueChanged;
+                attribute.ChangedCurrentValue += HandleAttributeCurrentValueChanged;
+                HandleAttributeMaxValueChanged(attribute);
+                HandleAttributeCurrentValueChanged(attribute);
+            }
+        }
+
         #region  HandleChangeValues
         private void HandleAttributeMaxValueChanged(Attribute attribute)
         {
             if (UiManager.instance != null)
             {
-                UiManager.instance.UpdateMaxValueAttribute(attribute.Type, attributes[(int)attribute.Type].MaxValue);
-                Debug.Log("HandleAttributeMaxValueChanged");
+                UiManager.instance.UpdateMaxValueAttribute(attributes[(int)attribute.Type]);
             }
         }
         private void HandleAttributeCurrentValueChanged(Attribute attribute)
         {
             if (UiManager.instance != null)
             {
-                UiManager.instance.UpdateCurrentValueAttribute(attribute.Type, attributes[(int)attribute.Type].CurrentValue);
-                Debug.Log("HandleAttributeCurrentValueChanged");
+                UiManager.instance.UpdateCurrentValueAttribute(attributes[(int)attribute.Type]);
             }
         }
         #endregion
@@ -89,8 +92,6 @@ namespace Player
             isDashing = true;
             
             Vector2 playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
-            // var rot = Quaternion.Slerp(_rb.transform.rotation, Quaternion.LookRotation(playerInput.normalized, Vector3.up),10).normalized;
-            // _rb.MoveRotation(rot);
             Vector3 dir = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y);
             if (dir.magnitude == 0)
             {
@@ -110,10 +111,12 @@ namespace Player
         private void Update()
         {
             var playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
-            playerInput = Vector2.ClampMagnitude(playerInput, 1);
             if (_playerInputAction.gameplay.enabled)
             {
-               _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
+                // Debug.Log(playerInput + " " + playerInput.normalized);
+                playerInput = playerInput.normalized;
+               // _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
+               _desiredVelocity = new Vector3(playerInput.x,0,playerInput.y) * maxSpeed;
                 _animator.SetBool(Walking,_velocity.magnitude > 0.01f);
                 _animator.SetFloat(VelocityX,Vector3.Dot(_desiredVelocity.normalized,transform.forward));
                 _animator.SetFloat(VelocityY,Vector3.Dot(_desiredVelocity.normalized,transform.right));
@@ -163,7 +166,6 @@ namespace Player
 
         private void HandleAttack(InputAction.CallbackContext obj)
         {
-            // throw new NotImplementedException();
         }
 
         public void HandleTeleportActivated(Vector3 position)
