@@ -115,8 +115,8 @@ namespace Player
             {
                 // Debug.Log(playerInput + " " + playerInput.normalized);
                 playerInput = playerInput.normalized;
-               // _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
-               _desiredVelocity = new Vector3(playerInput.x,0,playerInput.y) * maxSpeed;
+               _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
+               // _desiredVelocity = new Vector3(playerInput.x,0,playerInput.y) * maxSpeed;
                 _animator.SetBool(Walking,_velocity.magnitude > 0.01f);
                 _animator.SetFloat(VelocityX,Vector3.Dot(_desiredVelocity.normalized,transform.forward));
                 _animator.SetFloat(VelocityY,Vector3.Dot(_desiredVelocity.normalized,transform.right));
