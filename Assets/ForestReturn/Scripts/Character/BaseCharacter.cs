@@ -62,9 +62,10 @@ namespace Character
                 attributes[(int)baseModifiers[i].type].AddModifier(baseModifiers[i].value);
             }
 
-            weapon = (initialArtifactsToWeapon == null || initialArtifactsToWeapon.Length == 0)
-                ? new Weapon(this, initialWeaponData)
-                : new Weapon(this, initialWeaponData, initialArtifactsToWeapon); 
+            weapon = initialArtifactsToWeapon == null ? 
+                new Weapon(this, initialWeaponData) : 
+                new Weapon(this, initialWeaponData, initialArtifactsToWeapon);
+            
             
         }
         

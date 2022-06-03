@@ -21,11 +21,12 @@ namespace UI
             public string prefix;
             public Slider slider;
 
-            public void ChangeText(int currentValue)
+            public void ChangeText(int currentValue, int maxValue)
             {
                 if (text != null)
                 {
-                    text.text = $"{prefix}{currentValue}{suffix}";
+                    // text.text = $"{prefix}{currentValue}{suffix}";
+                    text.text = $"{currentValue}/{maxValue}";
                 }
             }
 
@@ -44,42 +45,61 @@ namespace UI
         }
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
-        public Image[] slots;
-        public ItemPopUp itemPopUp;
+        
+        [Header("Weapon Card")]
+        public GameObject root;
+        public RawImage image;
+        public TextMeshProUGUI title;
+        public UIArtifactCard[] uiArtifacts;
 
         protected override void Awake()
         {
             base.Awake();
             Array.Sort(attributesMax);
         }
-        
-        public void ActiveSlots(int amount)
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                slots[i].gameObject.SetActive(true);
-            }
-        }
 
         public void UpdateMaxValueAttribute(Attribute attribute)
         {
             if (attributesMax.Length > (int)attribute.Type)
             {
-                attributesMax[(int) attribute.Type].ChangeText(attribute.MaxValue);
+                attributesMax[(int) attribute.Type].ChangeText(attribute.CurrentValue,attribute.MaxValue);
             }
         }
         public void UpdateCurrentValueAttribute(Attribute attribute)
         {
             if (attributesCurrent.Length > (int)attribute.Type)
             {
-                attributesCurrent[(int) attribute.Type].ChangeText(attribute.CurrentValue);
+                attributesCurrent[(int) attribute.Type].ChangeText(attribute.CurrentValue,attribute.MaxValue);
                 attributesCurrent[(int) attribute.Type].ChangeSlider(attribute.CurrentValue,attribute.MaxValue);
             }
         }
 
         public void ShowItem(Weapon weapon)
         {
-            itemPopUp.Show(weapon);
+            if (root.activeSelf) return;
+            root.SetActive(true);
+            if (weapon.weaponConfig.image != null)
+            {
+                image.texture = weapon.weaponConfig.image;
+            }
+            title.text = weapon.weaponConfig.weaponName;
+            for (int i = 0; i < weapon.artifacts.Length; i++)
+            {
+                if (weapon.artifacts[i] != null)
+                {
+                    uiArtifacts[i].SetValues(weapon.artifacts[i]);
+                }
+            }
+        }
+        public void Hide()
+        {
+            root.SetActive(false);
+            image.texture = null;
+            title.text = String.Empty;
+            foreach (var uiArtifact in uiArtifacts)
+            {
+                uiArtifact.ResetValues();
+            }
         }
     }
 }
