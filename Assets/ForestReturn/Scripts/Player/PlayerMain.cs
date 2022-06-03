@@ -36,6 +36,8 @@ namespace Player
         private static readonly int Dash = Animator.StringToHash("Dash");
         [SerializeField] private float maxSpeedDash = 10;
 
+
+        [Header("Som")] public GameObject soundTrigger;
         protected override void Awake()
         {
             base.Awake();
@@ -177,6 +179,15 @@ namespace Player
         public void HandleAnimationTeleportPartOneEnd()
         {
             
+        }
+        public void HandleStepSound()
+        {
+            soundTrigger.SetActive(true);
+            Invoke(nameof(DisableFootStepSound),0.5f);
+        }
+        public void DisableFootStepSound()
+        {
+            soundTrigger.SetActive(false);
         }
     }
 }
