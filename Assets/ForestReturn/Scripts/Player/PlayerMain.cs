@@ -14,30 +14,34 @@ namespace Player
         private Rigidbody _rb;
         private Animator _animator;
         private PlayerInputAction _playerInputAction;
-        private Vector3 _velocity;
-        private Vector3 _desiredVelocity;
         [HideInInspector] public bool isAttacking;
         [HideInInspector] public bool isDashing;
         [SerializeField] [NotNull] private Camera _mainCamera;
-        
-        [SerializeField, Range(0f, 100f)] private float maxSpeed = 5f;
-        [SerializeField, Range(0f, 100f)] private float maxAcceleration = 6f;
-        
-        [SerializeField] private Transform playerInputSpace;
         [SerializeField] private float camRayLength;
-        [SerializeField] private LayerMask floorMask;
         private Quaternion _lastMouseRotation;
-        [SerializeField] private float rotationRatio;
 
         private PlayerAnimationManager _animationManager;
         private static readonly int VelocityX = Animator.StringToHash("VelocityX");
         private static readonly int VelocityY = Animator.StringToHash("VelocityY");
         private static readonly int Walking = Animator.StringToHash("isWalking");
         private static readonly int Dash = Animator.StringToHash("Dash");
-        [SerializeField] private float maxSpeedDash = 10;
+        private static readonly int Hurt = Animator.StringToHash("Hurt");
+        private static readonly int Dead = Animator.StringToHash("Dead");
+        
+        [Header("Movement")]
+        [SerializeField] private LayerMask floorMask;
+        [SerializeField] private float dashSpeed = 8;
+        [SerializeField] private float runSpeed = 6;
+        [SerializeField] private float rotationRatio;
+        private float _speed;
+        private Matrix4x4 _matrix4X4;
+        private Vector3 skewed;
 
 
-        [Header("Som")] public GameObject soundTrigger;
+        [Header("Som")] 
+        public GameObject soundTrigger;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -45,13 +49,39 @@ namespace Player
             _animator = GetComponentInChildren<Animator>();
             _playerInputAction = new PlayerInputAction();
             _playerInputAction.gameplay.Enable();
-            _playerInputAction.gameplay.Attack.performed += HandleAttack;
-            _playerInputAction.gameplay.Interact.performed += HandleInteract;
-            _playerInputAction.gameplay.dash.performed += HandleDash;
+            _matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,45,0));
+            _speed = runSpeed;
             if (_mainCamera == null && Camera.main != null)
             {
                 _mainCamera = Camera.main;
             }
+        }
+
+        private void OnEnable()
+        {
+            _playerInputAction.gameplay.Attack.performed += HandleAttack;
+            _playerInputAction.gameplay.Interact.performed += HandleInteract;
+            _playerInputAction.gameplay.dash.performed += HandleDash;
+            OnHurt += HandlePlayerHurt;
+            OnDead += HandlePlayerDead;
+        }
+
+        private void OnDisable()
+        {
+            _playerInputAction.gameplay.Attack.performed -= HandleAttack;
+            _playerInputAction.gameplay.Interact.performed -= HandleInteract;
+            _playerInputAction.gameplay.dash.performed -= HandleDash;
+            OnHurt -= HandlePlayerHurt;
+            OnDead -= HandlePlayerDead;
+        }
+
+        private void HandlePlayerDead()
+        {
+            // habilitar outro input
+            _playerInputAction.gameplay.Disable();
+            _animator.SetTrigger(Dead);
+            skewed = Vector3.zero;
+            _speed = 0;
         }
 
         private void Start()
@@ -91,38 +121,45 @@ namespace Player
         }
         private void HandleDash(InputAction.CallbackContext obj)
         {
-            isDashing = true;
-            
+            if (isAttacking || isDashing || !_playerInputAction.gameplay.enabled) return;
             Vector2 playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
-            Vector3 dir = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y);
-            if (dir.magnitude == 0)
-            {
-                dir = transform.forward;
-            }
             _playerInputAction.gameplay.Disable();
-            _desiredVelocity = dir * maxSpeedDash;
+            skewed = _matrix4X4.MultiplyPoint3x4(new Vector3(playerInput.x,0,playerInput.y));
+            if (skewed.magnitude < 0.01f)
+            {
+                skewed = transform.forward;
+            }
+            if (playerInput.magnitude > 0.01f)
+            {
+                var rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(skewed,Vector3.up), rotationRatio*10).normalized;
+                _rb.MoveRotation(rot);
+            }
             _animator.SetTrigger(Dash);
         }
 
         public void HandleAnimationDashEnd()
         {
+            _speed = runSpeed;
             isDashing = false;
+            isIntangible = false;
             _playerInputAction.gameplay.Enable();
+        }
+
+        public void HandleAnimationDashStart()
+        {
+            _speed = dashSpeed;
+            isDashing = true;
+            isIntangible = true;
         }
 
         private void Update()
         {
+            if (!_playerInputAction.gameplay.enabled) return;
             var playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
-            if (_playerInputAction.gameplay.enabled)
-            {
-                // Debug.Log(playerInput + " " + playerInput.normalized);
-                playerInput = playerInput.normalized;
-               _desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
-               // _desiredVelocity = new Vector3(playerInput.x,0,playerInput.y) * maxSpeed;
-                _animator.SetBool(Walking,_velocity.magnitude > 0.01f);
-                _animator.SetFloat(VelocityX,Vector3.Dot(_desiredVelocity.normalized,transform.forward));
-                _animator.SetFloat(VelocityY,Vector3.Dot(_desiredVelocity.normalized,transform.right));
-            }
+            skewed = _matrix4X4.MultiplyPoint3x4(new Vector3(playerInput.x,0,playerInput.y));
+            _animator.SetBool(Walking,skewed.magnitude > 0.01f);
+            _animator.SetFloat(VelocityX,Vector3.Dot(skewed,transform.forward));
+            _animator.SetFloat(VelocityY,Vector3.Dot(skewed,transform.right));
         }
 
         private void FixedUpdate()
@@ -152,13 +189,19 @@ namespace Player
             _rb.MoveRotation(rot);
         }
 
+        private void HandlePlayerHurt()
+        {
+            if (UiManager.instance != null)
+            {
+                _animator.SetTrigger(Hurt);
+                UiManager.instance.PlayerHurt();
+            }
+        }
+
         private void Move()
         {
-            _velocity = _rb.velocity;
-            var maxSpeedChange = maxAcceleration * Time.deltaTime;
-            _velocity.x = Mathf.MoveTowards(_velocity.x, _desiredVelocity.x, maxSpeedChange);
-            _velocity.z = Mathf.MoveTowards(_velocity.z, _desiredVelocity.z, maxSpeedChange);
-            _rb.velocity = _velocity;
+            if (skewed.magnitude < 0.01f) return;
+            _rb.MovePosition(transform.position + skewed * (_speed * Time.deltaTime));
         }
 
         private void HandleInteract(InputAction.CallbackContext obj)
@@ -182,6 +225,7 @@ namespace Player
         }
         public void HandleStepSound()
         {
+            if (soundTrigger == null) return;
             soundTrigger.SetActive(true);
             Invoke(nameof(DisableFootStepSound),0.5f);
         }

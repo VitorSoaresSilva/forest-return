@@ -1459,7 +1459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2360868039247205307
 Transform:
   m_ObjectHideFlags: 0
@@ -1807,7 +1807,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5031478279369007850}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2313,15 +2313,13 @@ MonoBehaviour:
   isAttacking: 0
   isDashing: 0
   _mainCamera: {fileID: 0}
-  maxSpeed: 5
-  maxAcceleration: 10
-  playerInputSpace: {fileID: 0}
   camRayLength: 100
   floorMask:
     serializedVersion: 2
     m_Bits: 64
+  dashSpeed: 8
+  runSpeed: 6
   rotationRatio: 0.1
-  maxSpeedDash: 6
   soundTrigger: {fileID: 0}
 --- !u!114 &6725375582429070835
 MonoBehaviour:

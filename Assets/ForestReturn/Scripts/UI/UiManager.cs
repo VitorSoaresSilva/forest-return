@@ -45,17 +45,19 @@ namespace UI
         }
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
-        
+        private Animator _animator;
         [Header("Weapon Card")]
         public GameObject root;
         public RawImage image;
         public TextMeshProUGUI title;
         public UIArtifactCard[] uiArtifacts;
+        private static readonly int Hurt = Animator.StringToHash("Hurt");
 
         protected override void Awake()
         {
             base.Awake();
             Array.Sort(attributesMax);
+            _animator = GetComponent<Animator>();
         }
 
         public void UpdateMaxValueAttribute(Attribute attribute)
@@ -100,6 +102,11 @@ namespace UI
             {
                 uiArtifact.ResetValues();
             }
+        }
+
+        public void PlayerHurt()
+        {
+            _animator.SetTrigger(Hurt);
         }
     }
 }
