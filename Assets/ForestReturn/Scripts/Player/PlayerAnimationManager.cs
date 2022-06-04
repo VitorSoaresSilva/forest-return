@@ -21,6 +21,10 @@ namespace Player
         {
             playerMainRef.HandleAnimationDashEnd();
         }
+        public void SetStartAnimationDash()
+        {
+            playerMainRef.HandleAnimationDashStart();
+        }
 
         public void SetEndAnimationTeleportPartOne()
         {

@@ -15,10 +15,17 @@ namespace Character
         [SerializeField] private CharacterStatScriptableObject characterStats; 
         [SerializeField] private AttributeModifier[] baseModifiers;
         protected bool isIntangible = false;
-        public Weapon weapon { get; protected set; }
+        public bool isDead { get; private set; }
+        public Weapon Weapon { get; protected set; }
         public WeaponsScriptableObject initialWeaponData;
         public ArtifactsScriptableObject[] initialArtifactsToWeapon;
 
+        public delegate void OnDeadEvent();
+        public event OnDeadEvent OnDead;
+
+        protected delegate void OnHurEvent();
+
+        protected event OnHurEvent OnHurt;
         public DataDamage DataDamage
         {
             get => new DataDamage(attributes[(int)AttributeType.Attack].CurrentValue,
@@ -41,7 +48,7 @@ namespace Character
             private set => attributes[(int) AttributeType.Mana].CurrentValue = value;
         }
 
-        protected virtual void Awake()    
+        protected virtual void Awake()
         {
             attributes = new Attribute[(int) AttributeType.COUNT];
             // Create the Attributes based on enum: AttributeType
@@ -62,7 +69,7 @@ namespace Character
                 attributes[(int)baseModifiers[i].type].AddModifier(baseModifiers[i].value);
             }
 
-            weapon = initialArtifactsToWeapon == null ? 
+            Weapon = initialArtifactsToWeapon == null ? 
                 new Weapon(this, initialWeaponData) : 
                 new Weapon(this, initialWeaponData, initialArtifactsToWeapon);
             
@@ -71,19 +78,21 @@ namespace Character
         
         public void TakeDamage(DataDamage dataDamage)
         {
-            if (isIntangible) return;
+            if (isIntangible || isDead) return;
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
             var damage = (damageTaken + dataDamage.trueDamage);
-            Debug.Log(damage);
+            // Debug.Log(damage);
             if (damage > 0)
             {
                 CurrentHealth -= damage;
                 StartCoroutine(nameof(IntangibleCooldown));
                 isIntangible = true;
+                OnHurt?.Invoke();
                 if (CurrentHealth <= 0)
                 {
-                    Debug.Log("Dead");
+                    OnDead?.Invoke();
+                    isDead = true;
                 }
             }
         }
@@ -92,6 +101,7 @@ namespace Character
         {
             yield return new WaitForSeconds(2);
             isIntangible = false;
+            // hasHurted = false;
         }
     }
 }

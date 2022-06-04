@@ -70,6 +70,7 @@ namespace Enemies.StateMachine
             var playerCharacter = other.GetComponentInParent<PlayerMain>();
             if (playerCharacter != null)
             {
+                playerCharacter.OnDead += HandlePlayerDead;
                 if (canCauseDamage)
                 {
                     playerCharacter.TakeDamage(DataDamage);
@@ -81,6 +82,12 @@ namespace Enemies.StateMachine
                     ChangeState(new ChasingState());
                 }
             }
+        }
+
+        private void HandlePlayerDead()
+        {
+            ChangeState(new IdleState());
+            navMeshAgent.isStopped = true;
         }
 
         private void OnTriggerStay(Collider other)
