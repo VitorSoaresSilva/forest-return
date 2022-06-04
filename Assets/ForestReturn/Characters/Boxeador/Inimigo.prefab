@@ -1528,9 +1528,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2830513984190836433, guid: cd9186c4981b0b14caac73dcca64ed0c, type: 3}
-  - {fileID: -3623572816997154050, guid: cd9186c4981b0b14caac73dcca64ed0c, type: 3}
-  - {fileID: 5860381705922315632, guid: cd9186c4981b0b14caac73dcca64ed0c, type: 3}
+  - {fileID: 2100000, guid: 56152311686147a4fbc715945383d305, type: 2}
+  - {fileID: 2100000, guid: 632b1e36584fdbb4f86d3b455acb5374, type: 2}
+  - {fileID: 2100000, guid: 5c68c6d3a1c66fe4b85150659f17a0d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1953,8 +1953,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8002322426505082961}
   - component: {fileID: 6113117894372360125}
-  - component: {fileID: 8412853403851916943}
-  - component: {fileID: 6321824290569053442}
   - component: {fileID: 8002322426505082963}
   - component: {fileID: 8002322426505082960}
   - component: {fileID: 8002322426505082967}
@@ -1995,6 +1993,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99bb71ebb484c03bff5544d2b94704f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attributes: []
+  characterStats: {fileID: 11400000, guid: 6742a627fe8cc7442aae01c0d9bf83b9, type: 2}
+  baseModifiers: []
+  initialWeaponData: {fileID: 11400000, guid: 3de1a0cc916440278607168af273b666, type: 2}
   _playerTransform: {fileID: 0}
   enemyConfig: {fileID: 11400000, guid: 29815f8c9da808444821d61f62ac6817, type: 2}
   canAttack: 0
@@ -2004,34 +2006,6 @@ MonoBehaviour:
   AnimatorAttackTrigger: Attack
   isAttacking: 0
   canCauseDamage: 0
---- !u!114 &8412853403851916943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8002322426505082975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80caaaed70af4c1f9aa23b768aab06eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes: []
-  characterStats: {fileID: 11400000, guid: 6742a627fe8cc7442aae01c0d9bf83b9, type: 2}
-  baseModifiers: []
---- !u!114 &6321824290569053442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8002322426505082975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2433927e6df14604bc2d25b9acdc1b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialWeaponData: {fileID: 11400000, guid: 3de1a0cc916440278607168af273b666, type: 2}
 --- !u!195 &8002322426505082963
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using Weapons;
 using Attribute = Attributes.Attribute;
 
 namespace UI
@@ -17,12 +18,23 @@ namespace UI
             public AttributeType type;
             public TextMeshProUGUI text;
             public string suffix;
+            public string prefix;
+            public Slider slider;
 
-            public void ChangeText(int currentValue)
+            public void ChangeText(int currentValue, int maxValue)
             {
                 if (text != null)
                 {
-                    text.text = $"{suffix}: {currentValue}";
+                    // text.text = $"{prefix}{currentValue}{suffix}";
+                    text.text = $"{currentValue}/{maxValue}";
+                }
+            }
+
+            public void ChangeSlider(int currentValue, int maxValue)
+            {
+                if (slider != null)
+                {
+                    slider.value = (float)currentValue / (float)maxValue;
                 }
             }
 
@@ -33,34 +45,60 @@ namespace UI
         }
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
-        public Image[] slots;
+        
+        [Header("Weapon Card")]
+        public GameObject root;
+        public RawImage image;
+        public TextMeshProUGUI title;
+        public UIArtifactCard[] uiArtifacts;
 
         protected override void Awake()
         {
             base.Awake();
             Array.Sort(attributesMax);
         }
-        
-        public void ActiveSlots(int amount)
+
+        public void UpdateMaxValueAttribute(Attribute attribute)
         {
-            for (int i = 0; i < amount; i++)
+            if (attributesMax.Length > (int)attribute.Type)
             {
-                slots[i].gameObject.SetActive(true);
+                attributesMax[(int) attribute.Type].ChangeText(attribute.CurrentValue,attribute.MaxValue);
+            }
+        }
+        public void UpdateCurrentValueAttribute(Attribute attribute)
+        {
+            if (attributesCurrent.Length > (int)attribute.Type)
+            {
+                attributesCurrent[(int) attribute.Type].ChangeText(attribute.CurrentValue,attribute.MaxValue);
+                attributesCurrent[(int) attribute.Type].ChangeSlider(attribute.CurrentValue,attribute.MaxValue);
             }
         }
 
-        public void UpdateMaxValueAttribute(AttributeType type, int value)
+        public void ShowItem(Weapon weapon)
         {
-            if (attributesMax.Length > (int)type)
+            if (root.activeSelf) return;
+            root.SetActive(true);
+            if (weapon.weaponConfig.image != null)
             {
-                attributesMax[(int) type].ChangeText(value);
+                image.texture = weapon.weaponConfig.image;
+            }
+            title.text = weapon.weaponConfig.weaponName;
+            for (int i = 0; i < weapon.artifacts.Length; i++)
+            {
+                if (weapon.artifacts[i] != null)
+                {
+                    uiArtifacts[i].SetValues(weapon.artifacts[i]);
+                }
             }
         }
-        public void UpdateCurrentValueAttribute(AttributeType type, int value)
+        public void Hide()
         {
-            if (attributesCurrent.Length > (int)type)
+            root.SetActive(false);
+            image.texture = null;
+            title.text = String.Empty;
+            foreach (var uiArtifact in uiArtifacts)
             {
-                attributesCurrent[(int) type].ChangeText(value);
+                uiArtifact.ResetValues();
             }
         }
     }

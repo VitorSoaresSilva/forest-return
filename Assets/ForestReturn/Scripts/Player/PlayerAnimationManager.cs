@@ -26,5 +26,9 @@ namespace Player
         {
             playerMainRef.HandleAnimationTeleportPartOneEnd();
         }
+        public void SetTriggerStep(){
+            playerMainRef.HandleStepSound();
+        }
+        
     }
 }

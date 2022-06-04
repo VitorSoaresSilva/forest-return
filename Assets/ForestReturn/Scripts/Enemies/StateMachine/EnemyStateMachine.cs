@@ -9,7 +9,7 @@ using Weapons;
 
 namespace Enemies.StateMachine
 {
-    public class EnemyStateMachine: MonoBehaviour
+    public class EnemyStateMachine: BaseCharacter
     {
         private BaseState currentState;
         public Transform _playerTransform;
@@ -25,13 +25,7 @@ namespace Enemies.StateMachine
         public string AnimatorAttackTrigger = "Attack";
         public bool isAttacking;
         public bool canCauseDamage;
-        private WeaponHolder _weaponHolder;
 
-        private void Awake()
-        {
-            // _animator = GetComponent<Animator>();
-            _weaponHolder = GetComponent<WeaponHolder>();
-        }
 
         private void Start()
         {
@@ -42,7 +36,6 @@ namespace Enemies.StateMachine
 
         private void Update()
         {
-            // Debug.Log(navMeshAgent.velocity.magnitude);
             _animator.SetBool(AnimatorIsMoving,navMeshAgent.velocity.magnitude > 0.01f);
         }
 
@@ -79,7 +72,7 @@ namespace Enemies.StateMachine
             {
                 if (canCauseDamage)
                 {
-                    playerCharacter.TakeDamage(_weaponHolder.DataDamage);
+                    playerCharacter.TakeDamage(DataDamage);
                 }
                 else
                 {
@@ -97,7 +90,7 @@ namespace Enemies.StateMachine
             {
                 if (canCauseDamage)
                 {
-                    playerCharacter.TakeDamage(_weaponHolder.DataDamage);
+                    playerCharacter.TakeDamage(DataDamage);
                 }
             }
         }

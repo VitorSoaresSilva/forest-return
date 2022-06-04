@@ -9,6 +9,6 @@ namespace Artifacts
         public string artifactName;
         public AttributeModifier[] modifiers;
         public GameObject model3d;
-        public Sprite model2d;
+        public Texture model2d;
     }
 }
