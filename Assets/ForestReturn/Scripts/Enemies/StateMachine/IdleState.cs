@@ -6,7 +6,6 @@ namespace Enemies.StateMachine
     {
         public override void UpdateState()
         {
-            Debug.Log("Idle");
         }
 
         public override void DestroyState()

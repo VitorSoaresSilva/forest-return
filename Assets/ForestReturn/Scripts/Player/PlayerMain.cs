@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Character;
+using Damage;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +9,6 @@ using Attribute = Attributes.Attribute;
 
 namespace Player
 {
-    [RequireComponent(typeof(PlayerAnimationManager))]
     public class PlayerMain : BaseCharacter
     {
         private Rigidbody _rb;
@@ -20,7 +20,7 @@ namespace Player
         [SerializeField] private float camRayLength;
         private Quaternion _lastMouseRotation;
 
-        private PlayerAnimationManager _animationManager;
+        // private PlayerAnimationManager _animationManager;
         private static readonly int VelocityX = Animator.StringToHash("VelocityX");
         private static readonly int VelocityY = Animator.StringToHash("VelocityY");
         private static readonly int Walking = Animator.StringToHash("isWalking");
@@ -41,6 +41,9 @@ namespace Player
         [Header("Som")] 
         public GameObject soundTrigger;
 
+        private static readonly int AttackPunch = Animator.StringToHash("AttackPunch");
+        [Header("Damage")] 
+        [SerializeField] private GameObject damageHitBox;
 
         protected override void Awake()
         {
@@ -82,6 +85,11 @@ namespace Player
             _animator.SetTrigger(Dead);
             skewed = Vector3.zero;
             _speed = 0;
+            var hitBoxes = GetComponentsInChildren<HitBox>(true);
+            foreach (var hitBox in hitBoxes)
+            {
+                hitBox.enabled = false;
+            }
         }
 
         private void Start()
@@ -191,6 +199,7 @@ namespace Player
 
         private void HandlePlayerHurt()
         {
+            HandleEndAttack();
             if (UiManager.instance != null)
             {
                 _animator.SetTrigger(Hurt);
@@ -209,8 +218,23 @@ namespace Player
             // throw new NotImplementedException();
         }
 
+        public void HandleStartAttack()
+        {
+            // setar o trigger
+            damageHitBox.SetActive(true);
+        }
+
+        public void HandleEndAttack()
+        {
+            // desligar trigger
+            damageHitBox.SetActive(false);
+            isAttacking = false;
+        }
         private void HandleAttack(InputAction.CallbackContext obj)
         {
+            if (isAttacking || isAttacking) return;
+            isAttacking = true;
+            _animator.SetTrigger(AttackPunch);
         }
 
         public void HandleTeleportActivated(Vector3 position)

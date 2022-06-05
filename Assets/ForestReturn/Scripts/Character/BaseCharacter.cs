@@ -24,7 +24,6 @@ namespace Character
         public event OnDeadEvent OnDead;
 
         protected delegate void OnHurEvent();
-
         protected event OnHurEvent OnHurt;
         public DataDamage DataDamage
         {
@@ -78,6 +77,7 @@ namespace Character
         
         public void TakeDamage(DataDamage dataDamage)
         {
+            Debug.Log("take damage:" + transform.name);
             if (isIntangible || isDead) return;
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
@@ -91,8 +91,8 @@ namespace Character
                 OnHurt?.Invoke();
                 if (CurrentHealth <= 0)
                 {
-                    OnDead?.Invoke();
                     isDead = true;
+                    OnDead?.Invoke();
                 }
             }
         }

@@ -15,6 +15,7 @@ namespace Enemies.StateMachine
 
         private void Attack()
         {
+            Debug.Log("Attack");
             owner.isAttacking = true;
             owner.navMeshAgent.isStopped = true;
             // animacao

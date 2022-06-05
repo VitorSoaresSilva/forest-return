@@ -8,12 +8,13 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject OptionsPanel;
     public GameObject CreditsPanel;
-
+    public GameObject hudPanel;
    
     //Carrega a cena da primeira fase
     public void PlayLevel1()
     {
         SceneManager.LoadScene(1);
+        hudPanel.SetActive(true);
     }
 
     //Carrega painel de configura��es

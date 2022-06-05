@@ -56,6 +56,7 @@ namespace UI
         protected override void Awake()
         {
             base.Awake();
+            DontDestroyOnLoad(this);
             Array.Sort(attributesMax);
             _animator = GetComponent<Animator>();
         }

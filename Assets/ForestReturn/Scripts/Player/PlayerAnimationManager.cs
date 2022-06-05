@@ -12,9 +12,13 @@ namespace Player
             playerMainRef = GetComponentInParent<PlayerMain>();
         }
 
+        public void SetStartAnimationAttack()
+        {
+            playerMainRef.HandleStartAttack();
+        }
         public void SetEndAnimationAttack()
         {
-            playerMainRef.isAttacking = false;
+            playerMainRef.HandleEndAttack();
         }
 
         public void SetEndAnimationDash()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Character;
+using Damage;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,12 +27,44 @@ namespace Enemies.StateMachine
         public bool isAttacking;
         public bool canCauseDamage;
 
+        [SerializeField] private GameObject hitBoxRotateAttack;
+        private static readonly int Death = Animator.StringToHash("Death");
+
 
         private void Start()
         {
             updateActive = true;
             updateStateCoroutine = StartCoroutine(nameof(UpdateState));
             ChangeState(new IdleState());
+        }
+
+        private void OnEnable()
+        {
+            OnDead += HandleDead;
+        }
+
+        private void OnDisable()
+        {
+            OnDead -= HandleDead;
+        }
+
+        private void HandleDead()
+        {
+            // Destroy(navMeshAgent);
+            StopAllCoroutines();
+            updateActive = false;
+            navMeshAgent.enabled = false;
+            _playerTransform = null;
+            canAttack = false;
+            isIntangible = true;
+            var hitBoxes = GetComponentsInChildren<HitBox>(true);
+            foreach (var hitBox in hitBoxes)
+            {
+                hitBox.enabled = false;
+            }
+            ChangeState(new IdleState());
+            _animator.SetTrigger(Death);
+            this.enabled = false;
         }
 
         private void Update()
@@ -67,6 +100,7 @@ namespace Enemies.StateMachine
         }
         private void OnTriggerEnter(Collider other)
         {
+            if (isDead) return;
             var playerCharacter = other.GetComponentInParent<PlayerMain>();
             if (playerCharacter != null)
             {
@@ -90,26 +124,28 @@ namespace Enemies.StateMachine
             navMeshAgent.isStopped = true;
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            var playerCharacter = other.GetComponentInParent<PlayerMain>();
-            if (playerCharacter != null)
-            {
-                if (canCauseDamage)
-                {
-                    playerCharacter.TakeDamage(DataDamage);
-                }
-            }
-        }
+        // private void OnTriggerStay(Collider other)
+        // {
+        //     var playerCharacter = other.GetComponentInParent<PlayerMain>();
+        //     if (playerCharacter != null)
+        //     {
+        //         if (canCauseDamage)
+        //         {
+        //             playerCharacter.TakeDamage(DataDamage);
+        //         }
+        //     }
+        // }
 
         public void EndAnimationAttack()
         {
+            hitBoxRotateAttack.SetActive(false);
             canCauseDamage = false;
             isAttacking = false;
             ChangeState(new ChasingState());
         }
         public void StartAnimationAttack()
         {
+            hitBoxRotateAttack.SetActive(true);
             canCauseDamage = true;
         }
     }
