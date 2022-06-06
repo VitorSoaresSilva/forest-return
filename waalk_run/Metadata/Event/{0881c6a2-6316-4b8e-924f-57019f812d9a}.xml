@@ -375,6 +375,9 @@
 		</relationship>
 	</object>
 	<object class="GroupTrack" id="{aa48b167-8186-4f1a-a64f-fee011821d44}">
+		<relationship name="automationTracks">
+			<destination>{498ac03b-e73f-49a9-888f-fced9f9a3a75}</destination>
+		</relationship>
 		<relationship name="modules">
 			<destination>{4aca8499-35aa-45e4-b36b-1356b9b18fc7}</destination>
 			<destination>{0d140230-cfe8-430d-8a6d-26cff1bd68a0}</destination>
@@ -1253,7 +1256,7 @@
 			<destination>{c10cf771-6436-41e0-b25f-0e937a88489e}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{527af261-e365-4bc4-8950-eb0a5136b8fb}</destination>
+			<destination>{23e2e9ca-e22a-4f1e-aa0d-8b82ffe3e239}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionSourceSound" id="{088373c7-52f0-4438-a237-8f1e815cf813}">
@@ -1459,7 +1462,7 @@
 			<destination>{8a072d3c-f8ee-4129-b08e-e12095c6010e}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{527af261-e365-4bc4-8950-eb0a5136b8fb}</destination>
+			<destination>{23e2e9ca-e22a-4f1e-aa0d-8b82ffe3e239}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionSourceSound" id="{81437ae5-af16-455c-adc2-d6d3db347728}">
@@ -1661,7 +1664,7 @@
 			<destination>{368eb849-9812-4655-892f-88b3bbbd0a99}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{527af261-e365-4bc4-8950-eb0a5136b8fb}</destination>
+			<destination>{23e2e9ca-e22a-4f1e-aa0d-8b82ffe3e239}</destination>
 		</relationship>
 	</object>
 	<object class="AutomationTrack" id="{bfb643e5-103e-41a8-9254-607c783ac2be}">
@@ -1874,6 +1877,9 @@
 		</property>
 		<property name="length">
 			<value>96.000000000000014</value>
+		</property>
+		<property name="volume">
+			<value>-1</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{6cdb7429-4018-462e-b9ce-875c703eea8f}</destination>
@@ -2647,6 +2653,11 @@
 			<destination>{23e2e9ca-e22a-4f1e-aa0d-8b82ffe3e239}</destination>
 		</relationship>
 	</object>
+	<object class="AutomationTrack" id="{498ac03b-e73f-49a9-888f-fced9f9a3a75}">
+		<relationship name="automator">
+			<destination>{2f3b1d4b-c030-4492-93d6-2be9cb5a7c85}</destination>
+		</relationship>
+	</object>
 	<object class="TransitionSourceSound" id="{4aca8499-35aa-45e4-b36b-1356b9b18fc7}">
 		<property name="length">
 			<value>0</value>
@@ -2740,11 +2751,14 @@
 	</object>
 	<object class="EventMixerGroup" id="{23e2e9ca-e22a-4f1e-aa0d-8b82ffe3e239}">
 		<property name="volume">
-			<value>10</value>
+			<value>-1.5</value>
 		</property>
 		<property name="name">
 			<value>SUB MIX</value>
 		</property>
+		<relationship name="automators">
+			<destination>{2f3b1d4b-c030-4492-93d6-2be9cb5a7c85}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{9d04538a-6d98-46e7-b8b9-8e27b5c68023}</destination>
 		</relationship>
@@ -3704,6 +3718,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{4f6ee031-5cf0-403c-8d86-599d8ef2e2fc}" />
+	<object class="Automator" id="{2f3b1d4b-c030-4492-93d6-2be9cb5a7c85}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{1fcb34f1-8c05-40dc-9330-fdcd0d0bc4b2}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{9d04538a-6d98-46e7-b8b9-8e27b5c68023}">
 		<relationship name="effects">
 			<destination>{ecc60d27-92af-4ab3-b2bc-9edbb90e597f}</destination>
@@ -5446,6 +5468,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{ceba3239-7fcb-47eb-ada7-6677fecde2a6}" />
+	<object class="AutomationCurve" id="{1fcb34f1-8c05-40dc-9330-fdcd0d0bc4b2}">
+		<relationship name="parameter">
+			<destination>{3ae2e9f2-291f-4958-a302-02c5c3627a04}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{0e928941-98b8-4d15-804b-09b8779be514}</destination>
+			<destination>{d5048b45-31f5-4006-a661-47904ae3aafe}</destination>
+		</relationship>
+	</object>
 	<object class="LowpassEffect" id="{ecc60d27-92af-4ab3-b2bc-9edbb90e597f}">
 		<property name="cutoff">
 			<value>22000</value>
@@ -5625,6 +5656,22 @@
 		</property>
 		<property name="value">
 			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{0e928941-98b8-4d15-804b-09b8779be514}">
+		<property name="position">
+			<value>173.84615384615387</value>
+		</property>
+		<property name="value">
+			<value>-10</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{d5048b45-31f5-4006-a661-47904ae3aafe}">
+		<property name="position">
+			<value>197.675213997047</value>
+		</property>
+		<property name="value">
+			<value>-3.60000014</value>
 		</property>
 	</object>
 </objects>

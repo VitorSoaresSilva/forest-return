@@ -2267,7 +2267,6 @@ GameObject:
   - component: {fileID: 6725375582429070832}
   - component: {fileID: 6725375582429070835}
   - component: {fileID: 6725375582429070831}
-  - component: {fileID: -4882761249907340026}
   - component: {fileID: 81575764013226263}
   m_Layer: 0
   m_Name: Player
@@ -2323,6 +2322,8 @@ MonoBehaviour:
   rotationRatio: 0.1
   soundTrigger: {fileID: 0}
   damageHitBox: {fileID: 9048500256311806916}
+  offsetInteract: {x: 0, y: 0, z: 0}
+  sphereInteractionRadius: 0
 --- !u!114 &6725375582429070835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2369,36 +2370,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-4882761249907340026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6725375582429070837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 142722722
-      Data2: 1267622678
-      Data3: 22499218
-      Data4: -1708293729
-    Path: event:/ambient/standard
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!136 &81575764013226263
 CapsuleCollider:
   m_ObjectHideFlags: 0
