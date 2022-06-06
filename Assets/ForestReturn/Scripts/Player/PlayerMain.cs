@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Character;
 using Damage;
+using Interactable;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Attribute = Attributes.Attribute;
 
 namespace Player
@@ -45,6 +48,11 @@ namespace Player
         [Header("Damage")] 
         [SerializeField] private GameObject damageHitBox;
 
+        
+        [Header("Interact")]
+        [SerializeField] private Vector3 offsetInteract;
+        [SerializeField] private float sphereInteractionRadius;
+        private RaycastHit[] _raycastHits = new RaycastHit[10];
         protected override void Awake()
         {
             base.Awake();
@@ -90,6 +98,7 @@ namespace Player
             {
                 hitBox.enabled = false;
             }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void Start()
@@ -215,7 +224,28 @@ namespace Player
 
         private void HandleInteract(InputAction.CallbackContext obj)
         {
-            // throw new NotImplementedException();
+            int hits = Physics.SphereCastNonAlloc(
+                transform.position + offsetInteract.x * transform.forward + offsetInteract.y * transform.up,
+                sphereInteractionRadius, transform.forward, _raycastHits);
+            var interactables = new List<IInteractable>();
+            int closestIndex = 0;
+            Debug.Log(hits);
+            for (int i = 0; i < hits; i++)
+            {
+                Debug.Log("for" + hits);
+                if (!_raycastHits[i].transform.TryGetComponent(out IInteractable interactable)) continue;
+                interactables.Add(interactable);
+                // interactable.
+                if (_raycastHits[i].distance < _raycastHits[closestIndex].distance)
+                {
+                    closestIndex = interactables.Count - 1;
+                }
+            }
+
+            if (interactables.Count > 0)
+            {
+                interactables[closestIndex].Interact();
+            }
         }
 
         public void HandleStartAttack()

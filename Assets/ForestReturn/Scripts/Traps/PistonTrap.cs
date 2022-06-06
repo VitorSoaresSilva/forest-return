@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.Traps
+namespace Traps
 {
     public class PistonTrap : MonoBehaviour
     {

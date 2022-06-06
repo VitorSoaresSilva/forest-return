@@ -1,7 +1,6 @@
 using System.Collections;
-using Unity.EditorCoroutines.Editor;
 using UnityEngine;
-namespace ForestReturn.Scripts.Traps
+namespace Traps
 {
     public class SpikeTrap : MonoBehaviour
     {
