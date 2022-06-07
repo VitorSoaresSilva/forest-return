@@ -1,4 +1,6 @@
 // using Interactable;
+
+using FMODUnity;
 using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Door : MonoBehaviour
@@ -7,6 +9,7 @@ public class Door : MonoBehaviour
     [SerializeField] private bool isClosed;
     private static readonly int CloseDoor = Animator.StringToHash("CloseDoor");
     private static readonly int OpenDoor = Animator.StringToHash("OpenDoor");
+    public EventReference EventPath;
     // [SerializeField] private KeysScriptableObject[] keysNeededToOpen;
     private void Awake()
     {
