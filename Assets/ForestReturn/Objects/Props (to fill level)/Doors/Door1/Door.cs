@@ -26,6 +26,7 @@ public class Door : MonoBehaviour
         isClosed = false;
         EventInstance openDoor = RuntimeManager.CreateInstance(openDoorEventPath);
         RuntimeManager.AttachInstanceToGameObject(openDoor,transform);
+        openDoor.setParameterByName("openClose", 0);
         openDoor.start();
         openDoor.release();
     }
@@ -37,6 +38,7 @@ public class Door : MonoBehaviour
         isClosed = true;
         EventInstance closeDoor = RuntimeManager.CreateInstance(closeDoorEventPath);
         RuntimeManager.AttachInstanceToGameObject(closeDoor,transform); 
+        closeDoor.setParameterByName("openClose", 1);
         closeDoor.start();
         closeDoor.release();
     }
