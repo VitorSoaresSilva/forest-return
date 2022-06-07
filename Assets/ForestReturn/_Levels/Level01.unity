@@ -25850,7 +25850,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 1
   OverrideMinDistance: 1
-  OverrideMaxDistance: 5.1
+  OverrideMaxDistance: 15
 --- !u!1001 &760647520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37360,7 +37360,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh138260
+  m_Name: pb_Mesh35014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -44982,7 +44982,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh137316
+  m_Name: pb_Mesh34058
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49587,6 +49587,26 @@ PrefabInstance:
     - target: {fileID: 6862044383385482828, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545252038671091836, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
+      propertyPath: EventPath.Path
+      value: event:/SFX/doorOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545252038671091836, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
+      propertyPath: EventPath.Guid.Data1
+      value: -326958009
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545252038671091836, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
+      propertyPath: EventPath.Guid.Data2
+      value: 1160360530
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545252038671091836, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
+      propertyPath: EventPath.Guid.Data3
+      value: -1866467910
+      objectReference: {fileID: 0}
+    - target: {fileID: 8545252038671091836, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
+      propertyPath: EventPath.Guid.Data4
+      value: 679712905
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a5cf9eeca81b44d9355779f130e26d, type: 3}
@@ -58386,6 +58406,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 411ddf208a198ab43a4ec0407c54b651, type: 3}
   m_PrefabInstance: {fileID: 527078739}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559175464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559175459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -327409375
+      Data2: 1283236357
+      Data3: 1195923899
+      Data4: -1965828118
+    Path: event:/SFX/dissipador
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1564230297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78373,6 +78423,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: abd49c7aa8789964c820fcf7075dd134, type: 3}
   m_PrefabInstance: {fileID: 357853300}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1979310021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979310014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 470168690
+      Data2: 1233739504
+      Data3: -454503257
+      Data4: 487275844
+    Path: event:/SFX/fan
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!43 &1980506102
 Mesh:
   m_ObjectHideFlags: 0
