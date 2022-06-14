@@ -26,7 +26,6 @@ namespace Enemies.StateMachine
         public string AnimatorAttackTrigger = "Attack";
         public bool isAttacking;
         public bool canCauseDamage;
-
         [SerializeField] private GameObject hitBoxRotateAttack;
         private static readonly int Death = Animator.StringToHash("Death");
 
@@ -50,9 +49,7 @@ namespace Enemies.StateMachine
 
         private void HandleDead()
         {
-            // Destroy(navMeshAgent);
             StopAllCoroutines();
-            updateActive = false;
             navMeshAgent.enabled = false;
             _playerTransform = null;
             canAttack = false;
@@ -60,23 +57,29 @@ namespace Enemies.StateMachine
             var hitBoxes = GetComponentsInChildren<HitBox>(true);
             foreach (var hitBox in hitBoxes)
             {
-                hitBox.enabled = false;
+                hitBox.gameObject.SetActive(false);
             }
             ChangeState(new IdleState());
             _animator.SetTrigger(Death);
             this.enabled = false;
         }
-
+    
         private void Update()
         {
-            _animator.SetBool(AnimatorIsMoving,navMeshAgent.velocity.magnitude > 0.01f);
+            if (navMeshAgent.isActiveAndEnabled)
+            {
+                _animator.SetBool(AnimatorIsMoving,navMeshAgent.velocity.magnitude > 0.01f);
+            }
         }
 
         private IEnumerator UpdateState()
         {
             while (updateActive)
             {
-                currentState?.UpdateState();
+                if (navMeshAgent.isActiveAndEnabled)
+                {
+                    currentState?.UpdateState();
+                }
                 yield return new WaitForSeconds(enemyConfig.updateDelay);
             }
             yield return null;
@@ -105,20 +108,13 @@ namespace Enemies.StateMachine
             if (playerCharacter != null)
             {
                 playerCharacter.OnDead += HandlePlayerDead;
-                if (canCauseDamage)
-                {
-                    playerCharacter.TakeDamage(DataDamage);
-                }
-                else
-                {
-                    _playerTransform = other.transform;
-                    alertSphereCollider.enabled = false;
-                    ChangeState(new ChasingState());
-                }
+                _playerTransform = other.transform;
+                alertSphereCollider.enabled = false;
+                ChangeState(new ChasingState());
             }
         }
 
-        private void HandlePlayerDead()
+        private void HandlePlayerDead() 
         {
             ChangeState(new IdleState());
             navMeshAgent.isStopped = true;

@@ -19,11 +19,12 @@ namespace Character
         public Weapon Weapon { get; protected set; }
         public WeaponsScriptableObject initialWeaponData;
         public ArtifactsScriptableObject[] initialArtifactsToWeapon;
+        protected Rigidbody _rigidbody;
 
         public delegate void OnDeadEvent();
         public event OnDeadEvent OnDead;
 
-        protected delegate void OnHurEvent();
+        protected delegate void OnHurEvent(Vector3 knockBackForce);
         protected event OnHurEvent OnHurt;
         public DataDamage DataDamage
         {
@@ -50,6 +51,7 @@ namespace Character
         protected virtual void Awake()
         {
             attributes = new Attribute[(int) AttributeType.COUNT];
+            _rigidbody = GetComponent<Rigidbody>();
             // Create the Attributes based on enum: AttributeType
             for (int i = 0; i < (int)AttributeType.COUNT; ++i)
             {
@@ -77,18 +79,22 @@ namespace Character
         
         public void TakeDamage(DataDamage dataDamage)
         {
-            Debug.Log("take damage:" + transform.name);
-            if (isIntangible || isDead) return;
+            TakeDamage(dataDamage, Vector3.zero);
+        }
+
+        public void TakeDamage(DataDamage dataDamage, Vector3 direction)
+        {
+            if (isIntangible || isDead) return; 
+            
             int damageTaken = dataDamage.damage - attributes[(int) AttributeType.Armor].MaxValue;
             damageTaken = Mathf.Max(damageTaken, 0);
             var damage = (damageTaken + dataDamage.trueDamage);
-            // Debug.Log(damage);
             if (damage > 0)
             {
+                isIntangible = true;
                 CurrentHealth -= damage;
                 StartCoroutine(nameof(IntangibleCooldown));
-                isIntangible = true;
-                OnHurt?.Invoke();
+                OnHurt?.Invoke(direction);
                 if (CurrentHealth <= 0)
                 {
                     isDead = true;
