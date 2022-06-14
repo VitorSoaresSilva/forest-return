@@ -28,33 +28,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3386
---- !u!114 &-7821216522425713709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menu/GoMenu
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/GoMenu
-  Guid:
-    Data1: 1477831676
-    Data2: 1094669245
-    Data3: -99739256
-    Data4: 407501478
-  Banks:
-  - {fileID: 7271101407567785891}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 5496
 --- !u!114 &-4745805717097126266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +106,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 124625
+--- !u!114 &-934775596376921333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/doorClose
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/doorClose
+  Guid:
+    Data1: 2106318001
+    Data2: 1164363393
+    Data3: -992838725
+    Data4: -2126283931
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2795
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,46 +157,16 @@ MonoBehaviour:
   - {fileID: -1817633527427268258}
   - {fileID: -1179583310354572898}
   - {fileID: 4517698252495382948}
+  - {fileID: -934775596376921333}
   - {fileID: 3329286924779685204}
   - {fileID: 3567466703239109349}
-  - {fileID: 6181268454089793882}
-  - {fileID: 8710930416676085388}
-  - {fileID: -7821216522425713709}
-  - {fileID: 23664907046396193}
   EditorParameters: []
   MasterBanks:
   - {fileID: 8235099139117137088}
   StringsBanks:
   - {fileID: 2103638568314959629}
-  cacheTime: 637904873936227762
+  cacheTime: 637907996071619154
   cacheVersion: 10
---- !u!114 &23664907046396193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menu/mouseOnTop
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/mouseOnTop
-  Guid:
-    Data1: 1324533261
-    Data2: 1315623118
-    Data3: -144997739
-    Data4: 1457193945
-  Banks:
-  - {fileID: 7271101407567785891}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 146
 --- !u!114 &241022084488486360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,10 +230,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637904873932467423
+  lastModified: 637907996070601875
   FileSizes:
   - Name: Desktop
-    Value: 1616
+    Value: 1494
   Exists: 1
 --- !u!114 &2392102453222564444
 MonoBehaviour:
@@ -477,33 +447,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 96052
---- !u!114 &6181268454089793882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menu/click
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/click
-  Guid:
-    Data1: -2046336268
-    Data2: 1250608704
-    Data3: 1704948364
-    Data4: 1734374062
-  Banks:
-  - {fileID: 7271101407567785891}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 104
 --- !u!114 &6797067341741789749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,10 +489,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637904873936227762
+  lastModified: 637907996071619154
   FileSizes:
   - Name: Desktop
-    Value: 17573056
+    Value: 16228064
   Exists: 1
 --- !u!114 &8235099139117137088
 MonoBehaviour:
@@ -566,35 +509,8 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637904873932417578
+  lastModified: 637902073769207960
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &8710930416676085388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Menu/backGame
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/backGame
-  Guid:
-    Data1: -1800473798
-    Data2: 1186736118
-    Data3: -1218480725
-    Data4: 618001921
-  Banks:
-  - {fileID: 7271101407567785891}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 5621
