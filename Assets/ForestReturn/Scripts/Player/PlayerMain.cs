@@ -53,6 +53,7 @@ namespace Player
         [SerializeField] private Vector3 offsetInteract;
         [SerializeField] private float sphereInteractionRadius;
         private RaycastHit[] _raycastHits = new RaycastHit[10];
+
         protected override void Awake()
         {
             base.Awake();
@@ -201,17 +202,19 @@ namespace Player
                     _lastMouseRotation = Quaternion.LookRotation(playerToMouse.normalized, Vector3.up);
                 }
             }
+            
             if (!(Quaternion.Angle(transform.rotation, _lastMouseRotation) > 0.01f)) return;
             var rot = Quaternion.Slerp(transform.rotation, _lastMouseRotation,rotationRatio).normalized;
             _rb.MoveRotation(rot);
         }
 
-        private void HandlePlayerHurt()
+        private void HandlePlayerHurt(Vector3 knockBackForce)
         {
             HandleEndAttack();
+            _animator.SetTrigger(Hurt);
+            _rigidbody.AddForce(knockBackForce, ForceMode.VelocityChange);
             if (UiManager.instance != null)
             {
-                _animator.SetTrigger(Hurt);
                 UiManager.instance.PlayerHurt();
             }
         }
@@ -219,7 +222,9 @@ namespace Player
         private void Move()
         {
             if (skewed.magnitude < 0.01f) return;
-            _rb.MovePosition(transform.position + skewed * (_speed * Time.deltaTime));
+            Vector3 vel = skewed * _speed;
+            vel.y = _rb.velocity.y;
+            _rb.velocity = vel;
         }
 
         private void HandleInteract(InputAction.CallbackContext obj)
@@ -229,10 +234,10 @@ namespace Player
                 sphereInteractionRadius, transform.forward, _raycastHits);
             var interactables = new List<IInteractable>();
             int closestIndex = 0;
-            Debug.Log(hits);
+            // Debug.Log(hits);
             for (int i = 0; i < hits; i++)
             {
-                Debug.Log("for" + hits);
+                // Debug.Log("for" + hits);
                 if (!_raycastHits[i].transform.TryGetComponent(out IInteractable interactable)) continue;
                 interactables.Add(interactable);
                 // interactable.
