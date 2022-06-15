@@ -1,4 +1,5 @@
 ﻿using Artifacts;
+using Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,5 +11,6 @@ namespace Weapons
         public string weaponName;
         public Texture image;
         [Range(0,5)] public int slotsAmount;
+        public DataDamage DataDamage;
     }
 }

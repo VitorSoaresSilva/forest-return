@@ -16,9 +16,9 @@ namespace Character
         [SerializeField] private AttributeModifier[] baseModifiers;
         protected bool isIntangible = false;
         public bool isDead { get; private set; }
-        public Weapon Weapon { get; protected set; }
-        public WeaponsScriptableObject initialWeaponData;
-        public ArtifactsScriptableObject[] initialArtifactsToWeapon;
+        // public Weapon Weapon { get; protected set; }
+        // public WeaponsScriptableObject initialWeaponData;
+        // public ArtifactsScriptableObject[] initialArtifactsToWeapon;
         protected Rigidbody _rigidbody;
 
         public delegate void OnDeadEvent();
@@ -28,7 +28,7 @@ namespace Character
         protected event OnHurEvent OnHurt;
         public DataDamage DataDamage
         {
-            get => new DataDamage(attributes[(int)AttributeType.Attack].CurrentValue,
+            get => new (attributes[(int)AttributeType.Attack].CurrentValue,
                 attributes[(int)AttributeType.TrueDamageAttack].CurrentValue);
         }
 
@@ -70,11 +70,9 @@ namespace Character
                 attributes[(int)baseModifiers[i].type].AddModifier(baseModifiers[i].value);
             }
 
-            Weapon = initialArtifactsToWeapon == null ? 
-                new Weapon(this, initialWeaponData) : 
-                new Weapon(this, initialWeaponData, initialArtifactsToWeapon);
-            
-            
+            // Weapon = initialArtifactsToWeapon == null ? 
+            //     new Weapon(this, initialWeaponData) : 
+            //     new Weapon(this, initialWeaponData, initialArtifactsToWeapon);
         }
         
         public void TakeDamage(DataDamage dataDamage)
@@ -107,7 +105,6 @@ namespace Character
         {
             yield return new WaitForSeconds(2);
             isIntangible = false;
-            // hasHurted = false;
         }
     }
 }

@@ -12,10 +12,19 @@ namespace Managers
 
         private void Start()
         {
+            // if (PlayerMain == null)
+            // {
+            //     PlayerMain = FindObjectOfType<PlayerMain>();
+            // }
+        }
+
+        public PlayerMain GetPlayerScript()
+        {
             if (PlayerMain == null)
             {
                 PlayerMain = FindObjectOfType<PlayerMain>();
             }
+            return PlayerMain;
         }
     }
 }

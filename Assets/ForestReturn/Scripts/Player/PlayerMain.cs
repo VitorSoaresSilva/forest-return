@@ -8,10 +8,13 @@ using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Weapons;
+// using Weapons;
 using Attribute = Attributes.Attribute;
 
 namespace Player
 {
+    [RequireComponent(typeof(WeaponHolder))]
     public class PlayerMain : BaseCharacter
     {
         private Rigidbody _rb;
@@ -39,6 +42,7 @@ namespace Player
         private float _speed;
         private Matrix4x4 _matrix4X4;
         private Vector3 skewed;
+        
 
 
         [Header("Som")] 
@@ -54,6 +58,11 @@ namespace Player
         [SerializeField] private float sphereInteractionRadius;
         private RaycastHit[] _raycastHits = new RaycastHit[10];
 
+        // [SerializeField] private Weapon initialWeapon;
+        // [Header("Weapon")]
+        public WeaponHolder _weaponHolder { get; private set; }
+        // private Weapon _weapon;
+
         protected override void Awake()
         {
             base.Awake();
@@ -63,6 +72,7 @@ namespace Player
             _playerInputAction.gameplay.Enable();
             _matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,45,0));
             _speed = runSpeed;
+            _weaponHolder = GetComponent<WeaponHolder>();
             if (_mainCamera == null && Camera.main != null)
             {
                 _mainCamera = Camera.main;
@@ -100,6 +110,16 @@ namespace Player
                 hitBox.enabled = false;
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        private void HandlePlayerHurt(Vector3 knockBackForce)
+        {
+            HandleEndAttack();
+            _animator.SetTrigger(Hurt);
+            _rigidbody.AddForce(knockBackForce, ForceMode.VelocityChange);
+            if (UiManager.instance != null)
+            {
+                UiManager.instance.PlayerHurt();
+            }
         }
 
         private void Start()
@@ -208,16 +228,7 @@ namespace Player
             _rb.MoveRotation(rot);
         }
 
-        private void HandlePlayerHurt(Vector3 knockBackForce)
-        {
-            HandleEndAttack();
-            _animator.SetTrigger(Hurt);
-            _rigidbody.AddForce(knockBackForce, ForceMode.VelocityChange);
-            if (UiManager.instance != null)
-            {
-                UiManager.instance.PlayerHurt();
-            }
-        }
+        
 
         private void Move()
         {
@@ -292,5 +303,16 @@ namespace Player
         {
             soundTrigger.SetActive(false);
         }
+
+        // public void EquipNewWeapon(WeaponsScriptableObject weaponsScriptableObject)
+        // {
+        //     // if (Weapon == null)
+        //     // {
+        //     //     Weapon = new Weapon(this, weaponsScriptableObject);
+        //     //     // Weapon = initialArtifactsToWeapon == null ? 
+        //     //     //     new Weapon(this, initialWeaponData) : 
+        //     //     //     new Weapon(this, initialWeaponData, initialArtifactsToWeapon);
+        //     // }
+        // }
     }
 }

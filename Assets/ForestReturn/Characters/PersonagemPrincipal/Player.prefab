@@ -2268,6 +2268,7 @@ GameObject:
   - component: {fileID: 6725375582429070835}
   - component: {fileID: 6725375582429070831}
   - component: {fileID: 81575764013226263}
+  - component: {fileID: 1102087731914401983}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2308,8 +2309,6 @@ MonoBehaviour:
   attributes: []
   characterStats: {fileID: 11400000, guid: 8be38213f0cdbac4e95bdaae208b0d1d, type: 2}
   baseModifiers: []
-  initialWeaponData: {fileID: 11400000, guid: 3de1a0cc916440278607168af273b666, type: 2}
-  initialArtifactsToWeapon: []
   isAttacking: 0
   isDashing: 0
   _mainCamera: {fileID: 0}
@@ -2384,6 +2383,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1102087731914401983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725375582429070837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2433927e6df14604bc2d25b9acdc1b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialWeapon: {fileID: 11400000, guid: 3de1a0cc916440278607168af273b666, type: 2}
+  initialArtifacts: []
 --- !u!1 &6725375582875350404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3431,6 +3444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45aac245ed114311a08d5143c4b90698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack: {fileID: 11400000, guid: c7a39fc6b1bf4424f8c2c83adf2d3ac1, type: 2}
 --- !u!1 &9127900246328927345
 GameObject:
   m_ObjectHideFlags: 0
