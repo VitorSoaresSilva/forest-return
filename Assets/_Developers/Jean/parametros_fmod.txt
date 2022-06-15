@@ -1,0 +1,81 @@
+situation 0 = Ambiente de eploração: track calma e dark, porém sem ação.
+Esse parâmetro funciona dentro de todos os outros parâmetros "situation"
+
+situation 1 = Ambiente suspense: (Será tocada uma transição para a track) - Track dark, indica perigo.
+Esse parâmetro pode ser influênciado pelo parâmetro "Danger" (explicação abaixo).
+Esse parâmetro "situation 1" funciona dentro de todos os outros parâmetros "situation"
+
+
+
+
+//
+Danger = Parâmetro usado para indicar o nível de perigo. Esse parâmetro influencia apenas sobre o "situation 1".
+
+0% até 25% = apenas suspense, indica ao jogador que pode haver algum perigo na região como armadilhas e inimigos.
+
+25% até 75% = Hits, earcandy, mais peso e presença de outros instrumentos. Indica uma ameaça maior.
+
+78% até 100% = Indica o maior nível possível de perigo.
+
+se quiser indicar uma área de perigo, chame o "situation 1" e defina o danger para indicar o quão perigoso essa área é.
+//
+
+
+
+
+situation 2 = Morte: É tocado uma transição que indica a morte do personagem e depois toca um loop "vazio" somente com som ambiente.
+Pode ser deixado para tocar enquanto o jogador escolhe as opções do menu para retornar para o jogo.
+Esse parâmetro funciona dentro de todos os outros parâmetros "situation"
+
+situation 3 = Win, track de vitória: É tocado uma transição de vitória e logo após é retornado para a o som ambiente 
+(mas sem retornar para o parâmetro "situation 1).
+O "situation 3" não funciona dentro do "situation 0 ou 2", pois não tem como "ganhar" se não tem nada acontecendo e nem se você 
+estiver morto. Ou seja, para o parâmetro 3 (win), ser tocado, ele precisa ser ativado quando o parâmetro "situation 1" está sendo
+tocado.
+
+
+------------------------------------------------------
+
+Eventos:
+
+MEnu/
+
+backGame: OneShot - Quando o jogador pressiona para voltar ao jogo após ter pausado ele.
+
+click: OneShot - Quando o jogador pressiona em cima de qualquer opção.
+
+GoMenu: OneShot - Quando o jogador pressiona pause no jogo.
+
+mouseOnTop: OneShot - Quando o jogador apenas deixa o mouse por cima de alguma opção mas não pressiona.
+
+// faltam criar - Escolha no menu de efeitos especiais como: Máscaras, espadas e combos// 
+
+
+-------------
+character/
+
+footsteps : OneShot - Parâmetros "Terrain e WalkRun".
+
+Terrain: Vai dos números 0 até 5. Cada número é um solo diferente.
+0 = Metal
+1 = Dirt
+2 = Sand
+3 = Water
+4 = Leaves
+5 = 
+-----------------
+
+
+character/
+collect : OneShot
+
+
+------------
+SFX/ 
+espinhos: OneShot - Parâmetros "onOff"
+
+onOff = Número 0 representa o pistão atacando, e 1 representa o pistão retraindo.
+------------
+
+
+
