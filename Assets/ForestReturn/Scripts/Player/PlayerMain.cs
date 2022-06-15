@@ -84,8 +84,18 @@ namespace Player
             _playerInputAction.gameplay.Attack.performed += HandleAttack;
             _playerInputAction.gameplay.Interact.performed += HandleInteract;
             _playerInputAction.gameplay.dash.performed += HandleDash;
+            _playerInputAction.gameplay.inventory.performed += HandleInventory;
             OnHurt += HandlePlayerHurt;
             OnDead += HandlePlayerDead;
+        }
+
+        private void HandleInventory(InputAction.CallbackContext obj)
+        {
+            if (UiManager.instance != null)
+            {
+                // _playerInputAction.gameplay.Disable();
+                UiManager.instance.ShowItem(_weaponHolder.Weapon);
+            }
         }
 
         private void OnDisable()
@@ -93,6 +103,7 @@ namespace Player
             _playerInputAction.gameplay.Attack.performed -= HandleAttack;
             _playerInputAction.gameplay.Interact.performed -= HandleInteract;
             _playerInputAction.gameplay.dash.performed -= HandleDash;
+            _playerInputAction.gameplay.inventory.performed -= HandleInventory;
             OnHurt -= HandlePlayerHurt;
             OnDead -= HandlePlayerDead;
         }

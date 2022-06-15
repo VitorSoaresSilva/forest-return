@@ -11,7 +11,7 @@ namespace Weapons
     [RequireComponent(typeof(BaseCharacter))]
     public class WeaponHolder : MonoBehaviour
     {
-        private Weapon _weapon;
+        public Weapon Weapon { get; private set; }
         private BaseCharacter _baseCharacter;
         private List<ArtifactsScriptableObject> _artifactsNotInUse;
         
@@ -20,7 +20,7 @@ namespace Weapons
         [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         private void Start()
         {
-            _weapon = null;
+            this.Weapon = null;
             _baseCharacter = GetComponent<BaseCharacter>();
             _artifactsNotInUse = new List<ArtifactsScriptableObject>();
             
@@ -37,14 +37,14 @@ namespace Weapons
         {
             
             if (weapon == null) return;
-            if (_weapon != null)
+            if (this.Weapon != null)
             {
                 RemoveWeapon();
             }
-            _weapon = weapon;
-            _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(_weapon.weaponConfig.DataDamage.damage);
-            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(_weapon.weaponConfig.DataDamage.trueDamage);
-            foreach (var artifactsScriptableObject in _weapon.artifacts)
+            this.Weapon = weapon;
+            _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(this.Weapon.weaponConfig.DataDamage.damage);
+            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(this.Weapon.weaponConfig.DataDamage.trueDamage);
+            foreach (var artifactsScriptableObject in this.Weapon.artifacts)
             {
                 if (artifactsScriptableObject != null)
                 {
@@ -59,10 +59,10 @@ namespace Weapons
 
         public void RemoveWeapon()
         {
-            if (_weapon == null) return;
-            _baseCharacter.attributes[(int)AttributeType.Attack].RemoveModifier(_weapon.weaponConfig.DataDamage.damage);
-            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].RemoveModifier(_weapon.weaponConfig.DataDamage.trueDamage);
-            foreach (var artifactsScriptableObject in _weapon.artifacts)
+            if (Weapon == null) return;
+            _baseCharacter.attributes[(int)AttributeType.Attack].RemoveModifier(Weapon.weaponConfig.DataDamage.damage);
+            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].RemoveModifier(Weapon.weaponConfig.DataDamage.trueDamage);
+            foreach (var artifactsScriptableObject in Weapon.artifacts)
             {
                 foreach (var attributeModifier in artifactsScriptableObject.modifiers)
                 {
@@ -70,7 +70,7 @@ namespace Weapons
                 }
                 _artifactsNotInUse.Add(artifactsScriptableObject);
             }
-            _weapon = null;
+            Weapon = null;
             // TODO: Trigger an Event to UiManager
         }
 
@@ -87,9 +87,9 @@ namespace Weapons
             if (index >= _artifactsNotInUse.Count) return;
             bool hasEmptySlots = false;
             int indexEmptySlot = -1;
-            for (int i = 0; i < _weapon.artifacts.Length; i++)
+            for (int i = 0; i < Weapon.artifacts.Length; i++)
             {
-                if (hasEmptySlots || _weapon.artifacts[i] != null) continue;
+                if (hasEmptySlots || Weapon.artifacts[i] != null) continue;
                 hasEmptySlots = true;
                 indexEmptySlot = i;
             }
@@ -100,7 +100,7 @@ namespace Weapons
             }
             ArtifactsScriptableObject artifact = _artifactsNotInUse[index];
             _artifactsNotInUse.RemoveAt(index);
-            _weapon.artifacts[indexEmptySlot] = artifact;
+            Weapon.artifacts[indexEmptySlot] = artifact;
             foreach (var attributeModifier in artifact.modifiers)
             {
                 _baseCharacter.attributes[(int)attributeModifier.type].RemoveModifier(attributeModifier.value);

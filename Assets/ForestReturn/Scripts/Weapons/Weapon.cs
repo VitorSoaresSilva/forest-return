@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Weapons
 {
     [System.Serializable]
-    public class Weapon
+    public class  Weapon
     {
         public WeaponsScriptableObject weaponConfig;
         public ArtifactsScriptableObject[] artifacts;

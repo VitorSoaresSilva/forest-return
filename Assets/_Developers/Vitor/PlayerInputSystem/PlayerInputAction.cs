@@ -71,6 +71,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""d424e96f-c240-4628-b367-8ee405d164d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -205,6 +214,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d21ebbef-7578-4b2a-bb60-bbfa368b7a14"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -246,6 +266,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_Interact = m_gameplay.FindAction("Interact", throwIfNotFound: true);
         m_gameplay_dash = m_gameplay.FindAction("dash", throwIfNotFound: true);
         m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
+        m_gameplay_inventory = m_gameplay.FindAction("inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +331,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_Interact;
     private readonly InputAction m_gameplay_dash;
     private readonly InputAction m_gameplay_pause;
+    private readonly InputAction m_gameplay_inventory;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -319,6 +341,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_gameplay_Interact;
         public InputAction @dash => m_Wrapper.m_gameplay_dash;
         public InputAction @pause => m_Wrapper.m_gameplay_pause;
+        public InputAction @inventory => m_Wrapper.m_gameplay_inventory;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -343,6 +366,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @inventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @inventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @inventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -362,6 +388,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @pause.started += instance.OnPause;
                 @pause.performed += instance.OnPause;
                 @pause.canceled += instance.OnPause;
+                @inventory.started += instance.OnInventory;
+                @inventory.performed += instance.OnInventory;
+                @inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -391,5 +420,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

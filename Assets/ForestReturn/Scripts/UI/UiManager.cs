@@ -46,10 +46,13 @@ namespace UI
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
         private Animator _animator;
+        
         [Header("Weapon Card")]
         public GameObject root;
         public RawImage image;
         public TextMeshProUGUI title;
+        public TextMeshProUGUI damageText;
+        public TextMeshProUGUI trueDamageText;
         public UIArtifactCard[] uiArtifacts;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
 
@@ -86,6 +89,8 @@ namespace UI
                 image.texture = weapon.weaponConfig.image;
             }
             title.text = weapon.weaponConfig.weaponName;
+            damageText.text = $"Damage: {weapon.weaponConfig.DataDamage.damage.ToString()}";
+            trueDamageText.text = $"True Damage: {weapon.weaponConfig.DataDamage.trueDamage.ToString()}";
             for (int i = 0; i < weapon.artifacts.Length; i++)
             {
                 if (weapon.artifacts[i] != null)
