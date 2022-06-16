@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Artifacts;
 using Attributes;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,7 +49,8 @@ namespace UI
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
         private Animator _animator;
-        
+
+        [field: SerializeField] public UiWeaponInventory UiWeaponInventory { get; private set; }
         [Header("Weapon Card")]
         public GameObject root;
         public RawImage image;
@@ -113,6 +117,27 @@ namespace UI
         public void PlayerHurt()
         {
             _animator.SetTrigger(Hurt);
+        }
+
+        public void ShowArtifact(ArtifactsScriptableObject newArtifact)
+        {
+            Debug.Log("Voce coletou o artefato " + newArtifact.artifactName);
+        }
+
+        public void ShowWeaponsInventory(List<WeaponsScriptableObject> list)
+        {
+            if (!UiWeaponInventory.gameObject.activeSelf)
+            {
+                UiWeaponInventory.gameObject.SetActive(true);
+            }
+            UiWeaponInventory.ShowWeapons(list);
+        }
+        public void EquipWeapon(int index)
+        {
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.GetPlayerScript()._weaponHolder.EquipWeapon(index);
+            }
         }
     }
 }

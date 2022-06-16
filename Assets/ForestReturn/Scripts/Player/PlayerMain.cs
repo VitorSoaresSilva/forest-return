@@ -94,7 +94,7 @@ namespace Player
             if (UiManager.instance != null)
             {
                 // _playerInputAction.gameplay.Disable();
-                UiManager.instance.ShowItem(_weaponHolder.Weapon);
+                UiManager.instance.ShowWeaponsInventory(_weaponHolder.GetWeapons());
             }
         }
 

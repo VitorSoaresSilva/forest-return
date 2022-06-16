@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace Weapons
 {
-    [System.Serializable]
     public class  Weapon
     {
-        public WeaponsScriptableObject weaponConfig;
-        public ArtifactsScriptableObject[] artifacts;
+        public readonly WeaponsScriptableObject weaponConfig;
+        public readonly ArtifactsScriptableObject[] artifacts;
         public Weapon(WeaponsScriptableObject initialWeaponConfig)
         {
             weaponConfig = initialWeaponConfig;

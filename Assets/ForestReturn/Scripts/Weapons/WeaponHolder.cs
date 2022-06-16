@@ -14,46 +14,45 @@ namespace Weapons
         public Weapon Weapon { get; private set; }
         private BaseCharacter _baseCharacter;
         private List<ArtifactsScriptableObject> _artifactsNotInUse;
+        private List<WeaponsScriptableObject> _weaponsNotInUse;
         
         [Header("Initial Data Weapon")]
         [SerializeField] private WeaponsScriptableObject initialWeapon;
         [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         private void Start()
         {
-            this.Weapon = null;
             _baseCharacter = GetComponent<BaseCharacter>();
             _artifactsNotInUse = new List<ArtifactsScriptableObject>();
-            
-            Weapon weapon = new Weapon(initialWeapon);
-            _artifactsNotInUse.AddRange(initialArtifacts);
-            EquipWeapon(weapon);
+            _weaponsNotInUse = new List<WeaponsScriptableObject>();
+            // Weapon weapon = new Weapon(initialWeapon);
+            if (initialWeapon != null)
+            {
+                _weaponsNotInUse.Add(initialWeapon);
+            }
+
+            if (initialArtifacts.Length > 0)
+            {
+                _artifactsNotInUse.AddRange(initialArtifacts);
+            }
+            EquipWeapon(0);
             var length = _artifactsNotInUse.Count;
             for (int i = 0; i < length; i++)
             {
                 TryEquipArtifactFromInventory(0);
             }
         }
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(int index)
         {
-            
-            if (weapon == null) return;
-            if (this.Weapon != null)
+            var weaponsScriptableObject = _weaponsNotInUse[index];   
+            if (weaponsScriptableObject == null) return;
+            if (Weapon != null)
             {
                 RemoveWeapon();
             }
-            this.Weapon = weapon;
-            _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(this.Weapon.weaponConfig.DataDamage.damage);
-            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(this.Weapon.weaponConfig.DataDamage.trueDamage);
-            foreach (var artifactsScriptableObject in this.Weapon.artifacts)
-            {
-                if (artifactsScriptableObject != null)
-                {
-                    foreach (var attributeModifier in artifactsScriptableObject.modifiers)
-                    {
-                        _baseCharacter.attributes[(int)attributeModifier.type].AddModifier(attributeModifier.value);
-                    }
-                }
-            }
+            _weaponsNotInUse.RemoveAt(index);
+            Weapon = new Weapon(weaponsScriptableObject);
+            _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(Weapon.weaponConfig.DataDamage.damage);
+            _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(Weapon.weaponConfig.DataDamage.trueDamage);
             // TODO: Trigger Event for UiManager
         }
 
@@ -64,23 +63,21 @@ namespace Weapons
             _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].RemoveModifier(Weapon.weaponConfig.DataDamage.trueDamage);
             foreach (var artifactsScriptableObject in Weapon.artifacts)
             {
-                foreach (var attributeModifier in artifactsScriptableObject.modifiers)
+                if (artifactsScriptableObject != null)
                 {
-                    _baseCharacter.attributes[(int)attributeModifier.type].RemoveModifier(attributeModifier.value);
+                    foreach (var attributeModifier in artifactsScriptableObject.modifiers)
+                    {
+                        _baseCharacter.attributes[(int)attributeModifier.type].RemoveModifier(attributeModifier.value);
+                    }
+                    _artifactsNotInUse.Add(artifactsScriptableObject);
                 }
-                _artifactsNotInUse.Add(artifactsScriptableObject);
             }
+            _weaponsNotInUse.Add(Weapon.weaponConfig);
             Weapon = null;
             // TODO: Trigger an Event to UiManager
         }
 
-        public void CollectArtifact(ArtifactsScriptableObject newArtifact)
-        {
-            if (newArtifact != null)
-            {
-                _artifactsNotInUse.Add(newArtifact);
-            }
-        }
+        
 
         public void TryEquipArtifactFromInventory(int index)
         {
@@ -103,8 +100,32 @@ namespace Weapons
             Weapon.artifacts[indexEmptySlot] = artifact;
             foreach (var attributeModifier in artifact.modifiers)
             {
-                _baseCharacter.attributes[(int)attributeModifier.type].RemoveModifier(attributeModifier.value);
+                _baseCharacter.attributes[(int)attributeModifier.type].AddModifier(attributeModifier.value);
             }
+        }
+
+        public void CollectWeapon(WeaponsScriptableObject newWeapon)
+        {
+            if (newWeapon != null)
+            {
+                _weaponsNotInUse.Add(newWeapon);
+            }
+        }
+        public void CollectArtifact(ArtifactsScriptableObject newArtifact)
+        {
+            if (newArtifact != null)
+            {
+                _artifactsNotInUse.Add(newArtifact);
+                if (UiManager.instance != null)
+                {
+                    UiManager.instance.ShowArtifact(newArtifact);
+                }
+            }
+        }
+
+        public List<WeaponsScriptableObject> GetWeapons()
+        {
+            return _weaponsNotInUse;
         }
     }
 } 

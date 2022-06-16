@@ -12,13 +12,12 @@ namespace Interactable
         [SerializeField] private WeaponsScriptableObject weaponData;
         public void Interact()
         {
-            Debug.Log("opa");
             if (GameManager.instance != null)
             {
                 PlayerMain playerMain =  GameManager.instance.GetPlayerScript();
                 if (playerMain != null)
                 {
-                    playerMain._weaponHolder.EquipWeapon(new Weapon(weaponData));
+                    playerMain._weaponHolder.CollectWeapon(weaponData);
                     Destroy(gameObject);
                 }
             }
