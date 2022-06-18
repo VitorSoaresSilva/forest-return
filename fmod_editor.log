@@ -2,27 +2,485 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=20204 (121702), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
 [LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.16ms, DSP buffer: 1024 * 4
+[LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000026B5CDF4528 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000022E36EB42C8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669338 : node = 0000022E0980D320
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669338
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E0980D430
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 7000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669338
+[LOG] SoundI::release                          : water_bubble (0000022E2A669338)
+[LOG] SoundI::release                          :     water_bubble (0000022E44ECDCC8)
+[LOG] SoundI::release                          :     water_bubble (0000022E2A669848)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669188 : node = 0000022E3751E520
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3751E630
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 8500
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A6680A8 : node = 0000022E3709D7D0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A6680A8
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSound                     :     setdata soundi = 0000022E2A669848 : node = 0000022E3709DE10
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSound                     :     add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709D8E0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A6680A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669848
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709DF20
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669848
+[LOG] SoundI::release                          : water_bubble (0000022E2A669188)
+[LOG] SoundI::release                          :     water_bubble (0000022E37074C18)
+[LOG] SoundI::release                          :     water_bubble (0000022E2A669338)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E37540228)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022D569660F8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E37541D28)
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E37541668)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E355EB928)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E37540DF8)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669188 : node = 0000022D54BA1860
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022D54BA1970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 9500
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] SoundI::release                          : water_bubble (0000022E2A669188)
+[LOG] SoundI::release                          :     water_bubble (0000022E44EA4DB8)
+[LOG] SoundI::release                          :     water_bubble (0000022E2A669338)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669188 : node = 0000022E0980D1E0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E0980D2F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 11500
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] SoundI::release                          : water_bubble (0000022E2A669188)
+[LOG] SoundI::release                          :     water_bubble (0000022E44CB4C08)
+[LOG] SoundI::release                          :     water_bubble (0000022E2A668258)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669188 : node = 0000022E3709D550
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSound                     :     setdata soundi = 0000022E2A668258 : node = 0000022E3709D910
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSound                     :     add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709D660
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A668258
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709DA20
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A668258
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E2A669848)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E44EA5438)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E2A669BA8)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E2A6680A8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E44EA48D8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E2A6699F8)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37541158 : node = 0000022E3709D2D0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37541158
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709D3E0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 13000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37541158
+[LOG] SoundI::release                          : water_bubble (0000022E37541158)
+[LOG] SoundI::release                          :     water_bubble (0000022E44CBA568)
+[LOG] SoundI::release                          :     water_bubble (0000022E375403D8)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37541668 : node = 0000022D54BA1860
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37541668
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022D54BA1970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 14500
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37541668
+[LOG] SoundI::release                          : water_bubble (0000022E37541668)
+[LOG] SoundI::release                          :     water_bubble (0000022E355EB788)
+[LOG] SoundI::release                          :     water_bubble (0000022E375403D8)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37540DF8 : node = 0000022E0980D1E0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540DF8
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E0980D2F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540DF8
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37540C48 : node = 0000022E0980D320
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540C48
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E0980D430
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540C48
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37540A98 : node = 0000022E3709DF50
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540A98
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709E060
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540A98
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E2A668258)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E44CB5768)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E37540228)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E2A669188)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E44CB5288)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E2A669338)
+[LOG] SoundI::release                          : water_bubble (0000022E37540A98)
+[LOG] SoundI::release                          :     water_bubble (0000022E355EC148)
+[LOG] SoundI::release                          :     water_bubble (0000022E37541158)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37541668 : node = 0000022D54BA1860
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37541668
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022D54BA1970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 16000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37541668
+[LOG] SoundI::release                          : water_bubble (0000022E37541668)
+[LOG] SoundI::release                          :     water_bubble (0000022E44CB9BA8)
+[LOG] SoundI::release                          :     water_bubble (0000022E37540228)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37540228 : node = 0000022D54BA10E0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540228
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSound                     :     setdata soundi = 0000022E37540A98 : node = 0000022D54BA1860
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSound                     :     add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022D54BA11F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540228
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540A98
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022D54BA1970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540A98
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669188 : node = 0000022E3751E520
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3751E630
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 18000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E37540C48)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E44CB6FC8)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E37541D28)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E37540DF8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E44CB6128)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E375403D8)
+[LOG] SoundI::release                          : water_bubble (0000022E2A669188)
+[LOG] SoundI::release                          :     water_bubble (0000022E44CB96C8)
+[LOG] SoundI::release                          :     water_bubble (0000022E2A669848)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E37540DF8 : node = 0000022E0980D1E0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E37540DF8
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E0980D2F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 20000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E37540DF8
+[LOG] SoundI::release                          : water_bubble (0000022E37540DF8)
+[LOG] SoundI::release                          :     water_bubble (0000022E45572708)
+[LOG] SoundI::release                          :     water_bubble (0000022E37540C48)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022E2A669848 : node = 0000022E3709D550
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669848
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSound                     :     setdata soundi = 0000022E2A669188 : node = 0000022E3709DB90
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSound                     :     add node to async list : head = 0000022E373CEEB8.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709D660
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669848
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022E2A669188
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20191744
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 125312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000022E3709DCA0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022E2A669188
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E37540A98)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E44CB4C08)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E37541158)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E37540228)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E44CB5AA8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E37541668)
+[LOG] SoundI::release                          :  (0000022E37C72EF8)
+[LOG] SoundI::release                          :     c01 (0000022D84275058)
+[LOG] SoundI::release                          :  (0000022E37C74488)
+[LOG] SoundI::release                          :     01 (0000022D84274D18)
+[LOG] SoundI::release                          :  (0000022E37C72C18)
+[LOG] SoundI::release                          :     c06 (0000022D842744F8)
+[LOG] SoundI::release                          :  (0000022E37C741A8)
+[LOG] SoundI::release                          :     05 (0000022D842741B8)
+[LOG] SoundI::release                          :  (0000022E37C73348)
+[LOG] SoundI::release                          :     c02 (0000022D84275D58)
+[LOG] SoundI::release                          :  (0000022E37C731D8)
+[LOG] SoundI::release                          :     c04 (0000022D842710F8)
+[LOG] SoundI::release                          :  (0000022E37C74D28)
+[LOG] SoundI::release                          :     08 (0000022D5524D8C8)
+[LOG] SoundI::release                          :  (0000022E37C74768)
+[LOG] SoundI::release                          :     04 (0000022D5524E428)
+[LOG] SoundI::release                          :  (0000022E37C72378)
+[LOG] SoundI::release                          :     02 (0000022D84277418)
+[LOG] SoundI::release                          :  (0000022E37C73068)
+[LOG] SoundI::release                          :     03 (0000022D84272C98)
+[LOG] SoundI::release                          :  (0000022E37C72938)
+[LOG] SoundI::release                          :     c07 (0000022D842727B8)
+[LOG] SoundI::release                          :  (0000022E37C75738)
+[LOG] SoundI::release                          :     c03 (0000022D84272958)
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (0000022E2A669188)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E44CBA3C8)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (0000022E2A6699F8)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (0000022E2A669848)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E44CB96C8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (0000022E2A669338)
+[LOG] SoundI::release                          :  (0000022E37C74A48)
+[LOG] SoundI::release                          :     c05 (0000022D5524D248)
+[LOG] SoundI::release                          :  (0000022E37C72D88)
+[LOG] SoundI::release                          :     06 (0000022D84273178)
+[LOG] SoundI::release                          :  (0000022E09755318)
+[LOG] SoundI::release                          :     07 (0000022E44CB4DA8)
+[LOG] SoundI::release                          :  (0000022E37C73EC8)
+[LOG] SoundI::release                          :     fan (0000022E4520FDC8)
+[LOG] SoundI::release                          :  (0000022E37C748D8)
+[LOG] SoundI::release                          :     Foley Metal Scrape Clicking 01 (0000022D84276A58)
+[LOG] SoundI::release                          :  (0000022E37C73798)
+[LOG] SoundI::release                          :     Foley Metal Scrape Multiple 01 (0000022E4520FA88)
+[LOG] SoundI::release                          :  (0000022E37C745F8)
+[LOG] SoundI::release                          :     Industry Machete Dropping On Hollow Wood 02 (0000022D84276D98)
+[LOG] SoundI::release                          :  (0000022E37C74038)
+[LOG] SoundI::release                          :     stone4 (0000022D84276F38)
+[LOG] SoundI::release                          :  (0000022E37C75458)
+[LOG] SoundI::release                          :     Foley Movement Cinder Block Slide On Cement 01 (0000022E4520F748)
+[LOG] SoundI::release                          :  (0000022E37C72208)
+[LOG] SoundI::release                          :     Foley Concrete Pieces Plastic Tub Rattle Fast Rattle 01 (0000022D84274838)
+[LOG] SoundI::release                          :  (0000022E37C74BB8)
+[LOG] SoundI::release                          :     Foley Metal Drag Through Leaf Debris 04 (0000022E4520F408)
+[LOG] SoundI::release                          :  (0000022E37C755C8)
+[LOG] SoundI::release                          :     Foley Table Fist Hits Hollow Wood Table 08 (0000022D84272E38)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
