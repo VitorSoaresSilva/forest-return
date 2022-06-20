@@ -9,15 +9,17 @@ namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        [field: SerializeField] public PlayerMain PlayerMain { get; private set; }
-
-        public PlayerMain GetPlayerScript()
+        private PlayerMain _playerMain;
+        public PlayerMain PlayerMain
         {
-            if (PlayerMain == null)
+            get
             {
-                PlayerMain = FindObjectOfType<PlayerMain>();
+                if (_playerMain == null)
+                {
+                    _playerMain = FindObjectOfType<PlayerMain>();
+                }
+                return _playerMain;
             }
-            return PlayerMain;
         }
     }
 }

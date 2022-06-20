@@ -14,7 +14,7 @@ namespace Interactable
         {
             if (GameManager.instance != null)
             {
-                PlayerMain playerMain =  GameManager.instance.GetPlayerScript();
+                PlayerMain playerMain =  GameManager.instance.PlayerMain;
                 if (playerMain != null)
                 {
                     playerMain._weaponHolder.CollectWeapon(weaponData);

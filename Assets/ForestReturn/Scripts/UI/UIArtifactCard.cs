@@ -11,7 +11,7 @@ namespace UI
         public TextMeshProUGUI titleName;
         public TextMeshProUGUI[] modifiersText;
 
-        public void SetValues(ArtifactsScriptableObject artifact)
+        public void ReceiveData(ArtifactsScriptableObject artifact,int indexId)
         {
             gameObject.SetActive(true);
             image.texture = artifact.model2d;

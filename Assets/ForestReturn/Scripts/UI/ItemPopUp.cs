@@ -15,30 +15,30 @@ public class ItemPopUp : MonoBehaviour
     public UIArtifactCard[] uiArtifacts;
     public void Show(Weapon weapon)
     {
-        if (root.activeSelf) return;
-        root.SetActive(true);
-        if (weapon.weaponConfig.image != null)
-        {
-            image.texture = weapon.weaponConfig.image;
-        }
-        title.text = weapon.weaponConfig.weaponName;
-        for (int i = 0; i < weapon.artifacts.Length; i++)
-        {
-            if (weapon.artifacts[i] != null)
-            {
-                uiArtifacts[i].SetValues(weapon.artifacts[i]);
-            }
-        }
+        // if (root.activeSelf) return;
+        // root.SetActive(true);
+        // if (weapon.weaponConfig.image != null)
+        // {
+        //     image.texture = weapon.weaponConfig.image;
+        // }
+        // title.text = weapon.weaponConfig.weaponName;
+        // for (int i = 0; i < weapon.artifacts.Length; i++)
+        // {
+        //     if (weapon.artifacts[i] != null)
+        //     {
+        //         uiArtifacts[i].ReceiveData(weapon.artifacts[i]);
+        //     }
+        // }
     }
 
     public void Hide()
     {
-        root.SetActive(false);
-        image.texture = null;
-        title.text = String.Empty;
-        foreach (var uiArtifact in uiArtifacts)
-        {
-            uiArtifact.ResetValues();
-        }
+        // root.SetActive(false);
+        // image.texture = null;
+        // title.text = String.Empty;
+        // foreach (var uiArtifact in uiArtifacts)
+        // {
+        //     uiArtifact.ResetValues();
+        // }
     }
 }

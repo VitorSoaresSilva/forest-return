@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Artifacts;
 using Attributes;
 using Managers;
@@ -51,13 +49,11 @@ namespace UI
         private Animator _animator;
 
         [field: SerializeField] public UiWeaponInventory UiWeaponInventory { get; private set; }
-        [Header("Weapon Card")]
-        public GameObject root;
-        public RawImage image;
-        public TextMeshProUGUI title;
-        public TextMeshProUGUI damageText;
-        public TextMeshProUGUI trueDamageText;
-        public UIArtifactCard[] uiArtifacts;
+        [field: SerializeField] public UiArtifactInventory UiArtifactInventory { get; private set; }
+        [SerializeField] private GameObject blackSmithUIGameObject;
+
+        [Header("Weapon Card")] 
+        [SerializeField] private UiWeaponCard uiWeaponCard;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
 
         protected override void Awake()
@@ -84,34 +80,10 @@ namespace UI
             }
         }
 
-        public void ShowItem(Weapon weapon)
+        public void ShowCollectedWeapon(WeaponsScriptableObject weaponsScriptableObject)
         {
-            if (root.activeSelf) return;
-            root.SetActive(true);
-            if (weapon.weaponConfig.image != null)
-            {
-                image.texture = weapon.weaponConfig.image;
-            }
-            title.text = weapon.weaponConfig.weaponName;
-            damageText.text = $"Damage: {weapon.weaponConfig.DataDamage.damage.ToString()}";
-            trueDamageText.text = $"True Damage: {weapon.weaponConfig.DataDamage.trueDamage.ToString()}";
-            for (int i = 0; i < weapon.artifacts.Length; i++)
-            {
-                if (weapon.artifacts[i] != null)
-                {
-                    uiArtifacts[i].SetValues(weapon.artifacts[i]);
-                }
-            }
-        }
-        public void Hide()
-        {
-            root.SetActive(false);
-            image.texture = null;
-            title.text = String.Empty;
-            foreach (var uiArtifact in uiArtifacts)
-            {
-                uiArtifact.ResetValues();
-            }
+            uiWeaponCard.gameObject.SetActive(true);
+            uiWeaponCard.ReceiveData(weaponsScriptableObject,0,false);
         }
 
         public void PlayerHurt()
@@ -124,19 +96,60 @@ namespace UI
             Debug.Log("Voce coletou o artefato " + newArtifact.artifactName);
         }
 
-        public void ShowWeaponsInventory(List<WeaponsScriptableObject> list)
+        public void ShowWeaponsInventory()
         {
+            HideBlacksmith();
             if (!UiWeaponInventory.gameObject.activeSelf)
             {
                 UiWeaponInventory.gameObject.SetActive(true);
             }
-            UiWeaponInventory.ShowWeapons(list);
+            UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
+        }
+
+        public void ShowArtifactInventory()
+        {
+            if (!UiArtifactInventory.gameObject.activeSelf)
+            {
+                UiArtifactInventory.buttonBack.SetActive(false);
+                UiArtifactInventory.gameObject.SetActive(true);
+            }
+            UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
+        }
+        public void ShowArtifactInventoryBlacksmith()
+        {
+            HideBlacksmith();
+            if (!UiArtifactInventory.gameObject.activeSelf)
+            {
+                UiArtifactInventory.buttonBack.SetActive(true);
+                UiArtifactInventory.gameObject.SetActive(true);
+            }
+            UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
+        }
+
+        public void ShowBlacksmith()
+        {
+            blackSmithUIGameObject.SetActive(true);
+        }
+
+        public void HideBlacksmith()
+        {
+            Debug.Log("hide");
+            blackSmithUIGameObject.SetActive(false);
+        }
+
+        public void HideWeaponsInventory()
+        {
+            if (UiWeaponInventory.gameObject.activeSelf)
+            {
+                UiWeaponInventory.gameObject.SetActive(false);
+            }
         }
         public void EquipWeapon(int index)
         {
             if (GameManager.instance != null)
             {
-                GameManager.instance.GetPlayerScript()._weaponHolder.EquipWeapon(index);
+                GameManager.instance.PlayerMain._weaponHolder.EquipWeapon(index);
+                
             }
         }
     }
