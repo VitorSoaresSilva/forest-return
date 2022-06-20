@@ -13,29 +13,27 @@ namespace Weapons
     {
         public Weapon Weapon { get; private set; }
         private BaseCharacter _baseCharacter;
-        private List<ArtifactsScriptableObject> _artifactsNotInUse;
-        private List<WeaponsScriptableObject> _weaponsNotInUse;
-        
+        public List<ArtifactsScriptableObject> ArtifactsInventory { get; private set; }
+        public List<WeaponsScriptableObject> WeaponsInventory { get; private set; }
+
         [Header("Initial Data Weapon")]
         [SerializeField] private WeaponsScriptableObject initialWeapon;
         [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         private void Start()
         {
             _baseCharacter = GetComponent<BaseCharacter>();
-            _artifactsNotInUse = new List<ArtifactsScriptableObject>();
-            _weaponsNotInUse = new List<WeaponsScriptableObject>();
-            // Weapon weapon = new Weapon(initialWeapon);
+            ArtifactsInventory = new List<ArtifactsScriptableObject>();
+            WeaponsInventory = new List<WeaponsScriptableObject>();
             if (initialWeapon != null)
             {
-                _weaponsNotInUse.Add(initialWeapon);
+                WeaponsInventory.Add(initialWeapon);
             }
-
             if (initialArtifacts.Length > 0)
             {
-                _artifactsNotInUse.AddRange(initialArtifacts);
+                ArtifactsInventory.AddRange(initialArtifacts);
             }
             EquipWeapon(0);
-            var length = _artifactsNotInUse.Count;
+            var length = ArtifactsInventory.Count;
             for (int i = 0; i < length; i++)
             {
                 TryEquipArtifactFromInventory(0);
@@ -43,13 +41,13 @@ namespace Weapons
         }
         public void EquipWeapon(int index)
         {
-            var weaponsScriptableObject = _weaponsNotInUse[index];   
+            var weaponsScriptableObject = WeaponsInventory[index];   
             if (weaponsScriptableObject == null) return;
             if (Weapon != null)
             {
                 RemoveWeapon();
             }
-            _weaponsNotInUse.RemoveAt(index);
+            WeaponsInventory.RemoveAt(index);
             Weapon = new Weapon(weaponsScriptableObject);
             _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(Weapon.weaponConfig.DataDamage.damage);
             _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(Weapon.weaponConfig.DataDamage.trueDamage);
@@ -69,10 +67,10 @@ namespace Weapons
                     {
                         _baseCharacter.attributes[(int)attributeModifier.type].RemoveModifier(attributeModifier.value);
                     }
-                    _artifactsNotInUse.Add(artifactsScriptableObject);
+                    ArtifactsInventory.Add(artifactsScriptableObject);
                 }
             }
-            _weaponsNotInUse.Add(Weapon.weaponConfig);
+            WeaponsInventory.Add(Weapon.weaponConfig);
             Weapon = null;
             // TODO: Trigger an Event to UiManager
         }
@@ -81,7 +79,7 @@ namespace Weapons
 
         public void TryEquipArtifactFromInventory(int index)
         {
-            if (index >= _artifactsNotInUse.Count) return;
+            if (index >= ArtifactsInventory.Count) return;
             bool hasEmptySlots = false;
             int indexEmptySlot = -1;
             for (int i = 0; i < Weapon.artifacts.Length; i++)
@@ -95,8 +93,8 @@ namespace Weapons
                 Debug.Log("Not Enough Space");
                 return;
             }
-            ArtifactsScriptableObject artifact = _artifactsNotInUse[index];
-            _artifactsNotInUse.RemoveAt(index);
+            ArtifactsScriptableObject artifact = ArtifactsInventory[index];
+            ArtifactsInventory.RemoveAt(index);
             Weapon.artifacts[indexEmptySlot] = artifact;
             foreach (var attributeModifier in artifact.modifiers)
             {
@@ -108,24 +106,20 @@ namespace Weapons
         {
             if (newWeapon != null)
             {
-                _weaponsNotInUse.Add(newWeapon);
+                WeaponsInventory.Add(newWeapon);
+                UiManager.instance.ShowCollectedWeapon(newWeapon);
             }
         }
         public void CollectArtifact(ArtifactsScriptableObject newArtifact)
         {
             if (newArtifact != null)
             {
-                _artifactsNotInUse.Add(newArtifact);
+                ArtifactsInventory.Add(newArtifact);
                 if (UiManager.instance != null)
                 {
                     UiManager.instance.ShowArtifact(newArtifact);
                 }
             }
-        }
-
-        public List<WeaponsScriptableObject> GetWeapons()
-        {
-            return _weaponsNotInUse;
         }
     }
 } 

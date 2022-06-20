@@ -7,8 +7,8 @@ namespace UI
     public class UiWeaponInventory : MonoBehaviour
     {
         [SerializeField] private GameObject uiWeaponCardPrefab;
-        
-        public void ShowWeapons(List<WeaponsScriptableObject> list)
+        [SerializeField] private GameObject backButton;
+        public void SetWeaponsData(List<WeaponsScriptableObject> list)
         {
             DeleteChildren();
             if (list.Count <= 0) return;
@@ -29,6 +29,11 @@ namespace UI
                     Destroy(children.transform.gameObject);
                 }
             }
+        }
+        public void Close()
+        {
+            DeleteChildren();
+            gameObject.SetActive(false);
         }
     }
 }

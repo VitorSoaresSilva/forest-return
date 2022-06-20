@@ -1,23 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Interactable;
-using UI;
+using Managers;
+using Player;
 using UnityEngine;
 using Weapons;
 
 public class Bau : MonoBehaviour, IInteractable
 {
-    [SerializeField] private WeaponsScriptableObject _weaponsScriptableObject;
-    private Weapon _weapon;
-    private void Start()
-    {
-        // _weapon = new Weapon();
-    }
+    [SerializeField] private WeaponsScriptableObject weaponsScriptableObject;
 
     public void Interact()
     {
-        UiManager.instance.ShowItem(_weapon);
+        if (GameManager.instance != null)
+        {
+            PlayerMain playerMain =  GameManager.instance.PlayerMain;
+            if (playerMain != null)
+            {
+                playerMain._weaponHolder.CollectWeapon(weaponsScriptableObject);
+                Destroy(gameObject);
+            }
+        }
     }
     
 }
