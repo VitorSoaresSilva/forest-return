@@ -54,8 +54,9 @@ namespace UI
 
         [Header("Weapon Card")] 
         [SerializeField] private UiWeaponCard uiWeaponCard;
-        private static readonly int Hurt = Animator.StringToHash("Hurt");
+        [SerializeField] private UIArtifactCard uiArtifactCard;
 
+        private static readonly int Hurt = Animator.StringToHash("Hurt");
         protected override void Awake()
         {
             base.Awake();
@@ -93,14 +94,27 @@ namespace UI
 
         public void ShowArtifact(ArtifactsScriptableObject newArtifact)
         {
+            uiArtifactCard.gameObject.SetActive(true);
+            uiArtifactCard.ReceiveData(newArtifact,0,false);
             Debug.Log("Voce coletou o artefato " + newArtifact.artifactName);
         }
 
         public void ShowWeaponsInventory()
         {
+            if (!UiWeaponInventory.gameObject.activeSelf)
+            {
+                UiWeaponInventory.backButton.SetActive(false);
+                UiWeaponInventory.gameObject.SetActive(true);
+            }
+            UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
+        }
+
+        public void ShowWeaponsInventoryBlacksmith()
+        {
             HideBlacksmith();
             if (!UiWeaponInventory.gameObject.activeSelf)
             {
+                UiWeaponInventory.backButton.SetActive(true);
                 UiWeaponInventory.gameObject.SetActive(true);
             }
             UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
@@ -150,6 +164,13 @@ namespace UI
             {
                 GameManager.instance.PlayerMain._weaponHolder.EquipWeapon(index);
                 
+            }
+        }
+        public void EquipArtifact(int index)
+        {
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.PlayerMain._weaponHolder.TryEquipArtifactFromInventory(index);
             }
         }
     }

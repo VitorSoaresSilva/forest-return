@@ -43,7 +43,7 @@ namespace UI
         private void CallEquipWeapon()
         {
             UiManager.instance.EquipWeapon(_indexId);
-            UiManager.instance.ShowWeaponsInventory();
+            UiManager.instance.ShowWeaponsInventoryBlacksmith();
         }
 
         private void Close()

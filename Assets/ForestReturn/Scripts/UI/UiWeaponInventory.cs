@@ -7,7 +7,7 @@ namespace UI
     public class UiWeaponInventory : MonoBehaviour
     {
         [SerializeField] private GameObject uiWeaponCardPrefab;
-        [SerializeField] private GameObject backButton;
+        public GameObject backButton;
         public void SetWeaponsData(List<WeaponsScriptableObject> list)
         {
             DeleteChildren();
