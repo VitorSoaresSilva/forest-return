@@ -10,11 +10,15 @@ public class Door : MonoBehaviour
     private static readonly int OpenDoor = Animator.StringToHash("OpenDoor");
     public EventReference openDoorEventPath;
     public EventReference closeDoorEventPath;
+
+    private EventInstance openDoor;
     // [SerializeField] private KeysScriptableObject[] keysNeededToOpen;
     private void Awake()
     {
         animator = GetComponent<Animator>();
         animator.SetTrigger(isClosed ? CloseDoor : OpenDoor);
+        openDoor = RuntimeManager.CreateInstance(openDoorEventPath);
+        RuntimeManager.AttachInstanceToGameObject(openDoor,transform);
         
         
     }
@@ -24,11 +28,8 @@ public class Door : MonoBehaviour
         if (!isClosed) return;
         animator.SetTrigger(OpenDoor);
         isClosed = false;
-        EventInstance openDoor = RuntimeManager.CreateInstance(openDoorEventPath);
-        RuntimeManager.AttachInstanceToGameObject(openDoor,transform);
         openDoor.setParameterByName("openClose", 0);
         openDoor.start();
-        openDoor.release();
     }
 
     public void Close()
@@ -40,7 +41,6 @@ public class Door : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(closeDoor,transform); 
         closeDoor.setParameterByName("openClose", 1);
         closeDoor.start();
-        closeDoor.release();
     }
 
     // public bool OpenWithKey(KeysScriptableObject[] keysPlayer)

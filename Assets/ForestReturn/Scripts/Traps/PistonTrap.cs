@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 namespace Traps
 {
@@ -18,6 +21,11 @@ namespace Traps
         private float _totalTimeBackward;
         private Coroutine _coroutine;
 
+        [Header("Audio")] 
+        [SerializeField] private EventReference activeEventPath;
+        [SerializeField] private EventReference retractEventPath;
+        private EventInstance activeEventInstance;
+        private EventInstance retractEventInstance;
         private void Start()
         {
             movingPart.localPosition =
@@ -25,6 +33,10 @@ namespace Traps
             _totalTimeForward = forward[forward.length - 1].time;
             _totalTimeBackward = backward[backward.length - 1].time;
             Invoke(nameof(StartMoving), coolDown);
+            activeEventInstance = RuntimeManager.CreateInstance(activeEventPath);
+            retractEventInstance = RuntimeManager.CreateInstance(retractEventPath);
+            RuntimeManager.AttachInstanceToGameObject(activeEventInstance,transform);
+            RuntimeManager.AttachInstanceToGameObject(retractEventInstance,transform);
         }
 
         public void StartMoving()
@@ -40,6 +52,7 @@ namespace Traps
         private IEnumerator Active()
         {
             float time = 0;
+            activeEventInstance.start();
             while (time < _totalTimeForward)
             {
                 var newPosition = Mathf.Lerp(minPosition, maxPosition, forward.Evaluate(time));
@@ -49,6 +62,7 @@ namespace Traps
                 yield return new WaitForFixedUpdate();
             }
 
+            activeEventInstance.stop(STOP_MODE.IMMEDIATE);
             yield return new WaitForSeconds(waitTimeBeforeRetract);
             _coroutine = StartCoroutine(nameof(RetractCoroutine));
             yield return null;
@@ -57,6 +71,7 @@ namespace Traps
         private IEnumerator RetractCoroutine()
         {
             float time = 0;
+            retractEventInstance.start();
             while (time < _totalTimeBackward)
             {
                 var newPosition = Mathf.Lerp(maxPosition, minPosition, backward.Evaluate(time));
@@ -66,6 +81,7 @@ namespace Traps
                 yield return new WaitForFixedUpdate();
             }
 
+            retractEventInstance.stop(STOP_MODE.IMMEDIATE);
             yield return new WaitForSeconds(coolDown);
             _coroutine = StartCoroutine(nameof(Active));
             yield return null;
