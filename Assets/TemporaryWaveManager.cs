@@ -27,6 +27,10 @@ public class TemporaryWaveManager : MonoBehaviour
         {
             isRunning = false;
             OpenDoors();
+            foreach (var enemy in enemies)
+            {
+                enemy.OnDead -= HandleEnemyDead;
+            }
         }
     }
 

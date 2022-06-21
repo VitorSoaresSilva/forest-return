@@ -55,7 +55,8 @@ namespace UI
         [Header("Weapon Card")] 
         [SerializeField] private UiWeaponCard uiWeaponCard;
         [SerializeField] private UIArtifactCard uiArtifactCard;
-
+        [SerializeField] private Camera camera;
+        [SerializeField] private MainMenu _mainMenu;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         protected override void Awake()
         {
@@ -172,6 +173,17 @@ namespace UI
             {
                 GameManager.instance.PlayerMain._weaponHolder.TryEquipArtifactFromInventory(index);
             }
+        }
+
+        public void HideMainMenu()
+        {
+            camera.gameObject.SetActive(false);
+            _mainMenu.gameObject.SetActive(false);
+        }
+        public void ShowMainMenu()
+        {
+            camera.gameObject.SetActive(true);
+            _mainMenu.gameObject.SetActive(true);
         }
     }
 }

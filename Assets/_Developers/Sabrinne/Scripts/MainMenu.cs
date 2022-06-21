@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using Utilities;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,9 +9,9 @@ public class MainMenu : MonoBehaviour
     public GameObject hudPanel;
    
     //Carrega a cena da primeira fase
-    public void PlayLevel1()
+    public void Play()
     {
-        SceneManager.LoadScene(1);
+        GameManager.instance.LoadScene(Enums.Scenes.Lobby);
         hudPanel.SetActive(true);
     }
 
