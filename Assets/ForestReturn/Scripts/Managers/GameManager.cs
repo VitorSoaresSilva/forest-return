@@ -2,16 +2,15 @@ using System;
 using Player;
 using UI;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace Managers
 {
-    public class GameManager : Singleton<GameManager>
+    public class GameManager : PersistentSingleton<GameManager>
     {
         public static event Action<GameState> OnGameStateChanged;
         public GameState GameState { get; private set; }
+        [field: SerializeField] public GameObject playerPrefab { get; private set; }
         private PlayerMain _playerMain;
         public PlayerMain PlayerMain
         {
@@ -25,11 +24,10 @@ namespace Managers
                 return _playerMain;
             }
         }
-
+    
         public void ChangeGameState(GameState newGameState)
         {
-            // Handle Exit state
-            if (newGameState != GameState)
+            if (newGameState != GameState )
             {
                 switch (GameState)
                 {
@@ -42,27 +40,20 @@ namespace Managers
                         break;
                     case GameState.Level01:
                         break;
+                    case GameState.None:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
                 GameState = newGameState;
                 OnGameStateChanged?.Invoke(newGameState);
             }
-            switch (newGameState)
-            {
-                case GameState.MainMenu:
-                    HandleMainMenu();
-                    break;
-                case GameState.Lobby:
-                    break;
-                case GameState.Pause:
-                    break;
-                case GameState.Level01:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(newGameState), newGameState, null);
-            }
         }
+
+        // private void HandleLobby()
+        // {
+        //     LevelManager.instance.SpawnPlayer();
+        // }
 
         private void HandleExitMainMenu()
         {
@@ -72,27 +63,29 @@ namespace Managers
         public void LoadScene(Enums.Scenes newScene)
         {
             // TODO: Dar unload nas outras cenas caso esteja vindo de dentro do jogo
-            MySceneLoader.instance.UnloadAnotherScenes(new []{(int)newScene,(int)Enums.Scenes.MainMenu});
-            MySceneLoader.instance.LoadScenes(new []{(int)newScene});
+            // MySceneLoader.instance.UnloadAnotherScenes(new []{(int)newScene,(int)Enums.Scenes.MainMenu});
+            // MySceneLoader.instance.UnloadAnotherScenes(new []{(int) Enums.Scenes.MainMenu, (int)newScene});
             MySceneLoader.instance.sceneLoaded += HandleSceneLoaded;
+            MySceneLoader.instance.LoadScenes(new []{(int)newScene});
         }
 
         private void HandleSceneLoaded()
         {
-            MySceneLoader.instance.sceneLoaded -= HandleSceneLoaded;
+            // MySceneLoader.instance.sceneLoaded -= HandleSceneLoaded;
+            // Debug.Log("handle scene loaded " + LevelManager.instance.State);
             GameState newGameState = LevelManager.instance.State;
-            ChangeGameState(newGameState);
+            ChangeGameState(LevelManager.instance.State);
             switch (newGameState)
             {
                 case GameState.MainMenu:
                     break;
                 case GameState.Lobby:
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)Enums.Scenes.Lobby));
+                    // HandleLobby();
                     break;
                 case GameState.Pause:
                     break;
                 case GameState.Level01:
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)Enums.Scenes.Level01));
+                    // SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)Enums.Scenes.Level01));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -112,6 +105,7 @@ namespace Managers
 
     public enum GameState
     {
+        None,
         MainMenu,
         Lobby,
         Pause,

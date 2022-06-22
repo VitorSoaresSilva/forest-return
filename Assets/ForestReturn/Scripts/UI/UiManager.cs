@@ -11,7 +11,7 @@ using Attribute = Attributes.Attribute;
 
 namespace UI
 {
-    public class UiManager : Singleton<UiManager>
+    public class UiManager : PersistentSingleton<UiManager>
     {
         [System.Serializable]
         public class AttributesUI : IComparable
@@ -50,6 +50,7 @@ namespace UI
 
         [field: SerializeField] public UiWeaponInventory UiWeaponInventory { get; private set; }
         [field: SerializeField] public UiArtifactInventory UiArtifactInventory { get; private set; }
+        // [field: SerializeField] public MainMenu MainMenu { get; private set; }
         [SerializeField] private GameObject blackSmithUIGameObject;
 
         [Header("Weapon Card")] 
@@ -61,8 +62,8 @@ namespace UI
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(this);
             Array.Sort(attributesMax);
+            Array.Sort(attributesCurrent);
             _animator = GetComponent<Animator>();
         }
 
@@ -177,12 +178,12 @@ namespace UI
 
         public void HideMainMenu()
         {
-            camera.gameObject.SetActive(false);
+            // camera.gameObject.SetActive(false);
             _mainMenu.gameObject.SetActive(false);
         }
         public void ShowMainMenu()
         {
-            camera.gameObject.SetActive(true);
+            // camera.gameObject.SetActive(true);
             _mainMenu.gameObject.SetActive(true);
         }
     }

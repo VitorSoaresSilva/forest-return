@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Utilities;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -14,6 +15,11 @@ namespace Managers
             GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
         }
 
+        private void OnDisable()
+        {
+            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
+        }
+
         private void GameManagerOnOnGameStateChanged(GameState obj)
         {
             if (obj == State)
@@ -22,9 +28,12 @@ namespace Managers
             }
         }
 
-        private void SpawnPlayer()
+        public void SpawnPlayer()
         {
-            Debug.Log("Spawn player");
+            // Debug.Log(pointsToSpawn.Length);
+            var player = Instantiate(GameManager.instance.playerPrefab,
+                pointsToSpawn[Random.Range(0, pointsToSpawn.Length)].position, Quaternion.identity);
+            // TODO: Spawn camera
         }
     }
 }

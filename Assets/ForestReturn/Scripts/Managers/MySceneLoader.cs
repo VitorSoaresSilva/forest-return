@@ -8,7 +8,7 @@ using Utilities;
 
 namespace Managers
 {
-    public class MySceneLoader : Singleton<MySceneLoader>
+    public class MySceneLoader : PersistentSingleton<MySceneLoader>
     {
         
         public UnityAction sceneLoaded;
@@ -25,7 +25,7 @@ namespace Managers
             {
                 if (!SceneManager.GetSceneByBuildIndex(scene).isLoaded)
                 {
-                    scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
+                    scenesLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single));
                 }
             }
             StartCoroutine(GetSceneLoadProgress(scenesLoading));
@@ -47,6 +47,7 @@ namespace Managers
                     yield return null;
                 }
             }   
+            // Debug.Log("batata");
             _uiLoadPanel.loadSlider.value = 100;
             yield return new WaitForSeconds(0.5f);
             _uiLoadPanel.gameObject.SetActive(false);
@@ -94,7 +95,7 @@ namespace Managers
         {
             if (_uiLoadPanel == null)
             {
-                _uiLoadPanel = Instantiate(uiLoadPrefab).GetComponent<UiLoadPanel>();
+                _uiLoadPanel = Instantiate(uiLoadPrefab,transform).GetComponent<UiLoadPanel>();
             }
             _uiLoadPanel.loadSlider.value = 0;
             _uiLoadPanel.gameObject.SetActive(true);

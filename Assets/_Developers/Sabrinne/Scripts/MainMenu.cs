@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         GameManager.instance.LoadScene(Enums.Scenes.Lobby);
-        hudPanel.SetActive(true);
+        // hudPanel.SetActive(true);
     }
 
     //Carrega painel de configura��es
