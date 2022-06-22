@@ -5,11 +5,11 @@ namespace ForestReturn.Scripts.Camera
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        private Vector3 offset;
+        [SerializeField] private Vector3 offset;
         public float maxDistance;
         private void Start()
         {
-            offset = transform.position - target.position;
+            transform.position = target.position + offset;
         }
 
         private void LateUpdate()

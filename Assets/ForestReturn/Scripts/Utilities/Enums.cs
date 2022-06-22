@@ -2,9 +2,9 @@ namespace Utilities
 {
     public static class Enums
     {
-        public enum DataTypeSaved
+        public enum DataTypeSave
         {
-            
+            Inventory
         }
 
         public enum Scenes
