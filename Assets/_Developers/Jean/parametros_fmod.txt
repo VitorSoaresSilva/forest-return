@@ -72,10 +72,16 @@ collect : OneShot
 
 ------------
 SFX/ 
-pistao: OneShot - Parâmetros "onOff" (para utilizar com os pistões)
+pistao: OneShot - Parâmetros "VaiVolta" (para utilizar com os pistões)
 
-onOff = Número 0 representa o pistão atacando, e 1 representa o pistão retraindo.
+Esse som representa o rolamento dos pistões. 
+
+VaiVolta = Número 0 representa o pistão atacando, e 1 representa o pistão retraindo.
 ------------
 
+SFX/ 
+HitPistao: OneShot - Parâmetros "HitVariation" (para diferenciar o hit de ataque e hit de retração).
+
+HitVariation = Número 0 representa o hit de ataque do pistão, e o número 1 o hit de retração.
 
 

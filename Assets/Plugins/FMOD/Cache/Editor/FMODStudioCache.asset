@@ -81,7 +81,7 @@ MonoBehaviour:
   - {fileID: 3363374992592360603}
   MinDistance: 1
   MaxDistance: 20
-  Length: 2019
+  Length: 2022
 --- !u!114 &-6113176779487482227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +238,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3765
+--- !u!114 &-1284443362290509809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/HitPistao
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/HitPistao
+  Guid:
+    Data1: 501603191
+    Data2: 1135196556
+    Data3: 783690155
+    Data4: -171151382
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1041186553312510170}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1441
+--- !u!114 &-1041186553312510170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/HitPistao/HitVariation
+  m_EditorClassIdentifier: 
+  Name: HitVariation
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1464695406
+    data2: 3657494412
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,12 +322,13 @@ MonoBehaviour:
   - {fileID: -6299750079079526214}
   - {fileID: 1066412493205793017}
   - {fileID: -6198075455543086640}
+  - {fileID: -1284443362290509809}
   EditorParameters: []
   MasterBanks:
   - {fileID: 8235099139117137088}
   StringsBanks:
   - {fileID: 2103638568314959629}
-  cacheTime: 637913200217189283
+  cacheTime: 637914353424556555
   cacheVersion: 10
 --- !u!114 &1066412493205793017
 MonoBehaviour:
@@ -347,10 +400,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637913200213243037
+  lastModified: 637914353418651630
   FileSizes:
   - Name: Desktop
-    Value: 1750
+    Value: 1836
   Exists: 1
 --- !u!114 &2938719640941054805
 MonoBehaviour:
@@ -413,9 +466,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/pistao/onOff
+  m_Name: parameter:/pistao/VaiVolta
   m_EditorClassIdentifier: 
-  Name: onOff
+  Name: VaiVolta
   StudioPath: 
   Min: 0
   Max: 1
@@ -576,10 +629,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637913200217189283
+  lastModified: 637914353424556555
   FileSizes:
   - Name: Desktop
-    Value: 20361280
+    Value: 20367520
   Exists: 1
 --- !u!114 &7786589320708614536
 MonoBehaviour:
@@ -623,7 +676,7 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637913200213203416
+  lastModified: 637914353418621705
   FileSizes:
   - Name: Desktop
     Value: 1036
