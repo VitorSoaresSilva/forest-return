@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8716085141300646116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/espinho1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/espinho1
+  Guid:
+    Data1: 1839114248
+    Data2: 1167291642
+    Data3: -1360403532
+    Data4: -1033032466
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 625
 --- !u!114 &-8682482687478676979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +265,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3765
+--- !u!114 &-4017129665946589003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/espinho2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/espinho2
+  Guid:
+    Data1: -1560102261
+    Data2: 1133954841
+    Data3: 282614190
+    Data4: -1845939137
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 823
 --- !u!114 &-1284443362290509809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,12 +377,14 @@ MonoBehaviour:
   - {fileID: 1066412493205793017}
   - {fileID: -6198075455543086640}
   - {fileID: -1284443362290509809}
+  - {fileID: -8716085141300646116}
+  - {fileID: -4017129665946589003}
   EditorParameters: []
   MasterBanks:
   - {fileID: 8235099139117137088}
   StringsBanks:
   - {fileID: 2103638568314959629}
-  cacheTime: 637914353424556555
+  cacheTime: 637914922774226571
   cacheVersion: 10
 --- !u!114 &1066412493205793017
 MonoBehaviour:
@@ -400,10 +456,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637914353418651630
+  lastModified: 637914922767119573
   FileSizes:
   - Name: Desktop
-    Value: 1836
+    Value: 1918
   Exists: 1
 --- !u!114 &2938719640941054805
 MonoBehaviour:
@@ -629,10 +685,10 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637914353424556555
+  lastModified: 637914922774226571
   FileSizes:
   - Name: Desktop
-    Value: 20367520
+    Value: 20379744
   Exists: 1
 --- !u!114 &7786589320708614536
 MonoBehaviour:
@@ -676,7 +732,7 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637914353418621705
+  lastModified: 637914922767089651
   FileSizes:
   - Name: Desktop
     Value: 1036
