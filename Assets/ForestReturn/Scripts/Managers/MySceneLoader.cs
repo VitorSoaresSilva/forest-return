@@ -98,6 +98,7 @@ namespace Managers
                 _uiLoadPanel = Instantiate(uiLoadPrefab,transform).GetComponent<UiLoadPanel>();
             }
             _uiLoadPanel.loadSlider.value = 0;
+            _uiLoadPanel.SetRandomImage();
             _uiLoadPanel.gameObject.SetActive(true);
         }
     }

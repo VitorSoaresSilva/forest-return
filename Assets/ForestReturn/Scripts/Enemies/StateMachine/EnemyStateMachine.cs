@@ -117,20 +117,7 @@ namespace Enemies.StateMachine
         private void HandlePlayerDead() 
         {
             ChangeState(new IdleState());
-            navMeshAgent.isStopped = true;
         }
-
-        // private void OnTriggerStay(Collider other)
-        // {
-        //     var playerCharacter = other.GetComponentInParent<PlayerMain>();
-        //     if (playerCharacter != null)
-        //     {
-        //         if (canCauseDamage)
-        //         {
-        //             playerCharacter.TakeDamage(DataDamage);
-        //         }
-        //     }
-        // }
 
         public void EndAnimationAttack()
         {

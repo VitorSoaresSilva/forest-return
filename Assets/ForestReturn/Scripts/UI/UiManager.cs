@@ -46,10 +46,13 @@ namespace UI
         }
         public AttributesUI[] attributesMax;
         public AttributesUI[] attributesCurrent;
-        private Animator _animator;
+        private Animator _hurtAnimator;
 
         [field: SerializeField] public UiWeaponInventory UiWeaponInventory { get; private set; }
         [field: SerializeField] public UiArtifactInventory UiArtifactInventory { get; private set; }
+        [field: SerializeField] public UiDeathPanel UiDeathPanel { get; private set; }
+        [field: SerializeField] public GameObject hurtPanel { get; private set; }
+        [field: SerializeField] public GameObject hudPanel { get; private set; }
         // [field: SerializeField] public MainMenu MainMenu { get; private set; }
         [SerializeField] private GameObject blackSmithUIGameObject;
 
@@ -57,14 +60,44 @@ namespace UI
         [SerializeField] private UiWeaponCard uiWeaponCard;
         [SerializeField] private UIArtifactCard uiArtifactCard;
         [SerializeField] private Camera camera;
-        [SerializeField] private MainMenu _mainMenu;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         protected override void Awake()
         {
             base.Awake();
             Array.Sort(attributesMax);
             Array.Sort(attributesCurrent);
-            _animator = GetComponent<Animator>();
+            _hurtAnimator = hurtPanel.GetComponent<Animator>();
+        }
+
+        private void OnEnable()
+        {
+            GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
+        }
+
+        private void GameManagerOnOnGameStateChanged(GameState obj)
+        {
+            Debug.Log("state: " + obj);
+            switch (obj)
+            {
+                case GameState.None:
+                    break;
+                case GameState.MainMenu:
+                    break;
+                case GameState.Lobby:
+                    break;
+                case GameState.Pause:
+                    break;
+                case GameState.Level01:
+                    hudPanel.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
+            }
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
         }
 
         public void UpdateMaxValueAttribute(Attribute attribute)
@@ -91,14 +124,13 @@ namespace UI
 
         public void PlayerHurt()
         {
-            _animator.SetTrigger(Hurt);
+            _hurtAnimator.SetTrigger(Hurt);
         }
 
         public void ShowArtifact(ArtifactsScriptableObject newArtifact)
         {
             uiArtifactCard.gameObject.SetActive(true);
             uiArtifactCard.ReceiveData(newArtifact,0,false);
-            Debug.Log("Voce coletou o artefato " + newArtifact.artifactName);
         }
 
         public void ShowWeaponsInventory()
@@ -165,7 +197,6 @@ namespace UI
             if (GameManager.instance != null)
             {
                 GameManager.instance.PlayerMain._weaponHolder.EquipWeapon(index);
-                
             }
         }
         public void EquipArtifact(int index)
@@ -176,15 +207,21 @@ namespace UI
             }
         }
 
-        public void HideMainMenu()
+        public void ShowDeathPanel()
         {
-            // camera.gameObject.SetActive(false);
-            _mainMenu.gameObject.SetActive(false);
+            UiDeathPanel.gameObject.SetActive(true);
+            hurtPanel.gameObject.SetActive(false);
+            hudPanel.SetActive(false);
+
         }
-        public void ShowMainMenu()
+
+        public void HideAllPanel()
         {
-            // camera.gameObject.SetActive(true);
-            _mainMenu.gameObject.SetActive(true);
+            UiDeathPanel.gameObject.SetActive(false);
+            hurtPanel.gameObject.SetActive(false);
+            UiWeaponInventory.gameObject.SetActive(false);
+            UiArtifactInventory.gameObject.SetActive(false);
+            hudPanel.SetActive(false);
         }
     }
 }

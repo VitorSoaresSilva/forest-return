@@ -4,14 +4,21 @@ namespace ForestReturn.Scripts.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        public Transform target = default;
         [SerializeField] private Vector3 offset;
         public float maxDistance;
         private void Start()
         {
-            transform.position = target.position + offset;
+            if (target != null)
+            { 
+                SetPosition();
+            }
         }
 
+        public void SetPosition()
+        {
+            transform.position += target.position;
+        }
         private void LateUpdate()
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position + offset, maxDistance);

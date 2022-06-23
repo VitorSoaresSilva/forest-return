@@ -4,10 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using Character;
 using Damage;
 using Interactable;
+using Managers;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Utilities;
 using Weapons;
 // using Weapons;
 using Attribute = Attributes.Attribute;
@@ -119,7 +121,9 @@ namespace Player
             {
                 hitBox.enabled = false;
             }
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            UiManager.instance.ShowDeathPanel();
+            // GameManager.instance.LoadScene(Enums.Scenes.Lobby);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         private void HandlePlayerHurt(Vector3 knockBackForce)
         {
