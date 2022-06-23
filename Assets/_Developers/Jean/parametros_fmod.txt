@@ -56,6 +56,8 @@ character/
 
 footsteps : OneShot - Parâmetros "Terrain e WalkRun".
 
+Para ser usado em todos personagens que caminham.
+
 Terrain: Vai dos números 0 até 5. Cada número é um solo diferente.
 0 = Metal
 1 = Dirt
@@ -67,7 +69,7 @@ Terrain: Vai dos números 0 até 5. Cada número é um solo diferente.
 
 
 character/
-collect : OneShot
+collect : OneShot - Som para os itens quando são coletados.
 
 
 ------------
@@ -83,5 +85,15 @@ SFX/
 HitPistao: OneShot - Parâmetros "HitVariation" (para diferenciar o hit de ataque e hit de retração).
 
 HitVariation = Número 0 representa o hit de ataque do pistão, e o número 1 o hit de retração.
+---------------------------
+
+character/
+
+dyingRobot: Som do robô morrendo
+robotWalk: Som do robô andando (loop)
+robotOn: Som do robô ligando (percebendo o inimigo ao redor).
+-------------------------------
+
+
 
 
