@@ -81,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1312
+--- !u!114 &-7711885806872486444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/character/robotOn
+  m_EditorClassIdentifier: 
+  Path: event:/character/robotOn
+  Guid:
+    Data1: 997605088
+    Data2: 1123045415
+    Data3: -1813368408
+    Data4: 764588874
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1312
 --- !u!114 &-6299750079079526214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,16 +433,43 @@ MonoBehaviour:
   - {fileID: -1284443362290509809}
   - {fileID: -8716085141300646116}
   - {fileID: -4017129665946589003}
-  - {fileID: 5784511710685262522}
-  - {fileID: 5293104411603368330}
-  - {fileID: -8501750113263033678}
+  - {fileID: 7866091037904055298}
+  - {fileID: 305929908470151831}
+  - {fileID: -7711885806872486444}
   EditorParameters: []
   MasterBanks:
   - {fileID: 8235099139117137088}
   StringsBanks:
   - {fileID: 2103638568314959629}
-  cacheTime: 637915798133112009
+  cacheTime: 637916101516394381
   cacheVersion: 10
+--- !u!114 &305929908470151831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/character/robotWalk
+  m_EditorClassIdentifier: 
+  Path: event:/character/robotWalk
+  Guid:
+    Data1: -811651453
+    Data2: 1284531455
+    Data3: -2089597764
+    Data4: -1376155220
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4394
 --- !u!114 &1066412493205793017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +540,7 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637915798128852321
+  lastModified: 637916101515041372
   FileSizes:
   - Name: Desktop
     Value: 2044
@@ -769,7 +823,7 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637915798133112009
+  lastModified: 637916101516394381
   FileSizes:
   - Name: Desktop
     Value: 21056608
@@ -801,6 +855,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 146
+--- !u!114 &7866091037904055298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/character/dyingRobot
+  m_EditorClassIdentifier: 
+  Path: event:/character/dyingRobot
+  Guid:
+    Data1: 321499975
+    Data2: 1307003621
+    Data3: -1688516209
+    Data4: 721443276
+  Banks:
+  - {fileID: 7271101407567785891}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1875
 --- !u!114 &8235099139117137088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +897,7 @@ MonoBehaviour:
   Path: waalk_run/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637915798128812436
+  lastModified: 637913589032963116
   FileSizes:
   - Name: Desktop
     Value: 1036
