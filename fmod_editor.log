@@ -8,20 +8,179 @@
 [LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000025DA20D0BB8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001E28AAB84B8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
+[LOG] SoundI::release                          : water_bubble (000001E337912098)
+[LOG] SoundI::release                          :     water_bubble (000001E34DB82748)
+[LOG] SoundI::release                          :     water_bubble (000001E3379123F8)
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001E34E16B728 : node = 000001E289CEA0B0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001E337BAE648.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E34E16B728
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20902304
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 154304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E289CEA1C0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 8500
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='water_bubble', format=5, channels=2, frequency=48000, lengthbytes=270624, lengthpcm=1164852, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.954834.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E34E16B728
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001E34E16B3C8 : node = 000001E34DE4A8A0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001E337BAE648.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E34E16B3C8
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20902304
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 154304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E34DE4A9B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4340
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     : filename = waalk_run/Build/Desktop/SFX.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     :     setdata soundi = 000001E34E16C2F8 : node = 000001E34DE4B2A0
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Tool Air Compressor 60GAL Running 01', format=5, channels=2, frequency=48000, lengthbytes=1624480, lengthpcm=7743074, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.416199.
+[LOG] SystemI::createSound                     :     add node to async list : head = 000001E337BAE648.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E34E16B3C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E34E16C2F8
+[LOG] SystemI::createSoundInternal             :     Create name='waalk_run/Build/Desktop/SFX.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 20902304
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 154304
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E34DE4B3B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 6840
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Industry Machine Pump In Alley 01', format=5, channels=2, frequency=48000, lengthbytes=2912704, lengthpcm=11520000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.942657.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E34E16C2F8
+[LOG] SoundI::release                          : water_bubble (000001E34E16B728)
+[LOG] SoundI::release                          :     water_bubble (000001E34DB7C288)
+[LOG] SoundI::release                          :     water_bubble (000001E34E16C9B8)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (000001E3379139E8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (000001E34DB82F68)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (000001E3379125A8)
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (000001E337912E18)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (000001E28AE6D6A8)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (000001E337913838)
+[LOG] SoundI::release                          :  (000001E34DD846F8)
+[LOG] SoundI::release                          :     fan (000001E28AE4FC28)
+[LOG] SoundI::release                          :  (000001E34DD84E28)
+[LOG] SoundI::release                          :     Foley Metal Scrape Multiple 01 (000001E28AE4EF28)
+[LOG] SoundI::release                          :  (000001E34DD84CB8)
+[LOG] SoundI::release                          :     Industry Tool Shovel Sand Movements Scrapes 04 (000001E28AE52B48)
+[LOG] SoundI::release                          :  (000001E34DD84868)
+[LOG] SoundI::release                          :     Foley Metal Scrape Clicking 01 (000001E28AE52CE8)
+[LOG] SoundI::release                          :  (000001E34DD842A8)
+[LOG] SoundI::release                          :     Industry Machete Dropping On Hollow Wood 02 (000001E28AE55248)
+[LOG] SoundI::release                          :  (000001E34DD859A8)
+[LOG] SoundI::release                          :     stone4 (000001E28AE546E8)
+[LOG] SoundI::release                          :  (000001E3106BE7D8)
+[LOG] SoundI::release                          :     Car door (000001E28AE539E8)
+[LOG] SoundI::release                          :  (000001E3378BF038)
+[LOG] SoundI::release                          :     Foley Metal Drag Through Leaf Debris 04 (000001E28AE51E48)
+[LOG] SoundI::release                          :  (000001E3378BF5F8)
+[LOG] SoundI::release                          :     Foley Movement Cinder Block Slide On Cement 01 (000001E28AE4F0C8)
+[LOG] SoundI::release                          : Industry Machine Pump In Alley 01 (000001E34E16C2F8)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (000001E34DB79508)
+[LOG] SoundI::release                          :     Industry Machine Pump In Alley 01 (000001E34E16B578)
+[LOG] SoundI::release                          : Industry Tool Air Compressor 60GAL Running 01 (000001E34E16B3C8)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (000001E34DB7E168)
+[LOG] SoundI::release                          :     Industry Tool Air Compressor 60GAL Running 01 (000001E34E16B218)
+[LOG] SoundI::release                          :  (000001E34DD85558)
+[LOG] SoundI::release                          :     Foley Movement Cinder Block Slide On Cement Short 01 (000001E28AE550A8)
+[LOG] SoundI::release                          :  (000001E34DD85C88)
+[LOG] SoundI::release                          :     Foley Table Fist Hits Hollow Wood Table 08 (000001E28AE54068)
+[LOG] SoundI::release                          :  (000001E34DD85B18)
+[LOG] SoundI::release                          :     c01 (000001E28AE54208)
+[LOG] SoundI::release                          :  (000001E3378BEEC8)
+[LOG] SoundI::release                          :     01 (000001E28AE50E08)
+[LOG] SoundI::release                          :  (000001E3378BE908)
+[LOG] SoundI::release                          :     c06 (000001E28AE54F08)
+[LOG] SoundI::release                          :  (000001E3378BEA78)
+[LOG] SoundI::release                          :     05 (000001E28AE6DD28)
+[LOG] SoundI::release                          :  (000001E34DD84B48)
+[LOG] SoundI::release                          :     c02 (000001E28AE51628)
+[LOG] SoundI::release                          :  (000001E34DD849D8)
+[LOG] SoundI::release                          :     c04 (000001E28AE52328)
+[LOG] SoundI::release                          :  (000001E34DD85108)
+[LOG] SoundI::release                          :     08 (000001E28AE54888)
+[LOG] SoundI::release                          :  (000001E34DD85DF8)
+[LOG] SoundI::release                          :     04 (000001E28AE4F408)
+[LOG] SoundI::release                          :  (000001E3378BF1A8)
+[LOG] SoundI::release                          :     02 (000001E28AE6DB88)
+[LOG] SoundI::release                          :  (000001E34DD856C8)
+[LOG] SoundI::release                          :     03 (000001E28AE54548)
+[LOG] SoundI::release                          :  (000001E3378BF318)
+[LOG] SoundI::release                          :     c07 (000001E28AE53848)
+[LOG] SoundI::release                          :  (000001E34DD853E8)
+[LOG] SoundI::release                          :     c03 (000001E28AE53368)
+[LOG] SoundI::release                          :  (000001E34DD85838)
+[LOG] SoundI::release                          :     c05 (000001E28AE529A8)
+[LOG] SoundI::release                          :  (000001E3106BF358)
+[LOG] SoundI::release                          :     06 (000001E28AE50FA8)
+[LOG] SoundI::release                          :  (000001E34DD84F98)
+[LOG] SoundI::release                          :     07 (000001E28AE553E8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 0x88890004.  Device was unplugged!
+[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 0x88890004.  Device was unplugged!
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.16ms, DSP buffer: 1024 * 4
+[LOG] SystemI::startDriver                     : Output requires a sample rate of 44100Hz, resampling will occur.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[ERR] FMOD_OS_File_Open                        : CreateFileW failed, GetLastError = 32 (name = waalk_run/Build/Desktop/SFX.bank)
+[ERR] RuntimeBankModel::openFile               : Failed to open file 'waalk_run/Build/Desktop/SFX.bank'
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] Manager::readBank                        : fileversion = 141, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
