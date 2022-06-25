@@ -24,6 +24,7 @@ namespace Managers
                 }
                 return _playerMain;
             }
+            set => _playerMain = value;
         }
     
         public void ChangeGameState(GameState newGameState)

@@ -1,5 +1,6 @@
 using System;
 using ForestReturn.Scripts.Camera;
+using Player;
 using UnityEngine;
 using Utilities;
 using Random = UnityEngine.Random;
@@ -28,12 +29,19 @@ namespace Managers
             {
                 SpawnPlayer();
             }
+
+            if (State == GameState.Level01)
+            {
+                GameManager.instance.PlayerMain.gameObject.SetActive(false);
+            }
         }
 
         public void SpawnPlayer()
         {
             var player = Instantiate(GameManager.instance.playerPrefab,
                 pointsToSpawn[Random.Range(0, pointsToSpawn.Length)].position, Quaternion.identity);
+            // player.SetActive(false);
+            GameManager.instance.PlayerMain = player.GetComponent<PlayerMain>();
             CameraFollow.target = player.transform;
             CameraFollow.SetPosition();
             CameraFollow.enabled = true;

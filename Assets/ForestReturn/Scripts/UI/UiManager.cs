@@ -88,7 +88,6 @@ namespace UI
                 case GameState.Pause:
                     break;
                 case GameState.Level01:
-                    hudPanel.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
@@ -222,6 +221,13 @@ namespace UI
             UiWeaponInventory.gameObject.SetActive(false);
             UiArtifactInventory.gameObject.SetActive(false);
             hudPanel.SetActive(false);
+        }
+
+
+        public void EndAnimationStart()
+        {
+            hudPanel.SetActive(true);
+            GameManager.instance.PlayerMain.gameObject.SetActive(true);
         }
     }
 }
