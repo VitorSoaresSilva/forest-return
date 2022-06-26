@@ -30,7 +30,7 @@ namespace Managers
                 SpawnPlayer();
             }
 
-            if (State == GameState.Level01)
+            if (State == GameState.Level01 || State == GameState.Lobby)
             {
                 GameManager.instance.PlayerMain.gameObject.SetActive(false);
             }
