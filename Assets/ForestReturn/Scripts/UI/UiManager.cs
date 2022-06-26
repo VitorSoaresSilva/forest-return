@@ -226,6 +226,7 @@ namespace UI
         public void EndAnimationStart()
         {
             hudPanel.SetActive(true);
+            hurtPanel.SetActive(true);
             GameManager.instance.PlayerMain.gameObject.SetActive(true);
         }
     }

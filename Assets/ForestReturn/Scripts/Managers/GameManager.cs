@@ -1,6 +1,7 @@
 using System;
 using Artifacts;
 using ForestReturn.Scripts.Data;
+using ForestReturn.Scripts.NaoSei;
 using Player;
 using UI;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Managers
         public InventoryScriptableObject InventoryScriptableObject;
         [SerializeField] private WeaponsScriptableObject initialWeapon;
         [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
+        public ConfigLobby configLobby;
         private PlayerMain _playerMain;
         public PlayerMain PlayerMain
         {

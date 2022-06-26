@@ -2,6 +2,7 @@ using System;
 using Attributes;
 using ForestReturn.Scripts.Camera;
 using Player;
+using Unity.Mathematics;
 using UnityEngine;
 using Utilities;
 using Random = UnityEngine.Random;
@@ -35,6 +36,29 @@ namespace Managers
             {
                 GameManager.instance.PlayerMain.gameObject.SetActive(false);
             }
+
+
+            if (State == GameState.Lobby)
+            {
+                if (GameManager.instance.configLobby.blacksmithSaved == true)
+                {
+                    SpawnBlackSmith();
+                }
+            }
+            if (State == GameState.Level01)
+            {
+                if (GameManager.instance.configLobby.blacksmithSaved == true)
+                {
+                    var rato = FindObjectOfType<ratoScript>();
+                    Destroy(rato.gameObject);
+                }
+            }
+        }
+
+        private void SpawnBlackSmith()
+        {
+            var blacksmith = Instantiate(GameManager.instance.configLobby.blackSmithPrefab,
+                GameManager.instance.configLobby.blackSmithPosition, quaternion.identity);
         }
 
         public void SpawnPlayer()
