@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Attributes;
 using Character;
 using Damage;
 using Interactable;

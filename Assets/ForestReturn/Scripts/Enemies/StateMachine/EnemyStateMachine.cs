@@ -57,6 +57,7 @@ namespace Enemies.StateMachine
             var hitBoxes = GetComponentsInChildren<HitBox>(true);
             foreach (var hitBox in hitBoxes)
             {
+                Debug.Log(hitBox.gameObject.name);
                 hitBox.gameObject.SetActive(false);
             }
             ChangeState(new IdleState());

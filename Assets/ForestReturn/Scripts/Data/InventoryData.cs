@@ -8,9 +8,10 @@ namespace ForestReturn.Scripts.Data
     [Serializable]
     public class InventoryData
     {
-        public List<ArtifactsScriptableObject> ArtifactsInventory;
-        public List<WeaponsScriptableObject> WeaponsInventory;
-        public WeaponsScriptableObject WeaponEquiped;
+        public float potato;
+        // public ArtifactsScriptableObject[] ArtifactsInventory;
+        // public WeaponsScriptableObject[] WeaponsInventory;
+        // public WeaponsScriptableObject WeaponEquiped;
         public ArtifactsScriptableObject[] ArtifactsEquiped;
     }
 }

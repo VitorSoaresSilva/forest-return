@@ -1,8 +1,11 @@
 using System;
+using Artifacts;
+using ForestReturn.Scripts.Data;
 using Player;
 using UI;
 using UnityEngine;
 using Utilities;
+using Weapons;
 
 namespace Managers
 {
@@ -12,6 +15,9 @@ namespace Managers
         public GameState GameState { get; private set; }
         [field: SerializeField] public GameObject playerPrefab { get; private set; }
         [field: SerializeField] public GameObject cameraPrefab { get; private set; }
+        public InventoryScriptableObject InventoryScriptableObject;
+        [SerializeField] private WeaponsScriptableObject initialWeapon;
+        [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         private PlayerMain _playerMain;
         public PlayerMain PlayerMain
         {
@@ -29,6 +35,7 @@ namespace Managers
     
         public void ChangeGameState(GameState newGameState)
         {
+            
             if (newGameState != GameState )
             {
                 GameState = newGameState;
@@ -42,7 +49,6 @@ namespace Managers
 
         public void LoadScene(Enums.Scenes newScene)
         {
-            
             MySceneLoader.instance.sceneLoaded += HandleSceneLoaded;
             MySceneLoader.instance.LoadScenes(new []{(int)newScene});
         }
@@ -80,6 +86,12 @@ namespace Managers
 
         private void Start()
         {
+            if (InventoryScriptableObject.WeaponEquiped == null && InventoryScriptableObject.WeaponsInventory.Length == 0){
+                InventoryScriptableObject.WeaponEquiped = initialWeapon;
+                InventoryScriptableObject.ArtifactsEquiped = initialArtifacts;
+                InventoryScriptableObject.ArtifactsInventory = Array.Empty<ArtifactsScriptableObject>();
+                InventoryScriptableObject.WeaponsInventory = Array.Empty<WeaponsScriptableObject>();
+            }
             ChangeGameState(GameState.MainMenu);
         }
     }

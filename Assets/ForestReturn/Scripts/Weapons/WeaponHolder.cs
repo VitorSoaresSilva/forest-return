@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Character;
 using UnityEngine;
 using Artifacts;
 using Attributes;
+using ForestReturn.Scripts.Data;
+using Managers;
 using UI;
+using Utilities;
 
 namespace Weapons
 {
@@ -16,28 +20,13 @@ namespace Weapons
         public List<ArtifactsScriptableObject> ArtifactsInventory { get; private set; }
         public List<WeaponsScriptableObject> WeaponsInventory { get; private set; }
 
-        [Header("Initial Data Weapon")]
-        [SerializeField] private WeaponsScriptableObject initialWeapon;
-        [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
+        // [Header("Initial Data Weapon")]
+        // [SerializeField] private WeaponsScriptableObject initialWeapon;
+        // [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         private void Start()
         {
             _baseCharacter = GetComponent<BaseCharacter>();
-            ArtifactsInventory = new List<ArtifactsScriptableObject>();
-            WeaponsInventory = new List<WeaponsScriptableObject>();
-            if (initialWeapon != null)
-            {
-                WeaponsInventory.Add(initialWeapon);
-            }
-            if (initialArtifacts.Length > 0)
-            {
-                ArtifactsInventory.AddRange(initialArtifacts);
-            }
-            EquipWeapon(0);
-            var length = ArtifactsInventory.Count;
-            for (int i = 0; i < length; i++)
-            {
-                TryEquipArtifactFromInventory(0);
-            }
+            LoadInventory();
         }
         public void EquipWeapon(int index)
         {
@@ -52,6 +41,7 @@ namespace Weapons
             _baseCharacter.attributes[(int)AttributeType.Attack].AddModifier(Weapon.weaponConfig.DataDamage.damage);
             _baseCharacter.attributes[(int)AttributeType.TrueDamageAttack].AddModifier(Weapon.weaponConfig.DataDamage.trueDamage);
             // TODO: Trigger Event for UiManager
+            SaveInventory();
         }
 
         public void RemoveWeapon()
@@ -72,6 +62,7 @@ namespace Weapons
             }
             WeaponsInventory.Add(Weapon.weaponConfig);
             Weapon = null;
+            SaveInventory();
             // TODO: Trigger an Event to UiManager
         }
 
@@ -100,26 +91,94 @@ namespace Weapons
             {
                 _baseCharacter.attributes[(int)attributeModifier.type].AddModifier(attributeModifier.value);
             }
+
+            SaveInventory();
         }
 
-        public void CollectWeapon(WeaponsScriptableObject newWeapon)
+        public void CollectWeapon(WeaponsScriptableObject newWeapon, bool showUI = true)
         {
             if (newWeapon != null)
             {
                 WeaponsInventory.Add(newWeapon);
-                UiManager.instance.ShowCollectedWeapon(newWeapon);
+
+                if (showUI)
+                {
+                    UiManager.instance.ShowCollectedWeapon(newWeapon);
+                }
+                SaveInventory();
             }
         }
-        public void CollectArtifact(ArtifactsScriptableObject newArtifact)
+        public void CollectArtifact(ArtifactsScriptableObject newArtifact, bool showUI = true)
         {
             if (newArtifact != null)
             {
                 ArtifactsInventory.Add(newArtifact);
-                if (UiManager.instance != null)
+                SaveInventory();
+                if (showUI)
                 {
-                    UiManager.instance.ShowArtifact(newArtifact);
+                    if (UiManager.instance != null)
+                    {
+                        UiManager.instance.ShowArtifact(newArtifact);
+                    }
                 }
             }
+        }
+
+        public void LoadInventory()
+        {
+            if (GameManager.instance.InventoryScriptableObject.ArtifactsInventory.Length > 0)
+            {
+                ArtifactsInventory = GameManager.instance.InventoryScriptableObject.ArtifactsInventory.ToList();
+            }
+            else
+            {
+                ArtifactsInventory = new List<ArtifactsScriptableObject>();
+            }
+
+            if (GameManager.instance.InventoryScriptableObject.WeaponsInventory.Length > 0)
+            {
+                WeaponsInventory = GameManager.instance.InventoryScriptableObject.WeaponsInventory.ToList();
+            }
+            else
+            {
+                WeaponsInventory = new List<WeaponsScriptableObject>();
+            }
+            
+            if (GameManager.instance.InventoryScriptableObject.WeaponEquiped != null)
+            {
+                CollectWeapon(GameManager.instance.InventoryScriptableObject.WeaponEquiped,false);
+                EquipWeapon(WeaponsInventory.Count-1);
+            }
+            for (int i = 0; i < GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length; i++)
+            {
+                CollectArtifact(GameManager.instance.InventoryScriptableObject.ArtifactsEquiped[i],false);
+                if (ArtifactsInventory.Count > 0)
+                {
+                    TryEquipArtifactFromInventory(ArtifactsInventory.Count - 1);
+                }
+            }
+        }
+
+        public void SaveInventory()
+        {
+            if (Weapon == null)
+            {
+                Debug.Log("cagou");
+                GameManager.instance.InventoryScriptableObject.WeaponEquiped = null;
+            }
+            else
+            {
+                GameManager.instance.InventoryScriptableObject.WeaponEquiped = Weapon.weaponConfig;
+            }
+
+            // if (GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length > 0)
+            // {
+            //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = Weapon.artifacts;
+            //     
+            // }
+            //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = null;
+            GameManager.instance.InventoryScriptableObject.ArtifactsInventory = ArtifactsInventory.ToArray();
+            GameManager.instance.InventoryScriptableObject.WeaponsInventory = WeaponsInventory.ToArray();
         }
     }
 } 

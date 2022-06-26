@@ -1,4 +1,5 @@
 using System;
+using Attributes;
 using ForestReturn.Scripts.Camera;
 using Player;
 using UnityEngine;
@@ -40,21 +41,17 @@ namespace Managers
         {
             var player = Instantiate(GameManager.instance.playerPrefab,
                 pointsToSpawn[Random.Range(0, pointsToSpawn.Length)].position, Quaternion.identity);
-            // player.SetActive(false);
-            GameManager.instance.PlayerMain = player.GetComponent<PlayerMain>();
+            var playerScript = player.GetComponent<PlayerMain>();
+            GameManager.instance.PlayerMain = playerScript;
+            
+            // setar os valores
+            
+            
+            
+            // playerScript.attributes[(int)AttributeType.Health].CurrentValue -= 20;
             CameraFollow.target = player.transform;
             CameraFollow.SetPosition();
             CameraFollow.enabled = true;
-            // var camera = Instantiate(GameManager.instance.cameraPrefab,
-            //     pointsToSpawn[Random.Range(0, pointsToSpawn.Length)].position, Quaternion.identity);
-            //
-            // camera.TryGetComponent<CameraFollow>(out var cameraScript);
-            // if (cameraScript == null)
-            // {
-            //     cameraScript = camera.AddComponent<CameraFollow>();
-            // }
-            // cameraScript.target = player.transform;
-            // cameraScript.SetPosition();
         }
     }
 }

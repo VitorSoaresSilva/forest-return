@@ -76,7 +76,6 @@ namespace UI
 
         private void GameManagerOnOnGameStateChanged(GameState obj)
         {
-            Debug.Log("state: " + obj);
             switch (obj)
             {
                 case GameState.None:
