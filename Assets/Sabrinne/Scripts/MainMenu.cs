@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< Updated upstream:Assets/Sabrinne/Scripts/MainMenu.cs
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+=======
+using Utilities;
+using System.Collections;
+>>>>>>> Stashed changes:Assets/_Developers/Sabrinne/Scripts/MainMenu.cs
 
 public class MainMenu : MonoBehaviour
 {
@@ -45,5 +50,14 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
+        {
+            OptionsPanel.SetActive(false);
+            CreditsPanel.SetActive(false);
+        }
     }
 }
