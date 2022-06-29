@@ -1,18 +1,24 @@
-using Managers;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< Updated upstream:Assets/Sabrinne/Scripts/MainMenu.cs
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+=======
 using Utilities;
+using System.Collections;
+>>>>>>> Stashed changes:Assets/_Developers/Sabrinne/Scripts/MainMenu.cs
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject OptionsPanel;
     public GameObject CreditsPanel;
-    public GameObject hudPanel;
+
    
     //Carrega a cena da primeira fase
-    public void Play()
+    public void PlayLevel1()
     {
-        GameManager.instance.LoadScene(Enums.Scenes.Lobby);
-        // hudPanel.SetActive(true);
+        SceneManager.LoadScene(1);
     }
 
     //Carrega painel de configura��es
@@ -44,5 +50,14 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
+        {
+            OptionsPanel.SetActive(false);
+            CreditsPanel.SetActive(false);
+        }
     }
 }
