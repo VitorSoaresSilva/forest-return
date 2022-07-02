@@ -32,6 +32,7 @@ namespace Enemies.StateMachine
 
         private void Start()
         {
+            
             updateActive = true;
             updateStateCoroutine = StartCoroutine(nameof(UpdateState));
             ChangeState(new IdleState());

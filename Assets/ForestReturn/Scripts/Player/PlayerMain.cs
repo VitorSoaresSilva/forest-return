@@ -88,8 +88,14 @@ namespace Player
             _playerInputAction.gameplay.Interact.performed += HandleInteract;
             _playerInputAction.gameplay.dash.performed += HandleDash;
             _playerInputAction.gameplay.inventory.performed += HandleInventory;
+            _playerInputAction.gameplay.menu.performed += HandleMenu;
             OnHurt += HandlePlayerHurt;
             OnDead += HandlePlayerDead;
+        }
+
+        private void HandleMenu(InputAction.CallbackContext obj)
+        {
+            LevelManager.instance.UiMenuOpen();
         }
 
         private void HandleInventory(InputAction.CallbackContext obj)

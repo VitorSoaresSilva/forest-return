@@ -20,24 +20,10 @@ namespace Managers
         [SerializeField] private WeaponsScriptableObject initialWeapon;
         [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
         public ConfigLobby configLobby;
-        private PlayerMain _playerMain;
-        public PlayerMain PlayerMain
-        {
-            get
-            {
-                if (_playerMain == null)
-                {
-                    // TODO: Botar player no topo do bagulho
-                    _playerMain = FindObjectOfType<PlayerMain>();
-                }
-                return _playerMain;
-            }
-            set => _playerMain = value;
-        }
-    
+        public PlayerMain PlayerMain { get; set; }
+
         public void ChangeGameState(GameState newGameState)
         {
-            
             if (newGameState != GameState )
             {
                 GameState = newGameState;
@@ -58,6 +44,7 @@ namespace Managers
         private void HandleSceneLoaded()
         {
             GameState newGameState = LevelManager.instance.State;
+            UiManager.instance.HideAllPanel();
             ChangeGameState(LevelManager.instance.State);
             switch (newGameState)
             {
@@ -78,7 +65,6 @@ namespace Managers
 
         private void HandleLobby()
         {
-            UiManager.instance.HideAllPanel();
         }
 
         private void HandleMainMenu()

@@ -53,6 +53,8 @@ namespace UI
         [field: SerializeField] public UiDeathPanel UiDeathPanel { get; private set; }
         [field: SerializeField] public GameObject hurtPanel { get; private set; }
         [field: SerializeField] public GameObject hudPanel { get; private set; }
+        [field: SerializeField] public UiMenu menuLobby { get; private set; }
+        [field: SerializeField] public UiMenu menuLevels { get; private set; }
         // [field: SerializeField] public MainMenu MainMenu { get; private set; }
         [SerializeField] private GameObject blackSmithUIGameObject;
 
@@ -221,6 +223,7 @@ namespace UI
             UiArtifactInventory.gameObject.SetActive(false);
             hudPanel.SetActive(false);
         }
+        
 
 
         public void EndAnimationStart()

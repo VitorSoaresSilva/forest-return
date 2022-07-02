@@ -2,6 +2,7 @@ using System;
 using Attributes;
 using ForestReturn.Scripts.Camera;
 using Player;
+using UI;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities;
@@ -76,6 +77,18 @@ namespace Managers
             CameraFollow.target = player.transform;
             CameraFollow.SetPosition();
             CameraFollow.enabled = true;
+        }
+
+        public void UiMenuOpen()
+        {
+            if (GameManager.instance.GameState != GameState.Lobby)
+            {
+                UiManager.instance.menuLevels.gameObject.SetActive(true);
+            }
+            else
+            {
+                UiManager.instance.menuLobby.gameObject.SetActive(true);
+            }
         }
     }
 }

@@ -80,6 +80,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""514eeeed-3e4a-4a7c-a6a7-039b05ddc054"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -225,6 +234,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d77db99e-7341-4c2a-96b8-64d9ca6c4f60"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -267,6 +287,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_dash = m_gameplay.FindAction("dash", throwIfNotFound: true);
         m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
         m_gameplay_inventory = m_gameplay.FindAction("inventory", throwIfNotFound: true);
+        m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,6 +353,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_dash;
     private readonly InputAction m_gameplay_pause;
     private readonly InputAction m_gameplay_inventory;
+    private readonly InputAction m_gameplay_menu;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -342,6 +364,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @dash => m_Wrapper.m_gameplay_dash;
         public InputAction @pause => m_Wrapper.m_gameplay_pause;
         public InputAction @inventory => m_Wrapper.m_gameplay_inventory;
+        public InputAction @menu => m_Wrapper.m_gameplay_menu;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -369,6 +392,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @inventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
                 @inventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
                 @inventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventory;
+                @menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -391,6 +417,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @inventory.started += instance.OnInventory;
                 @inventory.performed += instance.OnInventory;
                 @inventory.canceled += instance.OnInventory;
+                @menu.started += instance.OnMenu;
+                @menu.performed += instance.OnMenu;
+                @menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -421,5 +450,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
