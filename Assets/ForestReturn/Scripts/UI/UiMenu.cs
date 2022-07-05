@@ -9,7 +9,7 @@ namespace UI
         public void BackToLobby()
         {
             gameObject.SetActive(false);
-            GameManager.instance.LoadScene(Enums.Scenes.Lobby);
+            GameManager.instance.LoadScene(Enums.Scenes.LobbySemCutscene);
         }
 
         public void Close()

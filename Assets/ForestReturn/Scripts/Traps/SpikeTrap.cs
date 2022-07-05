@@ -33,7 +33,7 @@ namespace Traps
             RuntimeManager.AttachInstanceToGameObject(retractEventInstance,transform);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (_reloaded)
             {

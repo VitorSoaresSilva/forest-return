@@ -22,5 +22,10 @@ namespace Enemies
         {
             _enemyStateMachine.StartAnimationAttack();
         }
+
+        public void EndAnimationDeath()
+        {
+            Destroy(_enemyStateMachine.gameObject);
+        }
     }
 }

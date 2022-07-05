@@ -51,6 +51,7 @@ namespace Managers
                 case GameState.MainMenu:
                     break;
                 case GameState.Lobby:
+                case GameState.LobbySemCutscene:
                     HandleLobby();
                     break;
                 case GameState.Pause:
@@ -90,6 +91,7 @@ namespace Managers
         MainMenu,
         Lobby,
         Pause,
-        Level01
+        Level01,
+        LobbySemCutscene
     }
 }

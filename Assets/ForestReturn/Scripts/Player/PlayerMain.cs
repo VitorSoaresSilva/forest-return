@@ -235,7 +235,9 @@ namespace Player
             if (!_playerInputAction.gameplay.enabled) return;
             if (Mouse.current.position.ReadValueFromPreviousFrame() != Mouse.current.position.ReadValue())
             {
-                Ray camRay = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                Vector3 mouse = Mouse.current.position.ReadValue();
+                mouse.z = 500f;
+                Ray camRay = _mainCamera.ScreenPointToRay(mouse);
                 if (Physics.Raycast(camRay, out var floorHit, camRayLength, floorMask))
                 {
                     Vector3 playerToMouse = floorHit.point - transform.position;

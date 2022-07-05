@@ -21,6 +21,15 @@ namespace UI
             public string suffix;
             public string prefix;
             public Slider slider;
+            [SerializeField] private RawImage iconsLife100;
+            [SerializeField] private RawImage iconsLife20;
+            [SerializeField] private Sprite backgroundLife100;
+            [SerializeField] private Sprite backgroundLife20;
+            [SerializeField] private Sprite fillLife100;
+            [SerializeField] private Sprite fillLife20;
+            [SerializeField] private Image ImageBG;
+            [SerializeField] private Image ImageFill;
+            
 
             public void ChangeText(int currentValue, int maxValue)
             {
@@ -36,6 +45,32 @@ namespace UI
                 if (slider != null)
                 {
                     slider.value = (float)currentValue / (float)maxValue;
+                    if (type == AttributeType.Health && iconsLife100 != null && iconsLife20 != null)
+                    {
+                        if (currentValue >= (maxValue * 0.4f))
+                        {
+                            iconsLife100.gameObject.SetActive(true);
+                            iconsLife20.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            iconsLife100.gameObject.SetActive(false);
+                            iconsLife20.gameObject.SetActive(true);
+                        }
+                    }
+                    if (type == AttributeType.Health && backgroundLife100 != null && fillLife100 != null && backgroundLife20 != null && fillLife20 != null)
+                    {
+                        if (currentValue >= (maxValue * 0.4f))
+                        {
+                            ImageBG.sprite = backgroundLife100;
+                            ImageFill.sprite = fillLife100;
+                        }
+                        else
+                        {
+                            ImageBG.sprite = backgroundLife20;
+                            ImageFill.sprite = fillLife20;
+                        }
+                    }
                 }
             }
 
@@ -63,6 +98,7 @@ namespace UI
         [SerializeField] private UIArtifactCard uiArtifactCard;
         [SerializeField] private Camera camera;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
+        
         protected override void Awake()
         {
             base.Awake();
@@ -85,6 +121,7 @@ namespace UI
                 case GameState.MainMenu:
                     break;
                 case GameState.Lobby:
+                case GameState.LobbySemCutscene:
                     break;
                 case GameState.Pause:
                     break;
