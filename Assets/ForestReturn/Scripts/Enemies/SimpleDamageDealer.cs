@@ -8,7 +8,7 @@ namespace Enemies
     {
         public DataDamage dataDamage;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             var damageable = other.gameObject.transform.root.GetComponent<IDamageable>();
             damageable?.TakeDamage(dataDamage);

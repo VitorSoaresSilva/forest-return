@@ -5,6 +5,7 @@ using Damage;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.XR;
 using Weapons;
 
@@ -28,8 +29,8 @@ namespace Enemies.StateMachine
         public bool canCauseDamage;
         [SerializeField] private GameObject hitBoxRotateAttack;
         private static readonly int Death = Animator.StringToHash("Death");
-
-
+        [SerializeField] private Slider life;
+        
         private void Start()
         {
             
@@ -41,11 +42,21 @@ namespace Enemies.StateMachine
         private void OnEnable()
         {
             OnDead += HandleDead;
+            OnHurt += HandleHurt;
+        }
+
+        private void HandleHurt(Vector3 knockbackforce)
+        {
+            if (life != null)
+            {
+                life.value = CurrentHealth;
+            }
         }
 
         private void OnDisable()
         {
             OnDead -= HandleDead;
+            OnHurt -= HandleHurt;
         }
 
         private void HandleDead()
@@ -58,7 +69,6 @@ namespace Enemies.StateMachine
             var hitBoxes = GetComponentsInChildren<HitBox>(true);
             foreach (var hitBox in hitBoxes)
             {
-                Debug.Log(hitBox.gameObject.name);
                 hitBox.gameObject.SetActive(false);
             }
             ChangeState(new IdleState());

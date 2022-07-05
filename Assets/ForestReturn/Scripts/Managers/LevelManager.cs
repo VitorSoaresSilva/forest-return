@@ -69,11 +69,6 @@ namespace Managers
             var playerScript = player.GetComponent<PlayerMain>();
             GameManager.instance.PlayerMain = playerScript;
             
-            // setar os valores
-            
-            
-            
-            // playerScript.attributes[(int)AttributeType.Health].CurrentValue -= 20;
             CameraFollow.target = player.transform;
             CameraFollow.SetPosition();
             CameraFollow.enabled = true;

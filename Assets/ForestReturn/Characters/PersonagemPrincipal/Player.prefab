@@ -2309,6 +2309,7 @@ MonoBehaviour:
   attributes: []
   characterStats: {fileID: 11400000, guid: 8be38213f0cdbac4e95bdaae208b0d1d, type: 2}
   baseModifiers: []
+  intangibleCoolDown: 0.5
   isAttacking: 0
   isDashing: 0
   _mainCamera: {fileID: 0}
@@ -2316,7 +2317,7 @@ MonoBehaviour:
   floorMask:
     serializedVersion: 2
     m_Bits: 64
-  dashSpeed: 12
+  dashSpeed: 8
   runSpeed: 6
   rotationRatio: 0.1
   soundTrigger: {fileID: 0}
@@ -2395,8 +2396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2433927e6df14604bc2d25b9acdc1b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialWeapon: {fileID: 11400000, guid: 3de1a0cc916440278607168af273b666, type: 2}
-  initialArtifacts: []
 --- !u!1 &6725375582875350404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2613,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMainRef: {fileID: 0}
+  playerRBRef: {fileID: 0}
+  dragHigher: 40
 --- !u!1 &6856411832074516860
 GameObject:
   m_ObjectHideFlags: 0

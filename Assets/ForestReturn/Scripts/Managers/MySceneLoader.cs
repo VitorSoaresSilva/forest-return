@@ -49,7 +49,7 @@ namespace Managers
             }   
             // Debug.Log("batata");
             _uiLoadPanel.loadSlider.value = 100;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
             _uiLoadPanel.gameObject.SetActive(false);
             sceneLoaded?.Invoke();
         }
