@@ -6,10 +6,13 @@ namespace Player
     public class PlayerAnimationManager : MonoBehaviour
     {
         [HideInInspector] public PlayerMain playerMainRef;
+        [HideInInspector] public Rigidbody playerRBRef;
+        [SerializeField] private float dragHigher = 4;
 
         private void Awake()
         {
             playerMainRef = GetComponentInParent<PlayerMain>();
+            playerRBRef = GetComponentInParent<Rigidbody>();
         }
 
         public void SetStartAnimationAttack()
@@ -36,6 +39,17 @@ namespace Player
         }
         public void SetTriggerStep(){
             playerMainRef.HandleStepSound();
+        }
+
+        public void SetDragHigher()
+        {
+            playerRBRef.drag = dragHigher;
+        }
+
+        public void SetDragLower()
+        {
+            playerRBRef.drag = 1;
+            
         }
         
     }

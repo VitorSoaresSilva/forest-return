@@ -8,6 +8,6 @@ public class UiDeathPanel : MonoBehaviour
 {
     public void LoadLobbyLevel()
     {
-        GameManager.instance.LoadScene(Enums.Scenes.Lobby);
+        GameManager.instance.LoadScene(Enums.Scenes.LobbySemCutscene);
     }
 }

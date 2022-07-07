@@ -11,7 +11,8 @@ namespace Utilities
         {
             MainMenu,
             Lobby,
-            Level01
+            Level01,
+            LobbySemCutscene
         }
     }
 }

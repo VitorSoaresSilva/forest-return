@@ -20,6 +20,7 @@ namespace Character
         // public WeaponsScriptableObject initialWeaponData;
         // public ArtifactsScriptableObject[] initialArtifactsToWeapon;
         protected Rigidbody _rigidbody;
+        [SerializeField] private float intangibleCoolDown = 0.5f;
 
         public delegate void OnDeadEvent();
         public event OnDeadEvent OnDead;
@@ -103,7 +104,7 @@ namespace Character
 
         private IEnumerator IntangibleCooldown()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(intangibleCoolDown);
             isIntangible = false;
         }
     }

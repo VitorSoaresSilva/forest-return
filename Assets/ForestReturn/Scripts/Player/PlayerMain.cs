@@ -88,8 +88,14 @@ namespace Player
             _playerInputAction.gameplay.Interact.performed += HandleInteract;
             _playerInputAction.gameplay.dash.performed += HandleDash;
             _playerInputAction.gameplay.inventory.performed += HandleInventory;
+            _playerInputAction.gameplay.menu.performed += HandleMenu;
             OnHurt += HandlePlayerHurt;
             OnDead += HandlePlayerDead;
+        }
+
+        private void HandleMenu(InputAction.CallbackContext obj)
+        {
+            LevelManager.instance.UiMenuOpen();
         }
 
         private void HandleInventory(InputAction.CallbackContext obj)
@@ -229,7 +235,9 @@ namespace Player
             if (!_playerInputAction.gameplay.enabled) return;
             if (Mouse.current.position.ReadValueFromPreviousFrame() != Mouse.current.position.ReadValue())
             {
-                Ray camRay = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                Vector3 mouse = Mouse.current.position.ReadValue();
+                mouse.z = 500f;
+                Ray camRay = _mainCamera.ScreenPointToRay(mouse);
                 if (Physics.Raycast(camRay, out var floorHit, camRayLength, floorMask))
                 {
                     Vector3 playerToMouse = floorHit.point - transform.position;
