@@ -89,6 +89,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""look"",
+                    ""type"": ""Value"",
+                    ""id"": ""9fce4190-f711-425b-9a9b-3cb9a9f8c7da"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -245,6 +254,28 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89536743-da92-4993-8217-202563404ab1"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18773960-8d73-474c-9476-2c781ed035fe"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=2,y=2)"",
+                    ""groups"": """",
+                    ""action"": ""look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,6 +319,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
         m_gameplay_inventory = m_gameplay.FindAction("inventory", throwIfNotFound: true);
         m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
+        m_gameplay_look = m_gameplay.FindAction("look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -354,6 +386,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_pause;
     private readonly InputAction m_gameplay_inventory;
     private readonly InputAction m_gameplay_menu;
+    private readonly InputAction m_gameplay_look;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -365,6 +398,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @pause => m_Wrapper.m_gameplay_pause;
         public InputAction @inventory => m_Wrapper.m_gameplay_inventory;
         public InputAction @menu => m_Wrapper.m_gameplay_menu;
+        public InputAction @look => m_Wrapper.m_gameplay_look;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -395,6 +429,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
+                @look.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @look.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
+                @look.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -420,6 +457,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @menu.started += instance.OnMenu;
                 @menu.performed += instance.OnMenu;
                 @menu.canceled += instance.OnMenu;
+                @look.started += instance.OnLook;
+                @look.performed += instance.OnLook;
+                @look.canceled += instance.OnLook;
             }
         }
     }
@@ -451,5 +491,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

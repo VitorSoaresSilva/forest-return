@@ -1,0 +1,13 @@
+using UnityEngine;
+
+namespace ForestReturn.Scripts.PlayerAction
+{
+    [CreateAssetMenu(fileName = "newAttribute", menuName = "ScriptableObject/Action/Attributes", order = 1)]
+    public class Attributes : ScriptableObject
+    {
+        public int health;
+        public int stamina;
+        public int defense;
+        public int damage;
+    }
+}
