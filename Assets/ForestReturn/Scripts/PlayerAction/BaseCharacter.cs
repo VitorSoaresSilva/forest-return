@@ -33,11 +33,6 @@ namespace ForestReturn.Scripts.PlayerAction
 
         public void TakeDamage(int damage)
         {
-            TakeDamage(damage, Vector3.zero);
-        }
-
-        public void TakeDamage(int damage, Vector3 direction)
-        {
             if (IsIntangible || IsDead) return;
             var damageTaken = Mathf.Max(damage - Defense, 0);
             if (damage <= 0) return;

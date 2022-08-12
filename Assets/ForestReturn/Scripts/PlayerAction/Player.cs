@@ -8,41 +8,36 @@ namespace ForestReturn.Scripts.PlayerAction
 {
     public class Player : BaseCharacter
     {
-        [Header("Movement")]
-        private Vector2 _move; 
-        private Vector2 _look;
-        private Vector3 _rotation;
-        private float _speed; 
-        [SerializeField] private float rotationRatio;
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float turnSmoothTime = 0.1f;
-        public Transform cam;
-        
         private CharacterController _controller;
         private Animator _animator;
+        [Header("Movement")]
+        [SerializeField] private float speed; 
+        [SerializeField] private float turnSmoothTime = 0.1f;
+        private Vector2 _move; 
+        private Vector2 _look;
+        public Transform cam;
+        
         [Header("Interact")]
         [SerializeField] private Vector3 offsetInteract;
         [SerializeField] private float sphereInteractionRadius;
         private readonly RaycastHit[] _raycastHits = new RaycastHit[3];
         private bool _isAttacking;
         private bool _isDashing;
-        private float turnSmoothVelocity;
+        private float _turnSmoothVelocity;
+
+        [Header("Damage")] 
+        [SerializeField] private GameObject swordHitBox;
         
         // Animations
         private static readonly int AttackPunch = Animator.StringToHash("Attack");
+        private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
         private static readonly int Walking = Animator.StringToHash("isMoving");
-        private static readonly int VelocityX = Animator.StringToHash("VelocityX");
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             Cursor.lockState = CursorLockMode.Locked;
-        }
-
-        private void Start()
-        {
-            _speed = moveSpeed;
         }
 
         private void Update()
@@ -53,31 +48,32 @@ namespace ForestReturn.Scripts.PlayerAction
         
         private void Move()
         {
-            if (_move.sqrMagnitude < 0.01)
+            if (_move.sqrMagnitude < 0.01) //  || _isAttacking
                 return;
             float targetAngle = Mathf.Atan2(_move.x,_move.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
                 turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(moveDirection.normalized * (_speed * Time.deltaTime));
+            _controller.Move(moveDirection.normalized * (speed * Time.deltaTime));
         }
         
         public void OnMove(InputAction.CallbackContext context)
         {
             _move = context.ReadValue<Vector2>();
         }
-        
-        public void OnLook(InputAction.CallbackContext context)
-        {
-            _look = context.ReadValue<Vector2>();
-        }
 
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (_isAttacking) return;
             _isAttacking = true;
-            
+            _animator.SetTrigger(AttackPunch);
+        }
+        public void OnRangeAttack(InputAction.CallbackContext context)
+        {
+            if (_isAttacking) return;
+            _isAttacking = true;
+            _animator.SetTrigger(RangedAttack);
         }
         
         public void OnInteract(InputAction.CallbackContext context)
@@ -101,6 +97,28 @@ namespace ForestReturn.Scripts.PlayerAction
             {
                 interactableList[closestIndex].Interact();
             }
+        }
+
+        public void HandleEndAttack()
+        {
+            _isAttacking = false;
+            swordHitBox.SetActive(false);
+        }
+
+        public void HandleStartAttack()
+        {
+            swordHitBox.SetActive(true);
+        }
+
+        public void HandleStartRangedAttack()
+        {
+            // _isAttacking = true;
+            // neste ponto vou castar o espinho e diminuir na quantide de espinhos disponiveis
+        }
+
+        public void HandleEndRangedAttack()
+        {
+            _isAttacking = false;
         }
     }
 }

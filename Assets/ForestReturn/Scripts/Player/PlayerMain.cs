@@ -235,15 +235,15 @@ namespace Player
 
         private void Turning2()
         {
-            if (!_playerInputAction.gameplay.enabled) return;
-            var rotate = _playerInputAction.gameplay.look.ReadValue<Vector2>();
-            
-            if (rotate.sqrMagnitude < 0.01)
-                return;
-            var scaledRotateSpeed = rotationRatio * Time.deltaTime;
-            m_Rotation.y += rotate.x * scaledRotateSpeed;
-            // m_Rotation.x = Mathf.Clamp(m_Rotation.x - rotate.y * scaledRotateSpeed, -89, 89);
-            transform.localEulerAngles = m_Rotation;
+            // if (!_playerInputAction.gameplay.enabled) return;
+            // var rotate = _playerInputAction.gameplay.look.ReadValue<Vector2>();
+            //
+            // if (rotate.sqrMagnitude < 0.01)
+            //     return;
+            // var scaledRotateSpeed = rotationRatio * Time.deltaTime;
+            // m_Rotation.y += rotate.x * scaledRotateSpeed;
+            // // m_Rotation.x = Mathf.Clamp(m_Rotation.x - rotate.y * scaledRotateSpeed, -89, 89);
+            // transform.localEulerAngles = m_Rotation;
         }
 
         private void Turning()
