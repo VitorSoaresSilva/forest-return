@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Interactable;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,6 +33,7 @@ namespace ForestReturn.Scripts.PlayerAction
         private static readonly int AttackPunch = Animator.StringToHash("Attack");
         private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
         private static readonly int Walking = Animator.StringToHash("isMoving");
+        [SerializeField] private LayerMask itemsLayer;
 
         private void Awake()
         {
@@ -78,25 +80,19 @@ namespace ForestReturn.Scripts.PlayerAction
         
         public void OnInteract(InputAction.CallbackContext context)
         {
-            // TODO: testar
-            int hits = Physics.SphereCastNonAlloc(
-                transform.position + offsetInteract.x * transform.forward + offsetInteract.y * transform.up,
-                sphereInteractionRadius, transform.forward, _raycastHits);
-            var interactableList = new List<IInteractable>();
+            if (!context.performed) return;
+            var raycastHits = Physics.SphereCastAll(transform.position,sphereInteractionRadius,transform.forward,1,itemsLayer);
+            if (raycastHits.Length <= 0) return;
             int closestIndex = 0;
-            for (int i = 0; i < hits; i++)
+            for (int i = 0; i < raycastHits.Length; i++)
             {
-                if (!_raycastHits[i].transform.TryGetComponent(out IInteractable interactable)) continue;
-                interactableList.Add(interactable);
-                if (_raycastHits[i].distance < _raycastHits[closestIndex].distance)
+                if (raycastHits[i].distance < raycastHits[closestIndex].distance)
                 {
-                    closestIndex = interactableList.Count - 1;
+                    closestIndex = i;
                 }
             }
-            if (interactableList.Count > 0)
-            {
-                interactableList[closestIndex].Interact();
-            }
+            raycastHits[closestIndex].transform.TryGetComponent(out IInteractable closestInteractable);
+            closestInteractable?.Interact();
         }
 
         public void HandleEndAttack()
@@ -113,8 +109,8 @@ namespace ForestReturn.Scripts.PlayerAction
         public void HandleStartRangedAttack()
         {
             // _isAttacking = true;
-            // neste ponto vou castar o espinho e diminuir na quantide de espinhos disponiveis
-        }
+            // neste ponto vou castar o espinho e diminuir na quantidade de espinhos disponiveis
+        } 
 
         public void HandleEndRangedAttack()
         {
