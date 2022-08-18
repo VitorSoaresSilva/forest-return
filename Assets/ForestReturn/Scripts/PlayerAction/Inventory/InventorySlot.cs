@@ -4,10 +4,10 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
     public class InventorySlot
     {
         public int id;
-        public ItemObject item;
+        public Item item;
         public int amount;
 
-        public InventorySlot(int id, int amount, ItemObject item)
+        public InventorySlot(int id, int amount, Item item)
         {
             this.id = id;
             this.amount = amount;

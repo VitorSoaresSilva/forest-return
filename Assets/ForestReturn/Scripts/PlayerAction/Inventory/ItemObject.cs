@@ -4,6 +4,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
 {
     public class ItemObject : ScriptableObject
     {
+        public int id;
         public string itemName;
         public GameObject prefab;
         public Texture image;

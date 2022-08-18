@@ -11,15 +11,15 @@ namespace ForestReturn.Scripts.PlayerAction.UI
         [SerializeField]private TextMeshProUGUI nameText;
         public void UpdateData(InventorySlot itemObject)
         {
-            nameText.text = itemObject.item.itemName;
-            if (itemObject.item.isStackable)
-            {
-                amountText.text = itemObject.amount.ToString();
-            }
-            else
-            {
-                amountText.text = String.Empty;
-            }
+            nameText.text = itemObject.item.name;
+            // if (itemObject.item.isStackable)
+            // {
+            amountText.text = itemObject.amount.ToString();
+            // }
+            // else
+            // {
+            //     amountText.text = String.Empty;
+            // }
         }
     }
 }

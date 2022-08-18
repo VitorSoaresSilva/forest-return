@@ -10,7 +10,7 @@ namespace ForestReturn.Scripts.PlayerAction
         public GameObject alert;
         public void Interact()
         {
-            InventoryManager.instance.inventoryObject.AddItem(ItemObject,ItemObject.quantityPerPack);
+            InventoryManager.instance.inventoryObject.AddItem(new Item(ItemObject),ItemObject.quantityPerPack);
             Destroy(gameObject);
         }
 

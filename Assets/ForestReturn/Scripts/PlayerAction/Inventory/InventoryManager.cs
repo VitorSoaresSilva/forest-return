@@ -10,10 +10,16 @@ namespace ForestReturn.Scripts.PlayerAction
     {
         public InventoryObject inventoryObject;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            // inventoryObject = new InventoryObject();
+            inventoryObject.Load();
+        }
 
         public void OnApplicationQuit()
         {
-            inventoryObject.Container.Clear();
+            inventoryObject.Container.Items.Clear();
         }
     }
 }
