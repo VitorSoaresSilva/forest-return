@@ -17,7 +17,7 @@ using Attribute = Attributes.Attribute;
 
 namespace Player
 {
-    [RequireComponent(typeof(WeaponHolder))]
+    // [RequireComponent(typeof(WeaponHolder))]
     public class PlayerMain : BaseCharacter
     {
         private Rigidbody _rb;
@@ -43,8 +43,9 @@ namespace Player
         [SerializeField] private float runSpeed = 6;
         [SerializeField] private float rotationRatio;
         private float _speed;
-        private Matrix4x4 _matrix4X4;
-        private Vector3 skewed;
+        // private Matrix4x4 _matrix4X4;
+        // private Vector3 skewed;
+        private Vector2 m_Rotation;
         
 
 
@@ -73,13 +74,14 @@ namespace Player
             _animator = GetComponentInChildren<Animator>();
             _playerInputAction = new PlayerInputAction();
             _playerInputAction.gameplay.Enable();
-            _matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,45,0));
+            // _matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,0));
             _speed = runSpeed;
             _weaponHolder = GetComponent<WeaponHolder>();
             if (_mainCamera == null && Camera.main != null)
             {
                 _mainCamera = Camera.main;
             }
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void OnEnable()
@@ -89,6 +91,8 @@ namespace Player
             _playerInputAction.gameplay.dash.performed += HandleDash;
             _playerInputAction.gameplay.inventory.performed += HandleInventory;
             _playerInputAction.gameplay.menu.performed += HandleMenu;
+            
+            
             OnHurt += HandlePlayerHurt;
             OnDead += HandlePlayerDead;
         }
@@ -121,7 +125,7 @@ namespace Player
             // habilitar outro input
             _playerInputAction.gameplay.Disable();
             _animator.SetTrigger(Dead);
-            skewed = Vector3.zero;
+            // skewed = Vector3.zero;
             _speed = 0;
             var hitBoxes = GetComponentsInChildren<HitBox>(true);
             foreach (var hitBox in hitBoxes)
@@ -183,14 +187,14 @@ namespace Player
             if (isAttacking || isDashing || !_playerInputAction.gameplay.enabled) return;
             Vector2 playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
             _playerInputAction.gameplay.Disable();
-            skewed = _matrix4X4.MultiplyPoint3x4(new Vector3(playerInput.x,0,playerInput.y));
-            if (skewed.magnitude < 0.01f)
+            // skewed = _matrix4X4.MultiplyPoint3x4(new Vector3(playerInput.x,0,playerInput.y));
+            if (playerInput.magnitude < 0.01f)
             {
-                skewed = transform.forward;
+                playerInput = transform.forward;
             }
             if (playerInput.magnitude > 0.01f)
             {
-                var rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(skewed,Vector3.up), rotationRatio*10).normalized;
+                var rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerInput,Vector3.up), rotationRatio*10).normalized;
                 _rb.MoveRotation(rot);
             }
             _animator.SetTrigger(Dash);
@@ -213,21 +217,33 @@ namespace Player
 
         private void Update()
         {
-            if (!_playerInputAction.gameplay.enabled) return;
-            var playerInput = _playerInputAction.gameplay.move.ReadValue<Vector2>();
-            skewed = _matrix4X4.MultiplyPoint3x4(new Vector3(playerInput.x,0,playerInput.y));
-            _animator.SetBool(Walking,skewed.magnitude > 0.01f);
-            _animator.SetFloat(VelocityX,Vector3.Dot(skewed,transform.forward));
-            _animator.SetFloat(VelocityY,Vector3.Dot(skewed,transform.right));
+            var input = _playerInputAction.gameplay.move.ReadValue<Vector2>();
+            _animator.SetBool(Walking,input.magnitude > 0.01f);
+            var test = new Vector3(input.y, 0, input.x);
+            var move = Quaternion.Euler(0, transform.eulerAngles.y, 0) * new Vector3(input.x, 0, input.y);
+            Debug.Log(test + " " + transform.right + " " + move);
+            _animator.SetFloat(VelocityX,Vector3.Dot(move,transform.right));
+            // _animator.SetFloat(VelocityY,Vector3.Dot(test,transform.forward));
+            Turning2();
+            Move(input);
         }
 
         private void FixedUpdate()
         {
-            if (!isAttacking)
-            {
-                Move();
-            }
-            Turning();
+            
+        }
+
+        private void Turning2()
+        {
+            // if (!_playerInputAction.gameplay.enabled) return;
+            // var rotate = _playerInputAction.gameplay.look.ReadValue<Vector2>();
+            //
+            // if (rotate.sqrMagnitude < 0.01)
+            //     return;
+            // var scaledRotateSpeed = rotationRatio * Time.deltaTime;
+            // m_Rotation.y += rotate.x * scaledRotateSpeed;
+            // // m_Rotation.x = Mathf.Clamp(m_Rotation.x - rotate.y * scaledRotateSpeed, -89, 89);
+            // transform.localEulerAngles = m_Rotation;
         }
 
         private void Turning()
@@ -253,12 +269,16 @@ namespace Player
 
         
 
-        private void Move()
+        private void Move(Vector2 direction)
         {
-            if (skewed.magnitude < 0.01f) return;
-            Vector3 vel = skewed * _speed;
-            vel.y = _rb.velocity.y;
-            _rb.velocity = vel;
+            if (direction.sqrMagnitude < 0.01)
+                return;
+            var scaledMoveSpeed = _speed * Time.deltaTime;
+            // For simplicity's sake, we just keep movement in a single plane here. Rotate
+            // direction according to world Y rotation of player.
+            var move = Quaternion.Euler(0, transform.eulerAngles.y, 0) * new Vector3(direction.x, 0, direction.y);
+            transform.position += move * scaledMoveSpeed;
+            
         }
 
         private void HandleInteract(InputAction.CallbackContext obj)
