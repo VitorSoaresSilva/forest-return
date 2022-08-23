@@ -8,7 +8,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
     {
         public int manaHealed;
         public int lifeHealed;
-
+        public PotionType potionType;
         private void Awake()
         {
             isStackable = true;

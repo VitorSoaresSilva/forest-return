@@ -6,10 +6,30 @@ namespace ForestReturn.Scripts.PlayerAction
 {
     public class BaseCharacter : MonoBehaviour, IDamageable
     {
-        public int CurrentHealth { get; private set; }
-        public int MaxHealth { get; private set; }
-        public int CurrentStamina { get; private set; }
-        public int MaxStamina { get; private set; }
+        private int _currentHealth;
+        private int _currentMana;
+        public int CurrentHealth
+        {
+            get => _currentHealth;
+            protected set
+            {
+                var newValue = Mathf.Max(0, value);
+                newValue = Mathf.Min(newValue, MaxHealth);
+                _currentHealth = newValue;
+            }
+        }
+        public int CurrentMana
+        {
+            get => _currentMana;
+            protected set
+            {
+                var newValue = Mathf.Max(0, value);
+                newValue = Mathf.Min(newValue, MaxMana);
+                _currentMana = newValue; 
+            }
+        }
+        public int MaxHealth { get; protected set; }
+        public int MaxMana { get; private set; }
         public int Defense { get; private set; }
         public int Damage { get; private set; }
         public bool IsIntangible { get; private set; }
@@ -23,10 +43,11 @@ namespace ForestReturn.Scripts.PlayerAction
         public delegate void OnHurtEvent();
         public event OnHurtEvent OnHurt;
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            CurrentHealth = MaxHealth = baseAttributes.health;
-            MaxStamina = MaxStamina = baseAttributes.stamina;
+            MaxHealth = 10;
+            CurrentHealth = MaxHealth;
+            MaxMana = MaxMana = baseAttributes.mana;
             Defense = baseAttributes.defense;
             Damage = baseAttributes.damage;
         }
@@ -34,6 +55,7 @@ namespace ForestReturn.Scripts.PlayerAction
         public void TakeDamage(int damage)
         {
             if (IsIntangible || IsDead) return;
+            Debug.Log("damage");
             var damageTaken = Mathf.Max(damage - Defense, 0);
             if (damage <= 0) return;
             

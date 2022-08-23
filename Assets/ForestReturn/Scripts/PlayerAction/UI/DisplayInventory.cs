@@ -7,14 +7,12 @@ namespace ForestReturn.Scripts.PlayerAction.UI
 {
     public class DisplayInventory : MonoBehaviour
     {
-        private InventoryObject _inventoryObject;
         public GameObject prefab;
         public Transform grid;
         private Dictionary<InventorySlotUI, InventorySlot> itemsDisplayed = new();
 
         private void Start()
         {
-            _inventoryObject = InventoryManager.instance.inventoryObject;
             CreateSlots();
         }
 
@@ -26,14 +24,14 @@ namespace ForestReturn.Scripts.PlayerAction.UI
         private void CreateSlots()
         {
             itemsDisplayed = new();
-            for (int i = 0; i < _inventoryObject.Container.Items.Count; i++)
+            for (int i = 0; i < InventoryManager.instance.inventoryObject.Items.Count; i++)
             {
                 var itemUI = Instantiate(prefab,grid);
                 var inventorySlotUI = itemUI.GetComponent<InventorySlotUI>();
                 if (itemUI != null)
                 {
-                    inventorySlotUI.UpdateData(_inventoryObject.Container.Items[i]);
-                    itemsDisplayed.Add(inventorySlotUI, _inventoryObject.Container.Items[i]);
+                    inventorySlotUI.UpdateData(InventoryManager.instance.inventoryObject.Items[i]);
+                    itemsDisplayed.Add(inventorySlotUI, InventoryManager.instance.inventoryObject.Items[i]);
                 }
             }
         }

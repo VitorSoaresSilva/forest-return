@@ -20,4 +20,10 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         Potion,
         Weapon,
     }
+
+    public enum PotionType
+    {
+        Life,
+        Mana,
+    }
 }
