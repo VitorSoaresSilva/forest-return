@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ForestReturn.Scripts.PlayerAction.Inventory;
 using Interactable;
 using UnityEditor;
 using UnityEngine;
@@ -28,6 +29,9 @@ namespace ForestReturn.Scripts.PlayerAction
 
         [Header("Damage")] 
         [SerializeField] private GameObject swordHitBox;
+
+        private PlayerInput _playerInput;
+        private InventoryObject _inventoryObject;
         
         // Animations
         private static readonly int AttackPunch = Animator.StringToHash("Attack");
@@ -35,10 +39,13 @@ namespace ForestReturn.Scripts.PlayerAction
         private static readonly int Walking = Animator.StringToHash("isMoving");
         [SerializeField] private LayerMask itemsLayer;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
+            _playerInput = GetComponent<PlayerInput>();
+            _inventoryObject = InventoryManager.instance.inventoryObject;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -47,7 +54,17 @@ namespace ForestReturn.Scripts.PlayerAction
             Move();
             _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
         }
-        
+
+        private void OnEnable()
+        {
+            OnDead += HandleDeath;
+        }
+
+        private void OnDisable()
+        {
+            OnDead -= HandleDeath;
+        }
+
         private void Move()
         {
             if (_move.sqrMagnitude < 0.01) //  || _isAttacking
@@ -59,7 +76,10 @@ namespace ForestReturn.Scripts.PlayerAction
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _controller.Move(moveDirection.normalized * (speed * Time.deltaTime));
         }
-        
+
+
+
+        #region Gameplay
         public void OnMove(InputAction.CallbackContext context)
         {
             _move = context.ReadValue<Vector2>();
@@ -95,6 +115,80 @@ namespace ForestReturn.Scripts.PlayerAction
             closestInteractable?.Interact();
         }
 
+        public void OnInventory(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            _playerInput.SwitchCurrentActionMap("Inventory");
+            InventoryManager.instance.OpenInventory();
+        }
+
+        public void OnLifePotion(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (!(CurrentHealth < MaxHealth)) return;
+            var potions = _inventoryObject.GetItemsByType(ItemType.Potion);
+            if (potions.Count > 0)
+            {
+                foreach (var inventorySlot in potions)
+                {
+                    var potion = (PotionObject)inventorySlot.item;
+                    if (potion.potionType == PotionType.Life && _inventoryObject.RemoveItem(potion))
+                    {
+                        //TODO: Show in UI the current amount 
+                        CurrentHealth += potion.lifeHealed;
+                        Debug.Log("Life healed");
+                        return;
+                    }   
+                }
+            }
+
+            Debug.Log("Out of Life's Potion");
+            // TODO: Show in UI 'out of life's potion'
+        }
+        public void OnManaPotion(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (!(CurrentMana < MaxMana)) return;
+            var potions = _inventoryObject.GetItemsByType(ItemType.Potion);
+            if (potions.Count > 0)
+            {
+                foreach (var inventorySlot in potions)
+                {
+                    var potion = (PotionObject)inventorySlot.item;
+                    if (potion.potionType == PotionType.Mana && _inventoryObject.RemoveItem(potion))
+                    {
+                        //TODO: Show in UI the current amount 
+                        CurrentMana += potion.manaHealed;
+                        Debug.Log("Mana healed");
+                        return;
+                    }   
+                }
+            }
+
+            Debug.Log("Out of Mana's Potion");
+            // TODO: Show in UI 'out of mana's potion'
+        }
+        #endregion
+
+        #region Inventory
+
+        public void OnInventoryMove(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            var direction = context.ReadValue<Vector2>();
+            Debug.Log(direction);
+        }
+
+        public void OnInventoryClose(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            InventoryManager.instance.CloseInventory();
+            _playerInput.SwitchCurrentActionMap("gameplay");
+        }
+
+        #endregion
+
+        #region Handles
         public void HandleEndAttack()
         {
             _isAttacking = false;
@@ -116,5 +210,12 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             _isAttacking = false;
         }
+        private void HandleDeath()
+        {
+            // _playerInput.SwitchCurrentActionMap("deathScreen");
+        }
+        
+
+        #endregion
     }
 }

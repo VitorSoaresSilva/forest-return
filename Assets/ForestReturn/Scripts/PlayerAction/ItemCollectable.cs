@@ -6,11 +6,11 @@ namespace ForestReturn.Scripts.PlayerAction
 {
     public class ItemCollectable : MonoBehaviour,IInteractable
     {
-        public ItemObject ItemObject;
+        public ItemObject itemObject;
         public GameObject alert;
         public void Interact()
         {
-            InventoryManager.instance.inventoryObject.AddItem(new Item(ItemObject),ItemObject.quantityPerPack);
+            InventoryManager.instance.inventoryObject.AddItem(itemObject,itemObject.quantityPerPack);
             Destroy(gameObject);
         }
 

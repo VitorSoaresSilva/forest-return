@@ -107,6 +107,24 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LifePotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""54789a2f-e485-4053-860a-1ee4cbb92088"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ManaPotion"",
+                    ""type"": ""Button"",
+                    ""id"": ""a676f5c6-37e3-4f4a-9660-086f74184449"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -340,6 +358,120 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""RangeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e50a134-1a25-4cd7-b9e8-75694e11f0d8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LifePotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d784e670-8694-4123-8f43-20ae2e07913b"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ManaPotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""16f29b39-ac8d-47b5-af2c-62b7e24ec94d"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7d6886b-b67c-45e4-84c8-b06120e9e3a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e153f53-0665-42a1-9c0b-9e7f018093e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""Dpad"",
+                    ""id"": ""07b3c781-3638-44a0-9bd8-f1f3b1a7fa67"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8305bc31-2012-434e-afcf-4004bad81a25"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b4c1e961-919e-4e97-9be8-3f661db74213"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""facf7c79-28c0-4cdf-89e9-cf1a8e8b400d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""18c23e63-d42c-47e1-ac9a-bc336f68fb1f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb28737-e2fa-470a-8660-dc763838b03c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -385,6 +517,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_inventory = m_gameplay.FindAction("inventory", throwIfNotFound: true);
         m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
         m_gameplay_cameraControl = m_gameplay.FindAction("cameraControl", throwIfNotFound: true);
+        m_gameplay_LifePotion = m_gameplay.FindAction("LifePotion", throwIfNotFound: true);
+        m_gameplay_ManaPotion = m_gameplay.FindAction("ManaPotion", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_Move = m_Inventory.FindAction("Move", throwIfNotFound: true);
+        m_Inventory_Exit = m_Inventory.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -453,6 +591,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_inventory;
     private readonly InputAction m_gameplay_menu;
     private readonly InputAction m_gameplay_cameraControl;
+    private readonly InputAction m_gameplay_LifePotion;
+    private readonly InputAction m_gameplay_ManaPotion;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -466,6 +606,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @inventory => m_Wrapper.m_gameplay_inventory;
         public InputAction @menu => m_Wrapper.m_gameplay_menu;
         public InputAction @cameraControl => m_Wrapper.m_gameplay_cameraControl;
+        public InputAction @LifePotion => m_Wrapper.m_gameplay_LifePotion;
+        public InputAction @ManaPotion => m_Wrapper.m_gameplay_ManaPotion;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,6 +644,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @cameraControl.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @cameraControl.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @cameraControl.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
+                @LifePotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
+                @LifePotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
+                @LifePotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
+                @ManaPotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
+                @ManaPotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
+                @ManaPotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -533,10 +681,57 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @cameraControl.started += instance.OnCameraControl;
                 @cameraControl.performed += instance.OnCameraControl;
                 @cameraControl.canceled += instance.OnCameraControl;
+                @LifePotion.started += instance.OnLifePotion;
+                @LifePotion.performed += instance.OnLifePotion;
+                @LifePotion.canceled += instance.OnLifePotion;
+                @ManaPotion.started += instance.OnManaPotion;
+                @ManaPotion.performed += instance.OnManaPotion;
+                @ManaPotion.canceled += instance.OnManaPotion;
             }
         }
     }
     public GameplayActions @gameplay => new GameplayActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private IInventoryActions m_InventoryActionsCallbackInterface;
+    private readonly InputAction m_Inventory_Move;
+    private readonly InputAction m_Inventory_Exit;
+    public struct InventoryActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public InventoryActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Inventory_Move;
+        public InputAction @Exit => m_Wrapper.m_Inventory_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
+                @Exit.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -566,5 +761,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnCameraControl(InputAction.CallbackContext context);
+        void OnLifePotion(InputAction.CallbackContext context);
+        void OnManaPotion(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

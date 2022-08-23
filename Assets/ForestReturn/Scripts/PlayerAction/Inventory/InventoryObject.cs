@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
@@ -11,14 +12,12 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
     [CreateAssetMenu(fileName = "new Inventory", menuName = "Items/Inventory", order = 0)]
     public class InventoryObject : ScriptableObject
     {
-        public string savePath;
-        public ItemDatabaseObject database;
-        public Inventory Container;
-        public void AddItem(Item item, int amount = 1)
+        [field: SerializeField] public List<InventorySlot> Items { get; private set; } = new();
+        public void AddItem(ItemObject item, int amount = 1)
         {
-            // if (item.isStackable)
-            // {
-                foreach (var inventorySlot in Container.Items)
+            if (item.isStackable)
+            {
+                foreach (var inventorySlot in Items)
                 {
                     if (inventorySlot.item == item)
                     {
@@ -26,8 +25,23 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
                         return;
                     }
                 }
-            // }
-            Container.Items.Add(new InventorySlot(item.id,amount,item));
+            }
+            Items.Add(new InventorySlot(item.id,amount,item));
+        }
+
+        public bool RemoveItem(ItemObject itemObject, int amount = 1)
+        {
+            var inventorySlot = Items.Find(inventorySlot => inventorySlot.item == itemObject);
+            if (inventorySlot == null) return false;
+            if (inventorySlot.amount < amount) return false;
+            if (inventorySlot.amount > amount)
+            {
+                inventorySlot.amount -= amount;
+                return true;
+            }
+            if (inventorySlot.amount != amount) return false;
+            Items.Remove(inventorySlot);
+            return true;
         }
 
         [ContextMenu("Save")]
@@ -35,7 +49,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         {
             string saveData = JsonUtility.ToJson(this, true);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(string.Concat(Application.persistentDataPath,savePath));
+            FileStream file = File.Create(string.Concat(Application.persistentDataPath,InventoryManager.instance.savePath));
             bf.Serialize(file,saveData);
             file.Close();
 
@@ -52,10 +66,10 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         [ContextMenu("Load")]
         public void Load()
         {
-            if (File.Exists(string.Concat(Application.persistentDataPath,savePath)))
+            if (File.Exists(string.Concat(Application.persistentDataPath,InventoryManager.instance.savePath)))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
+                FileStream file = File.Open(string.Concat(Application.persistentDataPath, InventoryManager.instance.savePath), FileMode.Open);
                 JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
                 file.Close();
                 /*
@@ -72,7 +86,13 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         [ContextMenu("Clear")]
         public void Clear()
         {
-            Container = new Inventory();
+            Items.Clear();
+        }
+
+        public List<InventorySlot> GetItemsByType(ItemType itemType)
+        {
+            var items = Items.FindAll(x => x.item.itemType == itemType);
+            return items;
         }
     }
 }

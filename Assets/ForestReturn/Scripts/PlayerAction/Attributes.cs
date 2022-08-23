@@ -6,7 +6,7 @@ namespace ForestReturn.Scripts.PlayerAction
     public class Attributes : ScriptableObject
     {
         public int health;
-        public int stamina;
+        public int mana;
         public int defense;
         public int damage;
     }
