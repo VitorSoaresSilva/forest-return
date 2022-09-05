@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Inventory
 {
+    [System.Serializable]
     [CreateAssetMenu(fileName = "New Item Database", menuName = "Items/Item Database", order = 0)]
     public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiver
     {
@@ -16,7 +17,6 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
 
         public void OnAfterDeserialize()
         {
-            
             for (int i = 0; i < items.Length; i++)
             {
                 items[i].id = i;

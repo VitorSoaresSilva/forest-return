@@ -38,6 +38,21 @@ namespace ForestReturn.Scripts.PlayerAction
         private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
         private static readonly int Walking = Animator.StringToHash("isMoving");
         [SerializeField] private LayerMask itemsLayer;
+        
+        
+        
+        // parameters
+        [SerializeField] private ParameterObject more10PercentNormalAttack;
+        
+        // Damage
+        public DataDamage DataDamage
+        {
+            get
+            {
+                return new DataDamage(1);
+            }
+            
+        }
 
         protected override void Awake()
         {
@@ -45,7 +60,7 @@ namespace ForestReturn.Scripts.PlayerAction
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            _inventoryObject = InventoryManager.instance.inventoryObject;
+            _inventoryObject = InventoryManager.instance.inventory;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -58,11 +73,15 @@ namespace ForestReturn.Scripts.PlayerAction
         private void OnEnable()
         {
             OnDead += HandleDeath;
+            OnHurt += HandleHurt;
         }
+
+        
 
         private void OnDisable()
         {
             OnDead -= HandleDeath;
+            OnHurt -= HandleHurt;
         }
 
         private void Move()
@@ -209,12 +228,18 @@ namespace ForestReturn.Scripts.PlayerAction
         public void HandleEndRangedAttack()
         {
             _isAttacking = false;
-        }
+        } 
         private void HandleDeath()
         {
             // _playerInput.SwitchCurrentActionMap("deathScreen");
         }
-        
+        private void HandleHurt()
+        {
+            if (UiManager.instance != null)
+            {
+                UiManager.instance.PlayerHurt();
+            }
+        }
 
         #endregion
     }

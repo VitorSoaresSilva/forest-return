@@ -9,19 +9,19 @@ namespace ForestReturn.Scripts.PlayerAction
 {
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {
-        public InventoryObject inventoryObject;
-        [field: SerializeField] public ItemDatabaseObject Database { get;}
+        public InventoryObject inventory;
+        public ItemDatabaseObject Database;
         [SerializeField] private DisplayInventory displayInventory;
         public string savePath;
         protected override void Awake()
         {
             base.Awake();
-            inventoryObject.Load();
+            inventory.Load();
         }
 
         public void OnApplicationQuit()
         {
-            inventoryObject.Clear();
+            inventory.Clear();
         }
 
         public void OpenInventory()
@@ -32,6 +32,11 @@ namespace ForestReturn.Scripts.PlayerAction
         public void CloseInventory()
         {
             displayInventory.gameObject.SetActive(false);
+        }
+
+        public void Save()
+        {
+            inventory.Save();
         }
     }
 }

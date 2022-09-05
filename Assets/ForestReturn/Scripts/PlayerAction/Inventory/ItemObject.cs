@@ -7,7 +7,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public int id;
         public string itemName;
         public GameObject prefab;
-        public Texture image;
+        public Sprite image;
         public int price;
         public bool isStackable;
         public int quantityPerPack;

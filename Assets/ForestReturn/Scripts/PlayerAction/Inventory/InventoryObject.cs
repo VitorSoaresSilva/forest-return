@@ -52,6 +52,9 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             FileStream file = File.Create(string.Concat(Application.persistentDataPath,InventoryManager.instance.savePath));
             bf.Serialize(file,saveData);
             file.Close();
+            Debug.Log(InventoryManager.instance.Database);
+            
+            
 
             /*
              // This code save the data in a binary file
@@ -70,8 +73,17 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(string.Concat(Application.persistentDataPath, InventoryManager.instance.savePath), FileMode.Open);
-                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+                var a = bf.Deserialize(file).ToString();
+                // Debug.Log(a);
+                JsonUtility.FromJsonOverwrite(a, this);
                 file.Close();
+                
+                foreach (var inventorySlot in Items)
+                {
+                    inventorySlot.item = InventoryManager.instance.Database.GetItem[inventorySlot.id];
+                }
+                
+                
                 /*
                  // this code load the data from a binary file
                 IFormatter formatter = new BinaryFormatter();
@@ -80,6 +92,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
                 Container = (Inventory)formatter.Deserialize(stream);
                 stream.Close();
                 */
+                
             }
         }
 

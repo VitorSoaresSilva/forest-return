@@ -2,24 +2,22 @@ using System;
 using ForestReturn.Scripts.PlayerAction.Inventory;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 namespace ForestReturn.Scripts.PlayerAction.UI
 {
     public class InventorySlotUI : MonoBehaviour
     {
         [SerializeField]private TextMeshProUGUI amountText;
         [SerializeField]private TextMeshProUGUI nameText;
+        [SerializeField] private Image image;
         public void UpdateData(InventorySlot itemObject)
         {
             nameText.text = itemObject.item.name;
-            // if (itemObject.item.isStackable)
-            // {
-            amountText.text = itemObject.amount.ToString();
-            // }
-            // else
-            // {
-            //     amountText.text = String.Empty;
-            // }
+            if (itemObject.item.image != null)
+            {
+                image.sprite = itemObject.item.image;
+            }
+            amountText.text = itemObject.item.isStackable ? itemObject.amount.ToString() : string.Empty;
         }
     }
 }

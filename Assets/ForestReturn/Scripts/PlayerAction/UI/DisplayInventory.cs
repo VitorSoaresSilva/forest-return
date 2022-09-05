@@ -11,11 +11,6 @@ namespace ForestReturn.Scripts.PlayerAction.UI
         public Transform grid;
         private Dictionary<InventorySlotUI, InventorySlot> itemsDisplayed = new();
 
-        private void Start()
-        {
-            CreateSlots();
-        }
-
         private void OnEnable()
         {
             CreateSlots();
@@ -24,14 +19,14 @@ namespace ForestReturn.Scripts.PlayerAction.UI
         private void CreateSlots()
         {
             itemsDisplayed = new();
-            for (int i = 0; i < InventoryManager.instance.inventoryObject.Items.Count; i++)
+            for (int i = 0; i < InventoryManager.instance.inventory.Items.Count; i++)
             {
                 var itemUI = Instantiate(prefab,grid);
                 var inventorySlotUI = itemUI.GetComponent<InventorySlotUI>();
                 if (itemUI != null)
                 {
-                    inventorySlotUI.UpdateData(InventoryManager.instance.inventoryObject.Items[i]);
-                    itemsDisplayed.Add(inventorySlotUI, InventoryManager.instance.inventoryObject.Items[i]);
+                    inventorySlotUI.UpdateData(InventoryManager.instance.inventory.Items[i]);
+                    itemsDisplayed.Add(inventorySlotUI, InventoryManager.instance.inventory.Items[i]);
                 }
             }
         }
