@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using Attributes;
 using Character;
 using Damage;
+using ForestReturn.Scripts.Managers;
 using Interactable;
 using Managers;
 using UI;

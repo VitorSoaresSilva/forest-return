@@ -1,6 +1,7 @@
 using System;
 using Artifacts;
 using ForestReturn.Scripts.Data;
+using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.NaoSei;
 using Player;
 using UI;

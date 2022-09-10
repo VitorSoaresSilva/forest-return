@@ -1,6 +1,5 @@
-using System;
-using Attributes;
 using ForestReturn.Scripts.Camera;
+using Managers;
 using Player;
 using UI;
 using Unity.Mathematics;
@@ -8,7 +7,7 @@ using UnityEngine;
 using Utilities;
 using Random = UnityEngine.Random;
 
-namespace Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {

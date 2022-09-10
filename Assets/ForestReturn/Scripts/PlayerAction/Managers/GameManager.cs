@@ -1,7 +1,7 @@
-using UnityEngine;
+using System;
 using Utilities;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts.PlayerAction.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
