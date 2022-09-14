@@ -12,7 +12,6 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public void Awake()
         {
             isStackable = false;
-            quantityPerPack = 1;
             itemType = ItemType.Weapon;
         }
 

@@ -42,6 +42,10 @@ namespace ForestReturn.Scripts.PlayerAction
         
         public delegate void OnHurtEvent();
         public event OnHurtEvent OnHurt;
+        public delegate void OnHealthHealedEvent();
+        public event OnHealthHealedEvent OnHealthHealed;
+        public delegate void OnManaHealedEvent();
+        public event OnManaHealedEvent OnManaHealed;
 
         protected virtual void Awake()
         {
@@ -75,6 +79,18 @@ namespace ForestReturn.Scripts.PlayerAction
             yield return new WaitForSeconds(intangibleCoolDown);
             IsIntangible = false;
             //stop shader
+        }
+
+        protected void HealthHeal(int value)
+        {
+            CurrentHealth += value;
+            OnHealthHealed?.Invoke();
+        }
+
+        protected void ManaHeal(int value)
+        {
+            CurrentMana += value;
+            OnManaHealed?.Invoke();
         }
     }
 }

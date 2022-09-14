@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor;
 using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Inventory
@@ -73,14 +69,12 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(string.Concat(Application.persistentDataPath, InventoryManager.instance.savePath), FileMode.Open);
-                var a = bf.Deserialize(file).ToString();
-                // Debug.Log(a);
-                JsonUtility.FromJsonOverwrite(a, this);
+                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
                 file.Close();
-                
                 foreach (var inventorySlot in Items)
                 {
-                    inventorySlot.item = InventoryManager.instance.Database.GetItem[inventorySlot.id];
+                    var b = InventoryManager.instance.Database.GetItem[inventorySlot.id];
+                    inventorySlot.item = b;
                 }
                 
                 
@@ -105,6 +99,13 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public List<InventorySlot> GetItemsByType(ItemType itemType)
         {
             var items = Items.FindAll(x => x.item.itemType == itemType);
+            return items;
+        }
+
+        public List<InventorySlot> GetPotionByType(PotionType potionType)
+        {
+            var items = Items.FindAll(x =>
+                x.item.itemType == ItemType.Potion && ((PotionObject)x.item).potionType == potionType);
             return items;
         }
     }

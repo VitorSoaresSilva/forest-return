@@ -8,9 +8,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public string itemName;
         public GameObject prefab;
         public Sprite image;
-        public int price;
         public bool isStackable;
-        public int quantityPerPack;
         public ItemType itemType;
     }
 
@@ -19,11 +17,19 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         Default,
         Potion,
         Weapon,
+        Currency
     }
 
     public enum PotionType
     {
         Life,
         Mana,
+    }
+
+    public enum CurrencyType
+    {
+        Seed,
+        Scrap,
+        Essence
     }
 }

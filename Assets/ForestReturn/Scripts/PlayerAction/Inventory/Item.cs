@@ -11,5 +11,6 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             name = item.name;
             id = item.id;
         }
+        
     }
 }

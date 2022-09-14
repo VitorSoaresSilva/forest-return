@@ -74,14 +74,16 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             OnDead += HandleDeath;
             OnHurt += HandleHurt;
+            OnManaHealed += HandleManaHealed;
+            OnHealthHealed += HandleHealthHealed;
         }
-
-        
 
         private void OnDisable()
         {
             OnDead -= HandleDeath;
             OnHurt -= HandleHurt;
+            OnManaHealed -= HandleManaHealed;
+            OnHealthHealed -= HandleHealthHealed;
         }
 
         private void Move()
@@ -145,20 +147,12 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             if (!context.performed) return;
             if (!(CurrentHealth < MaxHealth)) return;
-            var potions = _inventoryObject.GetItemsByType(ItemType.Potion);
+            var potions = _inventoryObject.GetPotionByType(PotionType.Life);
             if (potions.Count > 0)
             {
-                foreach (var inventorySlot in potions)
-                {
-                    var potion = (PotionObject)inventorySlot.item;
-                    if (potion.potionType == PotionType.Life && _inventoryObject.RemoveItem(potion))
-                    {
-                        //TODO: Show in UI the current amount 
-                        CurrentHealth += potion.lifeHealed;
-                        Debug.Log("Life healed");
-                        return;
-                    }   
-                }
+                var potion = (PotionObject)potions[0].item;
+                HealthHeal(potion.value); 
+                return;
             }
 
             Debug.Log("Out of Life's Potion");
@@ -168,20 +162,12 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             if (!context.performed) return;
             if (!(CurrentMana < MaxMana)) return;
-            var potions = _inventoryObject.GetItemsByType(ItemType.Potion);
+            var potions = _inventoryObject.GetPotionByType(PotionType.Mana);
             if (potions.Count > 0)
             {
-                foreach (var inventorySlot in potions)
-                {
-                    var potion = (PotionObject)inventorySlot.item;
-                    if (potion.potionType == PotionType.Mana && _inventoryObject.RemoveItem(potion))
-                    {
-                        //TODO: Show in UI the current amount 
-                        CurrentMana += potion.manaHealed;
-                        Debug.Log("Mana healed");
-                        return;
-                    }   
-                }
+                var potion = (PotionObject)potions[0].item;
+                ManaHeal(potion.value);
+                return;
             }
 
             Debug.Log("Out of Mana's Potion");
@@ -239,6 +225,15 @@ namespace ForestReturn.Scripts.PlayerAction
             {
                 UiManager.instance.PlayerHurt();
             }
+        }
+        private void HandleHealthHealed()
+        {
+            Debug.Log("Life healed");
+        }
+
+        private void HandleManaHealed()
+        {
+            Debug.Log("Mana healed");
         }
 
         #endregion
