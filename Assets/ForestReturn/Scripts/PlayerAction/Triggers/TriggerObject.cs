@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Triggers
 {
-    [CreateAssetMenu(fileName = "newTrigger", menuName = "Trigger")]
+    [CreateAssetMenu(fileName = "newTrigger", menuName = "Trigger/Trigger")]
     public class TriggerObject : ScriptableObject
     {
         public int id;

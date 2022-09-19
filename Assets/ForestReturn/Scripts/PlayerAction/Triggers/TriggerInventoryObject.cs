@@ -7,7 +7,7 @@ using ForestReturn.Scripts.PlayerAction.Managers;
 
 namespace ForestReturn.Scripts.PlayerAction.Triggers
 {
-    [CreateAssetMenu(fileName = "newInventoryTrigger", menuName = "Trigger Inventory")]
+    [CreateAssetMenu(fileName = "newInventoryTrigger", menuName = "Trigger/Trigger Inventory")]
     public class TriggerInventoryObject : ScriptableObject
     {
         [field: SerializeField] public List<TriggerSlot> Triggers { get; private set; } = new();

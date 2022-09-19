@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.PlayerAction.Managers;
+using ForestReturn.Scripts.PlayerAction.Teleport;
 using Interactable;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utilities;
+using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
 namespace ForestReturn.Scripts.PlayerAction
 {
@@ -41,17 +45,18 @@ namespace ForestReturn.Scripts.PlayerAction
 
 
         public WeaponObject currentWeapon;
+        public ParticleSystem[] _particleSystemsTeleport;
 
-        private void Start()
+        public void Init()
         {
-            
-            
-            // currentWeapon = InventoryManager.instance.equippedItems.GetItemsByType(ItemType.Weapon)[0].item as WeaponObject;
+            _inventoryObjectRef = InventoryManager.instance.inventory;
+            if (LevelManager.instance != null)
+            {
+                _controller.enabled = false;
+                transform.position = LevelManager.instance.pointToSpawn;
+                _controller.enabled = true;
+            }
         }
-        // [Header("Artifacts")]
-        
-        // parameters
-        // [SerializeField] private ParameterObject more10PercentNormalAttack;
         
         // Damage
         public DataDamage DataDamage
@@ -68,7 +73,6 @@ namespace ForestReturn.Scripts.PlayerAction
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            _inventoryObjectRef = InventoryManager.instance.inventory;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -149,7 +153,7 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             if (!context.performed) return;
             _playerInput.SwitchCurrentActionMap("Inventory");
-            InventoryManager.instance.OpenInventory();
+            UiManager.instance.OpenCanvas(CanvasType.Inventory);
         }
 
         public void OnLifePotion(InputAction.CallbackContext context)
@@ -160,6 +164,7 @@ namespace ForestReturn.Scripts.PlayerAction
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;
+                InventoryManager.instance.inventory.RemoveItem(potion);
                 HealthHeal(potion.value); 
                 return;
             }
@@ -175,12 +180,51 @@ namespace ForestReturn.Scripts.PlayerAction
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;
+                InventoryManager.instance.inventory.RemoveItem(potion);
                 ManaHeal(potion.value);
                 return;
             }
 
             Debug.Log("Out of Mana's Potion");
             // TODO: Show in UI 'out of mana's potion'
+        }
+
+        public void OnTeleport(InputAction.CallbackContext context)
+        {
+            Debug.Log("Teleport");
+            /*
+             * Se eu to num level, posso ir pro lobby e retornar
+             * se eu to no lobby, posso retornar se eu tiver vindo pra ca com teleporte
+             */
+            
+            
+            if (!context.performed) return;
+            if (GameManager.instance.gameDataObject.currentLevel == Enums.Scenes.Lobby && 
+                GameManager.instance.gameDataObject.TeleportData is { AlreadyReturned: false })
+            {
+                foreach (var particle in _particleSystemsTeleport)
+                {
+                    particle.Play();
+                }
+                Debug.Log("Teleport back to level");
+                GameManager.instance.HandleTeleport(null);
+                _playerInput.enabled = false;
+            }
+
+            
+            var teleportItems = InventoryManager.instance.inventory.GetItemsByType(ItemType.Teleport);
+            if (GameManager.instance.gameDataObject.currentLevel != Enums.Scenes.Lobby &&
+                teleportItems.Count > 0)
+            {
+                foreach (var particle in _particleSystemsTeleport)
+                {
+                    particle.Play();
+                }
+                var teleportItem = teleportItems[0].item;
+                InventoryManager.instance.inventory.RemoveItem(teleportItem);
+                GameManager.instance.HandleTeleport(new TeleportData(transform.position, Enums.Scenes.Level01));
+                _playerInput.enabled = false;
+            }
         }
         #endregion
 
@@ -196,7 +240,7 @@ namespace ForestReturn.Scripts.PlayerAction
         public void OnInventoryClose(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            InventoryManager.instance.CloseInventory();
+            UiManager.instance.OpenCanvas(CanvasType.Hud);
             _playerInput.SwitchCurrentActionMap("gameplay");
         }
 

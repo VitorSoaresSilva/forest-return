@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Triggers
 {
-    [CreateAssetMenu(fileName = "newTriggerDatabase", menuName = "Trigger Database")]
+    [CreateAssetMenu(fileName = "newTriggerDatabase", menuName = "Trigger/Trigger Database")]
     public class TriggerDatabaseObject : ScriptableObject, ISerializationCallbackReceiver
     {
         public TriggerObject[] triggers;

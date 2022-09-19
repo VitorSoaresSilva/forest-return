@@ -125,6 +125,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Teleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""c070ac17-cb26-4833-af02-cf83b560c37d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -380,6 +389,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""ManaPotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2996e605-377c-40ce-9cfb-58fcfb874b97"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -519,6 +539,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_cameraControl = m_gameplay.FindAction("cameraControl", throwIfNotFound: true);
         m_gameplay_LifePotion = m_gameplay.FindAction("LifePotion", throwIfNotFound: true);
         m_gameplay_ManaPotion = m_gameplay.FindAction("ManaPotion", throwIfNotFound: true);
+        m_gameplay_Teleport = m_gameplay.FindAction("Teleport", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_Move = m_Inventory.FindAction("Move", throwIfNotFound: true);
@@ -593,6 +614,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_cameraControl;
     private readonly InputAction m_gameplay_LifePotion;
     private readonly InputAction m_gameplay_ManaPotion;
+    private readonly InputAction m_gameplay_Teleport;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -608,6 +630,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @cameraControl => m_Wrapper.m_gameplay_cameraControl;
         public InputAction @LifePotion => m_Wrapper.m_gameplay_LifePotion;
         public InputAction @ManaPotion => m_Wrapper.m_gameplay_ManaPotion;
+        public InputAction @Teleport => m_Wrapper.m_gameplay_Teleport;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -650,6 +673,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @ManaPotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
                 @ManaPotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
                 @ManaPotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnManaPotion;
+                @Teleport.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
+                @Teleport.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
+                @Teleport.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTeleport;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -687,6 +713,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @ManaPotion.started += instance.OnManaPotion;
                 @ManaPotion.performed += instance.OnManaPotion;
                 @ManaPotion.canceled += instance.OnManaPotion;
+                @Teleport.started += instance.OnTeleport;
+                @Teleport.performed += instance.OnTeleport;
+                @Teleport.canceled += instance.OnTeleport;
             }
         }
     }
@@ -763,6 +792,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnCameraControl(InputAction.CallbackContext context);
         void OnLifePotion(InputAction.CallbackContext context);
         void OnManaPotion(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

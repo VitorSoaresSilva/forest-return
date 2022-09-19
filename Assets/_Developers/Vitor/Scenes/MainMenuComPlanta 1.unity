@@ -6028,8 +6028,9 @@ GameObject:
   m_Component:
   - component: {fileID: 491386511}
   - component: {fileID: 491386510}
+  - component: {fileID: 491386512}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: ====Managers====
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6049,7 +6050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameDataObject: {fileID: 11400000, guid: 818539f5e4b9d304d8ab9a66b59144c0, type: 2}
   triggerDatabase: {fileID: 11400000, guid: a996635468d47cf478d3b539b6cc3251, type: 2}
-  triggerInventoryObject: {fileID: 11400000, guid: 3cc38956f511e3547ba92db680190a8b, type: 2}
+  triggerInventory: {fileID: 11400000, guid: 3cc38956f511e3547ba92db680190a8b, type: 2}
 --- !u!4 &491386511
 Transform:
   m_ObjectHideFlags: 0
@@ -6065,6 +6066,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491386512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491386509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c90f48faa8f4a28b00b5781964833be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: bcbc942e3e2babe4d98194df791a4d95, type: 2}
+  equippedItems: {fileID: 11400000, guid: e8b9a797d4e1c7b43bed1748860e383e, type: 2}
+  Database: {fileID: 11400000, guid: d67e274c245bc3e46bc44a7a2363a9bd, type: 2}
 --- !u!4 &493042031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8766319236331867890, guid: d940850a598a1064892ba31e1edc1e54, type: 3}

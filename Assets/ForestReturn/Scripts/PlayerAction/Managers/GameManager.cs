@@ -1,10 +1,11 @@
 using System;
 using Utilities;
 using System.IO;
+using ForestReturn.Scripts.PlayerAction.Teleport;
 using ForestReturn.Scripts.PlayerAction.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
+using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
 
 namespace ForestReturn.Scripts.PlayerAction.Managers
@@ -20,23 +21,41 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         public string TriggersSavePath => $"/gameData_{_indexSaveSlot}_triggers.data";
 
         [Header("Triggers")] 
-        [HideInInspector] public TriggerDatabaseObject triggerDatabase;
-        [FormerlySerializedAs("triggerInventoryObject")] public TriggerInventoryObject triggerInventory;
+        public TriggerDatabaseObject triggerDatabase;
+        public TriggerInventoryObject triggerInventory;
+        
+        // [Header("Game State")]
+        // [field: SerializeField] public Enums.Scenes currentScene { get; private set; }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [ContextMenu("Play")]
         public void Play()
         {
-            SceneManager.LoadScene((int)gameDataObject.currentLevel);
+            Debug.Log("load");
             LoadGame();
+            SceneManager.LoadScene((int)gameDataObject.currentLevel);
         }
         [ContextMenu("Save")]
         public void Save()
         {
-            // gameDataObject.path = GameDataSavePath;
+            gameDataObject.path = GameDataSavePath;
             gameDataObject.LastSave = new DateTime();
             gameDataObject.Save();
             
-            // triggerInventory.path = TriggersSavePath;
+            triggerInventory.path = TriggersSavePath;
             triggerInventory.Save();
             
             InventoryManager.instance.Save();
@@ -58,8 +77,6 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
             _indexSaveSlot = index.ToString();
             gameDataObject.path = GameDataSavePath;
             triggerInventory.path = TriggersSavePath;
-            InventoryManager.instance.inventory.path = InventorySavePath;
-            InventoryManager.instance.equippedItems.path = EquippedSavePath;
         }
 
         public bool[] GetAvailableSaves()
@@ -72,9 +89,31 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
             return data;
         }
 
+        public void HandleTeleport(TeleportData? teleportData)
+        {
+            // estou em um level -> envio "level x"
+            // estou no lobby => envio vazio
+
+            if (teleportData != null)
+            {
+                gameDataObject.TeleportData = teleportData.Value;
+                gameDataObject.currentLevel = Enums.Scenes.Lobby;
+                //delay
+                SceneManager.LoadSceneAsync((int)Enums.Scenes.Lobby, LoadSceneMode.Single);
+                return;
+            }
+
+            if (gameDataObject.TeleportData.AlreadyReturned) return;
+            gameDataObject.currentLevel = gameDataObject.TeleportData.SceneStartIndex;
+            //delay
+            SceneManager.LoadSceneAsync((int)gameDataObject.TeleportData.SceneStartIndex, LoadSceneMode.Single);
+
+        }
+
         private void OnApplicationQuit()
         {
             triggerInventory.Clear();
+            gameDataObject.Clear();
         }
     }
 }

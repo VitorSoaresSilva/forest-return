@@ -6,8 +6,8 @@ namespace ForestReturn.Scripts.PlayerAction.Utilities
     {
         public enum Scenes
         {
-            Intro,
             MainMenu,
+            Intro,
             Lobby,
             Level01
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using ForestReturn.Scripts.PlayerAction.Teleport;
 using ForestReturn.Scripts.PlayerAction.Utilities;
 using UnityEngine;
 namespace ForestReturn.Scripts.PlayerAction
@@ -10,10 +11,12 @@ namespace ForestReturn.Scripts.PlayerAction
     [CreateAssetMenu(fileName = "new Game Data", menuName = "Items/GameData")]
     public class GameDataObject : ScriptableObject
     {
-        public Enums.Scenes currentLevel;
         public string path;
         public DateTime LastSave;
-        public Transform pointToSpawn;
+        
+        public Enums.Scenes currentLevel;
+        // public Vector3 pointToSpawn;
+        public TeleportData TeleportData;
 
         [ContextMenu("Save")]
         public void Save()
@@ -37,9 +40,15 @@ namespace ForestReturn.Scripts.PlayerAction
             }
             else
             {
-                currentLevel = Enums.Scenes.Intro;
-                pointToSpawn = null;
+                currentLevel = Enums.Scenes.Level01;
+                // pointToSpawn = Vector3.zero;
+                TeleportData = new TeleportData();
             }
+        }
+        [ContextMenu("Clear")]
+        public void Clear()
+        {
+            this.Clear();
         }
     }
 }

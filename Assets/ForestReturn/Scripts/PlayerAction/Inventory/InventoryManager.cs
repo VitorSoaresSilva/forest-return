@@ -8,17 +8,17 @@ using Utilities;
 
 namespace ForestReturn.Scripts.PlayerAction
 {
-    public class InventoryManager : PersistentSingleton<InventoryManager>
+    public class InventoryManager : Singleton<InventoryManager>
     {
         public InventoryObject inventory;
         public InventoryObject equippedItems;
         public ItemDatabaseObject Database;
-        [SerializeField] private DisplayInventory displayInventory;
+        // [SerializeField] private DisplayInventory displayInventory;
 
-        private void Start()
-        {
-            Load();
-        }
+        // private void Start()
+        // {
+        //     Load();
+        // }
 
         public void OnApplicationQuit()
         {
@@ -26,15 +26,15 @@ namespace ForestReturn.Scripts.PlayerAction
             equippedItems.Clear();
         }
 
-        public void OpenInventory()
-        {
-            displayInventory.gameObject.SetActive(true);
-        }
-
-        public void CloseInventory()
-        {
-            displayInventory.gameObject.SetActive(false);
-        }
+        // public void OpenInventory()
+        // {
+        //     displayInventory.gameObject.SetActive(true);
+        // }
+        //
+        // public void CloseInventory()
+        // {
+        //     displayInventory.gameObject.SetActive(false);
+        // }
 
         public void Save()
         {
