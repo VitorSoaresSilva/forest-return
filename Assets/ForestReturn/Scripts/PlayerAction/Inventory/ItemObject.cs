@@ -9,6 +9,8 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public GameObject prefab;
         public Sprite image;
         public bool isStackable;
+        public bool isUnique;
+        public bool hasLevels;
         public ItemType itemType;
     }
 
@@ -17,7 +19,8 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         Default,
         Potion,
         Weapon,
-        Currency
+        Currency,
+        Artifacts
     }
 
     public enum PotionType

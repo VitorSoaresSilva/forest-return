@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,20 +9,22 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
     public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiver
     {
         public ItemObject[] items;
-        public Dictionary<int, ItemObject> GetItem = new ();
 
-        public void OnBeforeSerialize()
-        {
-            GetItem = new Dictionary<int, ItemObject>();
-        }
-
-        public void OnAfterDeserialize()
+        [ContextMenu("Update ID's")]
+        public void UpdateID()
         {
             for (int i = 0; i < items.Length; i++)
             {
                 items[i].id = i;
-                GetItem.Add(i,items[i]);
             }
+        }
+        public void OnAfterDeserialize()
+        {
+            UpdateID();
+        }
+
+        public void OnBeforeSerialize()
+        {
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public int id;
         public ItemObject item;
         public int amount;
+        public int level;
 
         public InventorySlot(int id, int amount, ItemObject item)
         {

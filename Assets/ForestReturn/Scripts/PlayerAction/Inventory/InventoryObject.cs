@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
     public class InventoryObject : ScriptableObject
     {
         [field: SerializeField] public List<InventorySlot> Items { get; private set; } = new();
+        public string path;
         public void AddItem(ItemObject item, int amount = 1)
         {
             if (item.isStackable)
@@ -45,7 +47,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         {
             string saveData = JsonUtility.ToJson(this, true);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(string.Concat(Application.persistentDataPath,InventoryManager.instance.savePath));
+            FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
             bf.Serialize(file,saveData);
             file.Close();
             Debug.Log(InventoryManager.instance.Database);
@@ -65,15 +67,15 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         [ContextMenu("Load")]
         public void Load()
         {
-            if (File.Exists(string.Concat(Application.persistentDataPath,InventoryManager.instance.savePath)))
+            if (File.Exists(string.Concat(Application.persistentDataPath, path)))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(string.Concat(Application.persistentDataPath, InventoryManager.instance.savePath), FileMode.Open);
+                FileStream file = File.Open(string.Concat(Application.persistentDataPath, path), FileMode.Open);
                 JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
                 file.Close();
                 foreach (var inventorySlot in Items)
                 {
-                    var b = InventoryManager.instance.Database.GetItem[inventorySlot.id];
+                    var b = InventoryManager.instance.Database.items[inventorySlot.id];
                     inventorySlot.item = b;
                 }
                 
@@ -93,6 +95,7 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         [ContextMenu("Clear")]
         public void Clear()
         {
+            path = string.Empty;
             Items.Clear();
         }
 
@@ -101,6 +104,12 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             var items = Items.FindAll(x => x.item.itemType == itemType);
             return items;
         }
+        public List<InventorySlot> GetItemsByTypes(ItemType[] itemType)
+        {
+            var items = Items.FindAll(x => itemType.Contains(x.item.itemType));
+            return items;
+        }
+        
 
         public List<InventorySlot> GetPotionByType(PotionType potionType)
         {
