@@ -25,7 +25,6 @@ namespace Utilities
 
         public static bool Load<T>(string fileName,out T data) where T:new()
         {
-            Debug.Log(Application.persistentDataPath + "/" + fileName);
             string path = Application.persistentDataPath + "/" + fileName;
             if (File.Exists(path))
             {
@@ -39,6 +38,7 @@ namespace Utilities
                 }
                 catch (Exception e)
                 {
+                    Debug.Log(e);
                     data = new T();
                     stream.Close();
                     return false;

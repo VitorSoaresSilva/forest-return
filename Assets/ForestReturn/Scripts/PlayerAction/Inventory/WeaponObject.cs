@@ -13,6 +13,8 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         {
             isStackable = false;
             itemType = ItemType.Weapon;
+            hasLevels = true;
+            isUnique = true;
         }
 
     }

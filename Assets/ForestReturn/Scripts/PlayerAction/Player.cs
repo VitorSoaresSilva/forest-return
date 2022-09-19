@@ -31,18 +31,27 @@ namespace ForestReturn.Scripts.PlayerAction
         [SerializeField] private GameObject swordHitBox;
 
         private PlayerInput _playerInput;
-        private InventoryObject _inventoryObject;
+        private InventoryObject _inventoryObjectRef;
         
         // Animations
         private static readonly int AttackPunch = Animator.StringToHash("Attack");
         private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
         private static readonly int Walking = Animator.StringToHash("isMoving");
         [SerializeField] private LayerMask itemsLayer;
-        
-        
+
+
+        public WeaponObject currentWeapon;
+
+        private void Start()
+        {
+            
+            
+            // currentWeapon = InventoryManager.instance.equippedItems.GetItemsByType(ItemType.Weapon)[0].item as WeaponObject;
+        }
+        // [Header("Artifacts")]
         
         // parameters
-        [SerializeField] private ParameterObject more10PercentNormalAttack;
+        // [SerializeField] private ParameterObject more10PercentNormalAttack;
         
         // Damage
         public DataDamage DataDamage
@@ -51,7 +60,6 @@ namespace ForestReturn.Scripts.PlayerAction
             {
                 return new DataDamage(1);
             }
-            
         }
 
         protected override void Awake()
@@ -60,13 +68,14 @@ namespace ForestReturn.Scripts.PlayerAction
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            _inventoryObject = InventoryManager.instance.inventory;
+            _inventoryObjectRef = InventoryManager.instance.inventory;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
         {
             Move();
+            _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime));
             _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
         }
 
@@ -147,7 +156,7 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             if (!context.performed) return;
             if (!(CurrentHealth < MaxHealth)) return;
-            var potions = _inventoryObject.GetPotionByType(PotionType.Life);
+            var potions = _inventoryObjectRef.GetPotionByType(PotionType.Life);
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;
@@ -162,7 +171,7 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             if (!context.performed) return;
             if (!(CurrentMana < MaxMana)) return;
-            var potions = _inventoryObject.GetPotionByType(PotionType.Mana);
+            var potions = _inventoryObjectRef.GetPotionByType(PotionType.Mana);
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;

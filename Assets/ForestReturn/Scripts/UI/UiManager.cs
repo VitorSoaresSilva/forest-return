@@ -4,6 +4,7 @@ using Attributes;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utilities;
 using Weapons;
@@ -96,7 +97,7 @@ namespace UI
         [Header("Weapon Card")] 
         [SerializeField] private UiWeaponCard uiWeaponCard;
         [SerializeField] private UIArtifactCard uiArtifactCard;
-        [SerializeField] private Camera camera;
+        [FormerlySerializedAs("camera")] [SerializeField] private Camera _camera;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         
         protected override void Awake()

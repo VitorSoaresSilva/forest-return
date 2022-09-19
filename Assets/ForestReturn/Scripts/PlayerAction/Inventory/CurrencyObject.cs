@@ -9,7 +9,9 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         public void Awake()
         {
             isStackable = true;
+            isUnique = false;
             itemType = ItemType.Currency;
+            hasLevels = false;
         }
     }
 }

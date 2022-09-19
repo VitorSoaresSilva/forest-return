@@ -12,6 +12,8 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         {
             isStackable = true;
             itemType = ItemType.Potion;
+            isUnique = false;
+            hasLevels = false;
         }
     }
 }
