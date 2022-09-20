@@ -24,27 +24,9 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         public TriggerDatabaseObject triggerDatabase;
         public TriggerInventoryObject triggerInventory;
         
-        // [Header("Game State")]
-        // [field: SerializeField] public Enums.Scenes currentScene { get; private set; }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         [ContextMenu("Play")]
         public void Play()
         {
-            Debug.Log("load");
             LoadGame();
             SceneManager.LoadScene((int)gameDataObject.currentLevel);
         }
@@ -68,7 +50,8 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
             
             triggerInventory.path = TriggersSavePath;
             triggerInventory.Load();
-            
+
+            InventoryManager.instance.Load();
             //load skills
         }
 
@@ -91,9 +74,6 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
 
         public void HandleTeleport(TeleportData? teleportData)
         {
-            // estou em um level -> envio "level x"
-            // estou no lobby => envio vazio
-
             if (teleportData != null)
             {
                 gameDataObject.TeleportData = teleportData.Value;

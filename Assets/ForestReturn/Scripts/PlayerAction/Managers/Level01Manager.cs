@@ -7,6 +7,7 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
     {
         private void Start()
         {
+            if (GameManager.instance == null) return;
             var teleportData = GameManager.instance.gameDataObject.TeleportData;
             if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
             {
