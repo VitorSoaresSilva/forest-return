@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ForestReturn.Scripts.PlayerAction.Artifacts;
 using ForestReturn.Scripts.PlayerAction.Inventory;
 using ForestReturn.Scripts.PlayerAction.Managers;
 using ForestReturn.Scripts.PlayerAction.UI;
@@ -13,29 +14,12 @@ namespace ForestReturn.Scripts.PlayerAction
         public InventoryObject inventory;
         public InventoryObject equippedItems;
         public ItemDatabaseObject Database;
-        // [SerializeField] private DisplayInventory displayInventory;
-
-        // private void Start()
-        // {
-        //     Load();
-        // }
-
         public void OnApplicationQuit()
         {
             inventory.Clear();
             equippedItems.Clear();
         }
-
-        // public void OpenInventory()
-        // {
-        //     displayInventory.gameObject.SetActive(true);
-        // }
-        //
-        // public void CloseInventory()
-        // {
-        //     displayInventory.gameObject.SetActive(false);
-        // }
-
+        
         public void Save()
         {
             inventory.path = GameManager.instance.InventorySavePath;
@@ -50,6 +34,15 @@ namespace ForestReturn.Scripts.PlayerAction
             equippedItems.path = GameManager.instance.EquippedSavePath;
             inventory.Load();
             equippedItems.Load();
+        }
+
+        public void TryEquipArtifact(ArtifactObject artifactObject) //bool
+        {
+            var slot = inventory.Find(artifactObject);
+            if (slot != null)
+            {
+                
+            }
         }
     }
 }

@@ -12,17 +12,20 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
-        public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
         public GameDataObject gameDataObject;
         private string _indexSaveSlot = "0";
         public string InventorySavePath => $"/gameData_{_indexSaveSlot}_inventory.data";
         public string EquippedSavePath => $"/gameData_{_indexSaveSlot}_equipped.data";
-        public string GameDataSavePath => $"/gameData_{_indexSaveSlot}_gameData.data";
-        public string TriggersSavePath => $"/gameData_{_indexSaveSlot}_triggers.data";
+        private string GameDataSavePath => $"/gameData_{_indexSaveSlot}_gameData.data";
+        private string TriggersSavePath => $"/gameData_{_indexSaveSlot}_triggers.data";
 
         [Header("Triggers")] 
         public TriggerDatabaseObject triggerDatabase;
         public TriggerInventoryObject triggerInventory;
+        public TriggerObject hammerFromBlacksmith;
+        
+        public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
+        public int MaxArtifacts { get; private set; } = 2;
         
         [ContextMenu("Play")]
         public void Play()
@@ -53,13 +56,22 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
 
             InventoryManager.instance.Load();
             //load skills
+
+            Init();
+        }
+
+        private void Init()
+        {
+            if (triggerInventory.Contains(hammerFromBlacksmith))
+            {
+                MaxArtifacts = 3;
+            }
+            //...
         }
 
         public void SelectIndexSaveSlot(int index)
         {
             _indexSaveSlot = index.ToString();
-            gameDataObject.path = GameDataSavePath;
-            triggerInventory.path = TriggersSavePath;
         }
 
         public bool[] GetAvailableSaves()

@@ -42,6 +42,16 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             return true;
         }
 
+        // public bool SwitchSlots(InventorySlot oldObject, InventorySlot newObject)
+        // {
+        //     var oldRef = Items.Find(x=>x == oldObject);
+        //     var newRef = Items.Find(x=>x == newObject);
+        //     oldRef = newObject;
+        //     newRef = oldObject;
+        //     
+        // }
+        
+
         [ContextMenu("Save")]
         public void Save()
         {
@@ -50,7 +60,6 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
             bf.Serialize(file,saveData);
             file.Close();
-            Debug.Log(InventoryManager.instance.Database);
             
             
 
@@ -88,7 +97,6 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
                 Container = (Inventory)formatter.Deserialize(stream);
                 stream.Close();
                 */
-                
             }
         }
 
@@ -110,12 +118,17 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             return items;
         }
         
-
         public List<InventorySlot> GetPotionByType(PotionType potionType)
         {
             var items = Items.FindAll(x =>
                 x.item.itemType == ItemType.Potion && ((PotionObject)x.item).potionType == potionType);
             return items;
+        }
+
+        public InventorySlot Find(ItemObject itemObject)
+        {
+            var item = Items.Find(x => x.item == itemObject);
+            return item;
         }
     }
 }
