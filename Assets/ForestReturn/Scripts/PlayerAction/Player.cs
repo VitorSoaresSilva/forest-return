@@ -199,8 +199,8 @@ namespace ForestReturn.Scripts.PlayerAction
             
             
             if (!context.performed) return;
-            if (GameManager.instance.gameDataObject.currentLevel == Enums.Scenes.Lobby && 
-                GameManager.instance.gameDataObject.TeleportData is { AlreadyReturned: false })
+            if (GameManager.instance.generalData.currentLevel == Enums.Scenes.Lobby && 
+                GameManager.instance.generalData.TeleportData is { AlreadyReturned: false })
             {
                 foreach (var particle in _particleSystemsTeleport)
                 {
@@ -213,7 +213,7 @@ namespace ForestReturn.Scripts.PlayerAction
 
             
             var teleportItems = InventoryManager.instance.inventory.GetItemsByType(ItemType.Teleport);
-            if (GameManager.instance.gameDataObject.currentLevel != Enums.Scenes.Lobby &&
+            if (GameManager.instance.generalData.currentLevel != Enums.Scenes.Lobby &&
                 teleportItems.Count > 0)
             {
                 foreach (var particle in _particleSystemsTeleport)

@@ -11,7 +11,6 @@ namespace ForestReturn.Scripts.PlayerAction.Triggers
     public class TriggerInventoryObject : ScriptableObject
     {
         [field: SerializeField] public List<TriggerSlot> Triggers { get; private set; } = new();
-        public string path;
 
         public void AddTrigger(TriggerObject triggerObject)
         {
@@ -42,35 +41,17 @@ namespace ForestReturn.Scripts.PlayerAction.Triggers
             return false;
         }
 
-        [ContextMenu("Save")]
-        public void Save()
+        public void Init()
         {
-            string saveData = JsonUtility.ToJson(this, true);
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
-            bf.Serialize(file, saveData);
-            file.Close();
-        }
-        
-        [ContextMenu("Load")]
-        public void Load()
-        {
-            if (File.Exists(string.Concat(Application.persistentDataPath, path)))
+            foreach (var trigger in Triggers)
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(string.Concat(Application.persistentDataPath, path), FileMode.Open);
-                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
-                file.Close();
-                foreach (var trigger in Triggers)
-                {
-                    trigger.TriggerObject = GameManager.instance.triggerDatabase.triggers[trigger.Id];
-                }
+                trigger.TriggerObject = GameManager.instance.triggerDatabase.triggers[trigger.Id];
             }
         }
         [ContextMenu("Clear")]
         public void Clear()
         {
-            path = string.Empty;
+            // path = string.Empty;
             Triggers.Clear();
         }
     }

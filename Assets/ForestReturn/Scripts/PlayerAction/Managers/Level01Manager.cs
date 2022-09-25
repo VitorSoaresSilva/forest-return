@@ -8,11 +8,11 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         private void Start()
         {
             if (GameManager.instance == null) return;
-            var teleportData = GameManager.instance.gameDataObject.TeleportData;
+            var teleportData = GameManager.instance.generalData.TeleportData;
             if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
             {
                 pointToSpawn = teleportData.PositionToSpawn;
-                GameManager.instance.gameDataObject.TeleportData.AlreadyReturned = true;
+                GameManager.instance.generalData.TeleportData.AlreadyReturned = true;
             }
             playerScript.Init();
         }
