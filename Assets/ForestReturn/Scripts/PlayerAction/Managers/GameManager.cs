@@ -1,10 +1,13 @@
 using System;
+using System.Globalization;
 using Utilities;
 using System.IO;
+using ForestReturn.Scripts.PlayerAction.Inventory;
 using ForestReturn.Scripts.PlayerAction.Teleport;
 using ForestReturn.Scripts.PlayerAction.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
 
@@ -12,100 +15,120 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
-        public GameDataObject gameDataObject;
-        private string _indexSaveSlot = "0";
-        public string InventorySavePath => $"/gameData_{_indexSaveSlot}_inventory.data";
-        public string EquippedSavePath => $"/gameData_{_indexSaveSlot}_equipped.data";
-        private string GameDataSavePath => $"/gameData_{_indexSaveSlot}_gameData.data";
-        private string TriggersSavePath => $"/gameData_{_indexSaveSlot}_triggers.data";
+        [FormerlySerializedAs("gameDataObject")] public GeneralDataObject generalData;
+        public int IndexSaveSlot { get; private set; } = -1;
+        // private int _indexLatestSaveSlot = -1;
+
+        // public GameData GameData;
+        public SaveGameData[] savedGameDataTemporary;
 
         [Header("Triggers")] 
         public TriggerDatabaseObject triggerDatabase;
         public TriggerInventoryObject triggerInventory;
         public TriggerObject hammerFromBlacksmith;
-        
         public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
         public int MaxArtifacts { get; private set; } = 2;
-        
+
+        private void Start()
+        {
+            
+            // SavedGameDataTemporary = new SaveGameData[3];
+            for (int i = 0; i < 3; i++)
+            {
+                // SavedGameDataTemporary[i] = ScriptableObject.CreateInstance<SaveGameData>();
+                // savedGameDataTemporary[i].Init();
+                savedGameDataTemporary[i].Load($"/gameData_{i}.data");
+                if (savedGameDataTemporary[i].LoadSuccess)
+                {
+                    if (IndexSaveSlot == -1 || savedGameDataTemporary[i].generalDataObject.LastSaveLong >
+                        savedGameDataTemporary[IndexSaveSlot].generalDataObject.LastSaveLong)
+                    {
+                        IndexSaveSlot = i;
+                    }
+                }
+            }
+
+            if (IndexSaveSlot != -1)
+            {
+                //continue button enable
+            }
+        }
+        public void SelectIndexSaveSlot(int index)
+        {
+            IndexSaveSlot = index;
+        }
+
         [ContextMenu("Play")]
         public void Play()
         {
-            LoadGame();
-            SceneManager.LoadScene((int)gameDataObject.currentLevel);
+            if (IndexSaveSlot == -1) return;
+            Init();
+            SceneManager.LoadScene((int)generalData.currentLevel);
         }
+
         [ContextMenu("Save")]
         public void Save()
         {
-            gameDataObject.path = GameDataSavePath;
-            gameDataObject.LastSave = new DateTime();
-            gameDataObject.Save();
-            
-            triggerInventory.path = TriggersSavePath;
-            triggerInventory.Save();
-            
-            InventoryManager.instance.Save();
+
+            generalData.LastSaveString = DateTime.Today.ToLongTimeString();
+            generalData.LastSaveLong = DateTime.Now.ToFileTime();
+            savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
-        public void LoadGame()
-        {
-            gameDataObject.path = GameDataSavePath;
-            gameDataObject.Load();
-            
-            triggerInventory.path = TriggersSavePath;
-            triggerInventory.Load();
 
-            InventoryManager.instance.Load();
-            //load skills
-
-            Init();
-        }
 
         private void Init()
         {
-            if (triggerInventory.Contains(hammerFromBlacksmith))
-            {
-                MaxArtifacts = 3;
-            }
-            //...
-        }
 
-        public void SelectIndexSaveSlot(int index)
-        {
-            _indexSaveSlot = index.ToString();
-        }
 
-        public bool[] GetAvailableSaves()
-        {
-            bool[] data = new bool[3];
-            for (int i = 0; i < data.Length; i++)
+            if (IndexSaveSlot == -1) return;
+            InventoryManager.instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
+            InventoryManager.instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
+            triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
+            generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
+
+
+            if (savedGameDataTemporary[IndexSaveSlot].LoadSuccess)
             {
-                data[i] = File.Exists(string.Concat(Application.persistentDataPath, $"/gameData_{i}_gameData.data"));
+                
             }
-            return data;
+            else
+            {
+                InventoryManager.instance.Init();
+                triggerInventory.Init();
+                generalData.Init();
+            }
+
+            // if (triggerIn ventory.Contains(hammerFromBlacksmith))
+            // {
+            //     MaxArtifacts = 3;
+            // }
         }
 
         public void HandleTeleport(TeleportData? teleportData)
         {
             if (teleportData != null)
             {
-                gameDataObject.TeleportData = teleportData.Value;
-                gameDataObject.currentLevel = Enums.Scenes.Lobby;
+                generalData.TeleportData = teleportData.Value;
+                generalData.currentLevel = Enums.Scenes.Lobby;
                 //delay
                 SceneManager.LoadSceneAsync((int)Enums.Scenes.Lobby, LoadSceneMode.Single);
                 return;
             }
 
-            if (gameDataObject.TeleportData.AlreadyReturned) return;
-            gameDataObject.currentLevel = gameDataObject.TeleportData.SceneStartIndex;
+            if (generalData.TeleportData.AlreadyReturned) return;
+            generalData.currentLevel = generalData.TeleportData.SceneStartIndex;
             //delay
-            SceneManager.LoadSceneAsync((int)gameDataObject.TeleportData.SceneStartIndex, LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync((int)generalData.TeleportData.SceneStartIndex, LoadSceneMode.Single);
 
         }
 
         private void OnApplicationQuit()
         {
-            triggerInventory.Clear();
-            gameDataObject.Clear();
+            for (int i = 0; i < savedGameDataTemporary.Length; i++)
+            {
+                savedGameDataTemporary[i].Clear();
+            }
         }
     }
 }

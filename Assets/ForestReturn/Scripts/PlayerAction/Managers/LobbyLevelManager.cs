@@ -14,11 +14,11 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         {
             if (GameManager.instance.triggerInventory.Contains(cutsceneWatched))
             {
-                Debug.Log("Play cutscene");
+                Debug.Log("Do not play");
             }
             else
             {
-                Debug.Log("Do not play");
+                Debug.Log("Play cutscene");
             }
             
             
@@ -31,7 +31,7 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
                 Debug.Log("Não Spawnar os npcs no cenario");
             }
 
-            var teleportData = GameManager.instance.gameDataObject.TeleportData;
+            var teleportData = GameManager.instance.generalData.TeleportData;
             if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
             {
                 pointToSpawn = teleportData.PositionToSpawn;

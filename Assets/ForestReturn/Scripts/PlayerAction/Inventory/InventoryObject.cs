@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,11 +7,12 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Inventory
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "new Inventory", menuName = "Items/Inventory", order = 0)]
     public class InventoryObject : ScriptableObject
     {
         [field: SerializeField] public List<InventorySlot> Items { get; private set; } = new();
-        public string path;
+        // public string path;
         public void AddItem(ItemObject item, int amount = 1)
         {
             if (item.isStackable)
@@ -42,6 +44,15 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
             return true;
         }
 
+        public void Init()
+        {
+            foreach (var inventorySlot in Items)
+            {
+                var b = InventoryManager.instance.Database.items[inventorySlot.id];
+                inventorySlot.item = b;
+            }
+        }
+
         // public bool SwitchSlots(InventorySlot oldObject, InventorySlot newObject)
         // {
         //     var oldRef = Items.Find(x=>x == oldObject);
@@ -52,58 +63,58 @@ namespace ForestReturn.Scripts.PlayerAction.Inventory
         // }
         
 
-        [ContextMenu("Save")]
-        public void Save()
-        {
-            string saveData = JsonUtility.ToJson(this, true);
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
-            bf.Serialize(file,saveData);
-            file.Close();
-            
-            
+        // [ContextMenu("Save")]
+        // public void Save()
+        // {
+        //     string saveData = JsonUtility.ToJson(this, true);
+        //     BinaryFormatter bf = new BinaryFormatter();
+        //     FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
+        //     bf.Serialize(file,saveData);
+        //     file.Close();
+        //     
+        //     
+        //
+        //     /*
+        //      // This code save the data in a binary file
+        //     IFormatter formatter = new BinaryFormatter();
+        //     Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create,
+        //         FileAccess.Write);
+        //     formatter.Serialize(stream, Container);
+        //     stream.Close();
+        //     */
+        // }
 
-            /*
-             // This code save the data in a binary file
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create,
-                FileAccess.Write);
-            formatter.Serialize(stream, Container);
-            stream.Close();
-            */
-        }
-
-        [ContextMenu("Load")]
-        public void Load()
-        {
-            if (File.Exists(string.Concat(Application.persistentDataPath, path)))
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(string.Concat(Application.persistentDataPath, path), FileMode.Open);
-                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
-                file.Close();
-                foreach (var inventorySlot in Items)
-                {
-                    var b = InventoryManager.instance.Database.items[inventorySlot.id];
-                    inventorySlot.item = b;
-                }
-                
-                
-                /*
-                 // this code load the data from a binary file
-                IFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open,
-                    FileAccess.Read);
-                Container = (Inventory)formatter.Deserialize(stream);
-                stream.Close();
-                */
-            }
-        }
+        // [ContextMenu("Load")]
+        // public void Load()
+        // {
+        //     if (File.Exists(string.Concat(Application.persistentDataPath, path)))
+        //     {
+        //         BinaryFormatter bf = new BinaryFormatter();
+        //         FileStream file = File.Open(string.Concat(Application.persistentDataPath, path), FileMode.Open);
+        //         JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+        //         file.Close();
+        //         foreach (var inventorySlot in Items)
+        //         {
+        //             var b = InventoryManager.instance.Database.items[inventorySlot.id];
+        //             inventorySlot.item = b;
+        //         }
+        //         
+        //         
+        //         /*
+        //          // this code load the data from a binary file
+        //         IFormatter formatter = new BinaryFormatter();
+        //         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open,
+        //             FileAccess.Read);
+        //         Container = (Inventory)formatter.Deserialize(stream);
+        //         stream.Close();
+        //         */
+        //     }
+        // }
 
         [ContextMenu("Clear")]
         public void Clear()
         {
-            path = string.Empty;
+            // path = string.Empty;
             Items.Clear();
         }
 
