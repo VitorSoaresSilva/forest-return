@@ -39,6 +39,7 @@ namespace ForestReturn.Scripts.PlayerAction
         
         // Animations
         private static readonly int AttackPunch = Animator.StringToHash("Attack");
+        private static readonly int AttackPunchBack = Animator.StringToHash("AttackBack");
         private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
         private static readonly int Walking = Animator.StringToHash("isMoving");
         [SerializeField] private LayerMask itemsLayer;
@@ -47,6 +48,10 @@ namespace ForestReturn.Scripts.PlayerAction
         public WeaponObject currentWeapon;
         public ParticleSystem[] _particleSystemsTeleport;
 
+        [Header("Attack")] 
+        private bool acceptComboAttack;
+        
+        
         public void Init()
         {
             _inventoryObjectRef = InventoryManager.instance.inventory;
@@ -121,9 +126,24 @@ namespace ForestReturn.Scripts.PlayerAction
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (_isAttacking) return;
-            _isAttacking = true;
-            _animator.SetTrigger(AttackPunch);
+
+            if (!context.performed) return;
+
+            if (!_isAttacking)
+            {
+                _isAttacking = true;
+                _animator.SetTrigger(AttackPunch);
+            }
+            else if (acceptComboAttack)
+            {
+                swordHitBox.SetActive(false);
+                _animator.SetTrigger(AttackPunchBack); 
+            }
+
+
+            // if (_isAttacking ) return;
+            // _isAttacking = true;
+            // _animator.SetTrigger(AttackPunch);
         }
         public void OnRangeAttack(InputAction.CallbackContext context)
         {
@@ -250,11 +270,13 @@ namespace ForestReturn.Scripts.PlayerAction
         public void HandleEndAttack()
         {
             _isAttacking = false;
+            acceptComboAttack = false;
             swordHitBox.SetActive(false);
         }
 
         public void HandleStartAttack()
         {
+            acceptComboAttack = false;
             swordHitBox.SetActive(true);
         }
 
@@ -267,7 +289,19 @@ namespace ForestReturn.Scripts.PlayerAction
         public void HandleEndRangedAttack()
         {
             _isAttacking = false;
-        } 
+        }
+
+        public void HandleStartRangeSecondAttack()
+        {
+            acceptComboAttack = true;
+        }
+
+        public void HandleEndRangeSecondAttack()
+        {
+            acceptComboAttack = false;
+        }
+        
+        
         private void HandleDeath()
         {
             // _playerInput.SwitchCurrentActionMap("deathScreen");
@@ -288,6 +322,8 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             Debug.Log("Mana healed");
         }
+        
+        
 
         #endregion
     }

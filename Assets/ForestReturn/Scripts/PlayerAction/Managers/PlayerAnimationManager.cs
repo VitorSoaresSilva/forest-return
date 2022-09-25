@@ -10,7 +10,6 @@ namespace ForestReturn.Scripts.PlayerAction
 
         private void Awake()
         {
-            // playerRigidbody = GetComponentInParent<Rigidbody>();
             player = GetComponentInParent<Player>();
         }
 
@@ -32,6 +31,16 @@ namespace ForestReturn.Scripts.PlayerAction
         public void EndRangedAttack()
         {
             player.HandleStartRangedAttack();
+        }
+
+        public void StartRangeSecondAttack()
+        {
+            player.HandleStartRangeSecondAttack();
+        }
+
+        public void EndRangeSecondAttack()
+        {
+            player.HandleEndRangeSecondAttack();
         }
     }
 }
