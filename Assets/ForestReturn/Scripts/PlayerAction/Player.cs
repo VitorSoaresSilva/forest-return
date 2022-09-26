@@ -54,7 +54,11 @@ namespace ForestReturn.Scripts.PlayerAction
         
         public void Init()
         {
-            _inventoryObjectRef = InventoryManager.instance.inventory;
+
+            if (InventoryManager.instance != null)
+            {
+                _inventoryObjectRef = InventoryManager.instance.inventory;
+            }
             if (LevelManager.instance != null)
             {
                 _controller.enabled = false;
@@ -91,7 +95,7 @@ namespace ForestReturn.Scripts.PlayerAction
         private void OnEnable()
         {
             OnDead += HandleDeath;
-            OnHurt += HandleHurt;
+            // OnHurt += HandleHurt;
             OnManaHealed += HandleManaHealed;
             OnHealthHealed += HandleHealthHealed;
         }
@@ -99,7 +103,7 @@ namespace ForestReturn.Scripts.PlayerAction
         private void OnDisable()
         {
             OnDead -= HandleDeath;
-            OnHurt -= HandleHurt;
+            // OnHurt -= HandleHurt;
             OnManaHealed -= HandleManaHealed;
             OnHealthHealed -= HandleHealthHealed;
         }
@@ -306,13 +310,13 @@ namespace ForestReturn.Scripts.PlayerAction
         {
             // _playerInput.SwitchCurrentActionMap("deathScreen");
         }
-        private void HandleHurt()
-        {
-            if (UiManager.instance != null)
-            {
-                UiManager.instance.PlayerHurt();
-            }
-        }
+        // private void HandleHurt()
+        // {
+        //     if (UiManager.instance != null)
+        //     {
+        //         UiManager.instance.PlayerHurt();
+        //     }
+        // }
         private void HandleHealthHealed()
         {
             Debug.Log("Life healed");

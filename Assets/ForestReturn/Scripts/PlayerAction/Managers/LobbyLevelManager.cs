@@ -9,32 +9,45 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
     {
         public TriggerObject npcSaved;
         public TriggerObject cutsceneWatched;
+        public GameObject[] NPCs;
         
         private void Start()
         {
-            if (GameManager.instance.triggerInventory.Contains(cutsceneWatched))
+            
+            
+            
+            // if (GameManager.instance.triggerInventory.Contains(cutsceneWatched))
+            // {
+            //     Debug.Log("Do not play");
+            // }
+            // else
+            // {
+            //     Debug.Log("Play cutscene");
+            // }
+            
+            
+            if (GameManager.instance != null && GameManager.instance.triggerInventory.Contains(npcSaved))
             {
-                Debug.Log("Do not play");
+                foreach (var npC in NPCs)
+                {
+                    npC.SetActive(true);
+                }
             }
             else
             {
-                Debug.Log("Play cutscene");
-            }
-            
-            
-            if (GameManager.instance.triggerInventory.Contains(npcSaved))
-            {
-                Debug.Log("Spawnar os npcs no cenario");
-            }
-            else
-            {
-                Debug.Log("Não Spawnar os npcs no cenario");
+                foreach (var npC in NPCs)
+                {
+                    npC.SetActive(false);
+                }
             }
 
-            var teleportData = GameManager.instance.generalData.TeleportData;
-            if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
+            if (GameManager.instance != null)
             {
-                pointToSpawn = teleportData.PositionToSpawn;
+                var teleportData = GameManager.instance.generalData.TeleportData;
+                if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
+                {
+                    pointToSpawn = teleportData.PositionToSpawn;
+                }
             }
             playerScript.Init();
         }

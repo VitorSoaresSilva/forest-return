@@ -10,8 +10,8 @@ public class MainMenu : MonoBehaviour
    
     //Carrega a cena da primeira fase
     public void Play()
-    {
-        GameManager.instance.LoadScene(Enums.Scenes.Lobby);
+    {   
+        // GameManager.instance.LoadScene(Enums.Scenes.Lobby);
         // hudPanel.SetActive(true);
     }
 

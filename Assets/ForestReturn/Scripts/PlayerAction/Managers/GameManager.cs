@@ -8,6 +8,7 @@ using ForestReturn.Scripts.PlayerAction.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
 
@@ -28,6 +29,8 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         public TriggerObject hammerFromBlacksmith;
         public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
         public int MaxArtifacts { get; private set; } = 2;
+
+        public Button continueBtn;
 
         private void Start()
         {
@@ -50,7 +53,14 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
 
             if (IndexSaveSlot != -1)
             {
+                continueBtn.gameObject.SetActive(true);
+                continueBtn.enabled = true;
                 //continue button enable
+            }
+            else
+            {
+                continueBtn.gameObject.SetActive(false);
+                continueBtn.enabled = false;
             }
         }
         public void SelectIndexSaveSlot(int index)
@@ -69,8 +79,7 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
         [ContextMenu("Save")]
         public void Save()
         {
-
-            generalData.LastSaveString = DateTime.Today.ToLongTimeString();
+            generalData.LastSaveString = DateTime.Now.ToLongTimeString();
             generalData.LastSaveLong = DateTime.Now.ToFileTime();
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
@@ -129,6 +138,14 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
             {
                 savedGameDataTemporary[i].Clear();
             }
+        }
+
+        public void ChangeScene(Enums.Scenes scene)
+        {
+            generalData.currentLevel = scene;
+            //TODO: Add Effect teleport
+            generalData.TeleportData = new TeleportData();
+            SceneManager.LoadScene((int)scene);
         }
     }
 }

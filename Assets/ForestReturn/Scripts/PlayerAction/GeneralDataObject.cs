@@ -22,7 +22,7 @@ namespace ForestReturn.Scripts.PlayerAction
 
         public void Init()
         {
-            currentLevel = Enums.Scenes.Level01;
+            currentLevel = Enums.Scenes.Lobby;
             TeleportData = new TeleportData();
         }
 

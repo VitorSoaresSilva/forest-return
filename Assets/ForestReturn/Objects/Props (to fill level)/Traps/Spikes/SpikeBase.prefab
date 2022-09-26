@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8167605461186122417}
   - component: {fileID: 8167605461186122418}
-  - component: {fileID: 8167605461186122421}
+  - component: {fileID: 1190653133427594588}
   m_Layer: 0
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -79,7 +79,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.82, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8167605461186122421
+--- !u!114 &1190653133427594588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,12 +88,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8167605461186122416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3276992cbaf34484850cd2388f12552d, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataDamage:
-    damage: 0
-    trueDamage: 10
+  damage: 1
 --- !u!1 &8167605461996072815
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +253,20 @@ MonoBehaviour:
   waitTimeBeforeRetract: 1
   coolDown: 2
   movingPart: {fileID: 8167605460807766271}
+  activeEventPath:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  retractEventPath:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &8167605462695995054
 BoxCollider:
   m_ObjectHideFlags: 0
