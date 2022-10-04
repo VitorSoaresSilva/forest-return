@@ -49,7 +49,7 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
                     pointToSpawn = teleportData.PositionToSpawn;
                 }
             }
-            playerScript.Init();
+            PlayerScript.Init();
         }
     }
 }

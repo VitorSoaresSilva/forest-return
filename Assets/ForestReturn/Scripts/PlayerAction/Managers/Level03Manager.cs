@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.PlayerAction.Managers
 {
-    public class Level01Manager : LevelManager
+    public class Level03Manager : LevelManager
     {
         private void Start()
         {
-            Debug.Log("level 01");
+            Debug.Log("level 03");
             if (GameManager.instance != null)
             {
                 var teleportData = GameManager.instance.generalData.TeleportData;

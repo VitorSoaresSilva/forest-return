@@ -9,8 +9,9 @@ namespace ForestReturn.Scripts.PlayerAction.Utilities
             MainMenu,
             Intro,
             Lobby,
-            Level01
-            
+            Level01,
+            Level02,
+            Level03,
         }
     }
 }

@@ -54,6 +54,7 @@ namespace ForestReturn.Scripts.PlayerAction
         
         public void Init()
         {
+            Debug.Log("a");
 
             if (InventoryManager.instance != null)
             {
@@ -65,6 +66,8 @@ namespace ForestReturn.Scripts.PlayerAction
                 transform.position = LevelManager.instance.pointToSpawn;
                 _controller.enabled = true;
             }
+
+            if (UnityEngine.Camera.main != null) cam = UnityEngine.Camera.main.transform;
         }
         
         // Damage
