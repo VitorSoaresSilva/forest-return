@@ -1,98 +1,151 @@
 using System;
-using Artifacts;
-using ForestReturn.Scripts.Data;
-using ForestReturn.Scripts.Managers;
-using ForestReturn.Scripts.NaoSei;
-using Player;
-using UI;
-using UnityEngine;
+using System.Globalization;
 using Utilities;
-using Weapons;
+using System.IO;
+using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.PlayerAction.Teleport;
+using ForestReturn.Scripts.PlayerAction.Triggers;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
-namespace Managers
+
+namespace ForestReturn.Scripts.PlayerAction.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
-        public static event Action<GameState> OnGameStateChanged;
-        public GameState GameState { get; private set; }
-        [field: SerializeField] public GameObject playerPrefab { get; private set; }
-        [field: SerializeField] public GameObject cameraPrefab { get; private set; }
-        public InventoryScriptableObject InventoryScriptableObject;
-        [SerializeField] private WeaponsScriptableObject initialWeapon;
-        [SerializeField] private ArtifactsScriptableObject[] initialArtifacts;
-        public ConfigLobby configLobby;
-        public PlayerMain PlayerMain { get; set; }
+        [FormerlySerializedAs("gameDataObject")] public GeneralDataObject generalData;
+        public int IndexSaveSlot { get; private set; } = -1;
+        // private int _indexLatestSaveSlot = -1;
 
-        public void ChangeGameState(GameState newGameState)
-        {
-            if (newGameState != GameState )
-            {
-                GameState = newGameState;
-                OnGameStateChanged?.Invoke(newGameState);
-            }
-        }
-        private void HandleExitMainMenu()
-        {
-            // UiManager.instance.HideMainMenu();
-        }
+        // public GameData GameData;
+        public SaveGameData[] savedGameDataTemporary;
 
-        public void LoadScene(Enums.Scenes newScene)
-        {
-            MySceneLoader.instance.sceneLoaded += HandleSceneLoaded;
-            MySceneLoader.instance.LoadScenes(new []{(int)newScene});
-        }
+        [Header("Triggers")] 
+        public TriggerDatabaseObject triggerDatabase;
+        public TriggerInventoryObject triggerInventory;
+        public TriggerObject hammerFromBlacksmith;
+        public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
+        public int MaxArtifacts { get; private set; } = 2;
 
-        private void HandleSceneLoaded()
-        {
-            GameState newGameState = LevelManager.instance.State;
-            UiManager.instance.HideAllPanel();
-            ChangeGameState(LevelManager.instance.State);
-            switch (newGameState)
-            {
-                case GameState.MainMenu:
-                    break;
-                case GameState.Lobby:
-                case GameState.LobbySemCutscene:
-                    HandleLobby();
-                    break;
-                case GameState.Pause:
-                    break;
-                case GameState.Level01:
-                    // SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)Enums.Scenes.Level01));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void HandleLobby()
-        {
-        }
-
-        private void HandleMainMenu()
-        {
-            // UiManager.instance.HideMainMenu();
-        }
+        public Button continueBtn;
 
         private void Start()
         {
-            if (InventoryScriptableObject.WeaponEquiped == null && InventoryScriptableObject.WeaponsInventory.Length == 0){
-                InventoryScriptableObject.WeaponEquiped = initialWeapon;
-                InventoryScriptableObject.ArtifactsEquiped = initialArtifacts;
-                InventoryScriptableObject.ArtifactsInventory = Array.Empty<ArtifactsScriptableObject>();
-                InventoryScriptableObject.WeaponsInventory = Array.Empty<WeaponsScriptableObject>();
+            
+            // SavedGameDataTemporary = new SaveGameData[3];
+            for (int i = 0; i < 3; i++)
+            {
+                // SavedGameDataTemporary[i] = ScriptableObject.CreateInstance<SaveGameData>();
+                // savedGameDataTemporary[i].Init();
+                savedGameDataTemporary[i].Load($"/gameData_{i}.data");
+                if (savedGameDataTemporary[i].LoadSuccess)
+                {
+                    if (IndexSaveSlot == -1 || savedGameDataTemporary[i].generalDataObject.LastSaveLong >
+                        savedGameDataTemporary[IndexSaveSlot].generalDataObject.LastSaveLong)
+                    {
+                        IndexSaveSlot = i;
+                    }
+                }
             }
-            ChangeGameState(GameState.MainMenu);
-        }
-    }
 
-    public enum GameState
-    {
-        None,
-        MainMenu,
-        Lobby,
-        Pause,
-        Level01,
-        LobbySemCutscene
+            if (IndexSaveSlot != -1)
+            {
+                continueBtn.gameObject.SetActive(true);
+                continueBtn.enabled = true;
+                //continue button enable
+            }
+            else
+            {
+                continueBtn.gameObject.SetActive(false);
+                continueBtn.enabled = false;
+            }
+        }
+        public void SelectIndexSaveSlot(int index)
+        {
+            IndexSaveSlot = index;
+        }
+
+        [ContextMenu("Play")]
+        public void Play()
+        {
+            if (IndexSaveSlot == -1) return;
+            Init();
+            SceneManager.LoadScene((int)generalData.currentLevel);
+        }
+
+        [ContextMenu("Save")]
+        public void Save()
+        {
+            generalData.LastSaveString = DateTime.Now.ToLongTimeString();
+            generalData.LastSaveLong = DateTime.Now.ToFileTime();
+            savedGameDataTemporary[IndexSaveSlot].Save();
+            //save skills
+        }
+
+
+        private void Init()
+        {
+
+
+            if (IndexSaveSlot == -1) return;
+            InventoryManager.instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
+            InventoryManager.instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
+            triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
+            generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
+
+
+            if (savedGameDataTemporary[IndexSaveSlot].LoadSuccess)
+            {
+                
+            }
+            else
+            {
+                InventoryManager.instance.Init();
+                triggerInventory.Init();
+                generalData.Init();
+            }
+
+            // if (triggerIn ventory.Contains(hammerFromBlacksmith))
+            // {
+            //     MaxArtifacts = 3;
+            // }
+        }
+
+        public void HandleTeleport(TeleportData? teleportData)
+        {
+            if (teleportData != null)
+            {
+                generalData.TeleportData = teleportData.Value;
+                generalData.currentLevel = Enums.Scenes.Lobby;
+                //delay
+                SceneManager.LoadSceneAsync((int)Enums.Scenes.Lobby, LoadSceneMode.Single);
+                return;
+            }
+
+            if (generalData.TeleportData.AlreadyReturned) return;
+            generalData.currentLevel = generalData.TeleportData.SceneStartIndex;
+            //delay
+            SceneManager.LoadSceneAsync((int)generalData.TeleportData.SceneStartIndex, LoadSceneMode.Single);
+
+        }
+
+        private void OnApplicationQuit()
+        {
+            for (int i = 0; i < savedGameDataTemporary.Length; i++)
+            {
+                savedGameDataTemporary[i].Clear();
+            }
+        }
+
+        public void ChangeScene(Enums.Scenes scene)
+        {
+            generalData.currentLevel = scene;
+            //TODO: Add Effect teleport
+            generalData.TeleportData = new TeleportData();
+            SceneManager.LoadScene((int)scene);
+        }
     }
 }

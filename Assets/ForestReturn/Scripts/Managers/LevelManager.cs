@@ -1,88 +1,28 @@
-using ForestReturn.Scripts.Camera;
-using Managers;
-using Player;
-using UI;
-using Unity.Mathematics;
 using UnityEngine;
 using Utilities;
-using Random = UnityEngine.Random;
+using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
 
-namespace ForestReturn.Scripts.Managers
+namespace ForestReturn.Scripts.PlayerAction.Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {
-        public Transform[] pointsToSpawn;
-        public GameState State;
-        public CameraFollow CameraFollow;
-
-        private void OnEnable()
+        public Enums.Scenes sceneIndex;
+        public Vector3 pointToSpawn;
+        public GameObject playerPrefab;
+        public Player PlayerScript
         {
-            GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
-        }
-
-        private void OnDisable()
-        {
-            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
-        }
-
-        private void GameManagerOnOnGameStateChanged(GameState obj)
-        {
-            if (obj == State)
+            get
             {
-                SpawnPlayer();
-            }
-
-            if (State == GameState.Level01 || State == GameState.Lobby)
-            {
-                GameManager.instance.PlayerMain.gameObject.SetActive(false);
-            }
-
-
-            if (State == GameState.Lobby)
-            {
-                if (GameManager.instance.configLobby.blacksmithSaved == true)
+                if (playerScript != null) return playerScript;
+                playerScript = FindObjectOfType<Player>();
+                if (playerScript == null)
                 {
-                    SpawnBlackSmith();
+                    var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
+                    playerScript = player.GetComponent<Player>();
                 }
-            }
-            if (State == GameState.Level01)
-            {
-                if (GameManager.instance.configLobby.blacksmithSaved == true)
-                {
-                    var rato = FindObjectOfType<ratoScript>();
-                    Destroy(rato.gameObject);
-                }
+                return playerScript;
             }
         }
-
-        private void SpawnBlackSmith()
-        {
-            var blacksmith = Instantiate(GameManager.instance.configLobby.blackSmithPrefab,
-                GameManager.instance.configLobby.blackSmithPosition, quaternion.identity);
-        }
-
-        public void SpawnPlayer()
-        {
-            var player = Instantiate(GameManager.instance.playerPrefab,
-                pointsToSpawn[Random.Range(0, pointsToSpawn.Length)].position, Quaternion.identity);
-            var playerScript = player.GetComponent<PlayerMain>();
-            GameManager.instance.PlayerMain = playerScript;
-            
-            CameraFollow.target = player.transform;
-            CameraFollow.SetPosition();
-            CameraFollow.enabled = true;
-        }
-
-        public void UiMenuOpen()
-        {
-            if (GameManager.instance.GameState != GameState.Lobby)
-            {
-                UiManager.instance.menuLevels.gameObject.SetActive(true);
-            }
-            else
-            {
-                UiManager.instance.menuLobby.gameObject.SetActive(true);
-            }
-        }
+        public Player playerScript;
     }
 }

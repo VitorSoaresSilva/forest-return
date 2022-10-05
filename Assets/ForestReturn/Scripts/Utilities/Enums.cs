@@ -1,18 +1,17 @@
-namespace Utilities
+using UnityEngine;
+
+namespace ForestReturn.Scripts.PlayerAction.Utilities
 {
     public static class Enums
     {
-        public enum DataTypeSave
-        {
-            Inventory
-        }
-
         public enum Scenes
         {
             MainMenu,
+            Intro,
             Lobby,
             Level01,
-            LobbySemCutscene
+            Level02,
+            Level03,
         }
     }
 }
