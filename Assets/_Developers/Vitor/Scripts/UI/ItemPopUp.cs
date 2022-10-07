@@ -1,44 +1,43 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UI;
+using _Developers.Vitor.Scripts.Weapons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Weapons;
 
-public class ItemPopUp : MonoBehaviour
+namespace _Developers.Vitor.Scripts.UI
 {
-    public GameObject root;
-    public RawImage image;
-    public TextMeshProUGUI title;
-    public UIArtifactCard[] uiArtifacts;
-    public void Show(Weapon weapon)
+    public class ItemPopUp : MonoBehaviour
     {
-        // if (root.activeSelf) return;
-        // root.SetActive(true);
-        // if (weapon.weaponConfig.image != null)
-        // {
-        //     image.texture = weapon.weaponConfig.image;
-        // }
-        // title.text = weapon.weaponConfig.weaponName;
-        // for (int i = 0; i < weapon.artifacts.Length; i++)
-        // {
-        //     if (weapon.artifacts[i] != null)
-        //     {
-        //         uiArtifacts[i].ReceiveData(weapon.artifacts[i]);
-        //     }
-        // }
-    }
+        public GameObject root;
+        public RawImage image;
+        public TextMeshProUGUI title;
+        public UIArtifactCard[] uiArtifacts;
+        public void Show(Weapon weapon)
+        {
+            // if (root.activeSelf) return;
+            // root.SetActive(true);
+            // if (weapon.weaponConfig.image != null)
+            // {
+            //     image.texture = weapon.weaponConfig.image;
+            // }
+            // title.text = weapon.weaponConfig.weaponName;
+            // for (int i = 0; i < weapon.artifacts.Length; i++)
+            // {
+            //     if (weapon.artifacts[i] != null)
+            //     {
+            //         uiArtifacts[i].ReceiveData(weapon.artifacts[i]);
+            //     }
+            // }
+        }
 
-    public void Hide()
-    {
-        // root.SetActive(false);
-        // image.texture = null;
-        // title.text = String.Empty;
-        // foreach (var uiArtifact in uiArtifacts)
-        // {
-        //     uiArtifact.ResetValues();
-        // }
+        public void Hide()
+        {
+            // root.SetActive(false);
+            // image.texture = null;
+            // title.text = String.Empty;
+            // foreach (var uiArtifact in uiArtifacts)
+            // {
+            //     uiArtifact.ResetValues();
+            // }
+        }
     }
 }

@@ -1,12 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class playertHit : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    private void OnTriggerEnter(Collider other)
+    public class playertHit : MonoBehaviour
     {
-        Debug.Log("player hit " + other.name);
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("player hit " + other.name);
+        }
     }
 }

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace ForestReturn.Scripts.PlayerAction.Utilities
+namespace ForestReturn.Scripts.Utilities
 {
     public static class Enums
     {

@@ -1,9 +1,9 @@
 using System;
-using ForestReturn.Scripts.PlayerAction.UI;
+using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.UI;
 using UnityEngine;
-using Utilities;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts.Managers
 {
     public class UiManager : Singleton<UiManager>
     {

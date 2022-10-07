@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace UI
+namespace _Developers.Vitor.Scripts.UI
 {
     public class SimplePlayAnimation : MonoBehaviour
     {

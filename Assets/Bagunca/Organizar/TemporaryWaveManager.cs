@@ -1,59 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Character;
+using _Developers.Vitor.Scripts.Character;
 using UnityEngine;
 
-public class TemporaryWaveManager : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    public BaseCharacter[] enemies;
-    [SerializeField] private int _amountOfEnemies;
-    public Door[] doors;
-    [SerializeField] private bool isRunning;
-
-    private void Start()
+    public class TemporaryWaveManager : MonoBehaviour
     {
-        _amountOfEnemies = enemies.Length;
-        foreach (var enemy in enemies)
-        {
-            enemy.OnDead += HandleEnemyDead;
-        }
-    }
+        public BaseCharacter[] enemies;
+        [SerializeField] private int _amountOfEnemies;
+        public Door[] doors;
+        [SerializeField] private bool isRunning;
 
-    private void HandleEnemyDead()
-    {
-        _amountOfEnemies--;
-        if (_amountOfEnemies <= 0)
+        private void Start()
         {
-            isRunning = false;
-            OpenDoors();
+            _amountOfEnemies = enemies.Length;
             foreach (var enemy in enemies)
             {
-                enemy.OnDead -= HandleEnemyDead;
+                enemy.OnDead += HandleEnemyDead;
             }
         }
-    }
 
-    private void OpenDoors()
-    {
-        foreach (var door in doors)
+        private void HandleEnemyDead()
         {
-            door.Open();
+            _amountOfEnemies--;
+            if (_amountOfEnemies <= 0)
+            {
+                isRunning = false;
+                OpenDoors();
+                foreach (var enemy in enemies)
+                {
+                    enemy.OnDead -= HandleEnemyDead;
+                }
+            }
         }
-    }
 
-    private void CloseDoors()
-    {
-        foreach (var door in doors)
+        private void OpenDoors()
         {
-            door.Close();
+            foreach (var door in doors)
+            {
+                door.Open();
+            }
         }
-    }
 
-    public void StartRoom()
-    {
-        if (isRunning) return;
-        isRunning = true;
-        CloseDoors();
+        private void CloseDoors()
+        {
+            foreach (var door in doors)
+            {
+                door.Close();
+            }
+        }
+
+        public void StartRoom()
+        {
+            if (isRunning) return;
+            isRunning = true;
+            CloseDoors();
+        }
     }
 }

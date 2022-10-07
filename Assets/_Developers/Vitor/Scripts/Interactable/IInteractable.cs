@@ -1,4 +1,4 @@
-﻿namespace Interactable
+﻿namespace _Developers.Vitor.Scripts.Interactable
 {
     public interface IInteractable
     {

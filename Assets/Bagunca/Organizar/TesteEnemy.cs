@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Character;
-using UnityEngine;
+using _Developers.Vitor.Scripts.Character;
 
-public class TesteEnemy : BaseCharacter
+namespace Bagunca.Organizar
 {
+    public class TesteEnemy : BaseCharacter
+    {
     
+    }
 }

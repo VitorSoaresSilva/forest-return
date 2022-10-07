@@ -1,8 +1,8 @@
+using _Developers.Vitor.Scripts.Utilities;
 using UnityEngine;
-using Utilities;
-using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
+using Enums = ForestReturn.Scripts.Utilities.Enums;
 
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {

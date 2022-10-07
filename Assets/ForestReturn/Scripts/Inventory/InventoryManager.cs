@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using ForestReturn.Scripts.PlayerAction.Artifacts;
-using ForestReturn.Scripts.PlayerAction.Inventory;
-using ForestReturn.Scripts.PlayerAction.Managers;
-using ForestReturn.Scripts.PlayerAction.UI;
-using UnityEngine;
-using Utilities;
+using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.Artifacts;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts.Inventory
 {
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {

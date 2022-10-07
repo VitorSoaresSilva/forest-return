@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.Attacks
+namespace _Developers.Vitor.Scripts.Attacks
 {
     [CreateAssetMenu(fileName = "New Attack", menuName = "ScriptableObject/Attack", order = 0)]
     public class AttackScriptableObject : ScriptableObject

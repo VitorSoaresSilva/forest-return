@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using ForestReturn.Scripts.PlayerAction.Teleport;
-using ForestReturn.Scripts.PlayerAction.Utilities;
-using Unity.VisualScripting;
+using ForestReturn.Scripts.Teleport;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
-namespace ForestReturn.Scripts.PlayerAction
+
+namespace ForestReturn.Scripts
 {
     [CreateAssetMenu(fileName = "new Game Data", menuName = "Items/GameData")]
     public class GeneralDataObject : ScriptableObject

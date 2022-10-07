@@ -1,8 +1,7 @@
-using System;
-using Character;
+using _Developers.Vitor.Scripts.Character;
 using UnityEngine;
 
-namespace Enemies
+namespace _Developers.Vitor.Scripts.Enemies
 {
     public class SimpleDamageDealer : MonoBehaviour
     {

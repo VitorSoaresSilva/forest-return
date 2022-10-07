@@ -1,9 +1,8 @@
-using System;
-using ForestReturn.Scripts.PlayerAction.Managers;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForestReturn.Scripts.PlayerAction.UI
+namespace ForestReturn.Scripts.UI
 {
     public class Hud : MonoBehaviour
     {

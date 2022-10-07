@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts.Managers
 {
     public class PlayerAnimationManager : MonoBehaviour
     {

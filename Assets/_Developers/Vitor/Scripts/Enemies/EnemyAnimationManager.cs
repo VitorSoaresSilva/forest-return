@@ -1,8 +1,7 @@
-using System;
-using Enemies.StateMachine;
+using _Developers.Vitor.Scripts.Enemies.StateMachine;
 using UnityEngine;
 
-namespace Enemies
+namespace _Developers.Vitor.Scripts.Enemies
 {
     public class EnemyAnimationManager : MonoBehaviour
     {

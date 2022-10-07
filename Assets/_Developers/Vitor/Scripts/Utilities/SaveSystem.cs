@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace Utilities
+namespace _Developers.Vitor.Scripts.Utilities
 {
     public static class SaveSystem
     {

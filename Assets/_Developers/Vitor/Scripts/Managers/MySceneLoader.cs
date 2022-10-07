@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using _Developers.Vitor.Scripts.Utilities;
+using Bagunca.Organizar;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using System.Linq;
-using Utilities;
 
-namespace Managers
+namespace _Developers.Vitor.Scripts.Managers
 {
     public class MySceneLoader : PersistentSingleton<MySceneLoader>
     {

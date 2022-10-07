@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Triggers
+namespace ForestReturn.Scripts.Triggers
 {
     [CreateAssetMenu(fileName = "newTriggerDatabase", menuName = "Trigger/Trigger Database")]
     public class TriggerDatabaseObject : ScriptableObject, ISerializationCallbackReceiver

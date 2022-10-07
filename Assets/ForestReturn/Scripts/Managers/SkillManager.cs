@@ -1,8 +1,7 @@
-using ForestReturn.Scripts.PlayerAction.Skills;
-using UnityEngine;
-using Utilities;
+using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.Skills;
 
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class SkillManager : Singleton<SkillManager>
     {

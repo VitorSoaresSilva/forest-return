@@ -1,16 +1,17 @@
 ﻿using System;
-using Artifacts;
-using Attributes;
-using Managers;
+using _Developers.Vitor.Scripts.Artifacts;
+using _Developers.Vitor.Scripts.Attributes;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.Utilities;
+using _Developers.Vitor.Scripts.Weapons;
+using Bagunca.Organizar;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Utilities;
-using Weapons;
-using Attribute = Attributes.Attribute;
+using Attribute = _Developers.Vitor.Scripts.Attributes.Attribute;
 
-namespace UI
+namespace _Developers.Vitor.Scripts.UI
 {
     public class UiManager : PersistentSingleton<UiManager>
     {
@@ -97,7 +98,7 @@ namespace UI
         [Header("Weapon Card")] 
         [SerializeField] private UiWeaponCard uiWeaponCard;
         [SerializeField] private UIArtifactCard uiArtifactCard;
-        [FormerlySerializedAs("camera")] [SerializeField] private Camera _camera;
+        [FormerlySerializedAs("camera")] [SerializeField] private UnityEngine.Camera _camera;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         
         protected override void Awake()
@@ -110,32 +111,32 @@ namespace UI
 
         private void OnEnable()
         {
-            GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
+            // GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
         }
 
-        private void GameManagerOnOnGameStateChanged(GameState obj)
-        {
-            switch (obj)
-            {
-                case GameState.None:
-                    break;
-                case GameState.MainMenu:
-                    break;
-                case GameState.Lobby:
-                case GameState.LobbySemCutscene:
-                    break;
-                case GameState.Pause:
-                    break;
-                case GameState.Level01:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
-            }
-        }
+        // private void GameManagerOnOnGameStateChanged(GameState obj)
+        // {
+        //     // switch (obj)
+        //     // {
+        //     //     case GameState.None:
+        //     //         break;
+        //     //     case GameState.MainMenu:
+        //     //         break;
+        //     //     case GameState.Lobby:
+        //     //     case GameState.LobbySemCutscene:
+        //     //         break;
+        //     //     case GameState.Pause:
+        //     //         break;
+        //     //     case GameState.Level01:
+        //     //         break;
+        //     //     default:
+        //     //         throw new ArgumentOutOfRangeException(nameof(obj), obj, null);
+        //     // }
+        // }
 
         private void OnDisable()
         {
-            GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
+            // GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
         }
 
         public void UpdateMaxValueAttribute(Attribute attribute)
@@ -178,7 +179,7 @@ namespace UI
                 UiWeaponInventory.backButton.SetActive(false);
                 UiWeaponInventory.gameObject.SetActive(true);
             }
-            UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
+            // UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
         }
 
         public void ShowWeaponsInventoryBlacksmith()
@@ -189,7 +190,7 @@ namespace UI
                 UiWeaponInventory.backButton.SetActive(true);
                 UiWeaponInventory.gameObject.SetActive(true);
             }
-            UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
+            // UiWeaponInventory.SetWeaponsData(GameManager.instance.PlayerMain._weaponHolder.WeaponsInventory);
         }
 
         public void ShowArtifactInventory()
@@ -199,7 +200,7 @@ namespace UI
                 UiArtifactInventory.buttonBack.SetActive(false);
                 UiArtifactInventory.gameObject.SetActive(true);
             }
-            UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
+            // UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
         }
         public void ShowArtifactInventoryBlacksmith()
         {
@@ -209,7 +210,7 @@ namespace UI
                 UiArtifactInventory.buttonBack.SetActive(true);
                 UiArtifactInventory.gameObject.SetActive(true);
             }
-            UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
+            // UiArtifactInventory.SetArtifactData(GameManager.instance.PlayerMain._weaponHolder.ArtifactsInventory);
         }
 
         public void ShowBlacksmith()
@@ -232,17 +233,17 @@ namespace UI
         }
         public void EquipWeapon(int index)
         {
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.PlayerMain._weaponHolder.EquipWeapon(index);
-            }
+            // if (GameManager.instance != null)
+            // {
+            //     GameManager.instance.PlayerMain._weaponHolder.EquipWeapon(index);
+            // }
         }
         public void EquipArtifact(int index)
         {
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.PlayerMain._weaponHolder.TryEquipArtifactFromInventory(index);
-            }
+            // if (GameManager.instance != null)
+            // {
+            //     GameManager.instance.PlayerMain._weaponHolder.TryEquipArtifactFromInventory(index);
+            // }
         }
 
         public void ShowDeathPanel()
@@ -268,7 +269,7 @@ namespace UI
         {
             hudPanel.SetActive(true);
             hurtPanel.SetActive(true);
-            GameManager.instance.PlayerMain.gameObject.SetActive(true);
+            // GameManager.instance.PlayerMain.gameObject.SetActive(true);
         }
     }
 }

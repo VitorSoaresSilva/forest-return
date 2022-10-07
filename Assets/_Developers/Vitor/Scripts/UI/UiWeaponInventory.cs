@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using _Developers.Vitor.Scripts.Weapons;
 using UnityEngine;
-using Weapons;
 
-namespace UI
+namespace _Developers.Vitor.Scripts.UI
 {
     public class UiWeaponInventory : MonoBehaviour
     {

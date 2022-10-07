@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
-using Character;
-using Damage;
-using Player;
+using _Developers.Vitor.Scripts.Character;
+using _Developers.Vitor.Scripts.Damage;
+using _Developers.Vitor.Scripts.Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using UnityEngine.XR;
-using Weapons;
 
-namespace Enemies.StateMachine
+namespace _Developers.Vitor.Scripts.Enemies.StateMachine
 {
     public class EnemyStateMachine: BaseCharacter
     {

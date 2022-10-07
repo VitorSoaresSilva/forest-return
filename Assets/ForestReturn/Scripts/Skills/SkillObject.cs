@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Skills
+namespace ForestReturn.Scripts.Skills
 {
     [CreateAssetMenu(fileName = "new skill", menuName = "Skills")]
     public class SkillObject : ScriptableObject

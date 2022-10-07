@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyHit : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    private void OnTriggerEnter(Collider other)
+    public class enemyHit : MonoBehaviour
     {
-        Debug.Log("enemy hurt "+ other.name);
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("enemy hurt "+ other.name);
+        }
     }
 }

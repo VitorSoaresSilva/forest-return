@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-namespace Character
+
+namespace _Developers.Vitor.Scripts.Character
 {
     public interface IDamageable
     {

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.UI
+namespace ForestReturn.Scripts.UI
 {
     public class CardLoadGame : MonoBehaviour
     {

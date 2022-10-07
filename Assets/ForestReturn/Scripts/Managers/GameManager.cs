@@ -1,18 +1,16 @@
 using System;
-using System.Globalization;
-using Utilities;
-using System.IO;
-using ForestReturn.Scripts.PlayerAction.Inventory;
-using ForestReturn.Scripts.PlayerAction.Teleport;
-using ForestReturn.Scripts.PlayerAction.Triggers;
+using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.Inventory;
+using ForestReturn.Scripts.Teleport;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
+using Enums = ForestReturn.Scripts.Utilities.Enums;
 
 
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
@@ -38,8 +36,6 @@ namespace ForestReturn.Scripts.PlayerAction.Managers
             // SavedGameDataTemporary = new SaveGameData[3];
             for (int i = 0; i < 3; i++)
             {
-                // SavedGameDataTemporary[i] = ScriptableObject.CreateInstance<SaveGameData>();
-                // savedGameDataTemporary[i].Init();
                 savedGameDataTemporary[i].Load($"/gameData_{i}.data");
                 if (savedGameDataTemporary[i].LoadSuccess)
                 {

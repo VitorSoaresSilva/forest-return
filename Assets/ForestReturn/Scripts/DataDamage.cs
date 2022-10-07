@@ -1,4 +1,4 @@
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     public class DataDamage
     {

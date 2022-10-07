@@ -1,7 +1,8 @@
-using Managers;
+using _Developers.Vitor.Scripts.Managers;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-namespace Interactable
+namespace _Developers.Vitor.Scripts.Interactable
 {
     public class Portal : MonoBehaviour, IInteractable
     {
@@ -9,7 +10,7 @@ namespace Interactable
         
         public void Interact()
         {
-            GameManager.instance.PlayerMain.HandleTeleportActivated(pointToTeleport.position);
+            // GameManager.instance.PlayerMain.HandleTeleportActivated(pointToTeleport.position);
         }
         /*
          * Um broto no chão, que ao me aproximar dele e interagir, vou ter teletransportado para o outro ponto

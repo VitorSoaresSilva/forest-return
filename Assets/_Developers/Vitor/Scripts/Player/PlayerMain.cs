@@ -1,22 +1,16 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Attributes;
-using Character;
-using Damage;
+using _Developers.Vitor.Scripts.Character;
+using _Developers.Vitor.Scripts.Damage;
+using _Developers.Vitor.Scripts.Interactable;
+using _Developers.Vitor.Scripts.Weapons;
 using ForestReturn.Scripts.Managers;
-using Interactable;
-using Managers;
-using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using Utilities;
-using Weapons;
 // using Weapons;
-using Attribute = Attributes.Attribute;
+using Attribute = _Developers.Vitor.Scripts.Attributes.Attribute;
 
-namespace Player
+namespace _Developers.Vitor.Scripts.Player
 {
     // [RequireComponent(typeof(WeaponHolder))]
     public class PlayerMain : BaseCharacter
@@ -26,7 +20,7 @@ namespace Player
         private PlayerInputAction _playerInputAction;
         [HideInInspector] public bool isAttacking;
         [HideInInspector] public bool isDashing;
-        [SerializeField] [NotNull] private Camera _mainCamera;
+        [SerializeField] [NotNull] private UnityEngine.Camera _mainCamera;
         [SerializeField] private float camRayLength;
         private Quaternion _lastMouseRotation;
 
@@ -78,9 +72,9 @@ namespace Player
             // _matrix4X4 = Matrix4x4.Rotate(Quaternion.Euler(0,0,0));
             _speed = runSpeed;
             _weaponHolder = GetComponent<WeaponHolder>();
-            if (_mainCamera == null && Camera.main != null)
+            if (_mainCamera == null && UnityEngine.Camera.main != null)
             {
-                _mainCamera = Camera.main;
+                _mainCamera = UnityEngine.Camera.main;
             }
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -100,14 +94,14 @@ namespace Player
 
         private void HandleMenu(InputAction.CallbackContext obj)
         {
-            LevelManager.instance.UiMenuOpen();
+            // LevelManager.instance.UiMenuOpen();
         }
 
         private void HandleInventory(InputAction.CallbackContext obj)
         {
             if (UiManager.instance != null)
             {
-                UiManager.instance.ShowArtifactInventory();
+                // UiManager.instance.ShowArtifactInventory();
             }
         }
 
@@ -133,7 +127,7 @@ namespace Player
             {
                 hitBox.enabled = false;
             }
-            UiManager.instance.ShowDeathPanel();
+            // UiManager.instance.ShowDeathPanel();
             // GameManager.instance.LoadScene(Enums.Scenes.Lobby);
             // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -164,14 +158,14 @@ namespace Player
         {
             if (UiManager.instance != null)
             {
-                UiManager.instance.UpdateMaxValueAttribute(attributes[(int)attribute.Type]);
+                // UiManager.instance.UpdateMaxValueAttribute(attributes[(int)attribute.Type]);
             }
         }
         private void HandleAttributeCurrentValueChanged(Attribute attribute)
         {
             if (UiManager.instance != null)
             {
-                UiManager.instance.UpdateCurrentValueAttribute(attributes[(int)attribute.Type]);
+                // UiManager.instance.UpdateCurrentValueAttribute(attributes[(int)attribute.Type]);
             }
         }
         #endregion

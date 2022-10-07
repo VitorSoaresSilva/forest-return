@@ -1,11 +1,11 @@
-﻿using UnityEngine ;
-using UnityEngine.UI ;
-using UnityEngine.Events ;
+﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 //------- Created by  : Hamza Herbou
 //------- Email       : hamza95herbou@gmail.com
 
-namespace EasyUI.Tabs {
+namespace _Developers.Sabrinne.Assets.UITabs.scripts {
    public enum TabsType{
       Horizontal,
       Vertical

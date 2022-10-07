@@ -1,25 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using ForestReturn.Scripts.PlayerAction;
-using ForestReturn.Scripts.PlayerAction.Managers;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+namespace ForestReturn.Scripts
 {
-    public ParticleSystem[] _particleSystems;
-    private void OnTriggerEnter(Collider other)
+    public class Checkpoint : MonoBehaviour
     {
-        if (other.TryGetComponent<ForestReturn.Scripts.Player>(out var player))
+        public ParticleSystem[] _particleSystems;
+        private void OnTriggerEnter(Collider other)
         {
-            foreach (var particle in _particleSystems)
+            if (other.TryGetComponent<ForestReturn.Scripts.Player>(out var player))
             {
-                particle.Play();
-            }
+                foreach (var particle in _particleSystems)
+                {
+                    particle.Play();
+                }
 
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.Save();
+                if (GameManager.instance != null)
+                {
+                    GameManager.instance.Save();
+                }
             }
         }
     }
