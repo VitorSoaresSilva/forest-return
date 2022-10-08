@@ -1,13 +1,13 @@
-using ForestReturn.Scripts.Camera;
-using Managers;
-using Player;
-using UI;
+using _Developers.Vitor.Scripts.Camera;
+using _Developers.Vitor.Scripts.Player;
+using _Developers.Vitor.Scripts.Utilities;
+using Bagunca.Organizar;
+using ForestReturn.Scripts.Managers;
 using Unity.Mathematics;
 using UnityEngine;
-using Utilities;
 using Random = UnityEngine.Random;
 
-namespace ForestReturn.Scripts.Managers
+namespace _Developers.Vitor.Scripts.Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {
@@ -75,14 +75,14 @@ namespace ForestReturn.Scripts.Managers
 
         public void UiMenuOpen()
         {
-            if (GameManager.instance.GameState != GameState.Lobby)
-            {
-                UiManager.instance.menuLevels.gameObject.SetActive(true);
-            }
-            else
-            {
-                UiManager.instance.menuLobby.gameObject.SetActive(true);
-            }
+            // if (GameManager.instance.GameState != GameState.Lobby)
+            // {
+            //     UiManager.instance.menuLevels.gameObject.SetActive(true);
+            // }
+            // else
+            // {
+            //     UiManager.instance.menuLobby.gameObject.SetActive(true);
+            // }
         }
     }
 }

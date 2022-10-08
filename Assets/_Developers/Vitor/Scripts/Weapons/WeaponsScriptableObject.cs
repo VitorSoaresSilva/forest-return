@@ -1,10 +1,8 @@
 ﻿using System;
-using Artifacts;
-using Character;
+using _Developers.Vitor.Scripts.Character;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Weapons
+namespace _Developers.Vitor.Scripts.Weapons
 {
     [Serializable]
     [CreateAssetMenu(fileName = "newWeapon", menuName = "ScriptableObject/Weapons")]

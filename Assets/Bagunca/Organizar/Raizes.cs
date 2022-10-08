@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Interactable;
-using Managers;
+using _Developers.Vitor.Scripts.Interactable;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.Utilities;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Utilities;
 
-public class Raizes : MonoBehaviour, IInteractable
+namespace Bagunca.Organizar
 {
-    public void Interact()
+    public class Raizes : MonoBehaviour, IInteractable
     {
-        GameManager.instance.LoadScene(Enums.Scenes.Level01);
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        public void Interact()
+        {
+            // GameManager.instance.LoadScene(Enums.Scenes.Level01);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }

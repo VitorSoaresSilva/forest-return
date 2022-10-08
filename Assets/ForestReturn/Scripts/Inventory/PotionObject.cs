@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [CreateAssetMenu(fileName = "newPotion", menuName = "Items/Potion", order = 0)]
     public class PotionObject : ItemObject

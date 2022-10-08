@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     public class ItemObject : ScriptableObject
     {

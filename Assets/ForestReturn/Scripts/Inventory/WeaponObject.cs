@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [CreateAssetMenu(fileName = "newWeapon", menuName = "Items/Weapon", order = 0)]
     public class WeaponObject : ItemObject

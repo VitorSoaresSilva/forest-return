@@ -1,4 +1,4 @@
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [System.Serializable]
     public class Item

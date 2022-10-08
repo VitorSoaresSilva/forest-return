@@ -1,9 +1,9 @@
-using System;
-using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-namespace ForestReturn.Scripts.PlayerAction.UI
+
+namespace ForestReturn.Scripts.UI
 {
     public class InventorySlotUI : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Traps
+namespace _Developers.Vitor.Scripts.Traps
 {
     public class WindTrap : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public static class GameParams
     {

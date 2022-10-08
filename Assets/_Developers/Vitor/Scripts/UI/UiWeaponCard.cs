@@ -1,9 +1,9 @@
+using _Developers.Vitor.Scripts.Weapons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Weapons;
 
-namespace UI
+namespace _Developers.Vitor.Scripts.UI
 {
     public class UiWeaponCard : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts.Managers
 {
     public class EquipmentManager : MonoBehaviour
     {

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Player
+namespace _Developers.Vitor.Scripts.Player
 {
     public class PlayerAnimationManager : MonoBehaviour
     {

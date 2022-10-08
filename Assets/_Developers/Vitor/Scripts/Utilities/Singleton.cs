@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities
+namespace _Developers.Vitor.Scripts.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {

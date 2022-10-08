@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using ForestReturn.Scripts.PlayerAction.Managers;
 
-namespace ForestReturn.Scripts.PlayerAction.Triggers
+namespace ForestReturn.Scripts.Triggers
 {
     [CreateAssetMenu(fileName = "newInventoryTrigger", menuName = "Trigger/Trigger Inventory")]
     public class TriggerInventoryObject : ScriptableObject

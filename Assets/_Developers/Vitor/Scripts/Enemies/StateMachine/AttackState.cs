@@ -1,5 +1,6 @@
 using UnityEngine;
-namespace Enemies.StateMachine
+
+namespace _Developers.Vitor.Scripts.Enemies.StateMachine
 {
     public class AttackState: BaseState
     {

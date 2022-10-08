@@ -1,4 +1,4 @@
-namespace Utilities
+namespace _Developers.Vitor.Scripts.Utilities
 {
     public static class Enums
     {

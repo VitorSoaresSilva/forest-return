@@ -1,9 +1,9 @@
-using Artifacts;
+using _Developers.Vitor.Scripts.Artifacts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace _Developers.Vitor.Scripts.UI
 {
     public class UIArtifactCard : MonoBehaviour
     {

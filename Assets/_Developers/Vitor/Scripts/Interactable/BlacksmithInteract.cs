@@ -1,18 +1,17 @@
-using System;
-using Managers;
-using UI;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.UI;
 using UnityEngine;
 
-namespace Interactable
+namespace _Developers.Vitor.Scripts.Interactable
 {
     public class BlacksmithInteract : MonoBehaviour, IInteractable
     {
         public void Interact()
         {
-            if (GameManager.instance != null && UiManager.instance != null)
-            {
-                UiManager.instance.ShowBlacksmith();
-            }
+            // if (GameManager.instance != null && UiManager.instance != null)
+            // {
+            //     UiManager.instance.ShowBlacksmith();
+            // }
         }
 
         private void OnTriggerExit(Collider other)

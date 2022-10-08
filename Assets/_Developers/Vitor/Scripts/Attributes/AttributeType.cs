@@ -1,4 +1,4 @@
-namespace Attributes
+namespace _Developers.Vitor.Scripts.Attributes
 {
     public enum AttributeType
     {

@@ -1,15 +1,14 @@
 using System;
-using Artifacts;
-using ForestReturn.Scripts.Data;
-using ForestReturn.Scripts.Managers;
-using ForestReturn.Scripts.NaoSei;
-using Player;
-using UI;
+using _Developers.Vitor.Scripts.Artifacts;
+using _Developers.Vitor.Scripts.Data;
+using _Developers.Vitor.Scripts.NaoSei;
+using _Developers.Vitor.Scripts.Player;
+using _Developers.Vitor.Scripts.UI;
+using _Developers.Vitor.Scripts.Utilities;
+using _Developers.Vitor.Scripts.Weapons;
 using UnityEngine;
-using Utilities;
-using Weapons;
 
-namespace Managers
+namespace _Developers.Vitor.Scripts.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {

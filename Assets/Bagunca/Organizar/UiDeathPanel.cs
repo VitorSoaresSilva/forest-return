@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using Managers;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.Utilities;
 using UnityEngine;
-using Utilities;
 
-public class UiDeathPanel : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    public void LoadLobbyLevel()
+    public class UiDeathPanel : MonoBehaviour
     {
-        GameManager.instance.LoadScene(Enums.Scenes.LobbySemCutscene);
+        public void LoadLobbyLevel()
+        {
+            // GameManager.instance.LoadScene(Enums.Scenes.LobbySemCutscene);
+        }
     }
 }

@@ -1,7 +1,7 @@
-using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.Inventory;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Artifacts
+namespace ForestReturn.Scripts.Artifacts
 {
     [CreateAssetMenu(fileName = "newArtifact", menuName = "Items/Artifacts")]
     public class ArtifactObject : ItemObject

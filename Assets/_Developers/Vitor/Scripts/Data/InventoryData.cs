@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using Artifacts;
-using Weapons;
+using _Developers.Vitor.Scripts.Artifacts;
 
-namespace ForestReturn.Scripts.Data
+namespace _Developers.Vitor.Scripts.Data
 {
     [Serializable]
     public class InventoryData

@@ -1,25 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
-using ForestReturn.Scripts.PlayerAction.Managers;
 using UnityEngine;
 
-public class FreeLookCameraConfig : MonoBehaviour
+namespace _Developers.Vitor.Scripts.Camera
 {
-    public CinemachineFreeLook CinemachineFreeLook;
-
-    private void Start()
+    public class FreeLookCameraConfig : MonoBehaviour
     {
-        if (LevelManager.instance != null)
-        {
-            var playerScriptTransform = LevelManager.instance.PlayerScript.transform;
-            CinemachineFreeLook.Follow = playerScriptTransform;
-            CinemachineFreeLook.LookAt = playerScriptTransform;
-        }
+        public CinemachineFreeLook CinemachineFreeLook;
 
-        var mYAxis = CinemachineFreeLook.m_YAxis;
-        mYAxis.Value = 0.5f;
-        CinemachineFreeLook.m_YAxis = mYAxis;
+        private void Start()
+        {
+            // if (LevelManager.instance != null)
+            // {
+            //     var playerScriptTransform = LevelManager.instance.PlayerScript.transform;
+            //     CinemachineFreeLook.Follow = playerScriptTransform;
+            //     CinemachineFreeLook.LookAt = playerScriptTransform;
+            // }
+
+            var mYAxis = CinemachineFreeLook.m_YAxis;
+            mYAxis.Value = 0.5f;
+            CinemachineFreeLook.m_YAxis = mYAxis;
+        }
     }
 }

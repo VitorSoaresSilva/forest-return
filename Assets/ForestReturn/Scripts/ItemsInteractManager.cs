@@ -1,8 +1,7 @@
-using System;
-using Interactable;
+using _Developers.Vitor.Scripts.Interactable;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     public class ItemsInteractManager : MonoBehaviour
     {

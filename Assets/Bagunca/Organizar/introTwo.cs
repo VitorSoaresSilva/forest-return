@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UI;
+using _Developers.Vitor.Scripts.UI;
 using UnityEngine;
 
-public class introTwo : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    public void EndIntro()
+    public class introTwo : MonoBehaviour
     {
-        UiManager.instance.EndAnimationStart();
+        public void EndIntro()
+        {
+            UiManager.instance.EndAnimationStart();
+        }
     }
 }

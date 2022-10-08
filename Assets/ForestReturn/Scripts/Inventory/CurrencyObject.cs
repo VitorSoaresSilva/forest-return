@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [CreateAssetMenu(fileName = "newCurrency", menuName = "Items/Currency", order = 0)]
     public class CurrencyObject : ItemObject

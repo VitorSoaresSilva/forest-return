@@ -1,6 +1,6 @@
 using System;
 
-namespace ForestReturn.Scripts.PlayerAction.Triggers
+namespace ForestReturn.Scripts.Triggers
 {
     [System.Serializable]
     public class TriggerSlot

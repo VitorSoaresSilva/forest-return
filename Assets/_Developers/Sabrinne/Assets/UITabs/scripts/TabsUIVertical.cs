@@ -1,12 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
-using EasyUI.Tabs;
-
-public class TabsUIVertical : TabsUI
+namespace _Developers.Sabrinne.Assets.UITabs.scripts
 {
-    #if UNITY_EDITOR
-    private void OnValidate() {
-        base.Validate(TabsType.Vertical);
+    public class TabsUIVertical : TabsUI
+    {
+#if UNITY_EDITOR
+        private void OnValidate() {
+            base.Validate(TabsType.Vertical);
+        }
+#endif
     }
-    #endif
 }

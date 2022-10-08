@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using ForestReturn.Scripts.PlayerAction.Inventory;
-using ForestReturn.Scripts.PlayerAction.Triggers;
+using ForestReturn.Scripts.Inventory;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
-namespace ForestReturn.Scripts.PlayerAction
+
+namespace ForestReturn.Scripts
 {
     [CreateAssetMenu(fileName = "newSaveGameData", menuName = "SaveGameData")]
     public class SaveGameData: ScriptableObject

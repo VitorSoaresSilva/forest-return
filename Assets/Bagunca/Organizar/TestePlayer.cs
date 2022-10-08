@@ -1,13 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Character;
+using _Developers.Vitor.Scripts.Character;
 using UnityEngine;
 
-public class TestePlayer : BaseCharacter
+namespace Bagunca.Organizar
 {
-    private void OnTriggerEnter(Collider other)
+    public class TestePlayer : BaseCharacter
     {
-        Debug.Log("batata");
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("batata");
+        }
     }
 }

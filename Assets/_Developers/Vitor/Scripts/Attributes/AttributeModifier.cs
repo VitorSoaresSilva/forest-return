@@ -1,6 +1,6 @@
 using System;
 
-namespace Attributes
+namespace _Developers.Vitor.Scripts.Attributes
 {
     [Serializable]
     public struct AttributeModifier

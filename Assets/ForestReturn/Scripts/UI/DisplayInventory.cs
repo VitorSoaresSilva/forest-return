@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.Inventory;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.UI
+namespace ForestReturn.Scripts.UI
 {
     public class DisplayInventory : MonoBehaviour
     {

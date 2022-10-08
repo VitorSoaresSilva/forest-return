@@ -1,8 +1,8 @@
 ﻿using System;
-using Attributes;
+using _Developers.Vitor.Scripts.Attributes;
 using UnityEngine;
 
-namespace Artifacts
+namespace _Developers.Vitor.Scripts.Artifacts
 {
     [Serializable]
     [CreateAssetMenu(fileName = "newArtifact", menuName = "ScriptableObject/Artifacts", order = 0)]
