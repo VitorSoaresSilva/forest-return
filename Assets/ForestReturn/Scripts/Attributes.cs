@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     [CreateAssetMenu(fileName = "newAttribute", menuName = "ScriptableObject/Action/Attributes", order = 1)]
     public class Attributes : ScriptableObject

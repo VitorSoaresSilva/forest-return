@@ -1,9 +1,8 @@
-using System;
-using Character;
-using ForestReturn.Scripts.Attacks;
+using _Developers.Vitor.Scripts.Attacks;
+using _Developers.Vitor.Scripts.Character;
 using UnityEngine;
 
-namespace Damage
+namespace _Developers.Vitor.Scripts.Damage
 {
     public class HitBox : MonoBehaviour
     {

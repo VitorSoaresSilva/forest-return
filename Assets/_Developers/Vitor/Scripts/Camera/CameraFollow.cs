@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.Camera
+namespace _Developers.Vitor.Scripts.Camera
 {
     public class CameraFollow : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Character
+namespace _Developers.Vitor.Scripts.Character
 {
     [CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObject/Character", order = 0)]
     public class CharacterStatScriptableObject : ScriptableObject

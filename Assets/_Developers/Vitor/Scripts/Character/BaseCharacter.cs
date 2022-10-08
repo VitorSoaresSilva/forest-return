@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
 using System.Reflection;
-using Artifacts;
+using _Developers.Vitor.Scripts.Attributes;
 using UnityEngine;
-using Attributes;
-using Weapons;
-using Attribute = Attributes.Attribute;
+using Attribute = _Developers.Vitor.Scripts.Attributes.Attribute;
 
-namespace Character
+namespace _Developers.Vitor.Scripts.Character
 {
     public class BaseCharacter : MonoBehaviour, IDamageable
     {

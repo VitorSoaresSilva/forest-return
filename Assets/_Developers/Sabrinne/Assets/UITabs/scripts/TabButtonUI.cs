@@ -1,8 +1,11 @@
-﻿using UnityEngine ;
-using UnityEngine.UI ;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class TabButtonUI : MonoBehaviour {
-   public Button uiButton ;
-   public Image uiImage ;
-   public LayoutElement uiLayoutElement ;
+namespace _Developers.Sabrinne.Assets.UITabs.scripts
+{
+   public class TabButtonUI : MonoBehaviour {
+      public Button uiButton ;
+      public Image uiImage ;
+      public LayoutElement uiLayoutElement ;
+   }
 }

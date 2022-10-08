@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Character;
+using _Developers.Vitor.Scripts.Artifacts;
+using _Developers.Vitor.Scripts.Attributes;
+using _Developers.Vitor.Scripts.Character;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.UI;
 using UnityEngine;
-using Artifacts;
-using Attributes;
-using ForestReturn.Scripts.Data;
-using Managers;
-using UI;
-using Utilities;
 
-namespace Weapons
+namespace _Developers.Vitor.Scripts.Weapons
 {
     [RequireComponent(typeof(BaseCharacter))]
     public class WeaponHolder : MonoBehaviour
@@ -126,59 +123,59 @@ namespace Weapons
 
         public void LoadInventory()
         {
-            if (GameManager.instance.InventoryScriptableObject.ArtifactsInventory.Length > 0)
-            {
-                ArtifactsInventory = GameManager.instance.InventoryScriptableObject.ArtifactsInventory.ToList();
-            }
-            else
-            {
-                ArtifactsInventory = new List<ArtifactsScriptableObject>();
-            }
-
-            if (GameManager.instance.InventoryScriptableObject.WeaponsInventory.Length > 0)
-            {
-                WeaponsInventory = GameManager.instance.InventoryScriptableObject.WeaponsInventory.ToList();
-            }
-            else
-            {
-                WeaponsInventory = new List<WeaponsScriptableObject>();
-            }
-            
-            if (GameManager.instance.InventoryScriptableObject.WeaponEquiped != null)
-            {
-                CollectWeapon(GameManager.instance.InventoryScriptableObject.WeaponEquiped,false);
-                EquipWeapon(WeaponsInventory.Count-1);
-            }
-            for (int i = 0; i < GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length; i++)
-            {
-                CollectArtifact(GameManager.instance.InventoryScriptableObject.ArtifactsEquiped[i],false);
-                if (ArtifactsInventory.Count > 0)
-                {
-                    TryEquipArtifactFromInventory(ArtifactsInventory.Count - 1);
-                }
-            }
+            // if (GameManager.instance.InventoryScriptableObject.ArtifactsInventory.Length > 0)
+            // {
+            //     ArtifactsInventory = GameManager.instance.InventoryScriptableObject.ArtifactsInventory.ToList();
+            // }
+            // else
+            // {
+            //     ArtifactsInventory = new List<ArtifactsScriptableObject>();
+            // }
+            //
+            // if (GameManager.instance.InventoryScriptableObject.WeaponsInventory.Length > 0)
+            // {
+            //     WeaponsInventory = GameManager.instance.InventoryScriptableObject.WeaponsInventory.ToList();
+            // }
+            // else
+            // {
+            //     WeaponsInventory = new List<WeaponsScriptableObject>();
+            // }
+            //
+            // if (GameManager.instance.InventoryScriptableObject.WeaponEquiped != null)
+            // {
+            //     CollectWeapon(GameManager.instance.InventoryScriptableObject.WeaponEquiped,false);
+            //     EquipWeapon(WeaponsInventory.Count-1);
+            // }
+            // for (int i = 0; i < GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length; i++)
+            // {
+            //     CollectArtifact(GameManager.instance.InventoryScriptableObject.ArtifactsEquiped[i],false);
+            //     if (ArtifactsInventory.Count > 0)
+            //     {
+            //         TryEquipArtifactFromInventory(ArtifactsInventory.Count - 1);
+            //     }
+            // }
         }
 
         public void SaveInventory()
         {
-            if (Weapon == null)
-            {
-                Debug.Log("cagou");
-                GameManager.instance.InventoryScriptableObject.WeaponEquiped = null;
-            }
-            else
-            {
-                GameManager.instance.InventoryScriptableObject.WeaponEquiped = Weapon.weaponConfig;
-            }
-
-            // if (GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length > 0)
+            // if (Weapon == null)
             // {
-            //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = Weapon.artifacts;
-            //     
+            //     Debug.Log("cagou");
+            //     GameManager.instance.InventoryScriptableObject.WeaponEquiped = null;
             // }
-            //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = null;
-            GameManager.instance.InventoryScriptableObject.ArtifactsInventory = ArtifactsInventory.ToArray();
-            GameManager.instance.InventoryScriptableObject.WeaponsInventory = WeaponsInventory.ToArray();
+            // else
+            // {
+            //     GameManager.instance.InventoryScriptableObject.WeaponEquiped = Weapon.weaponConfig;
+            // }
+            //
+            // // if (GameManager.instance.InventoryScriptableObject.ArtifactsEquiped.Length > 0)
+            // // {
+            // //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = Weapon.artifacts;
+            // //     
+            // // }
+            // //     GameManager.instance.InventoryScriptableObject.ArtifactsEquiped = null;
+            // GameManager.instance.InventoryScriptableObject.ArtifactsInventory = ArtifactsInventory.ToArray();
+            // GameManager.instance.InventoryScriptableObject.WeaponsInventory = WeaponsInventory.ToArray();
         }
     }
 } 

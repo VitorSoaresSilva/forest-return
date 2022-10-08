@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+
+namespace ForestReturn.Scripts.Inventory
 {
     [CreateAssetMenu(fileName = "new Equipped Inventory", menuName = "Items/Equipped Inventory")]
     public class EquippedObject : ScriptableObject

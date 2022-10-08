@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.NaoSei
+namespace _Developers.Vitor.Scripts.NaoSei
 {
     [CreateAssetMenu(fileName = "configLobby", menuName = "ScriptableObject/ConfigLobby", order = 0)]
     public class ConfigLobby : ScriptableObject

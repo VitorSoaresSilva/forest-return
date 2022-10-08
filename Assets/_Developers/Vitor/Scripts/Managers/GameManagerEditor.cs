@@ -1,8 +1,4 @@
-using UnityEditor;
-using UnityEngine;
-using Utilities;
-
-namespace Managers
+namespace _Developers.Vitor.Scripts.Managers
 {
     // [CustomEditor(typeof(GameManager))]
     // public class GameManagerEditor : Editor

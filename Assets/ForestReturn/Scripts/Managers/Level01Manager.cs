@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class Level01Manager : LevelManager
     {

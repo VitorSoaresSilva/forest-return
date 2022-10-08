@@ -1,11 +1,10 @@
-using ForestReturn.Scripts.PlayerAction;
-using ForestReturn.Scripts.PlayerAction.Inventory;
-using ForestReturn.Scripts.PlayerAction.Managers;
-using ForestReturn.Scripts.PlayerAction.Teleport;
-using Interactable;
+using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Inventory;
+using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Teleport;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Enums = ForestReturn.Scripts.PlayerAction.Utilities.Enums;
+using Enums = ForestReturn.Scripts.Utilities.Enums;
 
 namespace ForestReturn.Scripts
 {

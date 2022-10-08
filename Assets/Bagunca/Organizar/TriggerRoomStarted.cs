@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Player;
 using UnityEngine;
 
-public class TriggerRoomStarted : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    [SerializeField] private TemporaryWaveManager _waveManager;
-
-    private void OnTriggerEnter(Collider other)
+    public class TriggerRoomStarted : MonoBehaviour
     {
-        _waveManager.StartRoom();
+        [SerializeField] private TemporaryWaveManager _waveManager;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            _waveManager.StartRoom();
+        }
     }
 }

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     public interface IDamageable
     {

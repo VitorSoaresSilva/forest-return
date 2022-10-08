@@ -1,30 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using ForestReturn.Scripts.Managers;
-using Managers;
 using UnityEngine;
 
-public class LookToCamera : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    private Transform _cameraLocation;
-
-    [SerializeField] private GameObject rotationObject;
-    // Start is called before the first frame update
-    void Start()
+    public class LookToCamera : MonoBehaviour
     {
-        if (LevelManager.instance != null)
-        {
-            _cameraLocation = LevelManager.instance.CameraFollow.gameObject.transform;
-        }
-        else
-        {
-            enabled = false;
-        }
-    }
+        private Transform _cameraLocation;
 
-    // Update is called once per frame
-    void Update()
-    {
-        rotationObject.transform.LookAt(_cameraLocation);
+        [SerializeField] private GameObject rotationObject;
+        // Start is called before the first frame update
+        void Start()
+        {
+            // if (LevelManager.instance != null)
+            // {
+            //     _cameraLocation = LevelManager.instance.CameraFollow.gameObject.transform;
+            // }
+            // else
+            // {
+            //     enabled = false;
+            // }
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            rotationObject.transform.LookAt(_cameraLocation);
+        }
     }
 }

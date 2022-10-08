@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [CreateAssetMenu(fileName = "newTeleport", menuName = "Items/Teleport")]
     public class TeleportObject : ItemObject

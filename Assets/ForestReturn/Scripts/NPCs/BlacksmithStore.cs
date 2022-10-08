@@ -1,8 +1,7 @@
-using System;
-using ForestReturn.Scripts.PlayerAction.Inventory;
+using ForestReturn.Scripts.Inventory;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.NPCs
+namespace ForestReturn.Scripts.NPCs
 {
     public class BlacksmithStore : MonoBehaviour
     {

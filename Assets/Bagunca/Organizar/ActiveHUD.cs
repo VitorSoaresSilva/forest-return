@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UI;
+using _Developers.Vitor.Scripts.UI;
 using UnityEngine;
 
-public class ActiveHUD : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    // Start is called before the first frame update
-    public void startgame ()
+    public class ActiveHUD : MonoBehaviour
     {
-        UiManager.instance.EndAnimationStart();
+        // Start is called before the first frame update
+        public void startgame ()
+        {
+            UiManager.instance.EndAnimationStart();
+        }
     }
 }

@@ -1,7 +1,4 @@
-using UnityEditor;
-using UnityEngine;
-
-namespace Traps
+namespace _Developers.Vitor.Scripts.Traps
 {
     // [CustomEditor(typeof(SpikeTrap))]
     // public class SpikeTrapEditor: Editor

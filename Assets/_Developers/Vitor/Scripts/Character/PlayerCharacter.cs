@@ -1,9 +1,4 @@
-﻿using System;
-using UI;
-using UnityEngine;
-using Attribute = Attributes.Attribute;
-
-namespace Character
+﻿namespace _Developers.Vitor.Scripts.Character
 {
     
 }

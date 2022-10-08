@@ -1,18 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UI;
+using _Developers.Vitor.Scripts.UI;
 using UnityEngine;
 
-public class desligarHUD : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    private void OnTriggerEnter(Collider other)
+    public class desligarHUD : MonoBehaviour
     {
-        UiManager.instance.hudPanel.SetActive(false);
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            UiManager.instance.hudPanel.SetActive(false);
+        }
 
-    public void LigarHUD()
-    {
-        UiManager.instance.hudPanel.SetActive(true);
+        public void LigarHUD()
+        {
+            UiManager.instance.hudPanel.SetActive(true);
+        }
     }
 }

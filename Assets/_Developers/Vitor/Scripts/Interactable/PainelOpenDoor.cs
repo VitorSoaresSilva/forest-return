@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Interactable
+namespace _Developers.Vitor.Scripts.Interactable
 {
     public class PainelOpenDoor : MonoBehaviour, IInteractable
     {

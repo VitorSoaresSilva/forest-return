@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ForestReturn.Scripts.PlayerAction.Managers;
-using ForestReturn.Scripts.PlayerAction.Triggers;
-using Interactable;
+using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 
 public class rescueNpcInteractable : MonoBehaviour, IInteractable

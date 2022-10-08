@@ -1,24 +1,27 @@
-using Interactable;
-using Managers;
-using Player;
+using _Developers.Vitor.Scripts.Interactable;
+using _Developers.Vitor.Scripts.Managers;
+using _Developers.Vitor.Scripts.Player;
+using _Developers.Vitor.Scripts.Weapons;
 using UnityEngine;
-using Weapons;
 
-public class Bau : MonoBehaviour, IInteractable
+namespace Bagunca.Organizar
 {
-    [SerializeField] private WeaponsScriptableObject weaponsScriptableObject;
-
-    public void Interact()
+    public class Bau : MonoBehaviour, IInteractable
     {
-        if (GameManager.instance != null)
+        [SerializeField] private WeaponsScriptableObject weaponsScriptableObject;
+
+        public void Interact()
         {
-            PlayerMain playerMain =  GameManager.instance.PlayerMain;
-            if (playerMain != null)
-            {
-                playerMain._weaponHolder.CollectWeapon(weaponsScriptableObject);
-                Destroy(gameObject);
-            }
+            // if (GameManager.instance != null)
+            // {
+            //     PlayerMain playerMain =  GameManager.instance.PlayerMain;
+            //     if (playerMain != null)
+            //     {
+            //         playerMain._weaponHolder.CollectWeapon(weaponsScriptableObject);
+            //         Destroy(gameObject);
+            //     }
+            // }
         }
-    }
     
+    }
 }

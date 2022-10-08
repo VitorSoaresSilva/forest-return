@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WaveManager
+namespace _Developers.Vitor.Scripts.WaveManager
 {
     public class EnemyWaveManager : MonoBehaviour
     {

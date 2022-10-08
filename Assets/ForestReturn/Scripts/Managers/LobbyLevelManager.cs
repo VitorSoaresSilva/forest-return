@@ -1,9 +1,7 @@
-using System;
-using ForestReturn.Scripts.PlayerAction.Triggers;
-using ForestReturn.Scripts.PlayerAction.Utilities;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Managers
+namespace ForestReturn.Scripts.Managers
 {
     public class LobbyLevelManager : LevelManager
     {

@@ -1,4 +1,4 @@
-﻿namespace Character
+﻿namespace _Developers.Vitor.Scripts.Character
 {
     [System.Serializable]
     public struct DataDamage

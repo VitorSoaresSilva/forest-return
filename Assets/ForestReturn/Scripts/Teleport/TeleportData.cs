@@ -1,7 +1,7 @@
-using ForestReturn.Scripts.PlayerAction.Utilities;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Teleport
+namespace ForestReturn.Scripts.Teleport
 {
     public struct TeleportData
     {

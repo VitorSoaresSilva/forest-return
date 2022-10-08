@@ -1,9 +1,8 @@
-using System;
-using ForestReturn.Scripts.PlayerAction.Managers;
-using ForestReturn.Scripts.PlayerAction.Triggers;
+using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     public class TEST_GetTrigger : MonoBehaviour
     {

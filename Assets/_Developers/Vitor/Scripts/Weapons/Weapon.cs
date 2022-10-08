@@ -1,8 +1,6 @@
-﻿using Artifacts;
-using Character;
-using UnityEngine;
+﻿using _Developers.Vitor.Scripts.Artifacts;
 
-namespace Weapons
+namespace _Developers.Vitor.Scripts.Weapons
 {
     public class  Weapon
     {

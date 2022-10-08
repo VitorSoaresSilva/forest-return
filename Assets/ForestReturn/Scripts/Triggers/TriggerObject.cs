@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Triggers
+namespace ForestReturn.Scripts.Triggers
 {
     [CreateAssetMenu(fileName = "newTrigger", menuName = "Trigger/Trigger")]
     public class TriggerObject : ScriptableObject

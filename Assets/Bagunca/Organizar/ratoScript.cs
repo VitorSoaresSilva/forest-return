@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using Interactable;
-using Managers;
+using _Developers.Vitor.Scripts.Interactable;
+using _Developers.Vitor.Scripts.Managers;
 using UnityEngine;
 
-public class ratoScript : MonoBehaviour, IInteractable
+namespace Bagunca.Organizar
 {
-    [SerializeField] private Door _door;
-    public void Interact()
+    public class ratoScript : MonoBehaviour, IInteractable
     {
-        _door.Open();
-        GameManager.instance.configLobby.blacksmithSaved = true;
-        // TODO: fazer uma animação bonita aqui
-        Destroy(gameObject);
+        [SerializeField] private Door _door;
+        public void Interact()
+        {
+            _door.Open();
+            // GameManager.instance.configLobby.blacksmithSaved = true;
+            // TODO: fazer uma animação bonita aqui
+            Destroy(gameObject);
+        }
     }
 }

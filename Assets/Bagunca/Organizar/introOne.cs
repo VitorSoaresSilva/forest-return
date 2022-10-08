@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class introOne : MonoBehaviour
+namespace Bagunca.Organizar
 {
-    [SerializeField] private Animator animator2;
-
-    public void PlayIntro2()
+    public class introOne : MonoBehaviour
     {
-        animator2.SetTrigger("play");
+        [SerializeField] private Animator animator2;
+
+        public void PlayIntro2()
+        {
+            animator2.SetTrigger("play");
+        }
     }
 }

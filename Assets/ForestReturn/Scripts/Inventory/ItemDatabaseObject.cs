@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction.Inventory
+namespace ForestReturn.Scripts.Inventory
 {
     [System.Serializable]
     [CreateAssetMenu(fileName = "New Item Database", menuName = "Items/Item Database", order = 0)]

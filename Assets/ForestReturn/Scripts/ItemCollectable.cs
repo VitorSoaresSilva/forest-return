@@ -1,8 +1,8 @@
-using ForestReturn.Scripts.PlayerAction.Inventory;
-using Interactable;
+using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Inventory;
 using UnityEngine;
 
-namespace ForestReturn.Scripts.PlayerAction
+namespace ForestReturn.Scripts
 {
     public class ItemCollectable : MonoBehaviour,IInteractable
     {
