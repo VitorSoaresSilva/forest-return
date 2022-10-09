@@ -14,6 +14,8 @@ namespace ForestReturn.Scripts
         private Animator _animator;
         [Header("Movement")]
         [SerializeField] private float speed; 
+        [SerializeField] private float attackForwardStepSpeed;
+        private bool _isMovingForwardByAttack;
         [SerializeField] private float turnSmoothTime = 0.1f;
         private Vector2 _move; 
         private Vector2 _look;
@@ -87,8 +89,15 @@ namespace ForestReturn.Scripts
 
         private void Update()
         {
-            Move();
-            _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime));
+            if (_isMovingForwardByAttack)
+            {
+                _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
+            }
+            if (!_isAttacking)
+            {
+                Move();
+            }
+            _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
             _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
         }
 
@@ -132,10 +141,11 @@ namespace ForestReturn.Scripts
         {
 
             if (!context.performed) return;
-
+            
             if (!_isAttacking)
             {
                 _isAttacking = true;
+                _isMovingForwardByAttack = false;
                 _animator.SetTrigger(AttackPunch);
             }
             else if (acceptComboAttack)
@@ -271,6 +281,12 @@ namespace ForestReturn.Scripts
         #endregion
 
         #region Handles
+        public void HandleStartAttack()
+        {
+            acceptComboAttack = false;
+            swordHitBox.SetActive(true);
+            
+        }
         public void HandleEndAttack()
         {
             _isAttacking = false;
@@ -278,11 +294,6 @@ namespace ForestReturn.Scripts
             swordHitBox.SetActive(false);
         }
 
-        public void HandleStartAttack()
-        {
-            acceptComboAttack = false;
-            swordHitBox.SetActive(true);
-        }
 
         public void HandleStartRangedAttack()
         {
@@ -303,6 +314,16 @@ namespace ForestReturn.Scripts
         public void HandleEndRangeSecondAttack()
         {
             acceptComboAttack = false;
+        }
+
+        public void HandleStartMoveForward()
+        {
+            _isMovingForwardByAttack = true;
+        }
+
+        public void HandleEndMoveForward()
+        {
+            _isMovingForwardByAttack = false;
         }
         
         

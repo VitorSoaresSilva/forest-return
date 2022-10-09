@@ -41,5 +41,15 @@ namespace ForestReturn.Scripts.Managers
         {
             player.HandleEndRangeSecondAttack();
         }
+
+        public void StartMoveForward()
+        {
+            player.HandleStartMoveForward();
+        }
+
+        public void EndMoveForward()
+        {
+            player.HandleEndMoveForward();
+        }
     }
 }

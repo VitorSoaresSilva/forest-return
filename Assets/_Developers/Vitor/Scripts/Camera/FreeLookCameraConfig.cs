@@ -1,4 +1,5 @@
 using Cinemachine;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
 namespace _Developers.Vitor.Scripts.Camera
@@ -9,12 +10,12 @@ namespace _Developers.Vitor.Scripts.Camera
 
         private void Start()
         {
-            // if (LevelManager.instance != null)
-            // {
-            //     var playerScriptTransform = LevelManager.instance.PlayerScript.transform;
-            //     CinemachineFreeLook.Follow = playerScriptTransform;
-            //     CinemachineFreeLook.LookAt = playerScriptTransform;
-            // }
+            if (LevelManager.instance != null)
+            {
+                var playerScriptTransform = LevelManager.instance.PlayerScript.transform;
+                CinemachineFreeLook.Follow = playerScriptTransform;
+                CinemachineFreeLook.LookAt = playerScriptTransform;
+            }
 
             var mYAxis = CinemachineFreeLook.m_YAxis;
             mYAxis.Value = 0.5f;
