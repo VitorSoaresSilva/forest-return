@@ -87,8 +87,9 @@ namespace _Developers.Sabrinne.Assets.UITabs.scripts {
             tabContent [ previous ].SetActive (false) ;
             tabContent [ current ].SetActive (true) ;
 
-            tabBtns [ previous ].uiImage.color = tabColorInactive ;
-            tabBtns [ current ].uiImage.color = tabColorActive ;
+            // tabBtns [ previous ].uiImage.color = tabColorInactive ;
+            // tabBtns [ current ].uiImage.color = tabColorActive ;
+            tabBtns[current].uiButton.Select();
 
             tabBtns [ previous ].uiButton.interactable = true ;
             tabBtns [ current ].uiButton.interactable = false ;
