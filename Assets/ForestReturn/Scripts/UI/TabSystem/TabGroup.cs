@@ -6,8 +6,8 @@ namespace ForestReturn.UI.Scripts
 {
     public class TabGroup : MonoBehaviour
     {
-        public List<TabButton> tabButtons;
-        public TabButton selectedTab;
+        public List<ForestReturn.Scripts.UI.TabSystem.TabButton> tabButtons;
+        public ForestReturn.Scripts.UI.TabSystem.TabButton selectedTab;
         public List<GameObject> objectsToSwap;
 
         private void Start()
@@ -19,13 +19,13 @@ namespace ForestReturn.UI.Scripts
             }
         }
 
-        public void Subscribe(TabButton button)
+        public void Subscribe(ForestReturn.Scripts.UI.TabSystem.TabButton button)
         {
-            tabButtons ??= new List<TabButton>();
+            tabButtons ??= new List<ForestReturn.Scripts.UI.TabSystem.TabButton>();
             tabButtons.Add(button);
         }
 
-        public void OnTabEnter(TabButton button)
+        public void OnTabEnter(ForestReturn.Scripts.UI.TabSystem.TabButton button)
         {
             ResetTabs();
             if (selectedTab == null || button != selectedTab)
@@ -33,11 +33,11 @@ namespace ForestReturn.UI.Scripts
                 button.background.sprite = button.tabHover;
             }
         }
-        public void OnTabExit(TabButton button)
+        public void OnTabExit(ForestReturn.Scripts.UI.TabSystem.TabButton button)
         {
             ResetTabs();
         }
-        public void OnTabSelected(TabButton button)
+        public void OnTabSelected(ForestReturn.Scripts.UI.TabSystem.TabButton button)
         {
             if (selectedTab != null)
             {
@@ -57,7 +57,7 @@ namespace ForestReturn.UI.Scripts
 
         public void ResetTabs()
         {
-            foreach (TabButton tabButton in tabButtons)
+            foreach (ForestReturn.Scripts.UI.TabSystem.TabButton tabButton in tabButtons)
             {
                 if(selectedTab != null && tabButton == selectedTab) continue;
                 tabButton.background.sprite = tabButton.tabIdle;

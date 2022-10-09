@@ -1,10 +1,10 @@
-using System;
+using ForestReturn.UI.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace ForestReturn.UI.Scripts
+namespace ForestReturn.Scripts.UI.TabSystem
 {
     [RequireComponent(typeof(Image))]
     public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
