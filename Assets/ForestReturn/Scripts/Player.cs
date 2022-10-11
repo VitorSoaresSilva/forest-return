@@ -89,14 +89,14 @@ namespace ForestReturn.Scripts
 
         private void Update()
         {
-            if (_isMovingForwardByAttack)
-            {
-                _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
-            }
-            if (!_isAttacking)
-            {
+            // if (_isMovingForwardByAttack)
+            // {
+                // _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
+            // }
+            // if (!_isAttacking)
+            // {
+            // }
                 Move();
-            }
             _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
             _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
         }

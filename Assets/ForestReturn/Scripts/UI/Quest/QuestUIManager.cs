@@ -22,7 +22,18 @@ namespace ForestReturn.Scripts.UI.Quest
                 List<QuestCardData> questCardDataList = new()
                 {
                     new QuestCardData("Title", "Description", "100", "200"),
-                    new QuestCardData("Title 2", "Description", "300", "100")
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
+                    new QuestCardData("Title 2", "Description", "300", "100"),
                 };
             //
             foreach (QuestCardData questCardData in questCardDataList)
