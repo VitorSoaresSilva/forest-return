@@ -84,7 +84,7 @@ namespace ForestReturn.Scripts
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
@@ -187,7 +187,7 @@ namespace ForestReturn.Scripts
         {
             if (!context.performed) return;
             _playerInput.SwitchCurrentActionMap("Inventory");
-            UiManager.instance.OpenCanvas(CanvasType.Inventory);
+            UiManager.instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
 
         public void OnLifePotion(InputAction.CallbackContext context)

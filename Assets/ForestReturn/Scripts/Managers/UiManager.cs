@@ -2,6 +2,7 @@ using System;
 using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ForestReturn.Scripts.Managers
 {
@@ -9,8 +10,15 @@ namespace ForestReturn.Scripts.Managers
     {
         [SerializeField] private Animator _hurtAnimator;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
-        [SerializeField] private DisplayInventory displayInventory;
+        //[SerializeField] private DisplayInventory displayInventory;
         [SerializeField] private GameObject hud;
+        [SerializeField] private GameObject menu;
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         public void PlayerHurt()
         {
             _hurtAnimator.SetTrigger(Hurt);
@@ -20,13 +28,16 @@ namespace ForestReturn.Scripts.Managers
         {
             switch (canvasType)
             {
-                case CanvasType.Inventory:
+                case CanvasType.Menu:
                     hud.SetActive(false);
-                    displayInventory.gameObject.SetActive(true);
+                    menu.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    //displayInventory.gameObject.SetActive(true);
                     break;
                 case CanvasType.Hud:
                     hud.SetActive(true);
-                    displayInventory.gameObject.SetActive(false);
+                    menu.SetActive(false);
+                    //displayInventory.gameObject.SetActive(false);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
@@ -34,11 +45,9 @@ namespace ForestReturn.Scripts.Managers
         }
     }
 
-
-
     public enum CanvasType
     {
-        Inventory,
+        Menu,
         Hud,
     }
 }
