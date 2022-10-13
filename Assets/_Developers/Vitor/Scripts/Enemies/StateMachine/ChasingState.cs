@@ -37,8 +37,8 @@ namespace _Developers.Vitor.Scripts.Enemies.StateMachine
             else
             {
                 owner.navMeshAgent.destination = owner._playerTransform.position;
-                
-            }
+            } 
+            owner.navMeshAgent.destination = owner._playerTransform.position;
             
             
             
@@ -56,7 +56,6 @@ namespace _Developers.Vitor.Scripts.Enemies.StateMachine
         {
             var distance = Vector3.Distance(owner.transform.position, owner._playerTransform.position);
             var x = distance < owner.enemyConfig.minDistance || distance > owner.enemyConfig.maxDistance;
-            // Debug.Log(distance + " " + x);
             return (x);
         }
     }

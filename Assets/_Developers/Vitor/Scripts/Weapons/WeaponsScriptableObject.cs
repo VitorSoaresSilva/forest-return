@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace _Developers.Vitor.Scripts.Weapons
 {
-    [Serializable]
-    [CreateAssetMenu(fileName = "newWeapon", menuName = "ScriptableObject/Weapons")]
+    // [Serializable]
+    // [CreateAssetMenu(fileName = "newWeapon", menuName = "ScriptableObject/Weapons")]
     public class WeaponsScriptableObject : ScriptableObject
     {
         public string weaponName;
