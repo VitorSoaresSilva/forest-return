@@ -38,7 +38,7 @@ namespace ForestReturn.Scripts.UI
             for (int i = 0; i < 3; i++)
             {
                 var a = GameManager.instance.savedGameDataTemporary[i];
-                if (a.LoadSuccess)
+                if (a.loadSuccess)
                 {
                     cardsLoadGame[i].Init(a.generalDataObject.LastSaveString);
                 }

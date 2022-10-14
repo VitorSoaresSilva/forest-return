@@ -84,19 +84,19 @@ namespace ForestReturn.Scripts
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
         {
-            if (_isMovingForwardByAttack)
-            {
-                _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
-            }
-            if (!_isAttacking)
-            {
+            // if (_isMovingForwardByAttack)
+            // {
+                // _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
+            // }
+            // if (!_isAttacking)
+            // {
+            // }
                 Move();
-            }
             _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
             _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
         }
@@ -187,7 +187,7 @@ namespace ForestReturn.Scripts
         {
             if (!context.performed) return;
             _playerInput.SwitchCurrentActionMap("Inventory");
-            UiManager.instance.OpenCanvas(CanvasType.Inventory);
+            UiManager.instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
 
         public void OnLifePotion(InputAction.CallbackContext context)

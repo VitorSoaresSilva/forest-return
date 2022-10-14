@@ -17,6 +17,11 @@ namespace ForestReturn.Scripts.UI
             LevelManager.instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
         }
 
+        private void OnDisable()
+        {
+
+        }
+
         private void PlayerScriptOnOnHealthHealed()
         {
             lifeSliderFront.value = (float)LevelManager.instance.PlayerScript.CurrentHealth /
