@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "new Game Data", menuName = "Items/GameData")]
     public class GeneralDataObject : ScriptableObject
     {

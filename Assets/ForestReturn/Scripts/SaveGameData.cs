@@ -9,86 +9,68 @@ namespace ForestReturn.Scripts
     [CreateAssetMenu(fileName = "newSaveGameData", menuName = "SaveGameData")]
     public class SaveGameData: ScriptableObject
     {
-        public string Path = "";
-        public bool LoadSuccess = false;
-        
+        public string path = "";
+        public bool loadSuccess;
         public InventoryObject inventoryObject;
         public InventoryObject equippedObject;
         public GeneralDataObject generalDataObject;
         public TriggerInventoryObject triggerInventoryObject;
-        public string inventoryObjectJson;
-        public string equippedObjectJson;
-        public string generalDataObjectJson;
-        public string triggerInventoryObjectJson;
-        
-        
-        
         public void Save()
         {
-            ToJson();
-            string saveData = JsonUtility.ToJson(this,true);
+            var dataSerialized = new DataSerialized()
+            {
+                InventoryObjectJson = JsonUtility.ToJson(inventoryObject, true),
+                EquippedObjectJson = JsonUtility.ToJson(equippedObject, true),
+                GeneralDataObjectJson = JsonUtility.ToJson(generalDataObject, true),
+                TriggerInventoryObjectJson = JsonUtility.ToJson(triggerInventoryObject, true),
+            };
+            string saveData = JsonUtility.ToJson(dataSerialized,true);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(string.Concat(Application.persistentDataPath, Path));
+            FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));
             bf.Serialize(file,saveData);
             file.Close();
-            
-            
         }
 
         public void Load(string path)
         {
-            Path = path;
-            if (File.Exists(string.Concat(Application.persistentDataPath, Path)))
+            this.path = path;
+            if (File.Exists(string.Concat(Application.persistentDataPath, this.path)))
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(string.Concat(Application.persistentDataPath, Path), FileMode.Open);
-                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+                FileStream file = File.Open(string.Concat(Application.persistentDataPath, this.path), FileMode.Open);
+                DataSerialized a = new DataSerialized();
+                JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), a);
                 file.Close();
-                FromJson();
-                LoadSuccess = true;
+                FromJson(a);
+                loadSuccess = true;
                 return;
             }
-            LoadSuccess = false;
-        }
-
-        public void Init()
-        {
-            inventoryObject = CreateInstance<InventoryObject>();
-            equippedObject = CreateInstance<InventoryObject>();
-            generalDataObject = CreateInstance<GeneralDataObject>();
-            triggerInventoryObject = CreateInstance<TriggerInventoryObject>();
+            loadSuccess = false;
         }
 
         public void Clear()
         {
-            inventoryObjectJson = "";
-            equippedObjectJson = "";
-            generalDataObjectJson = "";
-            triggerInventoryObjectJson = "";
-            
             inventoryObject.Clear();
             equippedObject.Clear();
             generalDataObject.Clear();
             triggerInventoryObject.Clear();
-            LoadSuccess = false;
+            loadSuccess = false;
         }
 
-        public void ToJson()
+        public void FromJson(DataSerialized dataSerialized)
         {
-            generalDataObjectJson = JsonUtility.ToJson(generalDataObject);
-            inventoryObjectJson = JsonUtility.ToJson(inventoryObject);
-            equippedObjectJson = JsonUtility.ToJson(equippedObject);
-            triggerInventoryObjectJson = JsonUtility.ToJson(triggerInventoryObject);
-        }
-
-        public void FromJson()
-        {
-            JsonUtility.FromJsonOverwrite(generalDataObjectJson, generalDataObject);
-            JsonUtility.FromJsonOverwrite(inventoryObjectJson, inventoryObject);
-            JsonUtility.FromJsonOverwrite(equippedObjectJson, equippedObject);
-            JsonUtility.FromJsonOverwrite(triggerInventoryObjectJson, triggerInventoryObject);
+            JsonUtility.FromJsonOverwrite(dataSerialized.GeneralDataObjectJson, generalDataObject);
+            JsonUtility.FromJsonOverwrite(dataSerialized.InventoryObjectJson, inventoryObject);
+            JsonUtility.FromJsonOverwrite(dataSerialized.EquippedObjectJson, equippedObject);
+            JsonUtility.FromJsonOverwrite(dataSerialized.TriggerInventoryObjectJson, triggerInventoryObject);
         }
     }
-    
-    
+
+    public struct DataSerialized
+    {
+        public string InventoryObjectJson;
+        public string EquippedObjectJson;
+        public string GeneralDataObjectJson;
+        public string TriggerInventoryObjectJson;
+    }
 }

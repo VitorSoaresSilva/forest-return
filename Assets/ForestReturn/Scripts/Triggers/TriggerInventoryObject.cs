@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.Triggers
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "newInventoryTrigger", menuName = "Trigger/Trigger Inventory")]
     public class TriggerInventoryObject : ScriptableObject
     {
