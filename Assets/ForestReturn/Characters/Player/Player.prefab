@@ -887,6 +887,38 @@ Transform:
   m_Father: {fileID: 7038583537236704413}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -5.8903775, y: 25.796799, z: -76.14227}
+--- !u!1 &2970338528577403082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8687705500155290458}
+  m_Layer: 0
+  m_Name: Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8687705500155290458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970338528577403082}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4241379471182195609}
+  m_Father: {fileID: 6800021239049874358}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3072930593260606637
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +983,65 @@ Transform:
   m_Father: {fileID: 2843580303248188981}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -84.76269, y: -169.86755, z: 172.41083}
+--- !u!1 &3217983063553709414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4241379471182195609}
+  - component: {fileID: 1953175803489904843}
+  - component: {fileID: 2762474843287721525}
+  m_Layer: 16
+  m_Name: InteractableCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4241379471182195609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217983063553709414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8687705500155290458}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1953175803489904843
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217983063553709414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 1}
+--- !u!114 &2762474843287721525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217983063553709414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803561fd4186c1643953168eb70638bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3239653347215634252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,6 +2628,7 @@ Transform:
   m_Children:
   - {fileID: 6800021237827350186}
   - {fileID: 6800021237350143313}
+  - {fileID: 8687705500155290458}
   - {fileID: 410447653673523177}
   - {fileID: 3064367810982850250}
   m_Father: {fileID: 0}
@@ -2560,6 +2652,7 @@ MonoBehaviour:
   attackForwardStepSpeed: 2
   turnSmoothTime: 0.01
   cam: {fileID: 0}
+  sphereCollider: {fileID: 3217983063553709414}
   offsetInteract: {x: 0, y: 0, z: 0}
   sphereInteractionRadius: 2
   swordHitBox: {fileID: 9122438203517150595}
@@ -2771,6 +2864,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c070ac17-cb26-4833-af02-cf83b560c37d
     m_ActionName: gameplay/Teleport[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c463bb4d-cdf9-4f43-855b-6ee6d8861c1d
+    m_ActionName: "Menu/Op\xE7\xF5es[/Keyboard/escape]"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 145c2032-af3e-46b7-a08c-9e9d87c4b793
+    m_ActionName: Menu/Click[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: gameplay
@@ -3580,7 +3681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6800021239049874358}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4359390645831881129
 BoxCollider:
@@ -3680,7 +3781,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2994049833057877984, guid: bdafa105848a31d4b8915a64b96d5c98, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2994049833057877984, guid: bdafa105848a31d4b8915a64b96d5c98, type: 3}
       propertyPath: m_LocalScale.x

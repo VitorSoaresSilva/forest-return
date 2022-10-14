@@ -22,6 +22,7 @@ namespace ForestReturn.Scripts
         public Transform cam;
         
         [Header("Interact")]
+        [SerializeField] private GameObject sphereCollider;
         [SerializeField] private Vector3 offsetInteract;
         [SerializeField] private float sphereInteractionRadius;
         private readonly RaycastHit[] _raycastHits = new RaycastHit[3];
@@ -42,14 +43,12 @@ namespace ForestReturn.Scripts
         private static readonly int Walking = Animator.StringToHash("isMoving");
         [SerializeField] private LayerMask itemsLayer;
 
-
         public WeaponObject currentWeapon;
         public ParticleSystem[] _particleSystemsTeleport;
 
         [Header("Attack")] 
         private bool acceptComboAttack;
-        
-        
+
         public void Init()
         {
             Debug.Log("a");
@@ -66,7 +65,6 @@ namespace ForestReturn.Scripts
             }
 
             if (UnityEngine.Camera.main != null) cam = UnityEngine.Camera.main.transform;
-            
         }
         
         // Damage
@@ -169,7 +167,9 @@ namespace ForestReturn.Scripts
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            var raycastHits = Physics.SphereCastAll(transform.position,sphereInteractionRadius,transform.forward,1,itemsLayer);
+            sphereCollider.SetActive(true);
+            /*var raycastHits = Physics.SphereCastAll(transform.position,sphereInteractionRadius,transform.forward,1,itemsLayer);
+            
             if (raycastHits.Length <= 0) return;
             int closestIndex = 0;
             for (int i = 0; i < raycastHits.Length; i++)
@@ -179,8 +179,8 @@ namespace ForestReturn.Scripts
                     closestIndex = i;
                 }
             }
-            raycastHits[closestIndex].transform.TryGetComponent(out IInteractable closestInteractable);
-            closestInteractable?.Interact();
+            raycastHits[closestIndex].transform.TryGetComponent(out IInteractable closestInteractable);*/
+            //tInteractable?.Interact();
         }
 
         public void OnInventory(InputAction.CallbackContext context)
