@@ -14,7 +14,7 @@ namespace ForestReturn.Scripts.Managers
 {
     public class GameManager : PersistentSingleton<GameManager>
     {
-        [FormerlySerializedAs("gameDataObject")] public GeneralDataObject generalData;
+        [HideInInspector] public GeneralDataObject generalData;
         public int IndexSaveSlot { get; private set; } = -1;
         // private int _indexLatestSaveSlot = -1;
 
@@ -23,6 +23,7 @@ namespace ForestReturn.Scripts.Managers
 
         [Header("Triggers")] 
         public TriggerDatabaseObject triggerDatabase;
+        [HideInInspector]
         public TriggerInventoryObject triggerInventory;
         public TriggerObject hammerFromBlacksmith;
         public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
@@ -37,7 +38,7 @@ namespace ForestReturn.Scripts.Managers
             for (int i = 0; i < 3; i++)
             {
                 savedGameDataTemporary[i].Load($"/gameData_{i}.data");
-                if (savedGameDataTemporary[i].LoadSuccess)
+                if (savedGameDataTemporary[i].loadSuccess)
                 {
                     if (IndexSaveSlot == -1 || savedGameDataTemporary[i].generalDataObject.LastSaveLong >
                         savedGameDataTemporary[IndexSaveSlot].generalDataObject.LastSaveLong)
@@ -93,7 +94,7 @@ namespace ForestReturn.Scripts.Managers
             generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
 
 
-            if (savedGameDataTemporary[IndexSaveSlot].LoadSuccess)
+            if (savedGameDataTemporary[IndexSaveSlot].loadSuccess)
             {
                 
             }

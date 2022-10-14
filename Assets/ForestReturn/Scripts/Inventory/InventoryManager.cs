@@ -1,12 +1,13 @@
 using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Artifacts;
+using UnityEngine;
 
 namespace ForestReturn.Scripts.Inventory
 {
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {
-        public InventoryObject inventory;
-        public InventoryObject equippedItems;
+        [HideInInspector] public InventoryObject inventory;
+        [HideInInspector] public InventoryObject equippedItems;
         public ItemDatabaseObject Database;
 
         public void Clear()
