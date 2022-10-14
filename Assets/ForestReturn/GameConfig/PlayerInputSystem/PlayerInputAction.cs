@@ -231,7 +231,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -275,7 +275,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -505,6 +505,54 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""b4ac6db6-9d73-4502-97e0-9946a0d4b8b4"",
+            ""actions"": [
+                {
+                    ""name"": ""Opções"",
+                    ""type"": ""Button"",
+                    ""id"": ""c463bb4d-cdf9-4f43-855b-6ee6d8861c1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""145c2032-af3e-46b7-a08c-9e9d87c4b793"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e39ed854-b0d2-472f-a08e-e9c5b5562aac"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Opções"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e103b4b-ac84-4d7a-91cf-29409b8a3eba"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -555,6 +603,10 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_Move = m_Inventory.FindAction("Move", throwIfNotFound: true);
         m_Inventory_Exit = m_Inventory.FindAction("Exit", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Opções = m_Menu.FindAction("Opções", throwIfNotFound: true);
+        m_Menu_Click = m_Menu.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -772,6 +824,47 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Opções;
+    private readonly InputAction m_Menu_Click;
+    public struct MenuActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public MenuActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Opções => m_Wrapper.m_Menu_Opções;
+        public InputAction @Click => m_Wrapper.m_Menu_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Opções.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
+                @Opções.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
+                @Opções.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
+                @Click.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Opções.started += instance.OnOpções;
+                @Opções.performed += instance.OnOpções;
+                @Opções.canceled += instance.OnOpções;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -809,5 +902,10 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnOpções(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }
