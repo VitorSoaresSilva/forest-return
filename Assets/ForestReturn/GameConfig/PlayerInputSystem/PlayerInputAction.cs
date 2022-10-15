@@ -404,7 +404,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Inventory"",
+            ""name"": ""Menu"",
             ""id"": ""16f29b39-ac8d-47b5-af2c-62b7e24ec94d"",
             ""actions"": [
                 {
@@ -420,6 +420,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
                     ""id"": ""5e153f53-0665-42a1-9c0b-9e7f018093e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeTab"",
+                    ""type"": ""Button"",
+                    ""id"": ""d486d433-aecb-4b5f-af06-9d688ed2092b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -503,11 +512,77 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f7678997-bc60-4164-b3ed-68fece1cfe2f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c507a8fa-6208-402a-9872-3bb31a4620ae"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5e8678e0-7bde-43f1-a456-3ce49c6cb1e6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1d89bc17-6903-45c5-a0be-e09fad291149"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""caabf728-11c6-4248-9f85-dec8f5382d4d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6ba6aaba-e9fb-4551-be50-221018078553"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChangeTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
         {
-            ""name"": ""Menu"",
+            ""name"": ""Menu_2"",
             ""id"": ""b4ac6db6-9d73-4502-97e0-9946a0d4b8b4"",
             ""actions"": [
                 {
@@ -599,14 +674,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_LifePotion = m_gameplay.FindAction("LifePotion", throwIfNotFound: true);
         m_gameplay_ManaPotion = m_gameplay.FindAction("ManaPotion", throwIfNotFound: true);
         m_gameplay_Teleport = m_gameplay.FindAction("Teleport", throwIfNotFound: true);
-        // Inventory
-        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_Move = m_Inventory.FindAction("Move", throwIfNotFound: true);
-        m_Inventory_Exit = m_Inventory.FindAction("Exit", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-        m_Menu_Opções = m_Menu.FindAction("Opções", throwIfNotFound: true);
-        m_Menu_Click = m_Menu.FindAction("Click", throwIfNotFound: true);
+        m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
+        m_Menu_Exit = m_Menu.FindAction("Exit", throwIfNotFound: true);
+        m_Menu_ChangeTab = m_Menu.FindAction("ChangeTab", throwIfNotFound: true);
+        // Menu_2
+        m_Menu_2 = asset.FindActionMap("Menu_2", throwIfNotFound: true);
+        m_Menu_2_Opções = m_Menu_2.FindAction("Opções", throwIfNotFound: true);
+        m_Menu_2_Click = m_Menu_2.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -784,58 +860,19 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     }
     public GameplayActions @gameplay => new GameplayActions(this);
 
-    // Inventory
-    private readonly InputActionMap m_Inventory;
-    private IInventoryActions m_InventoryActionsCallbackInterface;
-    private readonly InputAction m_Inventory_Move;
-    private readonly InputAction m_Inventory_Exit;
-    public struct InventoryActions
-    {
-        private @PlayerInputAction m_Wrapper;
-        public InventoryActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Inventory_Move;
-        public InputAction @Exit => m_Wrapper.m_Inventory_Exit;
-        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
-        public void SetCallbacks(IInventoryActions instance)
-        {
-            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
-            {
-                @Move.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMove;
-                @Exit.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnExit;
-            }
-            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
-            }
-        }
-    }
-    public InventoryActions @Inventory => new InventoryActions(this);
-
     // Menu
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
-    private readonly InputAction m_Menu_Opções;
-    private readonly InputAction m_Menu_Click;
+    private readonly InputAction m_Menu_Move;
+    private readonly InputAction m_Menu_Exit;
+    private readonly InputAction m_Menu_ChangeTab;
     public struct MenuActions
     {
         private @PlayerInputAction m_Wrapper;
         public MenuActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Opções => m_Wrapper.m_Menu_Opções;
-        public InputAction @Click => m_Wrapper.m_Menu_Click;
+        public InputAction @Move => m_Wrapper.m_Menu_Move;
+        public InputAction @Exit => m_Wrapper.m_Menu_Exit;
+        public InputAction @ChangeTab => m_Wrapper.m_Menu_ChangeTab;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -845,14 +882,61 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
-                @Opções.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
-                @Opções.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
-                @Opções.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnOpções;
-                @Click.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
-                @Click.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
-                @Click.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnClick;
+                @Move.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnMove;
+                @Exit.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnExit;
+                @ChangeTab.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnChangeTab;
+                @ChangeTab.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnChangeTab;
+                @ChangeTab.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnChangeTab;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+                @ChangeTab.started += instance.OnChangeTab;
+                @ChangeTab.performed += instance.OnChangeTab;
+                @ChangeTab.canceled += instance.OnChangeTab;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
+
+    // Menu_2
+    private readonly InputActionMap m_Menu_2;
+    private IMenu_2Actions m_Menu_2ActionsCallbackInterface;
+    private readonly InputAction m_Menu_2_Opções;
+    private readonly InputAction m_Menu_2_Click;
+    public struct Menu_2Actions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public Menu_2Actions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Opções => m_Wrapper.m_Menu_2_Opções;
+        public InputAction @Click => m_Wrapper.m_Menu_2_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Menu_2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Menu_2Actions set) { return set.Get(); }
+        public void SetCallbacks(IMenu_2Actions instance)
+        {
+            if (m_Wrapper.m_Menu_2ActionsCallbackInterface != null)
+            {
+                @Opções.started -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
+                @Opções.performed -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
+                @Opções.canceled -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
+                @Click.started -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_Menu_2ActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Opções.started += instance.OnOpções;
@@ -864,7 +948,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
             }
         }
     }
-    public MenuActions @Menu => new MenuActions(this);
+    public Menu_2Actions @Menu_2 => new Menu_2Actions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -898,12 +982,13 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnManaPotion(InputAction.CallbackContext context);
         void OnTeleport(InputAction.CallbackContext context);
     }
-    public interface IInventoryActions
+    public interface IMenuActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnChangeTab(InputAction.CallbackContext context);
     }
-    public interface IMenuActions
+    public interface IMenu_2Actions
     {
         void OnOpções(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);

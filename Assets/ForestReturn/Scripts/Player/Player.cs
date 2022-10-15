@@ -51,8 +51,6 @@ namespace ForestReturn.Scripts
 
         public void Init()
         {
-            Debug.Log("a");
-
             if (InventoryManager.instance != null)
             {
                 _inventoryObjectRef = InventoryManager.instance.inventory;
@@ -186,7 +184,7 @@ namespace ForestReturn.Scripts
         public void OnInventory(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            _playerInput.SwitchCurrentActionMap("Inventory");
+            _playerInput.SwitchCurrentActionMap("Menu");
             UiManager.instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
 
@@ -276,6 +274,14 @@ namespace ForestReturn.Scripts
             if (!context.performed) return;
             UiManager.instance.OpenCanvas(CanvasType.Hud);
             _playerInput.SwitchCurrentActionMap("gameplay");
+        }
+        public void OnChangeTabs(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+
+            var a = context.valueType;
+            var b = context.ReadValue<float>();
+            Debug.Log(b);
         }
 
         #endregion

@@ -13,6 +13,7 @@ namespace ForestReturn.Scripts.Managers
         //[SerializeField] private DisplayInventory displayInventory;
         [SerializeField] private GameObject hud;
         [SerializeField] private GameObject menu;
+        
 
         private void Start()
         {

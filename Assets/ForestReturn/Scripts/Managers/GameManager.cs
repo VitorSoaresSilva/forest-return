@@ -26,8 +26,8 @@ namespace ForestReturn.Scripts.Managers
         [HideInInspector]
         public TriggerInventoryObject triggerInventory;
         public TriggerObject hammerFromBlacksmith;
-        public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
-        public int MaxArtifacts { get; private set; } = 2;
+        // public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
+        // public int MaxArtifacts { get; private set; } = 2;
 
         public Button continueBtn;
 

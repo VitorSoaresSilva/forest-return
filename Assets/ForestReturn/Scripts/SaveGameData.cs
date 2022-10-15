@@ -66,7 +66,8 @@ namespace ForestReturn.Scripts
         }
     }
 
-    public struct DataSerialized
+    
+    public class DataSerialized
     {
         public string InventoryObjectJson;
         public string EquippedObjectJson;

@@ -1,4 +1,3 @@
-using ForestReturn.UI.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 namespace ForestReturn.Scripts.UI.TabSystem
 {
     [RequireComponent(typeof(Image))]
-    public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+    public class MenuTabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
         public TabGroup tabGroup;
         public Image background;

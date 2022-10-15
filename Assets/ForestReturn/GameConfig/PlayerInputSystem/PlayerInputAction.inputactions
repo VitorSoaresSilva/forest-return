@@ -382,7 +382,7 @@
             ]
         },
         {
-            "name": "Inventory",
+            "name": "Menu",
             "id": "16f29b39-ac8d-47b5-af2c-62b7e24ec94d",
             "actions": [
                 {
@@ -398,6 +398,15 @@
                     "name": "Exit",
                     "type": "Button",
                     "id": "5e153f53-0665-42a1-9c0b-9e7f018093e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeTab",
+                    "type": "Button",
+                    "id": "d486d433-aecb-4b5f-af06-9d688ed2092b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -481,11 +490,77 @@
                     "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f7678997-bc60-4164-b3ed-68fece1cfe2f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTab",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c507a8fa-6208-402a-9872-3bb31a4620ae",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ChangeTab",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "5e8678e0-7bde-43f1-a456-3ce49c6cb1e6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ChangeTab",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "1d89bc17-6903-45c5-a0be-e09fad291149",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTab",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "caabf728-11c6-4248-9f85-dec8f5382d4d",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ChangeTab",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6ba6aaba-e9fb-4551-be50-221018078553",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ChangeTab",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
         {
-            "name": "Menu",
+            "name": "Menu_2",
             "id": "b4ac6db6-9d73-4502-97e0-9946a0d4b8b4",
             "actions": [
                 {

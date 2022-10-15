@@ -1,52 +1,59 @@
-    using System;
-    using System.Collections.Generic;
+using System.Collections.Generic;
+using _Developers.Vitor.Scripts.Utilities;
 using UnityEngine;
 
-namespace ForestReturn.UI.Scripts
+namespace ForestReturn.Scripts.UI.TabSystem
 {
-    public class TabGroup : MonoBehaviour
+    public class TabGroup : Singleton<TabGroup>
     {
-        public List<ForestReturn.Scripts.UI.TabSystem.TabButton> tabButtons;
-        public ForestReturn.Scripts.UI.TabSystem.TabButton selectedTab;
+        public List<MenuTabButton> tabButtons;
+        public MenuTabButton selectedMenuTab;
         public List<GameObject> objectsToSwap;
+        private int _currentSelectedIndex = -1;
 
         private void Start()
         {
             ResetTabs();
-            if(selectedTab != null)
+            if(selectedMenuTab != null)
             {
-                OnTabSelected(selectedTab);
+                OnTabSelected(selectedMenuTab);
+            }
+            
+        }
+
+        public void Subscribe(MenuTabButton button)
+        {
+            tabButtons ??= new List<MenuTabButton>();
+            tabButtons.Add(button);
+            if (_currentSelectedIndex == -1)
+            {
+                OnTabSelected(button);
             }
         }
 
-        public void Subscribe(ForestReturn.Scripts.UI.TabSystem.TabButton button)
-        {
-            tabButtons ??= new List<ForestReturn.Scripts.UI.TabSystem.TabButton>();
-            tabButtons.Add(button);
-        }
-
-        public void OnTabEnter(ForestReturn.Scripts.UI.TabSystem.TabButton button)
+        public void OnTabEnter(MenuTabButton button)
         {
             ResetTabs();
-            if (selectedTab == null || button != selectedTab)
+            if (selectedMenuTab == null || button != selectedMenuTab)
             { 
                 button.background.sprite = button.tabHover;
             }
         }
-        public void OnTabExit(ForestReturn.Scripts.UI.TabSystem.TabButton button)
+        public void OnTabExit(MenuTabButton button)
         {
             ResetTabs();
         }
-        public void OnTabSelected(ForestReturn.Scripts.UI.TabSystem.TabButton button)
+        public void OnTabSelected(MenuTabButton button)
         {
-            if (selectedTab != null)
+            if (selectedMenuTab != null)
             {
-                selectedTab.Deselect();
+                selectedMenuTab.Deselect();
             }
-            
-            selectedTab = button;
-            selectedTab.Select();
+            _currentSelectedIndex = tabButtons.FindIndex(tabButton => button == tabButton);
+            selectedMenuTab = button;
+            selectedMenuTab.Select();
             ResetTabs();
+            
             button.background.sprite = button.tabActive;
             int index = button.transform.GetSiblingIndex();
             for (int i = 0; i < objectsToSwap.Count; i++)
@@ -57,11 +64,34 @@ namespace ForestReturn.UI.Scripts
 
         public void ResetTabs()
         {
-            foreach (ForestReturn.Scripts.UI.TabSystem.TabButton tabButton in tabButtons)
+            if (tabButtons == null || tabButtons.Count == 0) return;
+            
+            foreach (MenuTabButton tabButton in tabButtons)
             {
-                if(selectedTab != null && tabButton == selectedTab) continue;
+                if(selectedMenuTab != null && tabButton == selectedMenuTab) continue;
                 tabButton.background.sprite = tabButton.tabIdle;
             }
+        }
+
+        public void ChangeTab(int direction)
+        {
+            var desiredIndex = _currentSelectedIndex;
+            if (direction == 1)
+            {
+                desiredIndex = (_currentSelectedIndex + direction) % tabButtons.Count;
+            }
+            else if(direction == -1)
+            {
+                if (_currentSelectedIndex == 0)
+                {
+                    desiredIndex = tabButtons.Count - 1;
+                }
+                else
+                {
+                    desiredIndex = _currentSelectedIndex + direction;
+                }
+            }
+            OnTabSelected(tabButtons[desiredIndex]);
         }
     
     
