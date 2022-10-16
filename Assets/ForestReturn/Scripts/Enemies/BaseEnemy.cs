@@ -38,6 +38,15 @@ namespace ForestReturn.Scripts.Enemies
         {
             _updateCoroutine = StartCoroutine(UpdateState());
             InitAttackRandomizer();
+            foreach (var enemyAttack in Attacks)
+            {
+                enemyAttack.hitBox.TryGetComponent(out HitBox hitBox);
+                if (hitBox == null)
+                {
+                    hitBox = enemyAttack.hitBox.AddComponent<HitBox>();
+                }
+                hitBox.damage = enemyAttack.damage;
+            }
         }
 
         private void InitAttackRandomizer()
@@ -119,15 +128,7 @@ namespace ForestReturn.Scripts.Enemies
 
         #endregion
 
-        
-        
-        
-
-
         #region Handles
-
-        
-
         public void HandleAnimationAttackEnded()
         {
             _isAttacking = false;
@@ -156,7 +157,6 @@ namespace ForestReturn.Scripts.Enemies
 
         private IEnumerator UpdateState()
         {
-            
             while (!IsDead)
             {
                 Animator.SetBool(IsMoving,NavMeshAgent.velocity.magnitude > 0.01f);

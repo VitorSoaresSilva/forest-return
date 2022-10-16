@@ -75,22 +75,23 @@ namespace ForestReturn.Scripts.UI.TabSystem
 
         public void ChangeTab(int direction)
         {
-            var desiredIndex = _currentSelectedIndex;
-            if (direction == 1)
-            {
-                desiredIndex = (_currentSelectedIndex + direction) % tabButtons.Count;
-            }
-            else if(direction == -1)
-            {
-                if (_currentSelectedIndex == 0)
-                {
-                    desiredIndex = tabButtons.Count - 1;
-                }
-                else
-                {
-                    desiredIndex = _currentSelectedIndex + direction;
-                }
-            }
+            var desiredIndex = (_currentSelectedIndex + direction + tabButtons.Count) % tabButtons.Count;
+            
+            // if (direction == 1)
+            // {
+            //     desiredIndex = (_currentSelectedIndex + direction) % tabButtons.Count;
+            // }
+            // else if(direction == -1)
+            // {
+            //     if (_currentSelectedIndex == 0)
+            //     {
+            //         desiredIndex = tabButtons.Count - 1;
+            //     }
+            //     else
+            //     {
+            //         desiredIndex = _currentSelectedIndex + direction;
+            //     }
+            // }
             OnTabSelected(tabButtons[desiredIndex]);
         }
     

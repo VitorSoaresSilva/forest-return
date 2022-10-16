@@ -2,6 +2,7 @@ using _Developers.Vitor.Scripts.Interactable;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Teleport;
+using ForestReturn.Scripts.UI.TabSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Enums = ForestReturn.Scripts.Utilities.Enums;
@@ -48,6 +49,7 @@ namespace ForestReturn.Scripts
 
         [Header("Attack")] 
         private bool acceptComboAttack;
+        [SerializeField] private GameObject swordEffect;
 
         public void Init()
         {
@@ -100,7 +102,7 @@ namespace ForestReturn.Scripts
         private void OnEnable()
         {
             OnDead += HandleDeath;
-            // OnHurt += HandleHurt;
+            OnHurt += HandleHurt;
             OnManaHealed += HandleManaHealed;
             OnHealthHealed += HandleHealthHealed;
         }
@@ -108,7 +110,7 @@ namespace ForestReturn.Scripts
         private void OnDisable()
         {
             OnDead -= HandleDeath;
-            // OnHurt -= HandleHurt;
+            OnHurt -= HandleHurt;
             OnManaHealed -= HandleManaHealed;
             OnHealthHealed -= HandleHealthHealed;
         }
@@ -281,7 +283,7 @@ namespace ForestReturn.Scripts
 
             var a = context.valueType;
             var b = context.ReadValue<float>();
-            Debug.Log(b);
+            TabGroup.instance.ChangeTab((int)b);
         }
 
         #endregion
@@ -291,7 +293,10 @@ namespace ForestReturn.Scripts
         {
             acceptComboAttack = false;
             swordHitBox.SetActive(true);
-            
+            if (!swordEffect.activeSelf)
+            {
+                swordEffect.SetActive(true);
+            }
         }
         public void HandleEndAttack()
         {
@@ -337,13 +342,13 @@ namespace ForestReturn.Scripts
         {
             // _playerInput.SwitchCurrentActionMap("deathScreen");
         }
-        // private void HandleHurt()
-        // {
-        //     if (UiManager.instance != null)
-        //     {
-        //         UiManager.instance.PlayerHurt();
-        //     }
-        // }
+        private void HandleHurt()
+        {
+            if (UiManager.instance != null)
+            {
+                UiManager.instance.PlayerHurt();
+            }
+        }
         private void HandleHealthHealed()
         {
             Debug.Log("Life healed");
@@ -357,5 +362,10 @@ namespace ForestReturn.Scripts
         
 
         #endregion
+
+        public void HandleEndComboAttack()
+        {
+            swordEffect.SetActive(false);
+        }
     }
 }

@@ -51,5 +51,10 @@ namespace ForestReturn.Scripts.Managers
         {
             player.HandleEndMoveForward();
         }
+
+        public void EndComboAttack()
+        {
+            player.HandleEndComboAttack();
+        }
     }
 }
