@@ -27,6 +27,7 @@ namespace ForestReturn.Scripts.Managers
         [HideInInspector]
         public TriggerInventoryObject triggerInventory;
         public TriggerObject hammerFromBlacksmith;
+        public bool loadingFromCheckpoint;
         // public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
         // public int MaxArtifacts { get; private set; } = 2;
 
@@ -79,6 +80,7 @@ namespace ForestReturn.Scripts.Managers
         {
             generalData.LastSaveString = DateTime.Now.ToLongTimeString();
             generalData.LastSaveLong = DateTime.Now.ToFileTime();
+            generalData.playerPosition = LevelManager.instance.playerScript.transform.position;
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
@@ -86,8 +88,6 @@ namespace ForestReturn.Scripts.Managers
 
         private void Init()
         {
-
-
             if (IndexSaveSlot == -1) return;
             InventoryManager.instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
             InventoryManager.instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
@@ -97,7 +97,7 @@ namespace ForestReturn.Scripts.Managers
 
             if (savedGameDataTemporary[IndexSaveSlot].loadSuccess)
             {
-                
+                loadingFromCheckpoint = true;
             }
             else
             {
@@ -106,7 +106,7 @@ namespace ForestReturn.Scripts.Managers
                 generalData.Init();
             }
 
-            // if (triggerIn ventory.Contains(hammerFromBlacksmith))
+            // if (triggerInventory.Contains(hammerFromBlacksmith))
             // {
             //     MaxArtifacts = 3;
             // }

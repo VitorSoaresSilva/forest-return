@@ -122,7 +122,7 @@ namespace _Developers.Vitor.Scripts.Player
             _animator.SetTrigger(Dead);
             // skewed = Vector3.zero;
             _speed = 0;
-            var hitBoxes = GetComponentsInChildren<HitBox>(true);
+            var hitBoxes = GetComponentsInChildren<HitBoxOld>(true);
             foreach (var hitBox in hitBoxes)
             {
                 hitBox.enabled = false;

@@ -20,10 +20,6 @@ namespace ForestReturn.Scripts.Enemies
         
         [Header("Nav Mesh")] 
         [SerializeField] private float chasingStoppingDistance;
-        // [SerializeField] private float minimumDistance;
-        // [SerializeField] private float minDistance;
-        // [SerializeField] private float maxDistance;
-        // [SerializeField] private float distanceToTurnBackwards;
         
         
         [Header("Attack")]
@@ -70,6 +66,11 @@ namespace ForestReturn.Scripts.Enemies
             }
         }
 
+        private void OnDisable()
+        {
+            _playerRef.OnDead -= PlayerRefOnOnDead;
+        }
+
         public void PlayerDetected()
         {
             if (state == EnemyState.Idle)
@@ -77,10 +78,14 @@ namespace ForestReturn.Scripts.Enemies
                 _playerRef = LevelManager.instance.playerScript;
                 state = EnemyState.Chasing;
                 SetNextAttack();
+                _playerRef.OnDead += PlayerRefOnOnDead;
             }
         }
 
-
+        private void PlayerRefOnOnDead()
+        {
+            StopCoroutine(_updateCoroutine);
+        }
 
 
         #region StateMachine
@@ -160,7 +165,6 @@ namespace ForestReturn.Scripts.Enemies
             while (!IsDead)
             {
                 Animator.SetBool(IsMoving,NavMeshAgent.velocity.magnitude > 0.01f);
-                
                 switch (state)
                 {
                     case EnemyState.Idle:
@@ -188,8 +192,7 @@ namespace ForestReturn.Scripts.Enemies
             NavMeshAgent.isStopped = false;
             // NavMeshAgent.updateRotation = true;
             var playerDistance = Vector3.Distance(transform.position, _playerRef.transform.position);
-            Vector3 destination; 
-            destination = _playerRef.transform.position;
+            var destination = _playerRef.transform.position;
             NavMeshAgent.destination = destination;
             // if (playerDistance < minDistance)
             // {

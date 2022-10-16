@@ -12,6 +12,7 @@ namespace ForestReturn.Scripts
         // public string path;
         public string LastSaveString;
         public long LastSaveLong;
+        public Vector3 playerPosition;
         
         public Enums.Scenes currentLevel;
         // public Vector3 pointToSpawn;

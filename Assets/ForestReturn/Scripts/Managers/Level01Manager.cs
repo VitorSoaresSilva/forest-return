@@ -4,8 +4,9 @@ namespace ForestReturn.Scripts.Managers
 {
     public class Level01Manager : LevelManager
     {
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             Debug.Log("level 01");
             if (GameManager.instance != null)
             {
@@ -16,7 +17,6 @@ namespace ForestReturn.Scripts.Managers
                     GameManager.instance.generalData.TeleportData.AlreadyReturned = true;
                 }
             }
-
             PlayerScript.Init();
         }
     }

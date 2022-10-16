@@ -14,43 +14,48 @@ namespace ForestReturn.Scripts
     {
         private CharacterController _controller;
         private Animator _animator;
-        [Header("Movement")]
-        [SerializeField] private float speed; 
-        [SerializeField] private float attackForwardStepSpeed;
-        private bool _isMovingForwardByAttack;
-        [SerializeField] private float turnSmoothTime = 0.1f;
-        private Vector2 _move; 
-        private Vector2 _look;
-        public Transform cam;
-        
-        [Header("Interact")]
-        [SerializeField] private GameObject sphereCollider;
-        [SerializeField] private Vector3 offsetInteract;
-        [SerializeField] private float sphereInteractionRadius;
-        private readonly RaycastHit[] _raycastHits = new RaycastHit[3];
         private bool _isAttacking;
         private bool _isDashing;
         private float _turnSmoothVelocity;
-
-        [Header("Damage")] 
-        [SerializeField] private GameObject swordHitBox;
-
         private PlayerInput _playerInput;
         private InventoryObject _inventoryObjectRef;
         
-        // Animations
-        private static readonly int AttackPunch = Animator.StringToHash("Attack");
-        private static readonly int AttackPunchBack = Animator.StringToHash("AttackBack");
-        private static readonly int RangedAttack = Animator.StringToHash("RangedAttack");
-        private static readonly int Walking = Animator.StringToHash("isMoving");
-        [SerializeField] private LayerMask itemsLayer;
+        [Header("Movement")]
+        private float _currentSpeed; 
+        [SerializeField] private float normalSpeed; 
+        // [SerializeField] private float attackForwardStepSpeed;
+        [SerializeField] private float turnSmoothTime = 0.1f;
+        private bool _isMovingForwardByAttack;
+        private Vector2 _move; 
+        private Vector2 _look;
+        private Transform _cam;
+        
+        [Header("Interact")]
+        [SerializeField] private GameObject sphereCollider;
+        // [SerializeField] private Vector3 offsetInteract;
+        // [SerializeField] private float sphereInteractionRadius;
+        // private readonly RaycastHit[] _raycastHits = new RaycastHit[3];
 
-        public WeaponObject currentWeapon;
+        [Header("Damage")] 
+        [SerializeField] private GameObject swordHitBox;
+        [SerializeField] private PlayerAttack[] attacks;
+
+        
+        // Animations
+        private static readonly int AttackPunchHashAnimation = Animator.StringToHash("Attack");
+        private static readonly int AttackPunchBackHashAnimation = Animator.StringToHash("AttackBack");
+        private static readonly int RangedAttackHashAnimation = Animator.StringToHash("RangedAttack");
+        private static readonly int WalkingHashAnimation = Animator.StringToHash("isMoving");
+        private static readonly int DeathHashAnimation = Animator.StringToHash("Death");
+        // [SerializeField] private LayerMask itemsLayer;
+
+        // public WeaponObject currentWeapon;
         public ParticleSystem[] _particleSystemsTeleport;
 
         [Header("Attack")] 
         private bool acceptComboAttack;
         [SerializeField] private GameObject swordEffect;
+        private static readonly int IsDefendingHashAnimation = Animator.StringToHash("IsDefending");
 
         public void Init()
         {
@@ -65,7 +70,8 @@ namespace ForestReturn.Scripts
                 _controller.enabled = true;
             }
 
-            if (UnityEngine.Camera.main != null) cam = UnityEngine.Camera.main.transform;
+            _currentSpeed = normalSpeed;
+            if (Camera.main != null) _cam = Camera.main.transform;
         }
         
         // Damage
@@ -97,7 +103,7 @@ namespace ForestReturn.Scripts
             // }
                 Move();
             _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
-            _animator.SetBool(Walking,_move.sqrMagnitude > 0.01f);
+            _animator.SetBool(WalkingHashAnimation,_move.sqrMagnitude > 0.01f);
         }
 
         private void OnEnable()
@@ -120,12 +126,12 @@ namespace ForestReturn.Scripts
         {
             if (_move.sqrMagnitude < 0.01) //  || _isAttacking
                 return;
-            float targetAngle = Mathf.Atan2(_move.x,_move.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(_move.x,_move.y) * Mathf.Rad2Deg + _cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
                 turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(moveDirection.normalized * (speed * Time.deltaTime));
+            _controller.Move(moveDirection.normalized * (_currentSpeed * Time.deltaTime));
         }
 
 
@@ -140,16 +146,32 @@ namespace ForestReturn.Scripts
         {
 
             if (!context.performed) return;
+
+
             if (!_isAttacking)
             {
                 _isAttacking = true;
-                _animator.SetTrigger(AttackPunch);
+                _animator.SetTrigger(AttackPunchHashAnimation);
             }
             else if (acceptComboAttack)
             {
-                swordHitBox.SetActive(true);
-                _animator.SetTrigger(AttackPunchBack); 
+                acceptComboAttack = false;
+                swordHitBox.SetActive(false);
+                _animator.SetTrigger(AttackPunchBackHashAnimation);
             }
+            
+            
+            
+            // if (!_isAttacking)
+            // {
+            //     _isAttacking = true;
+            //     _animator.SetTrigger(AttackPunch);
+            // }
+            // else if (acceptComboAttack)
+            // {
+            //     swordHitBox.SetActive(true);
+            //     _animator.SetTrigger(AttackPunchBack); 
+            // }
 
 
             // if (_isAttacking ) return;
@@ -160,7 +182,7 @@ namespace ForestReturn.Scripts
         {
             if (_isAttacking) return;
             _isAttacking = true;
-            _animator.SetTrigger(RangedAttack);
+            _animator.SetTrigger(RangedAttackHashAnimation);
         }
         
         public void OnInteract(InputAction.CallbackContext context)
@@ -251,6 +273,32 @@ namespace ForestReturn.Scripts
                 _playerInput.enabled = false;
             }
         }
+
+        public void OnDefense(InputAction.CallbackContext context)
+        {
+            Debug.Log(context.phase);
+
+            if (context.performed)
+            {
+                _animator.SetBool(IsDefendingHashAnimation, true);
+                _currentSpeed = 0;
+                IsDefending = true;
+                // defense += value
+            }
+            else if (context.canceled)
+            {
+                _animator.SetBool(IsDefendingHashAnimation, false);
+                _currentSpeed = normalSpeed;
+                IsDefending = false;
+                // defense -= value
+            }
+            // if (context.performed)
+            // {
+            //     
+            // }
+            // if()
+        }
+        
         #endregion
 
         #region Inventory
@@ -280,57 +328,70 @@ namespace ForestReturn.Scripts
         #endregion
 
         #region Handles
-        public void HandleStartAttack()
+
+        public void EnableHitBox()
         {
-            acceptComboAttack = false;
             swordHitBox.SetActive(true);
-            if (!swordEffect.activeSelf)
-            {
-                swordEffect.SetActive(true);
-            }
         }
-        public void HandleEndAttack()
+
+        public void DisableHitBox()
         {
-            _isAttacking = false;
-            acceptComboAttack = false;
             swordHitBox.SetActive(false);
         }
+        
+        // public void HandleStartAttack()
+        // {
+        //     acceptComboAttack = false;
+        //     swordHitBox.SetActive(true);
+        //     if (!swordEffect.activeSelf)
+        //     {
+        //         swordEffect.SetActive(true);
+        //     }
+        // }
+        // public void HandleEndAttack()
+        // {
+        //     _isAttacking = false;
+        //     acceptComboAttack = false;
+        //     swordHitBox.SetActive(false);
+        // }
 
 
-        public void HandleStartRangedAttack()
-        {
-            // _isAttacking = true;
-            // neste ponto vou castar o espinho e diminuir na quantidade de espinhos disponiveis
-        } 
+        // public void HandleStartRangedAttack()
+        // {
+        //     // _isAttacking = true;
+        //     // neste ponto vou castar o espinho e diminuir na quantidade de espinhos disponiveis
+        // } 
 
-        public void HandleEndRangedAttack()
-        {
-            _isAttacking = false;
-        }
-
+        // public void HandleEndRangedAttack()
+        // {
+        //     _isAttacking = false;
+        // }
+        //
         public void HandleStartRangeSecondAttack()
         {
             acceptComboAttack = true;
         }
-
+        //
         public void HandleEndRangeSecondAttack()
         {
             acceptComboAttack = false;
         }
-
-        public void HandleStartMoveForward()
-        {
-            _isMovingForwardByAttack = true;
-        }
-
-        public void HandleEndMoveForward()
-        {
-            _isMovingForwardByAttack = false;
-        }
+        //
+        // public void HandleStartMoveForward()
+        // {
+        //     _isMovingForwardByAttack = true;
+        // }
+        //
+        // public void HandleEndMoveForward()
+        // {
+        //     _isMovingForwardByAttack = false;
+        // }
         
         
         private void HandleDeath()
         {
+            _playerInput.enabled = false;
+            _animator.SetTrigger(DeathHashAnimation);
             // _playerInput.SwitchCurrentActionMap("deathScreen");
         }
         private void HandleHurt()
@@ -356,6 +417,7 @@ namespace ForestReturn.Scripts
 
         public void HandleEndComboAttack()
         {
+            _isAttacking = false;
             swordHitBox.SetActive(false);
             swordEffect.SetActive(false);
         }

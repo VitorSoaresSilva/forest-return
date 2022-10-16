@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Developers.Vitor.Scripts.Damage
 {
-    public class HitBox : MonoBehaviour
+    public class HitBoxOld : MonoBehaviour
     {
         private BaseCharacter _baseCharacter;
         [SerializeField] private AttackScriptableObject attack;

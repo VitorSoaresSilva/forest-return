@@ -4,8 +4,9 @@ namespace ForestReturn.Scripts.Managers
 {
     public class Level03Manager : LevelManager
     {
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             Debug.Log("level 03");
             if (GameManager.instance != null)
             {

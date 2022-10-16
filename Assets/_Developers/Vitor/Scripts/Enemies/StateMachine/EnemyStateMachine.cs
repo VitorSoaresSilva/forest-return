@@ -63,7 +63,7 @@ namespace _Developers.Vitor.Scripts.Enemies.StateMachine
             _playerTransform = null;
             canAttack = false;
             isIntangible = true;
-            var hitBoxes = GetComponentsInChildren<HitBox>(true);
+            var hitBoxes = GetComponentsInChildren<HitBoxOld>(true);
             foreach (var hitBox in hitBoxes)
             {
                 hitBox.gameObject.SetActive(false);

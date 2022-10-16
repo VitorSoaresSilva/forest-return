@@ -33,6 +33,7 @@ namespace ForestReturn.Scripts
         public int Damage { get; private set; }
         public bool IsIntangible { get; private set; }
         public bool IsDead { get; private set; }
+        public bool IsDefending { get; protected set; }
         [SerializeField] private float intangibleCoolDown = 0.5f;
         [SerializeField] private Attributes baseAttributes;
 
@@ -58,8 +59,10 @@ namespace ForestReturn.Scripts
         public void TakeDamage(int damage)
         {
             if (IsIntangible || IsDead) return;
-            var damageTaken = Mathf.Max(damage - Defense, 0);
-            if (damage <= 0) return;
+            
+            var damageTaken = IsDefending ? Mathf.Max(damage - Defense, 0) : damage;
+            if (damageTaken <= 0) return;
+            
             
             StartCoroutine(IntangibleCooldown());
             CurrentHealth -= damageTaken;
