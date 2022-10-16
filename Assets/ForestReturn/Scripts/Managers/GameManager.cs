@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Teleport;
@@ -117,16 +118,20 @@ namespace ForestReturn.Scripts.Managers
             {
                 generalData.TeleportData = teleportData.Value;
                 generalData.currentLevel = Enums.Scenes.Lobby;
-                //delay
-                SceneManager.LoadSceneAsync((int)Enums.Scenes.Lobby, LoadSceneMode.Single);
+                StartCoroutine(LoadScene((int)Enums.Scenes.Lobby));
                 return;
             }
 
             if (generalData.TeleportData.AlreadyReturned) return;
             generalData.currentLevel = generalData.TeleportData.SceneStartIndex;
-            //delay
-            SceneManager.LoadSceneAsync((int)generalData.TeleportData.SceneStartIndex, LoadSceneMode.Single);
+            StartCoroutine(LoadScene((int)generalData.TeleportData.SceneStartIndex));
+        }
 
+        private IEnumerator LoadScene(int sceneIndex)
+        {
+            yield return new WaitForSeconds(0.5f);
+            SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
+            yield return null;
         }
 
         private void OnApplicationQuit()

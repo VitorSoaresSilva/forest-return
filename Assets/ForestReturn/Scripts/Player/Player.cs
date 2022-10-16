@@ -1,3 +1,4 @@
+using System;
 using _Developers.Vitor.Scripts.Interactable;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
@@ -89,7 +90,7 @@ namespace ForestReturn.Scripts
         {
             // if (_isMovingForwardByAttack)
             // {
-                // _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
+            //     _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
             // }
             // if (!_isAttacking)
             // {
@@ -139,16 +140,14 @@ namespace ForestReturn.Scripts
         {
 
             if (!context.performed) return;
-            
             if (!_isAttacking)
             {
                 _isAttacking = true;
-                _isMovingForwardByAttack = false;
                 _animator.SetTrigger(AttackPunch);
             }
             else if (acceptComboAttack)
             {
-                swordHitBox.SetActive(false);
+                swordHitBox.SetActive(true);
                 _animator.SetTrigger(AttackPunchBack); 
             }
 
@@ -225,13 +224,6 @@ namespace ForestReturn.Scripts
 
         public void OnTeleport(InputAction.CallbackContext context)
         {
-            Debug.Log("Teleport");
-            /*
-             * Se eu to num level, posso ir pro lobby e retornar
-             * se eu to no lobby, posso retornar se eu tiver vindo pra ca com teleporte
-             */
-            
-            
             if (!context.performed) return;
             if (GameManager.instance.generalData.currentLevel == Enums.Scenes.Lobby && 
                 GameManager.instance.generalData.TeleportData is { AlreadyReturned: false })
@@ -240,7 +232,6 @@ namespace ForestReturn.Scripts
                 {
                     particle.Play();
                 }
-                Debug.Log("Teleport back to level");
                 GameManager.instance.HandleTeleport(null);
                 _playerInput.enabled = false;
             }
@@ -365,7 +356,15 @@ namespace ForestReturn.Scripts
 
         public void HandleEndComboAttack()
         {
+            swordHitBox.SetActive(false);
             swordEffect.SetActive(false);
         }
+    }
+    [Serializable]
+    public struct PlayerAttack
+    {
+        public int damage;
+        public string animationTrigger;
+        public GameObject hitBox;
     }
 }
