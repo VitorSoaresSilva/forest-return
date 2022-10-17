@@ -1,4 +1,3 @@
-using _Developers.Vitor.Scripts.Interactable;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
@@ -10,7 +9,15 @@ namespace ForestReturn.Scripts.Interactable
         public Enums.Scenes SceneToTeleport;
         public void Interact()
         {
-            GameManager.instance.ChangeScene(SceneToTeleport);
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.ChangeScene(SceneToTeleport);
+            }
+        }
+
+        public void SetStatusInteract(bool status)
+        {
+            Debug.Log("Set as Interactable");
         }
     }
 }

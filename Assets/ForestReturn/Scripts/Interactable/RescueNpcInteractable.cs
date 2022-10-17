@@ -1,7 +1,7 @@
-using _Developers.Vitor.Scripts.Interactable;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ForestReturn.Scripts.Interactable
 {
@@ -27,9 +27,21 @@ namespace ForestReturn.Scripts.Interactable
             //Todo: Get npc NavMeshAgent and set to the begin of level
             foreach (var npcGameObject in npcGameObjects)
             {
-                Destroy(npcGameObject);
+                npcGameObject.TryGetComponent(out NavMeshAgent navMeshAgent);
+                navMeshAgent.enabled = true;
+                navMeshAgent.SetDestination(((Level01Manager)LevelManager.instance).pointToNpcGoAway);
+                navMeshAgent.stoppingDistance = 0;
             }
-            GameManager.instance.triggerInventory.AddTrigger(npcRescued);
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.triggerInventory.AddTrigger(npcRescued);
+            }
+        }
+
+        public void SetStatusInteract(bool status)
+        {
+            Debug.Log("Set as Interactable");
         }
     }
 }

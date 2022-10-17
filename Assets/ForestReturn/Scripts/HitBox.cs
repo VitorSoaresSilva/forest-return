@@ -7,7 +7,7 @@ namespace ForestReturn.Scripts
         public int damage;
         private void OnTriggerStay(Collider other)
         {
-            var damageable =  other.GetComponentInParent<IDamageable>();
+            var damageable =  other.transform.root.GetComponentInParent<IDamageable>();
             damageable?.TakeDamage(damage);
         }
     }

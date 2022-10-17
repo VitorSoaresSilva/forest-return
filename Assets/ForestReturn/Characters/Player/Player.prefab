@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1360879970}
   - component: {fileID: 1360879971}
-  - component: {fileID: 1360879973}
-  - component: {fileID: 1360879972}
   - component: {fileID: 1360879974}
   m_Layer: 0
   m_Name: SwordHitBox
@@ -48,56 +46,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1360879973
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360879969}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -281957475248645145, guid: 739026bc9270269429809c6acbe702a8, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1360879972
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360879969}
-  m_Mesh: {fileID: -5495902117074765545, guid: e38ed1dd0d9dc1a48b62649277cf3f81, type: 3}
 --- !u!114 &1360879974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5977,8 +5925,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4241379471182195609}
   - component: {fileID: 1953175803489904843}
-  - component: {fileID: 2762474843287721525}
   - component: {fileID: 6727761910733936035}
+  - component: {fileID: 1874554190}
   m_Layer: 16
   m_Name: InteractableCollider
   m_TagString: Untagged
@@ -6015,18 +5963,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 1}
---- !u!114 &2762474843287721525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3217983063553709414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803561fd4186c1643953168eb70638bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &6727761910733936035
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6043,6 +5979,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1874554190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217983063553709414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262748f59fc64556b3806f1004b762fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!1 &3239653347215634252
 GameObject:
   m_ObjectHideFlags: 0
@@ -12532,9 +12481,10 @@ MonoBehaviour:
   baseAttributes: {fileID: 11400000, guid: a3a00f7dc484b9747ad17786fceef20b, type: 2}
   normalSpeed: 6
   turnSmoothTime: 0.01
-  sphereCollider: {fileID: 3217983063553709414}
+  playerInteractableHandler: {fileID: 1874554190}
   swordHitBox: {fileID: 1360879969}
-  attacks: []
+  attacks:
+  - hitBox: {fileID: 1360879969}
   _particleSystemsTeleport:
   - {fileID: 0}
   - {fileID: 0}

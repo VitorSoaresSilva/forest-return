@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.PlayerScripts;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -29,6 +30,7 @@ namespace ForestReturn.Scripts.Enemies
         private int[] _attackRandomizer;
         
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
+        private static readonly int DeadHashAnimation = Animator.StringToHash("IsDead");
 
         private void Start()
         {
@@ -42,6 +44,18 @@ namespace ForestReturn.Scripts.Enemies
                     hitBox = enemyAttack.hitBox.AddComponent<HitBox>();
                 }
                 hitBox.damage = enemyAttack.damage;
+            }
+            
+            OnDead += HandleOnDead;
+        }
+
+        private void HandleOnDead()
+        {
+            StopCoroutine(_updateCoroutine);
+            Animator.SetTrigger(DeadHashAnimation);
+            foreach (var enemyAttack in Attacks)
+            {
+                enemyAttack.hitBox.SetActive(false);
             }
         }
 
@@ -68,7 +82,10 @@ namespace ForestReturn.Scripts.Enemies
 
         private void OnDisable()
         {
-            _playerRef.OnDead -= PlayerRefOnOnDead;
+            if (_playerRef != null)
+            {
+                _playerRef.OnDead -= PlayerRefOnOnDead;
+            }
         }
 
         public void PlayerDetected()

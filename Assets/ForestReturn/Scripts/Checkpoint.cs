@@ -1,4 +1,4 @@
-using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Interactable;
 using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
@@ -18,6 +18,11 @@ namespace ForestReturn.Scripts
             {
                 GameManager.instance.Save();
             }
+        }
+
+        public void SetStatusInteract(bool status)
+        {
+            Debug.Log("Set as interact");
         }
     }
 }

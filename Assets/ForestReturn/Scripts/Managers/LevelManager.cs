@@ -1,5 +1,6 @@
 using System;
 using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.PlayerScripts;
 using UnityEngine;
 using Enums = ForestReturn.Scripts.Utilities.Enums;
 

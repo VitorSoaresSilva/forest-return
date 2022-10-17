@@ -1,4 +1,4 @@
-using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Interactable;
 using UnityEngine;
 
 namespace ForestReturn.Scripts

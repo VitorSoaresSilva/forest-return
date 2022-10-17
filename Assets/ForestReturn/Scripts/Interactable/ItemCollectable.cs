@@ -1,4 +1,4 @@
-using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Interactable;
 using ForestReturn.Scripts.Inventory;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace ForestReturn.Scripts
             
         }
 
-        public void SetAsInteract()
+        public void SetStatusInteract(bool status)
         {
             alert.SetActive(true);
         }

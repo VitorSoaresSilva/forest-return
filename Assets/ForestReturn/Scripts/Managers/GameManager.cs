@@ -102,6 +102,7 @@ namespace ForestReturn.Scripts.Managers
             else
             {
                 InventoryManager.instance.Init();
+                
                 triggerInventory.Init();
                 generalData.Init();
             }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Developers.Vitor.Scripts.Interactable;
+using ForestReturn.Scripts.Interactable;
 using UnityEngine;
 
 public class CollectItems : MonoBehaviour

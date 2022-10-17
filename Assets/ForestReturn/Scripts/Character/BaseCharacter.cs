@@ -58,6 +58,7 @@ namespace ForestReturn.Scripts
 
         public void TakeDamage(int damage)
         {
+            Debug.Log("damage");
             if (IsIntangible || IsDead) return;
             
             var damageTaken = IsDefending ? Mathf.Max(damage - Defense, 0) : damage;

@@ -1,3 +1,4 @@
+using ForestReturn.Scripts.NPCs;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 
@@ -19,12 +20,14 @@ namespace ForestReturn.Scripts.Managers
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
+                    npc.GetComponent<IBaseNpc>().InitOnLobby();
                 }
                 var teleportData = GameManager.instance.generalData.TeleportData;
                 if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
                 {
                     pointToSpawn = teleportData.PositionToSpawn;
                 }
+                
             }
             PlayerScript.Init();
         }
