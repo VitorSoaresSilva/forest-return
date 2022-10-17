@@ -21,7 +21,7 @@ namespace ForestReturn.Scripts
 
         public void SetStatusInteract(bool status)
         {
-            alert.SetActive(true);
+            // alert.SetActive(true);
         }
     }
 }

@@ -28,6 +28,8 @@ namespace ForestReturn.Scripts.Enemies
         private float _nextTimeAttack;
         private int _nextAttackIndex = -1;
         private int[] _attackRandomizer;
+
+        public GameObject collider;
         
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
         private static readonly int DeadHashAnimation = Animator.StringToHash("IsDead");
@@ -57,6 +59,7 @@ namespace ForestReturn.Scripts.Enemies
             {
                 enemyAttack.hitBox.SetActive(false);
             }
+            collider.SetActive(false);
         }
 
         private void InitAttackRandomizer()
@@ -164,7 +167,10 @@ namespace ForestReturn.Scripts.Enemies
 
         public void HandleEndHitBox()
         {
-            Attacks[_nextAttackIndex].hitBox.SetActive(false);
+            foreach (var enemyAttack in Attacks)
+            {
+                enemyAttack.hitBox.SetActive(false);
+            }
         }
         #endregion
 

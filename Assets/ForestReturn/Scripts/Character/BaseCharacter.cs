@@ -49,7 +49,7 @@ namespace ForestReturn.Scripts
 
         protected virtual void Awake()
         {
-            MaxHealth = 10;
+            MaxHealth = baseAttributes.health;
             CurrentHealth = MaxHealth;
             MaxMana = MaxMana = baseAttributes.mana;
             Defense = baseAttributes.defense;
