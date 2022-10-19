@@ -1,4 +1,6 @@
-﻿namespace ForestReturn.Scripts.Interactable
+﻿using UnityEngine.Events;
+
+namespace ForestReturn.Scripts.Interactable
 {
     public interface IInteractable
     {
