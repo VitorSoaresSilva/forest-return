@@ -22,12 +22,10 @@ namespace ForestReturn.Scripts.Interactable
         {
             if (status)
             {
-                Debug.Log("Set as Interactable");
                 SetAsInteractable.Invoke();
             }
             else
             {
-                Debug.Log("Set as not Interactable");
                 SetAsNotInteractable.Invoke();
             }
         }

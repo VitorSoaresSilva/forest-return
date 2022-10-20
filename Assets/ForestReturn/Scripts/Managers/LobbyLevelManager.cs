@@ -13,7 +13,6 @@ namespace ForestReturn.Scripts.Managers
         protected override void Start()
         {
             base.Start();
-            Debug.Log("Lobby");
             if (GameManager.instance != null)
             {
                 var npcState = GameManager.instance.triggerInventory.Contains(npcSaved);

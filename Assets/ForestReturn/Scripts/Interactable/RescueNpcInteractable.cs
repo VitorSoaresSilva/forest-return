@@ -41,7 +41,6 @@ namespace ForestReturn.Scripts.Interactable
 
         public void SetStatusInteract(bool status)
         {
-            Debug.Log("Set as Interactable");
         }
     }
 }

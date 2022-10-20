@@ -68,17 +68,15 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnTriggerExit(Collider other)
         {
-            Debug.Log("exit");
+            
             other.transform.root.TryGetComponent(out IInteractable interactable);
             ObjectInteractable objectInteractable = new ObjectInteractable(transform,interactable);
             var index = interactables.FindIndex(a => a.Interactable == interactable);
             if (interactable != null &&  index != -1)
             {
-                Debug.Log("exit 2");
                 interactables.RemoveAt(index);
                 if (objectInteractable.Interactable != null && objectInteractable.Interactable == CurrentInteractable.Interactable)
                 {
-                    Debug.Log("exit 3");
                     CurrentInteractable = null;
                     interactable.SetStatusInteract(false);
                 }

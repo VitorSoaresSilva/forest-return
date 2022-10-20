@@ -22,7 +22,6 @@ namespace ForestReturn.Scripts
 
         public void SetStatusInteract(bool status)
         {
-            Debug.Log("Set as interact");
         }
     }
 }

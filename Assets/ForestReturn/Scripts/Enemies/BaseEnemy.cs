@@ -29,7 +29,7 @@ namespace ForestReturn.Scripts.Enemies
         private int _nextAttackIndex = -1;
         private int[] _attackRandomizer;
 
-        public GameObject collider;
+        private CapsuleCollider _myCollider;
         
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
         private static readonly int DeadHashAnimation = Animator.StringToHash("IsDead");
@@ -37,6 +37,7 @@ namespace ForestReturn.Scripts.Enemies
         private void Start()
         {
             _updateCoroutine = StartCoroutine(UpdateState());
+            _myCollider = GetComponentInChildren<CapsuleCollider>();
             InitAttackRandomizer();
             foreach (var enemyAttack in Attacks)
             {
@@ -59,7 +60,7 @@ namespace ForestReturn.Scripts.Enemies
             {
                 enemyAttack.hitBox.SetActive(false);
             }
-            collider.SetActive(false);
+            _myCollider.enabled = false;
         }
 
         private void InitAttackRandomizer()

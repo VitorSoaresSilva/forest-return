@@ -32,7 +32,6 @@ namespace _Developers.Vitor.Scripts.Attributes
                 set
                 {
                     _currentValue = value;
-                    // Debug.Log(MaxValue + " " + CurrentValue + " " +value);
                     // _currentValue = Mathf.Max(value,0);
                     // _currentValue = Mathf.Min(_currentValue, MaxValue);
                     ChangedCurrentValue?.Invoke(this);
