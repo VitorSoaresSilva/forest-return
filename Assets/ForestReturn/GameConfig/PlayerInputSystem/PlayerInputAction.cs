@@ -600,54 +600,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
-        },
-        {
-            ""name"": ""Menu_2"",
-            ""id"": ""b4ac6db6-9d73-4502-97e0-9946a0d4b8b4"",
-            ""actions"": [
-                {
-                    ""name"": ""Opções"",
-                    ""type"": ""Button"",
-                    ""id"": ""c463bb4d-cdf9-4f43-855b-6ee6d8861c1d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Click"",
-                    ""type"": ""Button"",
-                    ""id"": ""145c2032-af3e-46b7-a08c-9e9d87c4b793"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""e39ed854-b0d2-472f-a08e-e9c5b5562aac"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Opções"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9e103b4b-ac84-4d7a-91cf-29409b8a3eba"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -700,10 +652,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
         m_Menu_Exit = m_Menu.FindAction("Exit", throwIfNotFound: true);
         m_Menu_ChangeTab = m_Menu.FindAction("ChangeTab", throwIfNotFound: true);
-        // Menu_2
-        m_Menu_2 = asset.FindActionMap("Menu_2", throwIfNotFound: true);
-        m_Menu_2_Opções = m_Menu_2.FindAction("Opções", throwIfNotFound: true);
-        m_Menu_2_Click = m_Menu_2.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -937,47 +885,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
-
-    // Menu_2
-    private readonly InputActionMap m_Menu_2;
-    private IMenu_2Actions m_Menu_2ActionsCallbackInterface;
-    private readonly InputAction m_Menu_2_Opções;
-    private readonly InputAction m_Menu_2_Click;
-    public struct Menu_2Actions
-    {
-        private @PlayerInputAction m_Wrapper;
-        public Menu_2Actions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Opções => m_Wrapper.m_Menu_2_Opções;
-        public InputAction @Click => m_Wrapper.m_Menu_2_Click;
-        public InputActionMap Get() { return m_Wrapper.m_Menu_2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Menu_2Actions set) { return set.Get(); }
-        public void SetCallbacks(IMenu_2Actions instance)
-        {
-            if (m_Wrapper.m_Menu_2ActionsCallbackInterface != null)
-            {
-                @Opções.started -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
-                @Opções.performed -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
-                @Opções.canceled -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnOpções;
-                @Click.started -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
-                @Click.performed -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
-                @Click.canceled -= m_Wrapper.m_Menu_2ActionsCallbackInterface.OnClick;
-            }
-            m_Wrapper.m_Menu_2ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Opções.started += instance.OnOpções;
-                @Opções.performed += instance.OnOpções;
-                @Opções.canceled += instance.OnOpções;
-                @Click.started += instance.OnClick;
-                @Click.performed += instance.OnClick;
-                @Click.canceled += instance.OnClick;
-            }
-        }
-    }
-    public Menu_2Actions @Menu_2 => new Menu_2Actions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1017,10 +924,5 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
         void OnChangeTab(InputAction.CallbackContext context);
-    }
-    public interface IMenu_2Actions
-    {
-        void OnOpções(InputAction.CallbackContext context);
-        void OnClick(InputAction.CallbackContext context);
     }
 }

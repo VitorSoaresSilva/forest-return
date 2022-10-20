@@ -13,6 +13,7 @@ namespace ForestReturn.Scripts.Managers
         //[SerializeField] private DisplayInventory displayInventory;
         [SerializeField] private GameObject hud;
         [SerializeField] private GameObject menu;
+        [SerializeField] private GameObject pause;
         
 
         private void Start()
@@ -30,19 +31,28 @@ namespace ForestReturn.Scripts.Managers
             switch (canvasType)
             {
                 case CanvasType.Menu:
-                    hud.SetActive(false);
+                    CloseAllMenu();
                     menu.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
-                    //displayInventory.gameObject.SetActive(true);
                     break;
                 case CanvasType.Hud:
+                    CloseAllMenu();
                     hud.SetActive(true);
-                    menu.SetActive(false);
-                    //displayInventory.gameObject.SetActive(false);
+                    break;
+                case CanvasType.Pause:
+                    CloseAllMenu();
+                    pause.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
+        }
+
+        public void CloseAllMenu()
+        {
+            hud.SetActive(false);
+            menu.SetActive(false);
+            pause.SetActive(false);
         }
     }
 
@@ -50,5 +60,6 @@ namespace ForestReturn.Scripts.Managers
     {
         Menu,
         Hud,
+        Pause,
     }
 }
