@@ -32,12 +32,10 @@ namespace ForestReturn.Scripts.NPCs
 
         public void Interact()
         {
-            Debug.Log("Interact Blacksmith");
         }
 
         public void SetStatusInteract(bool status)
         {
-            Debug.Log("Set as Interact Blacksmith");
         }
         private void Update()
         {

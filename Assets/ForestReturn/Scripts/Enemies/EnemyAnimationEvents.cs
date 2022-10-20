@@ -23,7 +23,6 @@ namespace ForestReturn.Scripts.Enemies
 
         public void EndHitBox()
         {
-            Debug.Log("end");
             _enemyRef.HandleEndHitBox();
         }
     }

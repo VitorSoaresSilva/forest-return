@@ -52,6 +52,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         [Header("Attack")] 
         private bool acceptComboAttack;
         [SerializeField] private GameObject swordEffect;
+        
 
         public void Init()
         {
@@ -203,7 +204,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 return;
             }
 
-            Debug.Log("Out of Life's Potion");
+            // Debug.Log("Out of Life's Potion");
             // TODO: Show in UI 'out of life's potion'
         }
         public void OnManaPotion(InputAction.CallbackContext context)
@@ -219,7 +220,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 return;
             }
 
-            Debug.Log("Out of Mana's Potion");
+            // Debug.Log("Out of Mana's Potion");
             // TODO: Show in UI 'out of mana's potion'
         }
 
@@ -255,7 +256,7 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void OnDefense(InputAction.CallbackContext context)
         {
-            Debug.Log(context.phase);
+            // Debug.Log(context.phase);
 
             if (context.performed)
             {
@@ -286,7 +287,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
             var direction = context.ReadValue<Vector2>();
-            Debug.Log(direction);
+            // Debug.Log(direction);
         }
 
         public void OnInventoryClose(InputAction.CallbackContext context)
@@ -375,19 +376,19 @@ namespace ForestReturn.Scripts.PlayerScripts
         }
         private void HandleHurt()
         {
-            if (UiManager.instance != null)
-            {
-                UiManager.instance.PlayerHurt();
-            }
+            // if (UiManager.instance != null)
+            // {
+            //     UiManager.instance.PlayerHurt();
+            // }
         }
         private void HandleHealthHealed()
         {
-            Debug.Log("Life healed");
+            // Debug.Log("Life healed");
         }
 
         private void HandleManaHealed()
         {
-            Debug.Log("Mana healed");
+            // Debug.Log("Mana healed");
         }
         
         

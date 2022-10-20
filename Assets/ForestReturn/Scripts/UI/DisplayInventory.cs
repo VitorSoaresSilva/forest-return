@@ -30,22 +30,6 @@ namespace ForestReturn.Scripts.UI
             }
         }
 
-        private void Update()
-        {
-            // for (int i = 0; i < _inventoryObject.Container.Items.Count; i++)
-            // {
-            //     
-            // }
-            // foreach (KeyValuePair<InventorySlotUI, InventorySlot> _slot in itemsDisplayed)
-            // {
-            //     Debug.Log(_slot.Key);
-            //     if (_slot.Value.id >= 0)
-            //     {
-            //         _slot.Key.UpdateData(_inventoryObject.Container.Items[_slot.Value.item.id]);
-            //     }
-            // }
-        }
-
         private void OnDisable()
         {
             var childCount = grid.childCount;

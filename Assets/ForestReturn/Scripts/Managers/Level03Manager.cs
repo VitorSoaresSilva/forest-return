@@ -7,7 +7,6 @@ namespace ForestReturn.Scripts.Managers
         protected override void Start()
         {
             base.Start();
-            Debug.Log("level 03");
             if (GameManager.instance != null)
             {
                 var teleportData = GameManager.instance.generalData.TeleportData;

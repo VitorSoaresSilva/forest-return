@@ -14,7 +14,6 @@ namespace ForestReturn.Scripts.Interactable
 
         public void SetStatusInteract(bool status)
         {
-            Debug.Log("Set as interactable");
         }
 
         private void OnTriggerEnter(Collider other)

@@ -48,7 +48,6 @@ namespace _Developers.Vitor.Scripts.Managers
                     yield return null;
                 }
             }   
-            // Debug.Log("batata");
             _uiLoadPanel.loadSlider.value = 100;
             yield return new WaitForSeconds(1.5f);
             _uiLoadPanel.gameObject.SetActive(false);
