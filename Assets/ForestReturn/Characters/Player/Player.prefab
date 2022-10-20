@@ -12479,6 +12479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intangibleCoolDown: 0.5
   baseAttributes: {fileID: 11400000, guid: a3a00f7dc484b9747ad17786fceef20b, type: 2}
+  _playerInput: {fileID: 0}
   normalSpeed: 6
   turnSmoothTime: 0.01
   playerInteractableHandler: {fileID: 1874554190}
@@ -12567,7 +12568,19 @@ MonoBehaviour:
     m_ActionId: 0e481739-a0c6-4c8e-9c7d-7642f41ecbf4
     m_ActionName: gameplay/dash[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6800021239049874377}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.PlayerScripts.Player, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7a4ba6e3-4486-4ffe-ae07-66cc5b16e0a8
     m_ActionName: gameplay/pause[/Keyboard/p]
   - m_PersistentCalls:
@@ -12641,8 +12654,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6800021239049874377}
-        m_TargetAssemblyTypeName: ForestReturn.Scripts.PlayerAction.Player, Assembly-CSharp
-        m_MethodName: OnInventoryClose
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.PlayerScripts.Player, Assembly-CSharp
+        m_MethodName: OnResume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12691,14 +12704,6 @@ MonoBehaviour:
     m_ActionId: c070ac17-cb26-4833-af02-cf83b560c37d
     m_ActionName: gameplay/Teleport[/Keyboard/t]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c463bb4d-cdf9-4f43-855b-6ee6d8861c1d
-    m_ActionName: "Menu/Op\xE7\xF5es[/Keyboard/escape]"
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 145c2032-af3e-46b7-a08c-9e9d87c4b793
-    m_ActionName: Menu/Click[/Mouse/rightButton]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6800021239049874377}
         m_TargetAssemblyTypeName: ForestReturn.Scripts.Player, Assembly-CSharp
@@ -12730,6 +12735,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c93f3db7-0d89-4233-a0c4-003d81a669f1
     m_ActionName: gameplay/Defense[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6800021239049874377}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.PlayerScripts.Player, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bd89ddcd-f6e1-4cc4-bf91-2c459495b62a
+    m_ActionName: Pause/Exit[/Keyboard/escape,/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: gameplay

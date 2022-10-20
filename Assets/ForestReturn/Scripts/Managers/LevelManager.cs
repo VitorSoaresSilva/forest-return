@@ -33,5 +33,15 @@ namespace ForestReturn.Scripts.Managers
             pointToSpawn = GameManager.instance.generalData.playerPosition;
             GameManager.instance.loadingFromCheckpoint = false;
         }
+        
+        public void OnResumeGame()
+        {
+            playerScript._playerInput.SwitchCurrentActionMap("gameplay");
+        }
+
+        public void OnPauseGame()
+        {
+            playerScript._playerInput.SwitchCurrentActionMap("Menu");
+        }
     }
 }

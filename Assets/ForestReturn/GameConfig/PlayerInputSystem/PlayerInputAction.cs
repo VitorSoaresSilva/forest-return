@@ -280,23 +280,23 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e9a3a62d-6f26-4c0d-8448-1382cc379610"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d21ebbef-7578-4b2a-bb60-bbfa368b7a14"",
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d77db99e-7341-4c2a-96b8-64d9ca6c4f60"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -600,6 +600,45 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Pause"",
+            ""id"": ""297cabd9-9593-4cc8-b9fc-dd18b23e6f77"",
+            ""actions"": [
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd89ddcd-f6e1-4cc4-bf91-2c459495b62a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0b840906-244e-4592-bb7b-7120fe52d8b8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44ecc6cb-1d4f-4bb2-99ca-fce34af1b88c"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -652,6 +691,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
         m_Menu_Exit = m_Menu.FindAction("Exit", throwIfNotFound: true);
         m_Menu_ChangeTab = m_Menu.FindAction("ChangeTab", throwIfNotFound: true);
+        // Pause
+        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+        m_Pause_Exit = m_Pause.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -885,6 +927,39 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Pause
+    private readonly InputActionMap m_Pause;
+    private IPauseActions m_PauseActionsCallbackInterface;
+    private readonly InputAction m_Pause_Exit;
+    public struct PauseActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public PauseActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Exit => m_Wrapper.m_Pause_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterface != null)
+            {
+                @Exit.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_PauseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public PauseActions @Pause => new PauseActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -924,5 +999,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
         void OnChangeTab(InputAction.CallbackContext context);
+    }
+    public interface IPauseActions
+    {
+        void OnExit(InputAction.CallbackContext context);
     }
 }

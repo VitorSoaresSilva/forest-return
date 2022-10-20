@@ -5249,9 +5249,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 491386509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ab2931b69c4af59c0a4c8ec0f9585a, type: 3}
+  m_Script: {fileID: 11500000, guid: 22b9744cf9ed46f19e16cf40e032a6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generalData: {fileID: 0}
+  savedGameDataTemporary:
+  - {fileID: 11400000, guid: 26fa1b908aefb8c49b6e5154e349d676, type: 2}
+  - {fileID: 11400000, guid: 617a3c9891b4add45b5f0693930db9dd, type: 2}
+  - {fileID: 11400000, guid: c85c6dc8a9c902240b52600074ad28f1, type: 2}
+  triggerDatabase: {fileID: 0}
+  triggerInventory: {fileID: 0}
+  hammerFromBlacksmith: {fileID: 11400000, guid: 986df19acdb0c09428cb89b2a1520d72, type: 2}
+  loadingFromCheckpoint: 0
+  continueBtn: {fileID: 1758125744}
 --- !u!4 &491386511
 Transform:
   m_ObjectHideFlags: 0
@@ -11625,9 +11635,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 491386510}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Managers.GameManager, Assembly-CSharp
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18650,7 +18660,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh75926
+  m_Name: pb_Mesh86040
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

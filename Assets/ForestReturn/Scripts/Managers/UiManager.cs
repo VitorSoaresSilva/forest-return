@@ -9,15 +9,16 @@ namespace ForestReturn.Scripts.Managers
     public class UiManager : Singleton<UiManager>
     {
         [SerializeField] private Animator _hurtAnimator;
+        [SerializeField] private GameObject prefabCanvas;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         //[SerializeField] private DisplayInventory displayInventory;
-        [SerializeField] private GameObject hud;
-        [SerializeField] private GameObject menu;
-        [SerializeField] private GameObject pause;
-        
 
         private void Start()
         {
+            if (CanvasManager.instance == null)
+            {
+                Instantiate(prefabCanvas);
+            }
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -25,23 +26,25 @@ namespace ForestReturn.Scripts.Managers
         {
             _hurtAnimator.SetTrigger(Hurt);
         }
-
+        
+        
+        
         public void OpenCanvas(CanvasType canvasType)
         {
             switch (canvasType)
             {
                 case CanvasType.Menu:
                     CloseAllMenu();
-                    menu.SetActive(true);
+                    CanvasManager.instance.menu.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 case CanvasType.Hud:
                     CloseAllMenu();
-                    hud.SetActive(true);
+                    CanvasManager.instance.hud.SetActive(true);
                     break;
                 case CanvasType.Pause:
                     CloseAllMenu();
-                    pause.SetActive(true);
+                    CanvasManager.instance.pause.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
@@ -50,9 +53,9 @@ namespace ForestReturn.Scripts.Managers
 
         public void CloseAllMenu()
         {
-            hud.SetActive(false);
-            menu.SetActive(false);
-            pause.SetActive(false);
+            CanvasManager.instance.hud.SetActive(false);
+            CanvasManager.instance.menu.SetActive(false);
+            CanvasManager.instance.pause.SetActive(false);
         }
     }
 
