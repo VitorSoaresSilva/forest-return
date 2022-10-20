@@ -34,7 +34,7 @@ RectTransform:
   m_Children:
   - {fileID: 9158915655190371765}
   - {fileID: 5414068233297021667}
-  - {fileID: 5034440516367769868}
+  - {fileID: 7923829705638634643}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 9158915655190371766}
+  hurtAnimator: {fileID: 9158915654540330823}
   menu: {fileID: 5414068233297021666}
   pause: {fileID: 5034440516367769869}
 --- !u!1001 &647478704
@@ -186,16 +187,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause
       objectReference: {fileID: 0}
+    - target: {fileID: 7923829706285177123, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923829706285177123, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923829706285177123, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923829706285177123, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
---- !u!4 &5034440516367769868 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5034440516863319228, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
-  m_PrefabInstance: {fileID: 647478704}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5034440516367769869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5034440516863319229, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
+  m_PrefabInstance: {fileID: 647478704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7923829705638634643 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7923829706285177123, guid: ede8eea574393ec419682cc685bbb25f, type: 3}
   m_PrefabInstance: {fileID: 647478704}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4713401866467962373
@@ -649,6 +666,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &9158915654540330823 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3801980943704997792, guid: 906f9606cd100794ea43f1ba38cfd02d, type: 3}
+  m_PrefabInstance: {fileID: 5465215752236906727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9158915655190371765 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3801980944228934994, guid: 906f9606cd100794ea43f1ba38cfd02d, type: 3}
