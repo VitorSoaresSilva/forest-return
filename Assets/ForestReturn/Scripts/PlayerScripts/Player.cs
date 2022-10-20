@@ -16,9 +16,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         private bool _isAttacking;
         private bool _isDashing;
         private float _turnSmoothVelocity;
-        private PlayerInput _playerInput;
+        public PlayerInput _playerInput;
         private InventoryObject _inventoryObjectRef;
-        
+
         [Header("Movement")]
         private float _currentSpeed; 
         [SerializeField] private float normalSpeed; 
@@ -171,6 +171,23 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _animator.SetTrigger(AttackPunchBackHashAnimation);
             }
         }
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (GameManager.instance.isPaused)
+            {
+                GameManager.instance.ResumeGame();
+            }
+            else
+            {
+                GameManager.instance.PauseGame();
+                _playerInput.SwitchCurrentActionMap("Pause");
+                UiManager.instance.OpenCanvas((CanvasType.Pause));
+                Cursor.lockState = CursorLockMode.None;
+            }
+            
+        }
+
         public void OnRangeAttack(InputAction.CallbackContext context)
         {
             if (_isAttacking) return;
@@ -187,6 +204,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnInventory(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
+            GameManager.instance.PauseGame();
             _playerInput.SwitchCurrentActionMap("Menu");
             UiManager.instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
@@ -290,12 +308,17 @@ namespace ForestReturn.Scripts.PlayerScripts
             // Debug.Log(direction);
         }
 
-        public void OnInventoryClose(InputAction.CallbackContext context)
+        public void OnResume(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
+            if (GameManager.instance.isPaused)
+            {
+                GameManager.instance.ResumeGame();
+            }
             UiManager.instance.OpenCanvas(CanvasType.Hud);
             _playerInput.SwitchCurrentActionMap("gameplay");
         }
+        
         public void OnChangeTabs(InputAction.CallbackContext context)
         {
             if (!context.performed) return;

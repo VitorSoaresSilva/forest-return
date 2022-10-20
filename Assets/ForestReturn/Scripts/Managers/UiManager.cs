@@ -9,14 +9,16 @@ namespace ForestReturn.Scripts.Managers
     public class UiManager : Singleton<UiManager>
     {
         [SerializeField] private Animator _hurtAnimator;
+        [SerializeField] private GameObject prefabCanvas;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         //[SerializeField] private DisplayInventory displayInventory;
-        [SerializeField] private GameObject hud;
-        [SerializeField] private GameObject menu;
-        
 
         private void Start()
         {
+            if (CanvasManager.instance == null)
+            {
+                Instantiate(prefabCanvas);
+            }
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -24,25 +26,36 @@ namespace ForestReturn.Scripts.Managers
         {
             _hurtAnimator.SetTrigger(Hurt);
         }
-
+        
+        
+        
         public void OpenCanvas(CanvasType canvasType)
         {
             switch (canvasType)
             {
                 case CanvasType.Menu:
-                    hud.SetActive(false);
-                    menu.SetActive(true);
+                    CloseAllMenu();
+                    CanvasManager.instance.menu.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
-                    //displayInventory.gameObject.SetActive(true);
                     break;
                 case CanvasType.Hud:
-                    hud.SetActive(true);
-                    menu.SetActive(false);
-                    //displayInventory.gameObject.SetActive(false);
+                    CloseAllMenu();
+                    CanvasManager.instance.hud.SetActive(true);
+                    break;
+                case CanvasType.Pause:
+                    CloseAllMenu();
+                    CanvasManager.instance.pause.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
+        }
+
+        public void CloseAllMenu()
+        {
+            CanvasManager.instance.hud.SetActive(false);
+            CanvasManager.instance.menu.SetActive(false);
+            CanvasManager.instance.pause.SetActive(false);
         }
     }
 
@@ -50,5 +63,6 @@ namespace ForestReturn.Scripts.Managers
     {
         Menu,
         Hud,
+        Pause,
     }
 }

@@ -17,6 +17,7 @@ namespace ForestReturn.Scripts.Managers
     {
         [HideInInspector] public GeneralDataObject generalData;
         public int IndexSaveSlot { get; private set; } = -1;
+        public bool isPaused { get; private set; }
         // private int _indexLatestSaveSlot = -1;
 
         // public GameData GameData;
@@ -150,5 +151,31 @@ namespace ForestReturn.Scripts.Managers
             generalData.TeleportData = new TeleportData();
             SceneManager.LoadScene((int)scene);
         }
+        
+        public void ResumeGame()
+        {
+            isPaused = false;
+            Time.timeScale = 1;
+            LevelManager.instance.OnResumeGame();
+            UiManager.instance.OpenCanvas(CanvasType.Hud);
+        }
+
+        public void PauseGame()
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+            LevelManager.instance.OnPauseGame();
+        }
+
+        public void MainMenu()
+        {
+            ChangeScene(Enums.Scenes.MainMenu);
+        }
+        public void ExitGame()
+        {
+            //TODO:Salvar jogo
+            Application.Quit();
+        }
     }
+    
 }
