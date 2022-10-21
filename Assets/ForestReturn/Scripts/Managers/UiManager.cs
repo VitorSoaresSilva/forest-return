@@ -3,6 +3,8 @@ using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using Cursor = UnityEngine.Cursor;
 
 namespace ForestReturn.Scripts.Managers
 {
@@ -13,7 +15,14 @@ namespace ForestReturn.Scripts.Managers
         public Animator hurtAnimator;
         public GameObject menu;
         public GameObject pause;
-
+        [SerializeField] private Button restartDeathButton;
+        [SerializeField] private Button mainMenuDeathButton;
+        [SerializeField] private Button quitDeathButton;
+        
+        [SerializeField] private Button resumeButton;
+        [SerializeField] private Button mainMenuPauseButton;
+        [SerializeField] private Button closePauseButton;
+        [SerializeField] private Button quitPauseButton;
         public void Init()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -21,8 +30,20 @@ namespace ForestReturn.Scripts.Managers
             {
                 LevelManager.instance.PlayerScript.OnHurt += PlayerHurt;
             }
-
             OpenCanvas(CanvasType.Hud);
+            SetListeners();
+        }
+
+        private void SetListeners()
+        {
+            mainMenuDeathButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
+            quitDeathButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
+            
+            resumeButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
+            mainMenuPauseButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
+            closePauseButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
+            quitPauseButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
+            
         }
 
         private void PlayerHurt()
