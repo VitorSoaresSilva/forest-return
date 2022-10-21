@@ -396,7 +396,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             _playerInput.enabled = false;
             _animator.SetTrigger(DeathHashAnimation);
-            // _playerInput.SwitchCurrentActionMap("deathScreen");
+            _playerInput.SwitchCurrentActionMap("Death");
         }
         private void HandleHurt()
         {
