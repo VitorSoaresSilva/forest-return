@@ -7,11 +7,6 @@ namespace ForestReturn.Scripts.UI
     {
         public TextMeshProUGUI lastSaveText;
         public TextMeshProUGUI activeText;
-        
-        public void Init()
-        {
-            
-        }
 
         public void Init(string saveText)
         {

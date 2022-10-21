@@ -28,7 +28,7 @@ namespace ForestReturn.Scripts
         {
             LastSaveString = String.Empty;
             LastSaveLong = 0;
-            currentLevel = Enums.Scenes.Level01;
+            currentLevel = Enums.Scenes.Lobby;
             TeleportData = new TeleportData();
         }
     }

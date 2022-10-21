@@ -4,6 +4,8 @@ using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Teleport;
 using ForestReturn.Scripts.Triggers;
+using ForestReturn.Scripts.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -27,17 +29,25 @@ namespace ForestReturn.Scripts.Managers
         public TriggerDatabaseObject triggerDatabase;
         [HideInInspector]
         public TriggerInventoryObject triggerInventory;
-        public TriggerObject hammerFromBlacksmith;
+        // public TriggerObject hammerFromBlacksmith;
         public bool loadingFromCheckpoint;
         // public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
         // public int MaxArtifacts { get; private set; } = 2;
 
-        public Button continueBtn;
 
         private void Start()
         {
-            
-            // SavedGameDataTemporary = new SaveGameData[3];
+            LoadDataFromFiles();
+            if (MainMenu.instance != null)
+            {
+                MainMenu.instance.UpdateUIMenu();
+            }
+        }
+
+        private void LoadDataFromFiles()
+        {
+            loadingFromCheckpoint = false;
+            IndexSaveSlot = -1;
             for (int i = 0; i < 3; i++)
             {
                 savedGameDataTemporary[i].Load($"/gameData_{i}.data");
@@ -50,19 +60,9 @@ namespace ForestReturn.Scripts.Managers
                     }
                 }
             }
-
-            if (IndexSaveSlot != -1)
-            {
-                continueBtn.gameObject.SetActive(true);
-                continueBtn.enabled = true;
-                //continue button enable
-            }
-            else
-            {
-                continueBtn.gameObject.SetActive(false);
-                continueBtn.enabled = false;
-            }
         }
+
+
         public void SelectIndexSaveSlot(int index)
         {
             IndexSaveSlot = index;
@@ -81,7 +81,7 @@ namespace ForestReturn.Scripts.Managers
         {
             generalData.LastSaveString = DateTime.Now.ToLongTimeString();
             generalData.LastSaveLong = DateTime.Now.ToFileTime();
-            generalData.playerPosition = LevelManager.instance.playerScript.transform.position;
+            generalData.playerPosition = LevelManager.instance.PlayerScript.transform.position;
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
@@ -90,6 +90,19 @@ namespace ForestReturn.Scripts.Managers
         private void Init()
         {
             if (IndexSaveSlot == -1) return;
+            InventoryManager.instance.inventory = null;
+            InventoryManager.instance.equippedItems = null;
+            // InventoryManager.instance.Clear();
+            if (triggerInventory != null)
+            {
+                // triggerInventory.Clear();
+                triggerInventory = null;
+            }
+            if (generalData != null)
+            {
+                generalData = null;
+                // generalData.Clear();
+            }
             InventoryManager.instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
             InventoryManager.instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
             triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
@@ -167,9 +180,18 @@ namespace ForestReturn.Scripts.Managers
             LevelManager.instance.OnPauseGame();
         }
 
-        public void MainMenu()
+        public void BackToMainMenu()
         {
-            ChangeScene(Enums.Scenes.MainMenu);
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            LoadDataFromFiles();
+            SceneManager.LoadScene((int)Enums.Scenes.MainMenu);
+            if (MainMenu.instance != null)
+            {
+                MainMenu.instance.UpdateUIMenu();
+            }
         }
         public void ExitGame()
         {

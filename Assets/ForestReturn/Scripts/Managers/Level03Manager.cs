@@ -16,7 +16,6 @@ namespace ForestReturn.Scripts.Managers
                     GameManager.instance.generalData.TeleportData.AlreadyReturned = true;
                 }
             }
-
             PlayerScript.Init();
         }
     }

@@ -26,7 +26,6 @@ namespace ForestReturn.Scripts.Managers
                 {
                     pointToSpawn = teleportData.PositionToSpawn;
                 }
-                
             }
             PlayerScript.Init();
         }

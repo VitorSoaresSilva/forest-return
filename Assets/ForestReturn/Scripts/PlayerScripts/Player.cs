@@ -16,7 +16,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private bool _isAttacking;
         private bool _isDashing;
         private float _turnSmoothVelocity;
-        public PlayerInput _playerInput;
+        [HideInInspector] public PlayerInput _playerInput;
         private InventoryObject _inventoryObjectRef;
 
         [Header("Movement")]

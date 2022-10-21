@@ -2,6 +2,7 @@ using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 namespace ForestReturn.Scripts.Interactable
 {
@@ -9,6 +10,8 @@ namespace ForestReturn.Scripts.Interactable
     {
         public GameObject[] npcGameObjects;
         public TriggerObject npcRescued;
+        public UnityEvent onInteractableTrue;
+        public UnityEvent onInteractableFalse;
 
         private void Start()
         {
@@ -41,6 +44,7 @@ namespace ForestReturn.Scripts.Interactable
 
         public void SetStatusInteract(bool status)
         {
+            
         }
     }
 }

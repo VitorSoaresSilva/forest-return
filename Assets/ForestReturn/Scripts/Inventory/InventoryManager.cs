@@ -12,8 +12,15 @@ namespace ForestReturn.Scripts.Inventory
 
         public void Clear()
         {
-            inventory.Clear();
-            equippedItems.Clear();
+            if (inventory != null)
+            {
+                inventory.Clear();
+            }
+
+            if (equippedItems != null)
+            {
+                equippedItems.Clear();
+            }
         }
         public void Init() // New Game
         {

@@ -11,7 +11,7 @@ public class ClosePause : MonoBehaviour
     void Start()
     {
         resumeButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
-        mainMenuButton.onClick.AddListener(() => {GameManager.instance.MainMenu();});
+        mainMenuButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
         closeButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
         quitButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
     }

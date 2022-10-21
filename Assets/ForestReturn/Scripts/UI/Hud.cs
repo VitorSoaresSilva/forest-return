@@ -8,6 +8,7 @@ namespace ForestReturn.Scripts.UI
     {
         public Slider lifeSliderFront;
         public Slider lifeSliderBack;
+        
 
         private void Start()
         {

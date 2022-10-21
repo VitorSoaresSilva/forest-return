@@ -15,33 +15,40 @@ namespace ForestReturn.Scripts.Managers
         {
             get
             {
-                if (playerScript != null) return playerScript;
-                playerScript = FindObjectOfType<Player>();
-                if (playerScript == null)
+                if (_playerScript != null) return _playerScript;
+                _playerScript = FindObjectOfType<Player>();
+                if (_playerScript == null)
                 {
                     var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
-                    playerScript = player.GetComponent<Player>();
+                    _playerScript = player.GetComponent<Player>();
                 }
-                return playerScript;
+                return _playerScript;
             }
         }
-        public Player playerScript;
+        private Player _playerScript;
 
         protected virtual void Start()
         {
-            if (GameManager.instance == null || !GameManager.instance.loadingFromCheckpoint) return;
-            pointToSpawn = GameManager.instance.generalData.playerPosition;
-            GameManager.instance.loadingFromCheckpoint = false;
+            if (GameManager.instance == null) return;
+            if (GameManager.instance.loadingFromCheckpoint)
+            {
+                pointToSpawn = GameManager.instance.generalData.playerPosition;
+                GameManager.instance.loadingFromCheckpoint = false;
+            }
+            else
+            {
+                GameManager.instance.Save();
+            }
         }
         
         public void OnResumeGame()
         {
-            playerScript._playerInput.SwitchCurrentActionMap("gameplay");
+            _playerScript._playerInput.SwitchCurrentActionMap("gameplay");
         }
 
         public void OnPauseGame()
         {
-            playerScript._playerInput.SwitchCurrentActionMap("Menu");
+            _playerScript._playerInput.SwitchCurrentActionMap("Menu");
         }
     }
 }
