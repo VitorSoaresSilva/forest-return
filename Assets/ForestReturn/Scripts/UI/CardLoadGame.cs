@@ -10,6 +10,7 @@ namespace ForestReturn.Scripts.UI
 
         public void Init(string saveText)
         {
+            Debug.Log(saveText);
             lastSaveText.text = saveText;
         }
 

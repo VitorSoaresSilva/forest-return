@@ -104,7 +104,6 @@ namespace ForestReturn.Scripts.PlayerScripts
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
-            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
@@ -184,8 +183,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             {
                 GameManager.instance.PauseGame();
                 _playerInput.SwitchCurrentActionMap("Pause");
-                UiManager.instance.OpenCanvas((CanvasType.Pause));
-                Cursor.lockState = CursorLockMode.None;
+                UiManager.instance.OpenCanvas(CanvasType.Pause);
             }
             
         }
@@ -205,7 +203,6 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
             var value = context.ReadValue<Vector2>();
-            Debug.Log(value);
             _cinemachine.m_YAxis.Value += value.y * Time.deltaTime * _cinemachine.m_YAxis.m_MaxSpeed;
         }
 
@@ -394,16 +391,13 @@ namespace ForestReturn.Scripts.PlayerScripts
         
         private void HandleDeath()
         {
-            _playerInput.enabled = false;
+            // _playerInput.enabled = false;
+            
             _animator.SetTrigger(DeathHashAnimation);
             _playerInput.SwitchCurrentActionMap("Death");
         }
         private void HandleHurt()
         {
-            // if (UiManager.instance != null)
-            // {
-            //     UiManager.instance.PlayerHurt();
-            // }
         }
         private void HandleHealthHealed()
         {

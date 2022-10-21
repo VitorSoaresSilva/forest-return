@@ -38,10 +38,6 @@ namespace ForestReturn.Scripts.Managers
         private void Start()
         {
             LoadDataFromFiles();
-            if (MainMenu.instance != null)
-            {
-                MainMenu.instance.UpdateUIMenu();
-            }
         }
 
         private void LoadDataFromFiles()
@@ -187,16 +183,27 @@ namespace ForestReturn.Scripts.Managers
                 ResumeGame();
             }
             LoadDataFromFiles();
-            SceneManager.LoadScene((int)Enums.Scenes.MainMenu);
-            if (MainMenu.instance != null)
-            {
-                MainMenu.instance.UpdateUIMenu();
-            }
+            SceneManager.LoadScene((int)Enums.Scenes.MainMenu); 
         }
         public void ExitGame()
         {
             //TODO:Salvar jogo
             Application.Quit();
+        }
+
+        public void RestartFromCheckpoint()
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            LoadDataFromFiles();
+            Play();
+        }
+
+        public void DeleteSlotIndex()
+        {
+            savedGameDataTemporary[IndexSaveSlot].Delete($"/gameData_{IndexSaveSlot}.data");
         }
     }
     

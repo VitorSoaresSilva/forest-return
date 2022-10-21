@@ -15,6 +15,7 @@ namespace ForestReturn.Scripts.Managers
         public Animator hurtAnimator;
         public GameObject menu;
         public GameObject pause;
+        public GameObject death;
         [SerializeField] private Button restartDeathButton;
         [SerializeField] private Button mainMenuDeathButton;
         [SerializeField] private Button quitDeathButton;
@@ -25,17 +26,32 @@ namespace ForestReturn.Scripts.Managers
         [SerializeField] private Button quitPauseButton;
         public void Init()
         {
+            Debug.Log("ui");
             Cursor.lockState = CursorLockMode.Locked;
             if (LevelManager.instance != null)
             {
                 LevelManager.instance.PlayerScript.OnHurt += PlayerHurt;
+                LevelManager.instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
             }
             OpenCanvas(CanvasType.Hud);
             SetListeners();
         }
 
+        private void PlayerScriptOnOnDead()
+        {
+            Invoke(nameof(OpenDeathPanel),2);
+        }
+
+        private void OpenDeathPanel()
+        {
+            
+            OpenCanvas(CanvasType.Death);
+        }
+
         private void SetListeners()
         {
+            
+            restartDeathButton.onClick.AddListener(() => {GameManager.instance.RestartFromCheckpoint();});
             mainMenuDeathButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
             quitDeathButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
             
@@ -58,16 +74,24 @@ namespace ForestReturn.Scripts.Managers
             {
                 case CanvasType.Menu:
                     CloseAllMenu();
-                    menu.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
+                    menu.SetActive(true);
                     break;
                 case CanvasType.Hud:
                     CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
                     hud.SetActive(true);
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case CanvasType.Pause:
                     CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
                     pause.SetActive(true);
+                    break;
+                case CanvasType.Death:
+                    CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
+                    death.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
@@ -79,6 +103,7 @@ namespace ForestReturn.Scripts.Managers
             hud.SetActive(false);
             menu.SetActive(false);
             pause.SetActive(false);
+            death.SetActive(false);
         }
     }
 
@@ -87,5 +112,6 @@ namespace ForestReturn.Scripts.Managers
         Menu,
         Hud,
         Pause,
+        Death
     }
 }

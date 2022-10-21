@@ -17,6 +17,10 @@ namespace ForestReturn.Scripts.Managers
                 }
             }
             PlayerScript.Init();
+            if (UiManager.instance != null)
+            {
+                UiManager.instance.Init();
+            }
         }
     }
 }

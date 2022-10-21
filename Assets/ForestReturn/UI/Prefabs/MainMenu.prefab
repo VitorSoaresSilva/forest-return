@@ -258,8 +258,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7720736248397805147}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.UI.MainMenu, Assembly-CSharp
+        m_MethodName: DeleteSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -304,9 +304,9 @@ RectTransform:
   m_Father: {fileID: 7720736248161677898}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 174, y: -319.5}
   m_SizeDelta: {x: 348, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720736247567580191
@@ -708,8 +708,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Programador / Game Design\r\nVitor Soares\r\n\r\nAnima\xE7\xE3o\r\nLucas
     Felipe\r\n\r\nArte 2D & 3D / Level Design / P\xF3s-Produ\xE7\xE3o\r\nElimar Luciano\r\n\r\nRigging\r\nBruno
-    Henrique\r\n\r\nUI Design\r\nSabrinne de Araujo\r\n\r\nConcept Art / SFX Design\r\nJean
-    Miller"
+    Henrique\r\n\r\nUI Design\r\nSabrinne de Araujo\r\n\r\nConcept Art / SFX Design\r
+    / UI Design\r\nJean Miller"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1045,9 +1045,9 @@ RectTransform:
   m_Father: {fileID: 7720736248161677898}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 174, y: -177.5}
   m_SizeDelta: {x: 348, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720736248079388288
@@ -1316,9 +1316,9 @@ RectTransform:
   m_Father: {fileID: 7720736248161677898}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 174, y: -106.5}
   m_SizeDelta: {x: 348, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720736248087343188
@@ -1737,11 +1737,11 @@ RectTransform:
   m_Father: {fileID: 7720736247874210961}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.00004386902, y: 21.41}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -100, y: 49}
   m_SizeDelta: {x: 303.601, y: 56.925}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 1, y: 0}
 --- !u!222 &7720736248099047846
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1824,8 +1824,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasLoadScene, Assembly-CSharp
+      - m_Target: {fileID: 7720736248397805147}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -2035,9 +2035,9 @@ RectTransform:
   m_Father: {fileID: 7720736248161677898}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 174, y: -35.5}
   m_SizeDelta: {x: 348, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720736248139163327
@@ -2122,8 +2122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasLoadScene, Assembly-CSharp
+      - m_Target: {fileID: 7720736248397805147}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -2338,7 +2338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7720736248397805144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3349,9 +3349,9 @@ RectTransform:
   m_Father: {fileID: 7720736248161677898}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 174, y: -248.5}
   m_SizeDelta: {x: 348, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720736249067920940
@@ -3465,7 +3465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7720736249225127754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4411,10 +4411,18 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 7720736248397805147}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793418476615448075, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_Name
+      value: Save1Button
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640889, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Pivot.x
@@ -4502,7 +4510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640890, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Name
-      value: Panel (1)
+      value: Save1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
@@ -4532,10 +4540,18 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 7720736248397805147}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793418476615448075, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_Name
+      value: Save2Button
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640889, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Pivot.x
@@ -4623,7 +4639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640890, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Name
-      value: Panel (2)
+      value: Save2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
@@ -4653,6 +4669,14 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 7720736248397805147}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793418476615448075, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_Name
+      value: Save0Button
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640889, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Pivot.x
@@ -4740,7 +4764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476733640890, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Name
-      value: Panel
+      value: Save0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}

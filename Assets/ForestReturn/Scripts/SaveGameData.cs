@@ -48,6 +48,15 @@ namespace ForestReturn.Scripts
             loadSuccess = false;
         }
 
+        public void Delete(string path)
+        {
+            this.path = path;
+            if (File.Exists(string.Concat(Application.persistentDataPath, this.path)))
+            {
+                File.Delete(string.Concat(Application.persistentDataPath, this.path));
+            }
+        }
+
         public void Clear()
         {
             inventoryObject.Clear();

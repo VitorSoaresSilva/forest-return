@@ -58,7 +58,10 @@ namespace ForestReturn.Scripts.Enemies
             Animator.SetTrigger(DeadHashAnimation);
             foreach (var enemyAttack in Attacks)
             {
-                Destroy(enemyAttack.hitBox);
+                if (enemyAttack.hitBox != null)
+                {
+                    Destroy(enemyAttack.hitBox);
+                }
             }
             _myCollider.enabled = false;
         }

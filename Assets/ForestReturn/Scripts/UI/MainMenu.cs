@@ -1,7 +1,10 @@
+using System;
 using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Managers;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using Cursor = UnityEngine.Cursor;
 
 namespace ForestReturn.Scripts.UI
 {
@@ -10,11 +13,6 @@ namespace ForestReturn.Scripts.UI
         public CardLoadGame[] cardsLoadGame;
         public Button playButton;
         public int currentActive = -1;
-        private void Start()
-        {
-            UpdateUIMenu();
-            UpdateCardsLoad();
-        }
 
         public Button continueBtn;
         public Button loadGameBtn;
@@ -35,6 +33,14 @@ namespace ForestReturn.Scripts.UI
             }
         }
 
+        private void Start()
+        {
+            UpdateUIMenu();
+            UpdateCardsLoad();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         private void UpdateCardsLoad()
         {
             if (GameManager.instance.IndexSaveSlot != -1)
@@ -46,14 +52,7 @@ namespace ForestReturn.Scripts.UI
             for (int i = 0; i < 3; i++)
             {
                 var a = GameManager.instance.savedGameDataTemporary[i];
-                if (a.loadSuccess)
-                {
-                    cardsLoadGame[i].Init(a.generalDataObject.LastSaveString);
-                }
-                else
-                {
-                    cardsLoadGame[i].Init("New Game");
-                }
+                cardsLoadGame[i].Init(a.loadSuccess ? a.generalDataObject.LastSaveString : "New Game");
             }
         }
         public void SetLoadIndex(int index)
@@ -67,9 +66,23 @@ namespace ForestReturn.Scripts.UI
             playButton.enabled = true;
             GameManager.instance.SelectIndexSaveSlot(index);
         }
+
+        public void DeleteSave()
+        {
+            GameManager.instance.DeleteSlotIndex();
+            UpdateUIMenu();
+            UpdateCardsLoad();
+        }
         public void Play()
         {
             GameManager.instance.Play();
         }
+
+        // public void Init()
+        // {
+        //     
+        //     // Debug.Log("init");
+        //     // Invoke(nameof(DelayedCursorConfig),4);
+        // }
     }
 }

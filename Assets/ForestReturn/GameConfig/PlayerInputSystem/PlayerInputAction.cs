@@ -149,7 +149,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""265c5fde-df34-4bd8-9f04-f8f6d6681576"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2,StickDeadzone,ScaleVector2(y=0)"",
+                    ""processors"": ""NormalizeVector2,StickDeadzone(min=0.2),ScaleVector2(y=0)"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
@@ -683,30 +683,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         {
             ""name"": ""Death"",
             ""id"": ""fbcfc75f-d03e-4203-aa72-e4695e4d7d53"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""7b23aded-9e92-43f3-9c1b-9514580c49bf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""cfb45701-69b2-485e-b3f1-02539506798d"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -766,7 +744,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_Pause_Exit = m_Pause.FindAction("Exit", throwIfNotFound: true);
         // Death
         m_Death = asset.FindActionMap("Death", throwIfNotFound: true);
-        m_Death_Newaction = m_Death.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1053,12 +1030,10 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     // Death
     private readonly InputActionMap m_Death;
     private IDeathActions m_DeathActionsCallbackInterface;
-    private readonly InputAction m_Death_Newaction;
     public struct DeathActions
     {
         private @PlayerInputAction m_Wrapper;
         public DeathActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Death_Newaction;
         public InputActionMap Get() { return m_Wrapper.m_Death; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1068,16 +1043,10 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_DeathActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
             }
             m_Wrapper.m_DeathActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
             }
         }
     }
@@ -1130,6 +1099,5 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     }
     public interface IDeathActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
     }
 }
