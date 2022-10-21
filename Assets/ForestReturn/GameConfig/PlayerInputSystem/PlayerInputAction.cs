@@ -143,6 +143,24 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TesteCamera"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""265c5fde-df34-4bd8-9f04-f8f6d6681576"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2,StickDeadzone,ScaleVector2(y=0)"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomCamera"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""70759857-cc0d-4c7c-8254-06b064816e0e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -420,6 +438,28 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Defense"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""347a2f8d-e613-4e9b-a698-2b4e2ead0917"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TesteCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8561b8b8-db08-45a0-a598-e3fea6a80e4d"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=0),NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""ZoomCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -686,6 +726,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_ManaPotion = m_gameplay.FindAction("ManaPotion", throwIfNotFound: true);
         m_gameplay_Teleport = m_gameplay.FindAction("Teleport", throwIfNotFound: true);
         m_gameplay_Defense = m_gameplay.FindAction("Defense", throwIfNotFound: true);
+        m_gameplay_TesteCamera = m_gameplay.FindAction("TesteCamera", throwIfNotFound: true);
+        m_gameplay_ZoomCamera = m_gameplay.FindAction("ZoomCamera", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -766,6 +808,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_ManaPotion;
     private readonly InputAction m_gameplay_Teleport;
     private readonly InputAction m_gameplay_Defense;
+    private readonly InputAction m_gameplay_TesteCamera;
+    private readonly InputAction m_gameplay_ZoomCamera;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -783,6 +827,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @ManaPotion => m_Wrapper.m_gameplay_ManaPotion;
         public InputAction @Teleport => m_Wrapper.m_gameplay_Teleport;
         public InputAction @Defense => m_Wrapper.m_gameplay_Defense;
+        public InputAction @TesteCamera => m_Wrapper.m_gameplay_TesteCamera;
+        public InputAction @ZoomCamera => m_Wrapper.m_gameplay_ZoomCamera;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -831,6 +877,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Defense.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
                 @Defense.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
                 @Defense.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
+                @TesteCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
+                @TesteCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
+                @TesteCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
+                @ZoomCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
+                @ZoomCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -874,6 +926,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Defense.started += instance.OnDefense;
                 @Defense.performed += instance.OnDefense;
                 @Defense.canceled += instance.OnDefense;
+                @TesteCamera.started += instance.OnTesteCamera;
+                @TesteCamera.performed += instance.OnTesteCamera;
+                @TesteCamera.canceled += instance.OnTesteCamera;
+                @ZoomCamera.started += instance.OnZoomCamera;
+                @ZoomCamera.performed += instance.OnZoomCamera;
+                @ZoomCamera.canceled += instance.OnZoomCamera;
             }
         }
     }
@@ -993,6 +1051,8 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnManaPotion(InputAction.CallbackContext context);
         void OnTeleport(InputAction.CallbackContext context);
         void OnDefense(InputAction.CallbackContext context);
+        void OnTesteCamera(InputAction.CallbackContext context);
+        void OnZoomCamera(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

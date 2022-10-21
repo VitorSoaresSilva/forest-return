@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Teleport;
@@ -28,6 +29,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private Vector2 _move; 
         private Vector2 _look;
         private Transform _cam;
+        private CinemachineFreeLook _cinemachine;
 
         [Header("Interact")] 
         [SerializeField] private PlayerInteractableHandler playerInteractableHandler;
@@ -68,10 +70,10 @@ namespace ForestReturn.Scripts.PlayerScripts
             }
             
             //equipamentos
-
             _currentSpeed = normalSpeed;
             UpdateAttacks();
             if (Camera.main != null) _cam = Camera.main.transform;
+            _cinemachine = _cam.transform.root.GetComponentInChildren<CinemachineFreeLook>();
         }
 
         public void UpdateAttacks()
@@ -194,11 +196,17 @@ namespace ForestReturn.Scripts.PlayerScripts
             // _isAttacking = true;
             // _animator.SetTrigger(RangedAttackHashAnimation);
         }
-        
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
             playerInteractableHandler.CurrentInteractable?.Interactable.Interact();
+        }
+        public void OnMouseZoom(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            var value = context.ReadValue<Vector2>();
+            Debug.Log(value);
+            _cinemachine.m_YAxis.Value += value.y * Time.deltaTime * _cinemachine.m_YAxis.m_MaxSpeed;
         }
 
         public void OnInventory(InputAction.CallbackContext context)
@@ -274,8 +282,6 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void OnDefense(InputAction.CallbackContext context)
         {
-            // Debug.Log(context.phase);
-
             if (context.performed)
             {
                 _animator.SetBool(IsDefendingHashAnimation, true);
@@ -290,11 +296,6 @@ namespace ForestReturn.Scripts.PlayerScripts
                 IsDefending = false;
                 // defense -= value
             }
-            // if (context.performed)
-            // {
-            //     
-            // }
-            // if()
         }
         
         #endregion

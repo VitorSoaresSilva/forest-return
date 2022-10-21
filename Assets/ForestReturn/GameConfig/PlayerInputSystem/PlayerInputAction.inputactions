@@ -121,6 +121,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TesteCamera",
+                    "type": "PassThrough",
+                    "id": "265c5fde-df34-4bd8-9f04-f8f6d6681576",
+                    "expectedControlType": "Vector2",
+                    "processors": "NormalizeVector2,StickDeadzone,ScaleVector2(y=0)",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ZoomCamera",
+                    "type": "PassThrough",
+                    "id": "70759857-cc0d-4c7c-8254-06b064816e0e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -396,6 +414,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Defense",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "347a2f8d-e613-4e9b-a698-2b4e2ead0917",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TesteCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8561b8b8-db08-45a0-a598-e3fea6a80e4d",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=0),NormalizeVector2",
+                    "groups": "",
+                    "action": "ZoomCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
