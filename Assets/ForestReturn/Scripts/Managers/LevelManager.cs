@@ -11,21 +11,35 @@ namespace ForestReturn.Scripts.Managers
         public Enums.Scenes sceneIndex;
         public Vector3 pointToSpawn;
         public GameObject playerPrefab;
+        public GameObject camerasHolderPrefab;
         public Player PlayerScript
         {
             get
             {
                 if (_playerScript != null) return _playerScript;
                 _playerScript = FindObjectOfType<Player>();
-                if (_playerScript == null)
-                {
-                    var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
-                    _playerScript = player.GetComponent<Player>();
-                }
+                if (_playerScript != null) return _playerScript;
+                var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
+                _playerScript = player.GetComponent<Player>();
                 return _playerScript;
             }
         }
         private Player _playerScript;
+
+        public CamerasHolder CamerasHolder
+        {
+            get
+            {
+                if (_camerasHolder != null) return _camerasHolder;
+                _camerasHolder = FindObjectOfType<CamerasHolder>();
+                if (_camerasHolder != null) return _camerasHolder;
+                var cameraHolder = Instantiate(camerasHolderPrefab,pointToSpawn,Quaternion.identity);
+                _camerasHolder = cameraHolder.GetComponent<CamerasHolder>();
+                return _camerasHolder;
+            }
+        }
+
+        private CamerasHolder _camerasHolder;
 
         protected virtual void Start()
         {

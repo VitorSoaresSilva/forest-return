@@ -1,6 +1,7 @@
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-namespace Bagunca.Organizar
+namespace ForestReturn.Scripts
 {
     public class LookToCamera : MonoBehaviour
     {
@@ -10,14 +11,7 @@ namespace Bagunca.Organizar
         // Start is called before the first frame update
         void Start()
         {
-            // if (LevelManager.instance != null)
-            // {
-            //     _cameraLocation = LevelManager.instance.CameraFollow.gameObject.transform;
-            // }
-            // else
-            // {
-            //     enabled = false;
-            // }
+            _cameraLocation = LevelManager.instance.CamerasHolder.mainCamera.transform;
         }
 
         // Update is called once per frame

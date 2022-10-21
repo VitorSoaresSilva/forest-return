@@ -166,14 +166,20 @@ namespace ForestReturn.Scripts.Enemies
 
         public void HandleStartHitBox()
         {
-            Attacks[_nextAttackIndex].hitBox.SetActive(true);
+            if (Attacks[_nextAttackIndex].hitBox != null)
+            {
+                Attacks[_nextAttackIndex].hitBox.SetActive(true);
+            }
         }
 
         public void HandleEndHitBox()
         {
             foreach (var enemyAttack in Attacks)
             {
-                enemyAttack.hitBox.SetActive(false);
+                if (enemyAttack.hitBox != null)
+                {
+                    enemyAttack.hitBox.SetActive(false);
+                }
             }
         }
         #endregion

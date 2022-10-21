@@ -29,11 +29,10 @@ namespace ForestReturn.Scripts.Managers
         public TriggerDatabaseObject triggerDatabase;
         [HideInInspector]
         public TriggerInventoryObject triggerInventory;
-        // public TriggerObject hammerFromBlacksmith;
         public bool loadingFromCheckpoint;
-        // public readonly float[] PercentageIncreaseByLevelWeapon = new []{1f,1.1f,1.2f};
-        // public int MaxArtifacts { get; private set; } = 2;
-
+        public delegate void OnGameManagerInitFinishedEvent();
+        public event OnGameManagerInitFinishedEvent OnGameManagerInitFinished;
+        public bool GameManagerInitFinished { get; private set; } = false;
 
         private void Start()
         {
@@ -42,6 +41,7 @@ namespace ForestReturn.Scripts.Managers
 
         private void LoadDataFromFiles()
         {
+            GameManagerInitFinished = false;
             loadingFromCheckpoint = false;
             IndexSaveSlot = -1;
             for (int i = 0; i < 3; i++)
@@ -56,6 +56,8 @@ namespace ForestReturn.Scripts.Managers
                     }
                 }
             }
+            GameManagerInitFinished = true;
+            OnGameManagerInitFinished?.Invoke();
         }
 
 
@@ -116,11 +118,6 @@ namespace ForestReturn.Scripts.Managers
                 triggerInventory.Init();
                 generalData.Init();
             }
-
-            // if (triggerInventory.Contains(hammerFromBlacksmith))
-            // {
-            //     MaxArtifacts = 3;
-            // }
         }
 
         public void HandleTeleport(TeleportData? teleportData)
@@ -182,8 +179,8 @@ namespace ForestReturn.Scripts.Managers
             {
                 ResumeGame();
             }
-            LoadDataFromFiles();
             SceneManager.LoadScene((int)Enums.Scenes.MainMenu); 
+            LoadDataFromFiles();
         }
         public void ExitGame()
         {

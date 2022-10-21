@@ -16,29 +16,45 @@ namespace ForestReturn.Scripts.UI
 
         public Button continueBtn;
         public Button loadGameBtn;
-        public void UpdateUIMenu()
+
+        private void Start()
+        {
+            if (GameManager.instance != null)
+            {
+                if (GameManager.instance.GameManagerInitFinished)
+                {
+                    UpdateAll();
+                }
+                else
+                {
+                    GameManager.instance.OnGameManagerInitFinished += UpdateAll;
+                }
+            }
+        }
+
+        private void UpdateUIMenu()
         {
             if (GameManager.instance == null) return;
             if (GameManager.instance.IndexSaveSlot != -1)
             {
-                continueBtn.gameObject.SetActive(true);
+                if (continueBtn.gameObject != null)
+                {
+                    // continueBtn.gameObject.SetActive(true);
+                    continueBtn.enabled = true; 
+                }
                 loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
-                continueBtn.enabled = true;
             }
             else
             {
-                continueBtn.gameObject.SetActive(false);
+                if (continueBtn.gameObject != null)
+                {
+                    // continueBtn.gameObject.SetActive(true);
+                    continueBtn.enabled = true; 
+                }
+                // continueBtn.gameObject.SetActive(false);
                 loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
-                continueBtn.enabled = false;
+                // continueBtn.enabled = false;
             }
-        }
-
-        private void Start()
-        {
-            UpdateUIMenu();
-            UpdateCardsLoad();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
 
         private void UpdateCardsLoad()
@@ -70,19 +86,19 @@ namespace ForestReturn.Scripts.UI
         public void DeleteSave()
         {
             GameManager.instance.DeleteSlotIndex();
-            UpdateUIMenu();
-            UpdateCardsLoad();
+            UpdateAll();
         }
         public void Play()
         {
             GameManager.instance.Play();
         }
 
-        // public void Init()
-        // {
-        //     
-        //     // Debug.Log("init");
-        //     // Invoke(nameof(DelayedCursorConfig),4);
-        // }
+        private void UpdateAll()
+        {
+            UpdateUIMenu();
+            UpdateCardsLoad();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
