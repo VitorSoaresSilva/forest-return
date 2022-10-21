@@ -639,6 +639,34 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Death"",
+            ""id"": ""fbcfc75f-d03e-4203-aa72-e4695e4d7d53"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b23aded-9e92-43f3-9c1b-9514580c49bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cfb45701-69b2-485e-b3f1-02539506798d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -694,6 +722,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         // Pause
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
         m_Pause_Exit = m_Pause.FindAction("Exit", throwIfNotFound: true);
+        // Death
+        m_Death = asset.FindActionMap("Death", throwIfNotFound: true);
+        m_Death_Newaction = m_Death.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -960,6 +991,39 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         }
     }
     public PauseActions @Pause => new PauseActions(this);
+
+    // Death
+    private readonly InputActionMap m_Death;
+    private IDeathActions m_DeathActionsCallbackInterface;
+    private readonly InputAction m_Death_Newaction;
+    public struct DeathActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public DeathActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Death_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Death; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DeathActions set) { return set.Get(); }
+        public void SetCallbacks(IDeathActions instance)
+        {
+            if (m_Wrapper.m_DeathActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_DeathActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_DeathActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public DeathActions @Death => new DeathActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1003,5 +1067,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     public interface IPauseActions
     {
         void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IDeathActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
