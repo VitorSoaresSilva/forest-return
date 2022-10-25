@@ -190,10 +190,10 @@ namespace ForestReturn.Scripts.Managers
 
         public void RestartFromCheckpoint()
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
+            // if (!isPaused)
+            // {
+            //     ResumeGame();
+            // }
             LoadDataFromFiles();
             Play();
         }

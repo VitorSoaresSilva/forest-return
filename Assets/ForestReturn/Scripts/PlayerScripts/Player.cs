@@ -198,6 +198,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
             playerInteractableHandler.CurrentInteractable?.Interactable.Interact();
+            playerInteractableHandler.Reset();
         }
         public void OnMouseZoom(InputAction.CallbackContext context)
         {
@@ -392,7 +393,6 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void HandleDeath()
         {
             // _playerInput.enabled = false;
-            
             _animator.SetTrigger(DeathHashAnimation);
             _playerInput.SwitchCurrentActionMap("Death");
         }

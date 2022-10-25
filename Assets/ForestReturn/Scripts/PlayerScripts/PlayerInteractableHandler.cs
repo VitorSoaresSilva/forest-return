@@ -44,7 +44,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                         }
                     }
                 }
-                
+
                 if (closestInteractable != CurrentInteractable)
                 {
                     CurrentInteractable?.Interactable.SetStatusInteract(false);
@@ -81,6 +81,12 @@ namespace ForestReturn.Scripts.PlayerScripts
                     interactable.SetStatusInteract(false);
                 }
             }
+        }
+
+        public void Reset()
+        {
+            interactables.Remove(CurrentInteractable);
+            CurrentInteractable = null;
         }
     }
     public class  ObjectInteractable

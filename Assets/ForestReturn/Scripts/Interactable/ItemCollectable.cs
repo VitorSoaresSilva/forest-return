@@ -9,11 +9,9 @@ namespace ForestReturn.Scripts
         public ItemObject itemObject;
         public GameObject alert;
         public int quantity = 1;
-        private bool _isAlertNotNull;
 
         private void Start()
         {
-            _isAlertNotNull = alert != null;
             SetStatusInteract(false);
         }
 
@@ -29,7 +27,7 @@ namespace ForestReturn.Scripts
 
         public void SetStatusInteract(bool status)
         {
-            if (_isAlertNotNull)
+            if (alert != null)
             {
                 alert.SetActive(true);
             }

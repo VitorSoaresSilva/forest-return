@@ -100,5 +100,10 @@ namespace ForestReturn.Scripts.UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        private void OnDisable()
+        {
+            GameManager.instance.OnGameManagerInitFinished -= UpdateAll;
+        }
     }
 }

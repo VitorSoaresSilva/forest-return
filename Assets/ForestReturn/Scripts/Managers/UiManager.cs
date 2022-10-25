@@ -44,8 +44,8 @@ namespace ForestReturn.Scripts.Managers
 
         private void OpenDeathPanel()
         {
-            
             OpenCanvas(CanvasType.Death);
+            GameManager.instance.PauseGame();
         }
 
         private void SetListeners()
