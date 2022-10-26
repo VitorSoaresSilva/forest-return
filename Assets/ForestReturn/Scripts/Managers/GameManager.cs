@@ -190,10 +190,10 @@ namespace ForestReturn.Scripts.Managers
 
         public void RestartFromCheckpoint()
         {
-            // if (!isPaused)
-            // {
-            //     ResumeGame();
-            // }
+            if (isPaused)
+            {
+                ResumeGame();
+            }
             LoadDataFromFiles();
             Play();
         }
@@ -201,6 +201,7 @@ namespace ForestReturn.Scripts.Managers
         public void DeleteSlotIndex()
         {
             savedGameDataTemporary[IndexSaveSlot].Delete($"/gameData_{IndexSaveSlot}.data");
+            LoadDataFromFiles();
         }
     }
     
