@@ -58,14 +58,14 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void Init()
         {
-            if (InventoryManager.instance != null)
+            if (InventoryManager.Instance != null)
             {
-                _inventoryObjectRef = InventoryManager.instance.inventory;
+                _inventoryObjectRef = InventoryManager.Instance.inventory;
             }
-            if (LevelManager.instance != null)
+            if (LevelManager.Instance != null)
             {
                 _controller.enabled = false;
-                transform.position = LevelManager.instance.pointToSpawn;
+                transform.position = LevelManager.Instance.pointToSpawn;
                 _controller.enabled = true;
             }
             
@@ -175,15 +175,15 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnPause(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.instance.isPaused)
+            if (GameManager.Instance.isPaused)
             {
-                GameManager.instance.ResumeGame();
+                GameManager.Instance.ResumeGame();
             }
             else
             {
-                GameManager.instance.PauseGame();
+                GameManager.Instance.PauseGame();
                 _playerInput.SwitchCurrentActionMap("Pause");
-                UiManager.instance.OpenCanvas(CanvasType.Pause);
+                UiManager.Instance.OpenCanvas(CanvasType.Pause);
             }
             
         }
@@ -210,9 +210,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnInventory(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            GameManager.instance.PauseGame();
+            GameManager.Instance.PauseGame();
             _playerInput.SwitchCurrentActionMap("Menu");
-            UiManager.instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
+            UiManager.Instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
 
         public void OnLifePotion(InputAction.CallbackContext context)
@@ -223,7 +223,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;
-                InventoryManager.instance.inventory.RemoveItem(potion);
+                InventoryManager.Instance.inventory.RemoveItem(potion);
                 HealthHeal(potion.value); 
                 return;
             }
@@ -239,7 +239,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             if (potions.Count > 0)
             {
                 var potion = (PotionObject)potions[0].item;
-                InventoryManager.instance.inventory.RemoveItem(potion);
+                InventoryManager.Instance.inventory.RemoveItem(potion);
                 ManaHeal(potion.value);
                 return;
             }
@@ -251,20 +251,20 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnTeleport(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.instance.generalData.currentLevel == Enums.Scenes.Lobby && 
-                GameManager.instance.generalData.TeleportData is { AlreadyReturned: false })
+            if (GameManager.Instance.generalData.currentLevel == Enums.Scenes.Lobby && 
+                GameManager.Instance.generalData.TeleportData is { AlreadyReturned: false })
             {
                 foreach (var particle in _particleSystemsTeleport)
                 {
                     particle.Play();
                 }
-                GameManager.instance.HandleTeleport(null);
+                GameManager.Instance.HandleTeleport(null);
                 _playerInput.enabled = false;
             }
 
             
-            var teleportItems = InventoryManager.instance.inventory.GetItemsByType(ItemType.Teleport);
-            if (GameManager.instance.generalData.currentLevel != Enums.Scenes.Lobby &&
+            var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
+            if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
                 teleportItems.Count > 0)
             {
                 foreach (var particle in _particleSystemsTeleport)
@@ -272,8 +272,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                     particle.Play();
                 }
                 var teleportItem = teleportItems[0].item;
-                InventoryManager.instance.inventory.RemoveItem(teleportItem);
-                GameManager.instance.HandleTeleport(new TeleportData(transform.position, Enums.Scenes.Level01));
+                InventoryManager.Instance.inventory.RemoveItem(teleportItem);
+                GameManager.Instance.HandleTeleport(new TeleportData(transform.position, Enums.Scenes.Level01));
                 _playerInput.enabled = false;
             }
         }
@@ -310,11 +310,11 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnResume(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.instance.isPaused)
+            if (GameManager.Instance.isPaused)
             {
-                GameManager.instance.ResumeGame();
+                GameManager.Instance.ResumeGame();
             }
-            UiManager.instance.OpenCanvas(CanvasType.Hud);
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
             _playerInput.SwitchCurrentActionMap("gameplay");
         }
         
@@ -324,7 +324,7 @@ namespace ForestReturn.Scripts.PlayerScripts
 
             var a = context.valueType;
             var b = context.ReadValue<float>();
-            TabGroup.instance.ChangeTab((int)b);
+            TabGroup.Instance.ChangeTab((int)b);
         }
 
         #endregion

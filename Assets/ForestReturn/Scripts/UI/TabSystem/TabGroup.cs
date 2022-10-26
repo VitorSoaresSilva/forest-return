@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using _Developers.Vitor.Scripts.Utilities;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
 namespace ForestReturn.Scripts.UI.TabSystem

@@ -17,9 +17,9 @@ namespace ForestReturn.Scripts
 
         public void Interact()
         {
-            if (InventoryManager.instance != null)
+            if (InventoryManager.Instance != null)
             {
-                InventoryManager.instance.inventory.AddItem(itemObject,quantity);
+                InventoryManager.Instance.inventory.AddItem(itemObject,quantity);
                 Destroy(gameObject);
             }
             

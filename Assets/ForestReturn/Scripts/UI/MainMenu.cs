@@ -1,6 +1,6 @@
 using System;
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,23 +19,23 @@ namespace ForestReturn.Scripts.UI
 
         private void Start()
         {
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                if (GameManager.instance.GameManagerInitFinished)
+                if (GameManager.Instance.GameManagerInitFinished)
                 {
                     UpdateAll();
                 }
                 else
                 {
-                    GameManager.instance.OnGameManagerInitFinished += UpdateAll;
+                    GameManager.Instance.OnGameManagerInitFinished += UpdateAll;
                 }
             }
         }
 
         private void UpdateUIMenu()
         {
-            if (GameManager.instance == null) return;
-            if (GameManager.instance.IndexSaveSlot != -1)
+            if (GameManager.Instance == null) return;
+            if (GameManager.Instance.IndexSaveSlot != -1)
             {
                 if (continueBtn.gameObject != null)
                 {
@@ -59,15 +59,15 @@ namespace ForestReturn.Scripts.UI
 
         private void UpdateCardsLoad()
         {
-            if (GameManager.instance.IndexSaveSlot != -1)
+            if (GameManager.Instance.IndexSaveSlot != -1)
             {
                 playButton.enabled = true;
-                currentActive = GameManager.instance.IndexSaveSlot;
+                currentActive = GameManager.Instance.IndexSaveSlot;
                 cardsLoadGame[currentActive].SetState(true);
             }
             for (int i = 0; i < 3; i++)
             {
-                var a = GameManager.instance.savedGameDataTemporary[i];
+                var a = GameManager.Instance.savedGameDataTemporary[i];
                 cardsLoadGame[i].Init(a.loadSuccess ? a.generalDataObject.LastSaveString : "New Game");
             }
         }
@@ -80,17 +80,17 @@ namespace ForestReturn.Scripts.UI
             currentActive = index;
             cardsLoadGame[currentActive].SetState(true);
             playButton.enabled = true;
-            GameManager.instance.SelectIndexSaveSlot(index);
+            GameManager.Instance.SelectIndexSaveSlot(index);
         }
 
         public void DeleteSave()
         {
-            GameManager.instance.DeleteSlotIndex();
+            GameManager.Instance.DeleteSlotIndex();
             UpdateAll();
         }
         public void Play()
         {
-            GameManager.instance.Play();
+            GameManager.Instance.Play();
         }
 
         private void UpdateAll()
@@ -103,7 +103,7 @@ namespace ForestReturn.Scripts.UI
 
         private void OnDisable()
         {
-            GameManager.instance.OnGameManagerInitFinished -= UpdateAll;
+            GameManager.Instance.OnGameManagerInitFinished -= UpdateAll;
         }
     }
 }

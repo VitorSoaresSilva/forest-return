@@ -44,7 +44,7 @@ namespace ForestReturn.Scripts.Triggers
         {
             foreach (var trigger in Triggers)
             {
-                trigger.TriggerObject = GameManager.instance.triggerDatabase.triggers[trigger.Id];
+                trigger.TriggerObject = GameManager.Instance.triggerDatabase.triggers[trigger.Id];
             }
         }
         [ContextMenu("Clear")]

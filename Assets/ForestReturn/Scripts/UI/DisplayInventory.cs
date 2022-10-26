@@ -18,14 +18,14 @@ namespace ForestReturn.Scripts.UI
         private void CreateSlots()
         {
             itemsDisplayed = new();
-            for (int i = 0; i < InventoryManager.instance.inventory.Items.Count; i++)
+            for (int i = 0; i < InventoryManager.Instance.inventory.Items.Count; i++)
             {
                 var itemUI = Instantiate(prefab,grid);
                 var inventorySlotUI = itemUI.GetComponent<InventorySlotUI>();
                 if (itemUI != null)
                 {
-                    inventorySlotUI.UpdateData(InventoryManager.instance.inventory.Items[i]);
-                    itemsDisplayed.Add(inventorySlotUI, InventoryManager.instance.inventory.Items[i]);
+                    inventorySlotUI.UpdateData(InventoryManager.Instance.inventory.Items[i]);
+                    itemsDisplayed.Add(inventorySlotUI, InventoryManager.Instance.inventory.Items[i]);
                 }
             }
         }

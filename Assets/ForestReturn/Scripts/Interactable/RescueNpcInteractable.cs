@@ -15,7 +15,7 @@ namespace ForestReturn.Scripts.Interactable
 
         private void Start()
         {
-            if (GameManager.instance != null && GameManager.instance.triggerInventory.Contains(npcRescued))
+            if (GameManager.Instance != null && GameManager.Instance.triggerInventory.Contains(npcRescued))
             {
                 foreach (var npcGameObject in npcGameObjects)
                 {
@@ -32,13 +32,13 @@ namespace ForestReturn.Scripts.Interactable
             {
                 npcGameObject.TryGetComponent(out NavMeshAgent navMeshAgent);
                 navMeshAgent.enabled = true;
-                navMeshAgent.SetDestination(((Level01Manager)LevelManager.instance).pointToNpcGoAway);
+                navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway);
                 navMeshAgent.stoppingDistance = 0;
             }
 
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                GameManager.instance.triggerInventory.AddTrigger(npcRescued);
+                GameManager.Instance.triggerInventory.AddTrigger(npcRescued);
             }
         }
 

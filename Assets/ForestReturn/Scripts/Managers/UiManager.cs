@@ -1,6 +1,6 @@
 using System;
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.UI;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,10 +28,10 @@ namespace ForestReturn.Scripts.Managers
         {
             Debug.Log("ui");
             Cursor.lockState = CursorLockMode.Locked;
-            if (LevelManager.instance != null)
+            if (LevelManager.Instance != null)
             {
-                LevelManager.instance.PlayerScript.OnHurt += PlayerHurt;
-                LevelManager.instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
+                LevelManager.Instance.PlayerScript.OnHurt += PlayerHurt;
+                LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
             }
             OpenCanvas(CanvasType.Hud);
             SetListeners();
@@ -45,20 +45,20 @@ namespace ForestReturn.Scripts.Managers
         private void OpenDeathPanel()
         {
             OpenCanvas(CanvasType.Death);
-            GameManager.instance.PauseGame();
+            GameManager.Instance.PauseGame();
         }
 
         private void SetListeners()
         {
             
-            restartDeathButton.onClick.AddListener(() => {GameManager.instance.RestartFromCheckpoint();});
-            mainMenuDeathButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
-            quitDeathButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
+            restartDeathButton.onClick.AddListener(() => {GameManager.Instance.RestartFromCheckpoint();});
+            mainMenuDeathButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
+            quitDeathButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
             
-            resumeButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
-            mainMenuPauseButton.onClick.AddListener(() => {GameManager.instance.BackToMainMenu();});
-            closePauseButton.onClick.AddListener(() => {GameManager.instance.ResumeGame();});
-            quitPauseButton.onClick.AddListener(() => {GameManager.instance.ExitGame();});
+            resumeButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
+            mainMenuPauseButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
+            closePauseButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
+            quitPauseButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
             
         }
 

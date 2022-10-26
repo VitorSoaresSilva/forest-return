@@ -1,33 +1,30 @@
 using UnityEngine;
 
-namespace _Developers.Vitor.Scripts.Utilities
+namespace ForestReturn.Scripts.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public static T instance { get; protected set; }
+        public static T Instance { get; protected set; }
 
-        public static bool instanceExists
-        {
-            get => instance != null;
-        }
+        public static bool InstanceExists => Instance != null;
 
         protected virtual void Awake()
         {
-            if (instanceExists)
+            if (InstanceExists)
             {
                 Destroy(gameObject);
             }
             else
             {
-                instance = (T)this;
+                Instance = (T)this;
             }
         }
 
         protected virtual void OnDestroy()
         {
-            if (instance == this)
+            if (Instance == this)
             {
-                instance = null;
+                Instance = null;
             }
         }
     }

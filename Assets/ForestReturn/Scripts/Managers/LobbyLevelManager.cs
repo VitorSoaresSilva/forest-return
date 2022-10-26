@@ -13,24 +13,24 @@ namespace ForestReturn.Scripts.Managers
         protected override void Start()
         {
             base.Start();
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                var npcState = GameManager.instance.triggerInventory.Contains(npcSaved);
+                var npcState = GameManager.Instance.triggerInventory.Contains(npcSaved);
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
                     npc.GetComponent<IBaseNpc>().InitOnLobby();
                 }
-                var teleportData = GameManager.instance.generalData.TeleportData;
+                var teleportData = GameManager.Instance.generalData.TeleportData;
                 if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
                 {
                     pointToSpawn = teleportData.PositionToSpawn;
                 }
             }
             PlayerScript.Init();
-            if (UiManager.instance != null)
+            if (UiManager.Instance != null)
             {
-                UiManager.instance.Init();
+                UiManager.Instance.Init();
             }
         }
     }

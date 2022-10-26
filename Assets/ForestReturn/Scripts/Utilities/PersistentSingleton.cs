@@ -1,4 +1,4 @@
-namespace _Developers.Vitor.Scripts.Utilities
+namespace ForestReturn.Scripts.Utilities
 {
     public class PersistentSingleton<T> : Singleton<T> where T : Singleton<T>
     {

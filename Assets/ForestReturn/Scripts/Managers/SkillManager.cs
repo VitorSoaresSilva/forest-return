@@ -1,5 +1,5 @@
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Skills;
+using ForestReturn.Scripts.Utilities;
 
 namespace ForestReturn.Scripts.Managers
 {

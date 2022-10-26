@@ -1,5 +1,5 @@
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Artifacts;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
 namespace ForestReturn.Scripts.Inventory
