@@ -10,7 +10,7 @@ namespace ForestReturn.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            GameManager.instance.triggerInventory.AddTrigger(npcSavedTrigger);
+            GameManager.Instance.triggerInventory.AddTrigger(npcSavedTrigger);
             Destroy(gameObject);
         }
     }

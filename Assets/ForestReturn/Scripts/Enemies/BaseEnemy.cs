@@ -99,7 +99,7 @@ namespace ForestReturn.Scripts.Enemies
         {
             if (state == EnemyState.Idle)
             {
-                _playerRef = LevelManager.instance.PlayerScript;
+                _playerRef = LevelManager.Instance.PlayerScript;
                 state = EnemyState.Chasing;
                 SetNextAttack();
                 _playerRef.OnDead += PlayerRefOnOnDead;

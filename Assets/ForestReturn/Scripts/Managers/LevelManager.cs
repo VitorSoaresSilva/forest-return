@@ -1,6 +1,6 @@
 using System;
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.PlayerScripts;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 using Enums = ForestReturn.Scripts.Utilities.Enums;
 
@@ -43,15 +43,15 @@ namespace ForestReturn.Scripts.Managers
 
         protected virtual void Start()
         {
-            if (GameManager.instance == null) return;
-            if (GameManager.instance.loadingFromCheckpoint)
+            if (GameManager.Instance == null) return;
+            if (GameManager.Instance.loadingFromCheckpoint)
             {
-                pointToSpawn = GameManager.instance.generalData.playerPosition;
-                GameManager.instance.loadingFromCheckpoint = false;
+                pointToSpawn = GameManager.Instance.generalData.playerPosition;
+                GameManager.Instance.loadingFromCheckpoint = false;
             }
             else
             {
-                GameManager.instance.Save();
+                GameManager.Instance.Save();
             }
         }
         

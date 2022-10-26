@@ -12,10 +12,10 @@ namespace ForestReturn.Scripts.UI
 
         private void Start()
         {
-            lifeSliderFront.value = (float)LevelManager.instance.PlayerScript.CurrentHealth /
-                                    (float)LevelManager.instance.PlayerScript.MaxHealth;
-            LevelManager.instance.PlayerScript.OnHurt += PlayerScriptOnOnHurt;
-            LevelManager.instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
+            lifeSliderFront.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth /
+                                    (float)LevelManager.Instance.PlayerScript.MaxHealth;
+            LevelManager.Instance.PlayerScript.OnHurt += PlayerScriptOnOnHurt;
+            LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
         }
 
         private void OnDisable()
@@ -25,14 +25,14 @@ namespace ForestReturn.Scripts.UI
 
         private void PlayerScriptOnOnHealthHealed()
         {
-            lifeSliderFront.value = (float)LevelManager.instance.PlayerScript.CurrentHealth /
-                                    (float)LevelManager.instance.PlayerScript.MaxHealth;
+            lifeSliderFront.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth /
+                                    (float)LevelManager.Instance.PlayerScript.MaxHealth;
         }
 
         private void PlayerScriptOnOnHurt()
         {
-            lifeSliderFront.value = (float)LevelManager.instance.PlayerScript.CurrentHealth /
-                                    (float)LevelManager.instance.PlayerScript.MaxHealth;
+            lifeSliderFront.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth /
+                                    (float)LevelManager.Instance.PlayerScript.MaxHealth;
         }
     }
 }

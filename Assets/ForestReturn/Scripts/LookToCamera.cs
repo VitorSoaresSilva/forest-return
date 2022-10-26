@@ -11,7 +11,7 @@ namespace ForestReturn.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            _cameraLocation = LevelManager.instance.CamerasHolder.mainCamera.transform;
+            _cameraLocation = LevelManager.Instance.CamerasHolder.mainCamera.transform;
         }
 
         // Update is called once per frame

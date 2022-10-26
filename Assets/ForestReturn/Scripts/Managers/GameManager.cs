@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using _Developers.Vitor.Scripts.Utilities;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Teleport;
 using ForestReturn.Scripts.Triggers;
 using ForestReturn.Scripts.UI;
+using ForestReturn.Scripts.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -79,7 +79,7 @@ namespace ForestReturn.Scripts.Managers
         {
             generalData.LastSaveString = DateTime.Now.ToLongTimeString();
             generalData.LastSaveLong = DateTime.Now.ToFileTime();
-            generalData.playerPosition = LevelManager.instance.PlayerScript.transform.position;
+            generalData.playerPosition = LevelManager.Instance.PlayerScript.transform.position;
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
@@ -88,8 +88,8 @@ namespace ForestReturn.Scripts.Managers
         private void Init()
         {
             if (IndexSaveSlot == -1) return;
-            InventoryManager.instance.inventory = null;
-            InventoryManager.instance.equippedItems = null;
+            InventoryManager.Instance.inventory = null;
+            InventoryManager.Instance.equippedItems = null;
             // InventoryManager.instance.Clear();
             if (triggerInventory != null)
             {
@@ -101,8 +101,8 @@ namespace ForestReturn.Scripts.Managers
                 generalData = null;
                 // generalData.Clear();
             }
-            InventoryManager.instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
-            InventoryManager.instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
+            InventoryManager.Instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
+            InventoryManager.Instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
             triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
             generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
 
@@ -113,7 +113,7 @@ namespace ForestReturn.Scripts.Managers
             }
             else
             {
-                InventoryManager.instance.Init();
+                InventoryManager.Instance.Init();
                 
                 triggerInventory.Init();
                 generalData.Init();
@@ -162,15 +162,15 @@ namespace ForestReturn.Scripts.Managers
         {
             isPaused = false;
             Time.timeScale = 1;
-            LevelManager.instance.OnResumeGame();
-            UiManager.instance.OpenCanvas(CanvasType.Hud);
+            LevelManager.Instance.OnResumeGame();
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
         }
 
         public void PauseGame()
         {
             isPaused = true;
             Time.timeScale = 0;
-            LevelManager.instance.OnPauseGame();
+            LevelManager.Instance.OnPauseGame();
         }
 
         public void BackToMainMenu()
@@ -190,10 +190,10 @@ namespace ForestReturn.Scripts.Managers
 
         public void RestartFromCheckpoint()
         {
-            // if (!isPaused)
-            // {
-            //     ResumeGame();
-            // }
+            if (isPaused)
+            {
+                ResumeGame();
+            }
             LoadDataFromFiles();
             Play();
         }
@@ -201,6 +201,7 @@ namespace ForestReturn.Scripts.Managers
         public void DeleteSlotIndex()
         {
             savedGameDataTemporary[IndexSaveSlot].Delete($"/gameData_{IndexSaveSlot}.data");
+            LoadDataFromFiles();
         }
     }
     

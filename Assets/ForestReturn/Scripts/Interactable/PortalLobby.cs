@@ -12,9 +12,9 @@ namespace ForestReturn.Scripts.Interactable
         public UnityEvent SetAsNotInteractable;
         public void Interact()
         {
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                GameManager.instance.ChangeScene(SceneToTeleport);
+                GameManager.Instance.ChangeScene(SceneToTeleport);
             }
         }
 

@@ -14,9 +14,9 @@ namespace ForestReturn.Scripts
             {
                 particle.Play();
             }
-            if (GameManager.instance != null)
+            if (GameManager.Instance != null)
             {
-                GameManager.instance.Save();
+                GameManager.Instance.Save();
             }
         }
 

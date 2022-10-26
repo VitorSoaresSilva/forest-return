@@ -46,7 +46,7 @@ namespace ForestReturn.Scripts.Inventory
         {
             foreach (var inventorySlot in Items)
             {
-                var b = InventoryManager.instance.Database.items[inventorySlot.id];
+                var b = InventoryManager.Instance.Database.items[inventorySlot.id];
                 inventorySlot.item = b;
             }
         }

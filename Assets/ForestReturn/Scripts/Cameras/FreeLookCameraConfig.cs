@@ -10,9 +10,9 @@ namespace _Developers.Vitor.Scripts.Camera
 
         private void Start()
         {
-            if (LevelManager.instance != null)
+            if (LevelManager.Instance != null)
             {
-                var playerScriptTransform = LevelManager.instance.PlayerScript.transform;
+                var playerScriptTransform = LevelManager.Instance.PlayerScript.transform;
                 CinemachineFreeLook.Follow = playerScriptTransform;
                 CinemachineFreeLook.LookAt = playerScriptTransform;
             }
