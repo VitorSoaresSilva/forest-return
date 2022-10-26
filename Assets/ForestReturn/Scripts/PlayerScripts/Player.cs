@@ -258,6 +258,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                 {
                     particle.Play();
                 }
+
+                IsIntangible = true;
                 GameManager.Instance.HandleTeleport(null);
                 _playerInput.enabled = false;
             }

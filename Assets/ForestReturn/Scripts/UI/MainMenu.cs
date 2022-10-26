@@ -120,7 +120,10 @@ namespace ForestReturn.Scripts.UI
 
         private void OnDisable()
         {
-            GameManager.Instance.OnGameManagerInitFinished -= UpdateAll;
+            if (GameManager.InstanceExists)
+            {
+                GameManager.Instance.OnGameManagerInitFinished -= UpdateAll;
+            }
         }
     }
 }

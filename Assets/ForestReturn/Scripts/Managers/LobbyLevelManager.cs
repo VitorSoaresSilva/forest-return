@@ -15,7 +15,7 @@ namespace ForestReturn.Scripts.Managers
             base.Start();
             if (GameManager.Instance != null)
             {
-                var npcState = GameManager.Instance.triggerInventory.Contains(npcSaved);
+                bool npcState = GameManager.Instance.triggerInventory.Contains(npcSaved);
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);

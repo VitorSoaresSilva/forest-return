@@ -1,20 +1,22 @@
+using System;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Utilities;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace ForestReturn.Scripts.Interactable
 {
-    public class PortalLobby : MonoBehaviour, IInteractable
+    public class PortalLv1 : MonoBehaviour, IInteractable
     {
-        public Enums.Scenes SceneToTeleport;
         public UnityEvent SetAsInteractable;
         public UnityEvent SetAsNotInteractable;
+
         public void Interact()
         {
-            if (GameManager.Instance != null)
+            if (GameManager.InstanceExists)
             {
-                GameManager.Instance.ChangeScene(SceneToTeleport);
+                GameManager.Instance.ChangeScene(Enums.Scenes.Lobby);
             }
         }
 

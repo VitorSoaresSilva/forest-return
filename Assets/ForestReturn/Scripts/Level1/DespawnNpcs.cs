@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ForestReturn.Scripts.Triggers;
+using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.NPCs;
 using UnityEngine;
 
 public class DespawnNpcs : MonoBehaviour
 {
-
+    public TriggerObject Lv1Complete;
     public GameObject portalToLobby;
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +16,8 @@ public class DespawnNpcs : MonoBehaviour
         if (baseNpc != null)
         {
             Destroy(other.transform.root.gameObject);
-            if (!portalToLobby.activeSelf)
+            GameManager.Instance.triggerInventory.AddTrigger(Lv1Complete);
+           if (!portalToLobby.activeSelf)
             {
                 portalToLobby.SetActive(true);
             }

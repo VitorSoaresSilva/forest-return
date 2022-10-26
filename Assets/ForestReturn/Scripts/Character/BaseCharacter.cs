@@ -31,7 +31,7 @@ namespace ForestReturn.Scripts
         public int MaxMana { get; private set; }
         public int Defense { get; private set; }
         public int Damage { get; private set; }
-        public bool IsIntangible { get; private set; }
+        public bool IsIntangible { get; protected set; }
         public bool IsDead { get; private set; }
         public bool IsDefending { get; protected set; }
         [SerializeField] private float intangibleCoolDown = 0.5f;
