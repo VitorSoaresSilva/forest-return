@@ -275,7 +275,7 @@ namespace ForestReturn.Scripts.Enemies
         public float cooldown;
         [Range(1,5)]
         public int weightPriority;
-        [Range(1,5)]
+        [Range(0,5)]
         public int stopDistance;
         public string animationTrigger;
         public GameObject hitBox;
