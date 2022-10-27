@@ -1,6 +1,7 @@
 using System;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Triggers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,6 +31,7 @@ namespace ForestReturn.Scripts.Enemies
             foreach (BaseEnemy baseEnemy in enemies)
             {
                 baseEnemy.OnDead += BaseEnemyOnOnDead;
+                baseEnemy.gameObject.SetActive(false);
             }
         }
 
@@ -44,8 +46,15 @@ namespace ForestReturn.Scripts.Enemies
         [ContextMenu("CloseDoors")]
         public void CloseDoors()
         {
-            Debug.Log("Close Doors");
-            closeDoorsEvent.Invoke();
+            if (GameManager.InstanceExists &&! GameManager.Instance.triggerInventory.Contains(roomCleared))
+            {
+                Debug.Log("Close Doors");
+                closeDoorsEvent.Invoke();
+                foreach (BaseEnemy baseEnemy in enemies)
+                {
+                    baseEnemy.gameObject.SetActive(true);
+                }
+            }
         }
 
         [ContextMenu("Open")]
