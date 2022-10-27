@@ -30,8 +30,8 @@ namespace ForestReturn.Scripts.Enemies
             enemiesAlive = enemies.Length;
             foreach (BaseEnemy baseEnemy in enemies)
             {
-                baseEnemy.OnDead += BaseEnemyOnOnDead;
                 baseEnemy.gameObject.SetActive(false);
+                baseEnemy.OnDead += BaseEnemyOnOnDead;
             }
         }
 
@@ -46,9 +46,10 @@ namespace ForestReturn.Scripts.Enemies
         [ContextMenu("CloseDoors")]
         public void CloseDoors()
         {
-            if (GameManager.InstanceExists &&! GameManager.Instance.triggerInventory.Contains(roomCleared))
+            if (GameManager.InstanceExists && !GameManager.Instance.triggerInventory.Contains(roomCleared))
             {
-                Debug.Log("Close Doors");
+                if (enemies.Length <= 0) return;
+                
                 closeDoorsEvent.Invoke();
                 foreach (BaseEnemy baseEnemy in enemies)
                 {
@@ -60,7 +61,6 @@ namespace ForestReturn.Scripts.Enemies
         [ContextMenu("Open")]
         public void OpenDoors()
         {
-            Debug.Log("Open Doors");
             openDoorsEvent.Invoke();
         }
 
