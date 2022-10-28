@@ -5,11 +5,19 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.Inventory
 {
+    public struct ItemCollectedData
+    {
+        public int CollectedAmount;
+        public int CurrentAmount;
+        public ItemObject Item;
+    }
     [Serializable]
     [CreateAssetMenu(fileName = "new Inventory", menuName = "Items/Inventory", order = 0)]
     public class InventoryObject : ScriptableObject
     {
         [field: SerializeField] public List<InventorySlot> Items { get; private set; } = new();
+        public delegate void OnItemCollectedEvent(ItemCollectedData itemCollectedData);
+        public event OnItemCollectedEvent OnItemCollected;
         // public string path;
         public void AddItem(ItemObject item, int amount = 1)
         {
@@ -19,11 +27,13 @@ namespace ForestReturn.Scripts.Inventory
                 {
                     if (inventorySlot.item == item)
                     {
+                        OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = inventorySlot.amount, Item = item});
                         inventorySlot.AddAmount(amount);
                         return;
                     }
                 }
             }
+            OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = amount,Item = item});
             Items.Add(new InventorySlot(item.id,amount,item));
         }
 

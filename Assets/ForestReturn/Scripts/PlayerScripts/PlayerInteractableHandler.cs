@@ -75,7 +75,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             if (interactable != null &&  index != -1)
             {
                 interactables.RemoveAt(index);
-                if (objectInteractable.Interactable != null && objectInteractable.Interactable == CurrentInteractable.Interactable)
+                if (CurrentInteractable != null && objectInteractable.Interactable == CurrentInteractable.Interactable)
                 {
                     CurrentInteractable = null;
                     interactable.SetStatusInteract(false);

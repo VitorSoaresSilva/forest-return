@@ -1,4 +1,5 @@
 using System;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.UI;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
@@ -24,17 +25,54 @@ namespace ForestReturn.Scripts.Managers
         [SerializeField] private Button mainMenuPauseButton;
         [SerializeField] private Button closePauseButton;
         [SerializeField] private Button quitPauseButton;
+
+        public GameObject prefabItemCollected;
+        public GameObject itemCollectedParent;
         public void Init()
         {
             Debug.Log("ui");
             Cursor.lockState = CursorLockMode.Locked;
-            if (LevelManager.Instance != null)
+            if (LevelManager.InstanceExists)
             {
                 LevelManager.Instance.PlayerScript.OnHurt += PlayerHurt;
                 LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
             }
+            if(InventoryManager.InstanceExists)
+            {
+                InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
+            }
             OpenCanvas(CanvasType.Hud);
             SetListeners();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            if ( LevelManager.InstanceExists)
+            {
+                LevelManager.Instance.PlayerScript.OnHurt -= PlayerHurt;
+                LevelManager.Instance.PlayerScript.OnDead -= PlayerScriptOnOnDead;
+            }
+            if ( InventoryManager.InstanceExists)
+            {
+                InventoryManager.Instance.inventory.OnItemCollected -= InventoryOnItemCollected;
+            }
+        }
+
+        private void OnDisable()
+        {
+            
+            
+        }
+        private void InventoryOnItemCollected(ItemCollectedData itemCollectedData)
+        {
+            var item = Instantiate(prefabItemCollected,itemCollectedParent.transform);
+            if (itemCollectedParent != null)
+            {
+                item.transform.SetParent(itemCollectedParent.transform);
+            }
+            var itemCollectedAlert = item.GetComponent<ItemCollectedAlert>();
+            itemCollectedAlert.SetText(itemCollectedData);
         }
 
         private void PlayerScriptOnOnDead()
