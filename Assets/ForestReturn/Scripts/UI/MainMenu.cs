@@ -11,7 +11,7 @@ namespace ForestReturn.Scripts.UI
     public class MainMenu : Singleton<MainMenu>
     {
         public CardLoadGame[] cardsLoadGame;
-        public Button playButton;
+        // public Button playButton;
         private int _currentSlotIndexActive = -1;
 
         public Button continueBtn;
@@ -38,28 +38,13 @@ namespace ForestReturn.Scripts.UI
             if (GameManager.Instance.IndexSaveSlot != -1)
             {
                 continueBtn.enabled = true; 
-                loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
+                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
             }
             else
             {
                 // continueBtn.enabled = true; 
-                loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
+                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
                 continueBtn.enabled = false;
-            }
-        }
-
-        private void UpdateCardsLoad()
-        {
-            if (GameManager.Instance.IndexSaveSlot != -1)
-            {
-                // playButton.enabled = true;
-                _currentSlotIndexActive = GameManager.Instance.IndexSaveSlot;
-                cardsLoadGame[_currentSlotIndexActive].SetState(true);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                var a = GameManager.Instance.savedGameDataTemporary[i];
-                cardsLoadGame[i].Init(a.loadSuccess ? a.generalDataObject.LastSaveString : "New Game");
             }
         }
         public void SetLoadIndex(int index)
@@ -70,7 +55,7 @@ namespace ForestReturn.Scripts.UI
             }
             _currentSlotIndexActive = index;
             cardsLoadGame[_currentSlotIndexActive].SetState(true);
-            playButton.enabled = true;
+            // playButton.enabled = true;
             GameManager.Instance.SelectIndexSaveSlot(index);
         }
 
@@ -95,7 +80,7 @@ namespace ForestReturn.Scripts.UI
             }
             if (GameManager.Instance.IndexSaveSlot < 0)
             {
-                loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
+                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
                 continueBtn.gameObject.SetActive(false);
                 _currentSlotIndexActive = 0;
                 cardsLoadGame[_currentSlotIndexActive].SetState(true);
@@ -103,18 +88,12 @@ namespace ForestReturn.Scripts.UI
             }
             else
             { 
-                loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
+                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
                 continueBtn.gameObject.SetActive(true);
                 
                 _currentSlotIndexActive = GameManager.Instance.IndexSaveSlot;
                 cardsLoadGame[_currentSlotIndexActive].SetState(true);
             }
-            
-            
-            
-            
-            // UpdateUIMenu();
-            // UpdateCardsLoad();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
