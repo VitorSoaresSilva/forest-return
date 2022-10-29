@@ -1,10 +1,12 @@
+using ForestReturn.Scripts.Interactable;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-namespace ForestReturn.Scripts.Interactable
+namespace ForestReturn.Scripts.Level1
 {
     public class RescueNpcInteractable : MonoBehaviour, IInteractable
     {
@@ -15,7 +17,7 @@ namespace ForestReturn.Scripts.Interactable
 
         private void Start()
         {
-            if (GameManager.Instance != null && GameManager.Instance.triggerInventory.Contains(npcRescued))
+            if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(npcRescued))
             {
                 foreach (var npcGameObject in npcGameObjects)
                 {
@@ -36,15 +38,22 @@ namespace ForestReturn.Scripts.Interactable
                 navMeshAgent.stoppingDistance = 0;
             }
 
-            if (GameManager.Instance != null)
+            if (InventoryManager.InstanceExists)
             {
-                GameManager.Instance.triggerInventory.AddTrigger(npcRescued);
+                InventoryManager.Instance.triggerInventory.AddTrigger(npcRescued);
             }
         }
 
         public void SetStatusInteract(bool status)
         {
-            
+            if (status)
+            {
+                onInteractableTrue?.Invoke();
+            }
+            else
+            {
+                onInteractableFalse?.Invoke();
+            }
         }
     }
 }

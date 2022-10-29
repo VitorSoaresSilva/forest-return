@@ -1,3 +1,4 @@
+using ForestReturn.Scripts.Teleport;
 using UnityEngine;
 
 namespace ForestReturn.Scripts.Managers
@@ -9,11 +10,14 @@ namespace ForestReturn.Scripts.Managers
             base.Start();
             if (GameManager.Instance != null)
             {
-                var teleportData = GameManager.Instance.generalData.TeleportData;
-                if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
+                if (GameManager.Instance.generalData.TeleportData != null)
                 {
-                    pointToSpawn = teleportData.PositionToSpawn;
-                    GameManager.Instance.generalData.TeleportData.AlreadyReturned = true;
+                    TeleportData teleportData = (TeleportData)GameManager.Instance.generalData.TeleportData;
+                    if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
+                    {
+                        pointToSpawn = teleportData.PositionToSpawn;
+                        GameManager.Instance.generalData.TeleportData = null;
+                    }
                 }
             }
             PlayerScript.Init();

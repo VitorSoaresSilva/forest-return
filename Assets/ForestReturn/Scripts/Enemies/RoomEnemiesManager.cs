@@ -1,7 +1,6 @@
 using System;
-using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Triggers;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,10 +14,20 @@ namespace ForestReturn.Scripts.Enemies
         public TriggerObject roomCleared;
         public UnityEvent openDoorsEvent;
         public UnityEvent closeDoorsEvent;
-        
+
+
+        private void Awake()
+        {
+            foreach (var enemy in enemies)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+        }
+
         private void Start()
         {
-            if (GameManager.InstanceExists && GameManager.Instance.triggerInventory.Contains(roomCleared))
+            Debug.Log("Rooom manager");
+            if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(roomCleared))
             {
                 foreach (var enemy in enemies)
                 {
@@ -30,8 +39,8 @@ namespace ForestReturn.Scripts.Enemies
             enemiesAlive = enemies.Length;
             foreach (BaseEnemy baseEnemy in enemies)
             {
-                baseEnemy.gameObject.SetActive(false);
                 baseEnemy.OnDead += BaseEnemyOnOnDead;
+                baseEnemy.gameObject.SetActive(false);
             }
         }
 
@@ -46,7 +55,7 @@ namespace ForestReturn.Scripts.Enemies
         [ContextMenu("CloseDoors")]
         public void CloseDoors()
         {
-            if (GameManager.InstanceExists && !GameManager.Instance.triggerInventory.Contains(roomCleared))
+            if (InventoryManager.InstanceExists && !InventoryManager.Instance.triggerInventory.Contains(roomCleared))
             {
                 if (enemies.Length <= 0) return;
                 
@@ -66,9 +75,9 @@ namespace ForestReturn.Scripts.Enemies
 
         private void RoomCleared()
         {
-            if (GameManager.InstanceExists)
+            if (InventoryManager.InstanceExists)
             {
-                GameManager.Instance.triggerInventory.AddTrigger(roomCleared);
+                InventoryManager.Instance.triggerInventory.AddTrigger(roomCleared);
             }
             OpenDoors();
         }

@@ -16,12 +16,12 @@ namespace ForestReturn.Scripts
         
         public Enums.Scenes currentLevel;
         // public Vector3 pointToSpawn;
-        public TeleportData TeleportData;
+        public TeleportData? TeleportData;
 
         public void Init()
         {
             currentLevel = Enums.Scenes.Lobby;
-            TeleportData = new TeleportData();
+            TeleportData = null;
         }
 
         public void Clear()
@@ -29,7 +29,7 @@ namespace ForestReturn.Scripts
             LastSaveString = String.Empty;
             LastSaveLong = 0;
             currentLevel = Enums.Scenes.Lobby;
-            TeleportData = new TeleportData();
+            TeleportData = null;
         }
     }
 }

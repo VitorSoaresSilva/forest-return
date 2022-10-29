@@ -24,11 +24,6 @@ namespace ForestReturn.Scripts.Managers
 
         // public GameData GameData;
         public SaveGameData[] savedGameDataTemporary;
-
-        [Header("Triggers")] 
-        public TriggerDatabaseObject triggerDatabase;
-        [HideInInspector]
-        public TriggerInventoryObject triggerInventory;
         public bool loadingFromCheckpoint;
         public delegate void OnGameManagerInitFinishedEvent();
         public event OnGameManagerInitFinishedEvent OnGameManagerInitFinished;
@@ -90,12 +85,7 @@ namespace ForestReturn.Scripts.Managers
             if (IndexSaveSlot == -1) return;
             InventoryManager.Instance.inventory = null;
             InventoryManager.Instance.equippedItems = null;
-            // InventoryManager.instance.Clear();
-            if (triggerInventory != null)
-            {
-                // triggerInventory.Clear();
-                triggerInventory = null;
-            }
+            InventoryManager.Instance.triggerInventory = null;
             if (generalData != null)
             {
                 generalData = null;
@@ -103,7 +93,7 @@ namespace ForestReturn.Scripts.Managers
             }
             InventoryManager.Instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
             InventoryManager.Instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
-            triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
+            InventoryManager.Instance.triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
             generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
 
 
@@ -115,7 +105,7 @@ namespace ForestReturn.Scripts.Managers
             {
                 InventoryManager.Instance.Init();
                 
-                triggerInventory.Init();
+                // InventoryManager.Instance.triggerInventory.Init();
                 generalData.Init();
             }
         }
@@ -130,9 +120,9 @@ namespace ForestReturn.Scripts.Managers
                 return;
             }
 
-            if (generalData.TeleportData.AlreadyReturned) return;
-            generalData.currentLevel = generalData.TeleportData.SceneStartIndex;
-            StartCoroutine(LoadScene((int)generalData.TeleportData.SceneStartIndex));
+            if (generalData.TeleportData == null ) return;
+            generalData.currentLevel = (Enums.Scenes)generalData.TeleportData?.SceneStartIndex;
+            StartCoroutine(LoadScene((int)generalData.TeleportData?.SceneStartIndex));
         }
 
         private IEnumerator LoadScene(int sceneIndex)

@@ -804,10 +804,14 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 869251733}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLoadIndex
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: ForestReturn.Scripts.UI.MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448075, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_Name
@@ -1480,10 +1484,14 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 869251733}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLoadIndex
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: ForestReturn.Scripts.UI.MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -1959,7 +1967,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869251728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -3178,10 +3186,14 @@ PrefabInstance:
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 869251733}
+    - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLoadIndex
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MainMenu, Assembly-CSharp
+      value: ForestReturn.Scripts.UI.MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7793418476615448073, guid: 96cb13aa5c23b204584229b6c277988e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -3309,7 +3321,6 @@ GameObject:
   - component: {fileID: 1526385277}
   - component: {fileID: 1526385276}
   - component: {fileID: 1526385275}
-  - component: {fileID: 1526385274}
   m_Layer: 5
   m_Name: continue-button
   m_TagString: Untagged
@@ -3337,35 +3348,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 693.7124, y: 81.0803}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1526385274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526385272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1526385275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3409,7 +3391,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1526385276}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 869251733}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.UI.MainMenu, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1526385276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4597,6 +4591,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7470098165606389440, guid: 89ddb515558f942459d3b95297a1cf7b, type: 3}
+      propertyPath: triggerDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: a996635468d47cf478d3b539b6cc3251, type: 2}
     - target: {fileID: 7470098165606389469, guid: 89ddb515558f942459d3b95297a1cf7b, type: 3}
       propertyPath: m_Name
       value: ====Managers====

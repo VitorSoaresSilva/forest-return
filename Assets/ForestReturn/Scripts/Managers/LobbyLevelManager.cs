@@ -1,4 +1,6 @@
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.NPCs;
+using ForestReturn.Scripts.Teleport;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 
@@ -13,22 +15,28 @@ namespace ForestReturn.Scripts.Managers
         protected override void Start()
         {
             base.Start();
-            if (GameManager.InstanceExists)
+            if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
-                bool npcState = GameManager.Instance.triggerInventory.Contains(npcSaved);
+                bool npcState = InventoryManager.Instance.triggerInventory.Contains(npcSaved);
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
                     npc.GetComponent<IBaseNpc>().InitOnLobby();
                 }
-                var teleportData = GameManager.Instance.generalData.TeleportData;
-                if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
+
+                if (GameManager.Instance.generalData.TeleportData != null)
                 {
-                    pointToSpawn = teleportData.PositionToSpawn;
+                    TeleportData teleportData = (TeleportData)GameManager.Instance.generalData.TeleportData;
+                    if (teleportData.SceneStartIndex == sceneIndex)
+                    {
+                        pointToSpawn = teleportData.PositionToSpawn;
+                    }
+                    
                 }
+                
             }
             PlayerScript.Init();
-            if (UiManager.Instance != null)
+            if (UiManager.InstanceExists)
             {
                 UiManager.Instance.Init();
             }

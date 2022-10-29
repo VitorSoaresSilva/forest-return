@@ -1,4 +1,5 @@
 using ForestReturn.Scripts.Artifacts;
+using ForestReturn.Scripts.Triggers;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
@@ -9,7 +10,10 @@ namespace ForestReturn.Scripts.Inventory
         [HideInInspector] public InventoryObject inventory;
         [HideInInspector] public InventoryObject equippedItems;
         public ItemDatabaseObject Database;
-
+        [Header("Triggers")] 
+        public TriggerDatabaseObject triggerDatabase;
+        [HideInInspector]
+        public TriggerInventoryObject triggerInventory;
         public void Clear()
         {
             if (inventory != null)
@@ -26,6 +30,7 @@ namespace ForestReturn.Scripts.Inventory
         {
             inventory.Clear();
             equippedItems.Clear();
+            triggerInventory.Init();
             // add initial sword to Equipped items
         }
         public void Init(InventoryObject loadedInventory,InventoryObject loadedEquippedItems)

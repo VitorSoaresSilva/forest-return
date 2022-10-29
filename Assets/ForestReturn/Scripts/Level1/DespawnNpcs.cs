@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Triggers;
-using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.NPCs;
 using UnityEngine;
 
@@ -16,7 +13,7 @@ public class DespawnNpcs : MonoBehaviour
         if (baseNpc != null)
         {
             Destroy(other.transform.root.gameObject);
-            GameManager.Instance.triggerInventory.AddTrigger(Lv1Complete);
+            InventoryManager.Instance.triggerInventory.AddTrigger(Lv1Complete);
            if (!portalToLobby.activeSelf)
             {
                 portalToLobby.SetActive(true);

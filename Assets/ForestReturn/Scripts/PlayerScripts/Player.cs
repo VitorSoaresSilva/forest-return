@@ -285,7 +285,10 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void OnVinesSkill(InputAction.CallbackContext context)
         {
-            Instantiate(vinesSkillPrefab, transform.position, transform.rotation);
+            if (context.performed)
+            {
+                Instantiate(vinesSkillPrefab, transform.position, transform.rotation);
+            }
         }
         public void OnDefense(InputAction.CallbackContext context)
         {

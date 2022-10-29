@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ namespace ForestReturn.Scripts.Triggers
         {
             foreach (var trigger in Triggers)
             {
-                trigger.TriggerObject = GameManager.Instance.triggerDatabase.triggers[trigger.Id];
+                trigger.TriggerObject = InventoryManager.Instance.triggerDatabase.triggers[trigger.Id];
             }
         }
         [ContextMenu("Clear")]

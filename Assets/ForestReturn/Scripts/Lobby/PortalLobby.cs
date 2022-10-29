@@ -1,3 +1,4 @@
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Utilities;
 using ForestReturn.Scripts.Triggers;
@@ -14,13 +15,13 @@ namespace ForestReturn.Scripts.Interactable
         public UnityEvent SetAsNotInteractable;
         public void Interact()
         {
-            if (GameManager.Instance != null)
+            if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
-                if (GameManager.Instance.triggerInventory.Contains(Lv1Complete))
+                if (InventoryManager.Instance.triggerInventory.Contains(Lv1Complete))
                 {
                     GameManager.Instance.ChangeScene(Enums.Scenes.Level02);
                 }
-                else if(GameManager.Instance.triggerInventory.Contains(Lv2Complete))
+                else if(InventoryManager.Instance.triggerInventory.Contains(Lv2Complete))
                 {
                     GameManager.Instance.ChangeScene(Enums.Scenes.Level03);
                 }

@@ -43,7 +43,7 @@ namespace ForestReturn.Scripts.Managers
 
         protected virtual void Start()
         {
-            if (GameManager.Instance == null) return;
+            if (!GameManager.InstanceExists) return;
             if (GameManager.Instance.loadingFromCheckpoint)
             {
                 pointToSpawn = GameManager.Instance.generalData.playerPosition;

@@ -36,6 +36,7 @@ namespace ForestReturn.Scripts.Enemies
 
         private void Start()
         {
+            Debug.Log("Start " + gameObject.name);
             _updateCoroutine = StartCoroutine(UpdateState());
             _myCollider = GetComponentInChildren<CapsuleCollider>();
             InitAttackRandomizer();
@@ -186,6 +187,7 @@ namespace ForestReturn.Scripts.Enemies
 
         private void SetNextAttack()
         {
+            Debug.Log(gameObject.name);
             _nextAttackIndex = _attackRandomizer[Random.Range(0, _attackRandomizer.Length)];
             _nextTimeAttack = Time.time + Attacks[_nextAttackIndex].cooldown;
             
