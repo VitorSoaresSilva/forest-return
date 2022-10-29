@@ -139,6 +139,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "VinesSkill",
+                    "type": "Button",
+                    "id": "3e02f270-96c0-4f03-9df9-0e35fe30c6ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -436,6 +445,17 @@
                     "processors": "ScaleVector2(x=0),NormalizeVector2",
                     "groups": "",
                     "action": "ZoomCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d78decf-f785-47b5-9984-5b5359f2cd4b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VinesSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

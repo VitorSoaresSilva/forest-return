@@ -54,6 +54,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         [Header("Attack")] 
         private bool acceptComboAttack;
         [SerializeField] private GameObject swordEffect;
+
+        [Header("Skills")] 
+        [SerializeField] private GameObject vinesSkillPrefab;
         
 
         public void Init()
@@ -280,6 +283,10 @@ namespace ForestReturn.Scripts.PlayerScripts
             }
         }
 
+        public void OnVinesSkill(InputAction.CallbackContext context)
+        {
+            Instantiate(vinesSkillPrefab, transform.position, transform.rotation);
+        }
         public void OnDefense(InputAction.CallbackContext context)
         {
             if (context.performed)

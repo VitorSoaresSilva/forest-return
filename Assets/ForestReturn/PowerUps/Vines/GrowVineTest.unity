@@ -207,6 +207,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279868110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6800021239049874377, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+  m_PrefabInstance: {fileID: 828143462}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d2148b61cf43e9b1c22c0b3dd51d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &828143462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,6 +228,46 @@ PrefabInstance:
     - target: {fileID: 6800021239049874354, guid: 53260944c6c198e4f8733299eac27308, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: 3e02f270-96c0-4f03-9df9-0e35fe30c6ea
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: gameplay/VinesSkill[/Keyboard/q]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 279868110}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnVinesSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ForestReturn.Scripts.PlayerScripts.Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874356, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6800021239049874358, guid: 53260944c6c198e4f8733299eac27308, type: 3}
       propertyPath: m_RootOrder
@@ -262,6 +313,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6800021239049874377, guid: 53260944c6c198e4f8733299eac27308, type: 3}
+      propertyPath: vinesSkillPrefab
+      value: 
+      objectReference: {fileID: 6912981248318724675, guid: 0234029f0909b1642931ec9e02dd472a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53260944c6c198e4f8733299eac27308, type: 3}
 --- !u!1 &1357473906
@@ -477,64 +532,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1642307901
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3991072916641813344, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_Name
-      value: VinesPowerUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072916641813345, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991072917291253365, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: add2b8c8016ed8c4389af5155f945df1, type: 3}

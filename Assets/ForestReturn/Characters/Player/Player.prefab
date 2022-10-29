@@ -12511,6 +12511,7 @@ MonoBehaviour:
   - {fileID: 7035442663604222291}
   - {fileID: 7052558729550120547}
   swordEffect: {fileID: 8534589066460981031}
+  vinesSkillPrefab: {fileID: 6912981248318724675, guid: 0234029f0909b1642931ec9e02dd472a, type: 3}
 --- !u!114 &6800021239049874356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12804,6 +12805,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 70759857-cc0d-4c7c-8254-06b064816e0e
     m_ActionName: gameplay/ZoomCamera[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6800021239049874377}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.PlayerScripts.Player, Assembly-CSharp
+        m_MethodName: OnVinesSkill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3e02f270-96c0-4f03-9df9-0e35fe30c6ea
+    m_ActionName: gameplay/VinesSkill[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: gameplay

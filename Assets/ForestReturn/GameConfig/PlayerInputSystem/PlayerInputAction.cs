@@ -161,6 +161,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VinesSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e02f270-96c0-4f03-9df9-0e35fe30c6ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -460,6 +469,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""ZoomCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d78decf-f785-47b5-9984-5b5359f2cd4b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VinesSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -734,6 +754,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_Defense = m_gameplay.FindAction("Defense", throwIfNotFound: true);
         m_gameplay_TesteCamera = m_gameplay.FindAction("TesteCamera", throwIfNotFound: true);
         m_gameplay_ZoomCamera = m_gameplay.FindAction("ZoomCamera", throwIfNotFound: true);
+        m_gameplay_VinesSkill = m_gameplay.FindAction("VinesSkill", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -818,6 +839,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_Defense;
     private readonly InputAction m_gameplay_TesteCamera;
     private readonly InputAction m_gameplay_ZoomCamera;
+    private readonly InputAction m_gameplay_VinesSkill;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -837,6 +859,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @Defense => m_Wrapper.m_gameplay_Defense;
         public InputAction @TesteCamera => m_Wrapper.m_gameplay_TesteCamera;
         public InputAction @ZoomCamera => m_Wrapper.m_gameplay_ZoomCamera;
+        public InputAction @VinesSkill => m_Wrapper.m_gameplay_VinesSkill;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -891,6 +914,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @ZoomCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
                 @ZoomCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
                 @ZoomCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
+                @VinesSkill.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
+                @VinesSkill.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
+                @VinesSkill.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -940,6 +966,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @ZoomCamera.started += instance.OnZoomCamera;
                 @ZoomCamera.performed += instance.OnZoomCamera;
                 @ZoomCamera.canceled += instance.OnZoomCamera;
+                @VinesSkill.started += instance.OnVinesSkill;
+                @VinesSkill.performed += instance.OnVinesSkill;
+                @VinesSkill.canceled += instance.OnVinesSkill;
             }
         }
     }
@@ -1086,6 +1115,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnDefense(InputAction.CallbackContext context);
         void OnTesteCamera(InputAction.CallbackContext context);
         void OnZoomCamera(InputAction.CallbackContext context);
+        void OnVinesSkill(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
