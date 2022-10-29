@@ -137,7 +137,7 @@ namespace ForestReturn.Scripts.Managers
 
         private IEnumerator LoadScene(int sceneIndex)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
             yield return null;
         }

@@ -29,7 +29,7 @@ namespace ForestReturn.Scripts
         {
             if (alert != null)
             {
-                alert.SetActive(true);
+                alert.SetActive(status);
             }
         }
     }

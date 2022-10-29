@@ -72,7 +72,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8109266634331874667}
-  - component: {fileID: 8051394448360674983}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -179,36 +178,6 @@ Transform:
   m_Father: {fileID: 8863614891804879434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8051394448360674983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314686330431226605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
 --- !u!1 &1936635111854192153
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8863614891804879434}
+  - component: {fileID: 1024471432}
   m_Layer: 0
   m_Name: 2VerticalA
   m_TagString: Untagged
@@ -386,7 +356,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8873857839931639372}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -400,6 +370,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1024471432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873857839931639372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74176ed4733a43b5b490d8b36b76a3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 0}
+  - {fileID: 0}
+  enemiesAlive: 0
+  roomCleared: {fileID: 11400000, guid: 5c4e52bbf8dceef4e9ae230957f6c430, type: 2}
+  openDoorsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9063719263453540150}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4799480334637710612}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  closeDoorsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9063719263453540150}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4799480334637710612}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &391973668706072515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,6 +870,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+--- !u!114 &4799480334637710612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 691971213978170015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6928909549045400259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
@@ -2942,6 +2994,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
   m_PrefabInstance: {fileID: 3947828860589449405}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9063719263453540150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 3947828860589449405}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4091418881505763271
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8236969685075526842}
-  - component: {fileID: 8236969685075526841}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -132,36 +131,6 @@ Transform:
   m_Father: {fileID: 8236969686284831430}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8236969685075526841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236969685075526843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: -1372625422
-  m_CollectObjects: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d1de0f1452dd53e438dc7b329bc075f3, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &8236969685605204723
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8236969686284831430}
+  - component: {fileID: 1113693424}
   m_Layer: 0
   m_Name: 4Gates
   m_TagString: Untagged
@@ -283,7 +253,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8236969686284831431}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -297,6 +267,125 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1113693424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236969686284831431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74176ed4733a43b5b490d8b36b76a3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 0}
+  - {fileID: 0}
+  enemiesAlive: 0
+  roomCleared: {fileID: 11400000, guid: 7009b2f5da1da1f42bf53d14a5499803, type: 2}
+  openDoorsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4129472658424047678}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472660290317669}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472659959585295}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472659359308588}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  closeDoorsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4129472658424047678}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472660290317669}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472659959585295}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129472659359308588}
+        m_TargetAssemblyTypeName: ForestReturn.Scripts.Cenario.Door, Assembly-CSharp
+        m_MethodName: CloseDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8236969686541344243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2896,6 +2985,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
   m_PrefabInstance: {fileID: 8236969685430031527}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4129472659359308588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 8236969685430031527}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8236969685460990492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3268,6 +3368,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
   m_PrefabInstance: {fileID: 8236969685543217077}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4129472658424047678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 8236969685543217077}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8236969685548951883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3523,6 +3634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8236969686077719244}
     m_Modifications:
+    - target: {fileID: 151597802311330077, guid: 33e6814ed1b3d3945a891d6cc76abd1c, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1320040371348099698, guid: 33e6814ed1b3d3945a891d6cc76abd1c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5996,6 +6111,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
   m_PrefabInstance: {fileID: 8236969686360777454}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4129472660290317669 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 8236969686360777454}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8236969686362573706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8848,6 +8974,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616166005502324828, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
   m_PrefabInstance: {fileID: 8236969686977172868}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4129472659959585295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3818685484834795637, guid: a4c3c3249bfdd1d4c97a2fe4da6ea5b0, type: 3}
+  m_PrefabInstance: {fileID: 8236969686977172868}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3e9acbed7f456aaa9f929db04239a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8236969686989462491
 PrefabInstance:
   m_ObjectHideFlags: 0
