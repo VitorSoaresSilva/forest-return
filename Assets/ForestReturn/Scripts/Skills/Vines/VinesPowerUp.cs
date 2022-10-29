@@ -27,7 +27,6 @@ namespace ForestReturn.Scripts.Skills.Vines
             {
                 colliderGameObject = GetComponentInChildren<BoxCollider>().gameObject;
             }
-
             var localScale = colliderGameObject.transform.localScale;
             _maxColliderZValue = localScale.z;
             localScale = new Vector3(localScale.x, localScale.y, 0);
@@ -43,7 +42,6 @@ namespace ForestReturn.Scripts.Skills.Vines
                     }
                 }
             }
-
             colliderGameObject.SetActive(false);
         }
 
@@ -56,15 +54,12 @@ namespace ForestReturn.Scripts.Skills.Vines
         public void GrowUp()
         {
             StartCoroutine(GrowVines());
-            
         }
 
         private IEnumerator GrowVines()
         {
             float growValue = 0;
             var localScale = colliderGameObject.transform.localScale;
-            // if (!_fullyGrown)
-            // {
             colliderGameObject.SetActive(true);
             while (growValue < maxGrow)
             {
@@ -79,7 +74,6 @@ namespace ForestReturn.Scripts.Skills.Vines
             }
             localScale = new Vector3(localScale.x, localScale.y, _maxColliderZValue);
             colliderGameObject.transform.localScale = localScale;
-            Debug.Log("Fully grown");
             yield return new WaitForSeconds(timeToStayActive);
             while (growValue > minGrow)
             {
@@ -93,61 +87,7 @@ namespace ForestReturn.Scripts.Skills.Vines
                 yield return new WaitForSeconds(refreshRate);
             }
             colliderGameObject.SetActive(false);
-            
-            
-            
-            // }
-            // else
-            // {
-            //     while (growValue > minGrow)
-            //     {
-            //         growValue -= 1 / (timeToGrowBackward / refreshRate);
-            //         material.SetFloat(Grow, growValue);
-            //         localScale = new Vector3(localScale.x, localScale.y, Mathf.Lerp(0, _maxColliderZValue, growValue));
-            //         colliderGameObject.transform.localScale = localScale;
-            //         yield return new WaitForSeconds(refreshRate);
-            //     }
-            //
-            //     colliderGameObject.SetActive(false);
-            // }
-
-            _fullyGrown = growValue >= maxGrow;
-        }
-
-        private IEnumerator GrowVines2(Material material)
-        {
-            float growValue = material.GetFloat(Grow);
-            var localScale = colliderGameObject.transform.localScale;
-            if (!_fullyGrown)
-            {
-                colliderGameObject.SetActive(true);
-                while (growValue < maxGrow)
-                {
-                    growValue += 1 / (timeToGrowForward / refreshRate);
-                    material.SetFloat(Grow, growValue);
-                    localScale = new Vector3(localScale.x, localScale.y, Mathf.Lerp(0, _maxColliderZValue, growValue));
-                    colliderGameObject.transform.localScale = localScale;
-
-                    yield return new WaitForSeconds(refreshRate);
-                }
-
-                Debug.Log("Fully grown");
-            }
-            else
-            {
-                while (growValue > minGrow)
-                {
-                    growValue -= 1 / (timeToGrowBackward / refreshRate);
-                    material.SetFloat(Grow, growValue);
-                    localScale = new Vector3(localScale.x, localScale.y, Mathf.Lerp(0, _maxColliderZValue, growValue));
-                    colliderGameObject.transform.localScale = localScale;
-                    yield return new WaitForSeconds(refreshRate);
-                }
-
-                colliderGameObject.SetActive(false);
-            }
-
-            _fullyGrown = growValue >= maxGrow;
+            Destroy(gameObject);
         }
     }
 }
