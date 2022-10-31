@@ -1,8 +1,10 @@
+using System;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
 namespace ForestReturn.Scripts.Teleport
 {
+    [Serializable]
     public struct TeleportData
     {
         public Vector3 PositionToSpawn;

@@ -15,17 +15,22 @@ namespace ForestReturn.Scripts.Interactable
 
         private void Start()
         {
+            if (InventoryManager.InstanceExists && triggerObject &&
+                InventoryManager.Instance.triggerInventory.Contains(triggerObject))
+            {
+                Destroy(gameObject);
+            }
             SetStatusInteract(false);
         }
 
         public void Interact()
         {
-            if (InventoryManager.Instance != null)
+            if (InventoryManager.InstanceExists)
             {
                 InventoryManager.Instance.inventory.AddItem(itemObject,quantity);
-                if (isUnique && triggerObject)
+                if (isUnique && triggerObject != null)
                 {
-                    // GameManager.Instance.triggerInventory
+                    InventoryManager.Instance.triggerInventory.AddTrigger(triggerObject);
                 }
                 Destroy(gameObject);
             }

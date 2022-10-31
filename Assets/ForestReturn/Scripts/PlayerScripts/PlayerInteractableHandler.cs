@@ -59,7 +59,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void OnTriggerEnter(Collider other)
         {
             other.transform.root.TryGetComponent(out IInteractable interactable);
-            ObjectInteractable objectInteractable = new ObjectInteractable(other.transform,interactable);
+            ObjectInteractable objectInteractable = new ObjectInteractable(other.transform.root,interactable);
             if (interactable != null && !interactables.Contains(objectInteractable))
             {
                 interactables.Add(objectInteractable);
@@ -68,9 +68,8 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnTriggerExit(Collider other)
         {
-            
             other.transform.root.TryGetComponent(out IInteractable interactable);
-            ObjectInteractable objectInteractable = new ObjectInteractable(transform,interactable);
+            ObjectInteractable objectInteractable = new ObjectInteractable(other.transform.root,interactable);
             var index = interactables.FindIndex(a => a.Interactable == interactable);
             if (interactable != null &&  index != -1)
             {

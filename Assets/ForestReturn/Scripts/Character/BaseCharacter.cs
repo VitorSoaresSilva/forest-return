@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts
 {
+    public struct BaseCharacterData
+    {
+        public int CurrentHealth;
+        public int CurrentMana;
+    }
     public class BaseCharacter : MonoBehaviour, IDamageable
     {
         private int _currentHealth;
@@ -52,6 +57,7 @@ namespace ForestReturn.Scripts
             MaxHealth = baseAttributes.health;
             CurrentHealth = MaxHealth;
             MaxMana = MaxMana = baseAttributes.mana;
+            CurrentMana = MaxMana;
             Defense = baseAttributes.defense;
             Damage = baseAttributes.damage;
         }

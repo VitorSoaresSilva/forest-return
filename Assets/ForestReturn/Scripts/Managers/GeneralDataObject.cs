@@ -13,10 +13,11 @@ namespace ForestReturn.Scripts
         public string LastSaveString;
         public long LastSaveLong;
         public Vector3 playerPosition;
+        public BaseCharacterData? playerCharacterData;
         
         public Enums.Scenes currentLevel;
         // public Vector3 pointToSpawn;
-        public TeleportData? TeleportData;
+        [SerializeField]public TeleportData? TeleportData;
 
         public void Init()
         {

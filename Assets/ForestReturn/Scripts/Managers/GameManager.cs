@@ -20,9 +20,6 @@ namespace ForestReturn.Scripts.Managers
         [HideInInspector] public GeneralDataObject generalData;
         public int IndexSaveSlot { get; private set; } = -1;
         public bool isPaused { get; private set; }
-        // private int _indexLatestSaveSlot = -1;
-
-        // public GameData GameData;
         public SaveGameData[] savedGameDataTemporary;
         public bool loadingFromCheckpoint;
         public delegate void OnGameManagerInitFinishedEvent();
@@ -36,6 +33,7 @@ namespace ForestReturn.Scripts.Managers
 
         private void LoadDataFromFiles()
         {
+            Clear();
             GameManagerInitFinished = false;
             loadingFromCheckpoint = false;
             IndexSaveSlot = -1;
@@ -66,7 +64,7 @@ namespace ForestReturn.Scripts.Managers
         {
             if (IndexSaveSlot == -1) return;
             Init();
-            SceneManager.LoadScene((int)generalData.currentLevel);
+            
         }
 
         [ContextMenu("Save")]
@@ -75,27 +73,33 @@ namespace ForestReturn.Scripts.Managers
             generalData.LastSaveString = DateTime.Now.ToLongTimeString();
             generalData.LastSaveLong = DateTime.Now.ToFileTime();
             generalData.playerPosition = LevelManager.Instance.PlayerScript.transform.position;
+            generalData.currentLevel = LevelManager.Instance.sceneIndex;
+            generalData.playerCharacterData = new BaseCharacterData()
+            {
+                CurrentHealth = LevelManager.Instance.PlayerScript.CurrentHealth,
+                CurrentMana = LevelManager.Instance.PlayerScript.CurrentMana
+            };
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
 
-
+        public void Clear()
+        {
+            InventoryManager.Instance.Clear();
+            if (generalData != null)
+            {
+                Debug.Log("Clear 2");
+                generalData.Clear();
+            }
+        }
         private void Init()
         {
             if (IndexSaveSlot == -1) return;
-            InventoryManager.Instance.inventory = null;
-            InventoryManager.Instance.equippedItems = null;
-            InventoryManager.Instance.triggerInventory = null;
-            if (generalData != null)
-            {
-                generalData = null;
-                // generalData.Clear();
-            }
             InventoryManager.Instance.inventory = savedGameDataTemporary[IndexSaveSlot].inventoryObject;
             InventoryManager.Instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
             InventoryManager.Instance.triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
             generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
-
+            Debug.Log("equals null on init " + generalData.TeleportData == null);
 
             if (savedGameDataTemporary[IndexSaveSlot].loadSuccess)
             {
@@ -103,11 +107,13 @@ namespace ForestReturn.Scripts.Managers
             }
             else
             {
+                Debug.Log("init");
                 InventoryManager.Instance.Init();
                 
                 // InventoryManager.Instance.triggerInventory.Init();
                 generalData.Init();
             }
+            SceneManager.LoadScene((int)generalData.currentLevel);
         }
 
         public void HandleTeleport(TeleportData? teleportData)
@@ -115,14 +121,15 @@ namespace ForestReturn.Scripts.Managers
             if (teleportData != null)
             {
                 generalData.TeleportData = teleportData.Value;
-                generalData.currentLevel = Enums.Scenes.Lobby;
-                StartCoroutine(LoadScene((int)Enums.Scenes.Lobby));
-                return;
+                // generalData.currentLevel = Enums.Scenes.Lobby;
+                // StartCoroutine(LoadScene((int)Enums.Scenes.Lobby));
+                ChangeScene(Enums.Scenes.Lobby);
             }
-
-            if (generalData.TeleportData == null ) return;
-            generalData.currentLevel = (Enums.Scenes)generalData.TeleportData?.SceneStartIndex;
-            StartCoroutine(LoadScene((int)generalData.TeleportData?.SceneStartIndex));
+            else
+            {
+                ChangeScene(generalData.TeleportData.Value.SceneStartIndex);
+                generalData.TeleportData = null;
+            }
         }
 
         private IEnumerator LoadScene(int sceneIndex)
@@ -142,9 +149,8 @@ namespace ForestReturn.Scripts.Managers
 
         public void ChangeScene(Enums.Scenes scene)
         {
-            generalData.currentLevel = scene;
             //TODO: Add Effect teleport
-            generalData.TeleportData = new TeleportData();
+            Save();
             SceneManager.LoadScene((int)scene);
         }
         
@@ -191,6 +197,7 @@ namespace ForestReturn.Scripts.Managers
         public void DeleteSlotIndex()
         {
             savedGameDataTemporary[IndexSaveSlot].Delete($"/gameData_{IndexSaveSlot}.data");
+            // Save();
             LoadDataFromFiles();
         }
     }

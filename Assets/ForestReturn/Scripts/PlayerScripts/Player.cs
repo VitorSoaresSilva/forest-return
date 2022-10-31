@@ -71,6 +71,12 @@ namespace ForestReturn.Scripts.PlayerScripts
                 transform.position = LevelManager.Instance.pointToSpawn;
                 _controller.enabled = true;
             }
+
+            if (GameManager.InstanceExists && GameManager.Instance.generalData.playerCharacterData != null)
+            {
+                CurrentHealth = (int)GameManager.Instance.generalData.playerCharacterData?.CurrentHealth;
+                CurrentMana = (int)GameManager.Instance.generalData.playerCharacterData?.CurrentMana;
+            }
             
             //equipamentos
             _currentSpeed = normalSpeed;
@@ -200,7 +206,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            playerInteractableHandler.CurrentInteractable?.Interactable.Interact();
+            playerInteractableHandler.CurrentInteractable?.Interactable?.Interact();
             playerInteractableHandler.Reset();
         }
         public void OnMouseZoom(InputAction.CallbackContext context)
@@ -254,33 +260,61 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnTeleport(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.Instance.generalData.currentLevel == Enums.Scenes.Lobby && 
-                GameManager.Instance.generalData.TeleportData is { AlreadyReturned: false })
-            {
-                foreach (var particle in _particleSystemsTeleport)
-                {
-                    particle.Play();
-                }
 
+            Debug.Log(GameManager.Instance.generalData.TeleportData != null);
+            if (GameManager.Instance.generalData.TeleportData != null)
+            {
+                Debug.Log("not equals null");
+                _playerInput.enabled = false;
                 IsIntangible = true;
                 GameManager.Instance.HandleTeleport(null);
-                _playerInput.enabled = false;
             }
-
-            
-            var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
-            if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
-                teleportItems.Count > 0)
+            else
             {
-                foreach (var particle in _particleSystemsTeleport)
+                Debug.Log("equals null");
+                var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
+                if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
+                    teleportItems.Count > 0)
                 {
-                    particle.Play();
+                    foreach (var particle in _particleSystemsTeleport)
+                    {
+                        particle.Play();
+                    }
+                    var teleportItem = teleportItems[0].item;
+                    InventoryManager.Instance.inventory.RemoveItem(teleportItem);
+                    GameManager.Instance.HandleTeleport(new TeleportData(transform.position, LevelManager.Instance.sceneIndex));
+                    _playerInput.enabled = false;
                 }
-                var teleportItem = teleportItems[0].item;
-                InventoryManager.Instance.inventory.RemoveItem(teleportItem);
-                GameManager.Instance.HandleTeleport(new TeleportData(transform.position, Enums.Scenes.Level01));
-                _playerInput.enabled = false;
             }
+            
+            // if (GameManager.Instance.generalData.currentLevel == Enums.Scenes.Lobby && 
+            //     GameManager.Instance.generalData.TeleportData is { AlreadyReturned: false })
+            // {
+            //     foreach (var particle in _particleSystemsTeleport)
+            //     {
+            //         particle.Play();
+            //     }
+            //
+            //     _playerInput.enabled = false;
+            //     IsIntangible = true;
+            //     GameManager.Instance.HandleTeleport(null);
+            //     return;
+            // }
+            //
+            //
+            // var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
+            // if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
+            //     teleportItems.Count > 0)
+            // {
+            //     foreach (var particle in _particleSystemsTeleport)
+            //     {
+            //         particle.Play();
+            //     }
+            //     var teleportItem = teleportItems[0].item;
+            //     InventoryManager.Instance.inventory.RemoveItem(teleportItem);
+            //     GameManager.Instance.HandleTeleport(new TeleportData(transform.position, LevelManager.Instance.sceneIndex));
+            //     _playerInput.enabled = false;
+            // }
         }
 
         public void OnVinesSkill(InputAction.CallbackContext context)

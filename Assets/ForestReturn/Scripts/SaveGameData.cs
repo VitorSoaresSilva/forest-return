@@ -54,11 +54,13 @@ namespace ForestReturn.Scripts
             if (File.Exists(string.Concat(Application.persistentDataPath, this.path)))
             {
                 File.Delete(string.Concat(Application.persistentDataPath, this.path));
+                Clear();
             }
         }
 
         public void Clear()
         {
+            Debug.Log("Clear");
             inventoryObject.Clear();
             equippedObject.Clear();
             generalDataObject.Clear();
