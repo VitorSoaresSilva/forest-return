@@ -9,6 +9,7 @@ namespace ForestReturn.Scripts.UI
         public GameObject prefab;
         public Transform grid;
         private Dictionary<InventorySlotUI, InventorySlot> itemsDisplayed = new();
+        public InventoryItemDescription inventoryItemDescription;
 
         private void OnEnable()
         {
@@ -24,7 +25,7 @@ namespace ForestReturn.Scripts.UI
                 var inventorySlotUI = itemUI.GetComponent<InventorySlotUI>();
                 if (itemUI != null)
                 {
-                    inventorySlotUI.UpdateData(InventoryManager.Instance.inventory.Items[i]);
+                    inventorySlotUI.UpdateData(InventoryManager.Instance.inventory.Items[i], this);
                     itemsDisplayed.Add(inventorySlotUI, InventoryManager.Instance.inventory.Items[i]);
                 }
             }
@@ -38,5 +39,11 @@ namespace ForestReturn.Scripts.UI
                 Destroy(grid.GetChild(i).gameObject);
             }
         }
+
+        public void SetAsSelected(InventorySlot inventorySlot)
+        {
+            inventoryItemDescription.UpdateData(inventorySlot);
+        }
+        
     }
 }

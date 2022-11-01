@@ -9,8 +9,9 @@ namespace ForestReturn.Scripts.UI
     {
         [SerializeField]private TextMeshProUGUI amountText;
         [SerializeField]private TextMeshProUGUI nameText;
-        [SerializeField] private Image image;
-        public void UpdateData(InventorySlot itemObject)
+        [SerializeField]private Image image;
+        [SerializeField]private Button button;
+        public void UpdateData(InventorySlot itemObject, DisplayInventory displayInventory)
         {
             nameText.text = itemObject.item.name;
             if (itemObject.item.image != null)
@@ -18,6 +19,7 @@ namespace ForestReturn.Scripts.UI
                 image.sprite = itemObject.item.image;
             }
             amountText.text = itemObject.item.isStackable ? itemObject.amount.ToString() : string.Empty;
+            button.onClick.AddListener(() => {displayInventory.SetAsSelected(itemObject);});
         }
     }
 }

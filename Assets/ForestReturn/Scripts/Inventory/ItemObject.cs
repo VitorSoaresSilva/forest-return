@@ -12,6 +12,7 @@ namespace ForestReturn.Scripts.Inventory
         public bool isUnique;
         public bool hasLevels;
         public ItemType itemType;
+        public string itemDescription;
     }
 
     public enum ItemType
