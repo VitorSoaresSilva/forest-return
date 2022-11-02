@@ -61,28 +61,45 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void Init()
         {
-            if (InventoryManager.Instance != null)
+            if (InventoryManager.InstanceExists)
             {
                 _inventoryObjectRef = InventoryManager.Instance.inventory;
             }
-            if (LevelManager.Instance != null)
+            if (LevelManager.InstanceExists)
             {
                 _controller.enabled = false;
                 transform.position = LevelManager.Instance.pointToSpawn;
                 _controller.enabled = true;
             }
 
-            if (GameManager.InstanceExists && GameManager.Instance.generalData.playerCharacterData != null)
+            if (GameManager.InstanceExists)
             {
-                CurrentHealth = (int)GameManager.Instance.generalData.playerCharacterData?.CurrentHealth;
-                CurrentMana = (int)GameManager.Instance.generalData.playerCharacterData?.CurrentMana;
+                GameManager.Instance.OnPauseGame += OnPauseGame;
+                GameManager.Instance.OnResumeGame += OnResumeGame;
+                if (GameManager.Instance.generalData.HasPlayerData)
+                {
+                    CurrentHealth = GameManager.Instance.generalData.PlayerCurrentHealth;
+                    CurrentMana = GameManager.Instance.generalData.PlayerCurrentMana;
+                    GameManager.Instance.generalData.ClearPlayerData();
+                    
+                }
             }
             
             //equipamentos
+            GameManager.Instance.Save();
             _currentSpeed = normalSpeed;
             UpdateAttacks();
             if (Camera.main != null) _cam = Camera.main.transform;
             _cinemachine = _cam.transform.root.GetComponentInChildren<CinemachineFreeLook>();
+        }
+
+        private void OnDestroy()
+        {
+            if (GameManager.InstanceExists)
+            {
+                GameManager.Instance.OnResumeGame -= OnResumeGame;
+                GameManager.Instance.OnPauseGame -= OnPauseGame;
+            }
         }
 
         public void UpdateAttacks()
@@ -113,6 +130,19 @@ namespace ForestReturn.Scripts.PlayerScripts
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
             _playerInput = GetComponent<PlayerInput>();
+        }
+        public void OnResumeGame()
+        {
+            Debug.Log("resume");
+            _playerInput.enabled = true;
+            _playerInput.SwitchCurrentActionMap("gameplay");
+        }
+        
+        public void OnPauseGame()
+        {
+            Debug.Log("pause");
+            _playerInput.enabled = true;
+            _playerInput.SwitchCurrentActionMap("Menu");
         }
 
         private void Update()
@@ -184,14 +214,13 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnPause(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.Instance.isPaused)
+            if (GameManager.Instance.IsPaused)
             {
                 GameManager.Instance.ResumeGame();
             }
             else
             {
                 GameManager.Instance.PauseGame();
-                _playerInput.SwitchCurrentActionMap("Pause");
                 UiManager.Instance.OpenCanvas(CanvasType.Pause);
             }
             
@@ -220,7 +249,6 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
             GameManager.Instance.PauseGame();
-            _playerInput.SwitchCurrentActionMap("Menu");
             UiManager.Instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
         }
 
@@ -260,22 +288,28 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnTeleport(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-
-            Debug.Log(GameManager.Instance.generalData.TeleportData != null);
-            if (GameManager.Instance.generalData.TeleportData != null)
+            if (!GameManager.InstanceExists || !LevelManager.InstanceExists) return;
+            
+            if (LevelManager.Instance.sceneIndex == Enums.Scenes.Lobby)
             {
-                Debug.Log("not equals null");
-                _playerInput.enabled = false;
-                IsIntangible = true;
-                GameManager.Instance.HandleTeleport(null);
+                if (GameManager.Instance.generalData.HasTeleportData)
+                {
+                    _playerInput.enabled = false;
+                    IsIntangible = true;
+                    foreach (var particle in _particleSystemsTeleport)
+                    {
+                        particle.Play();
+                    }
+                    GameManager.Instance.HandleTeleport(null);
+                }
             }
             else
             {
-                Debug.Log("equals null");
                 var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
-                if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
-                    teleportItems.Count > 0)
+                if (teleportItems.Count > 0)
                 {
+                    _playerInput.enabled = false;
+                    IsIntangible = true;
                     foreach (var particle in _particleSystemsTeleport)
                     {
                         particle.Play();
@@ -283,38 +317,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                     var teleportItem = teleportItems[0].item;
                     InventoryManager.Instance.inventory.RemoveItem(teleportItem);
                     GameManager.Instance.HandleTeleport(new TeleportData(transform.position, LevelManager.Instance.sceneIndex));
-                    _playerInput.enabled = false;
                 }
             }
-            
-            // if (GameManager.Instance.generalData.currentLevel == Enums.Scenes.Lobby && 
-            //     GameManager.Instance.generalData.TeleportData is { AlreadyReturned: false })
-            // {
-            //     foreach (var particle in _particleSystemsTeleport)
-            //     {
-            //         particle.Play();
-            //     }
-            //
-            //     _playerInput.enabled = false;
-            //     IsIntangible = true;
-            //     GameManager.Instance.HandleTeleport(null);
-            //     return;
-            // }
-            //
-            //
-            // var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
-            // if (GameManager.Instance.generalData.currentLevel != Enums.Scenes.Lobby &&
-            //     teleportItems.Count > 0)
-            // {
-            //     foreach (var particle in _particleSystemsTeleport)
-            //     {
-            //         particle.Play();
-            //     }
-            //     var teleportItem = teleportItems[0].item;
-            //     InventoryManager.Instance.inventory.RemoveItem(teleportItem);
-            //     GameManager.Instance.HandleTeleport(new TeleportData(transform.position, LevelManager.Instance.sceneIndex));
-            //     _playerInput.enabled = false;
-            // }
         }
 
         public void OnVinesSkill(InputAction.CallbackContext context)
@@ -356,12 +360,11 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnResume(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-            if (GameManager.Instance.isPaused)
+            if (GameManager.Instance.IsPaused)
             {
                 GameManager.Instance.ResumeGame();
             }
             UiManager.Instance.OpenCanvas(CanvasType.Hud);
-            _playerInput.SwitchCurrentActionMap("gameplay");
         }
         
         public void OnChangeTabs(InputAction.CallbackContext context)

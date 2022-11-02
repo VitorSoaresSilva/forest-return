@@ -7,15 +7,13 @@ namespace ForestReturn.Scripts.Teleport
     [Serializable]
     public struct TeleportData
     {
-        public Vector3 PositionToSpawn;
-        public Enums.Scenes SceneStartIndex;
-        public bool AlreadyReturned;
+        public Vector3 teleportPointToSpawn;
+        public Enums.Scenes teleportScene;
 
-        public TeleportData(Vector3 positionToSpawn, Enums.Scenes scene, bool alreadyReturned = false)
+        public TeleportData(Vector3 teleportPointToSpawn, Enums.Scenes teleportScene)
         {
-            PositionToSpawn = positionToSpawn;
-            SceneStartIndex = scene;
-            AlreadyReturned = alreadyReturned;
+            this.teleportPointToSpawn = teleportPointToSpawn;
+            this.teleportScene = teleportScene;
         }
     }
 }

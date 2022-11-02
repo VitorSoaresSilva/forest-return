@@ -23,17 +23,6 @@ namespace ForestReturn.Scripts.Managers
                     npc.SetActive(npcState);
                     npc.GetComponent<IBaseNpc>().InitOnLobby();
                 }
-
-                if (GameManager.Instance.generalData.TeleportData != null)
-                {
-                    TeleportData teleportData = (TeleportData)GameManager.Instance.generalData.TeleportData;
-                    if (teleportData.SceneStartIndex == sceneIndex)
-                    {
-                        pointToSpawn = teleportData.PositionToSpawn;
-                    }
-                    
-                }
-                
             }
             PlayerScript.Init();
             if (UiManager.InstanceExists)

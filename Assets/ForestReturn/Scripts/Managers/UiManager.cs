@@ -11,9 +11,8 @@ namespace ForestReturn.Scripts.Managers
 {
     public class UiManager : Singleton<UiManager>
     {
-        private static readonly int HurtStringHash = Animator.StringToHash("Hurt");
+        
         public GameObject hud;
-        public Animator hurtAnimator;
         public GameObject menu;
         public GameObject pause;
         public GameObject death;
@@ -30,11 +29,9 @@ namespace ForestReturn.Scripts.Managers
         public GameObject itemCollectedParent;
         public void Init()
         {
-            Debug.Log("ui");
             Cursor.lockState = CursorLockMode.Locked;
             if (LevelManager.InstanceExists)
             {
-                LevelManager.Instance.PlayerScript.OnHurt += PlayerHurt;
                 LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
             }
             if(InventoryManager.InstanceExists)
@@ -50,7 +47,6 @@ namespace ForestReturn.Scripts.Managers
             base.OnDestroy();
             if ( LevelManager.InstanceExists)
             {
-                LevelManager.Instance.PlayerScript.OnHurt -= PlayerHurt;
                 LevelManager.Instance.PlayerScript.OnDead -= PlayerScriptOnOnDead;
             }
             if ( InventoryManager.InstanceExists)
@@ -58,14 +54,9 @@ namespace ForestReturn.Scripts.Managers
                 InventoryManager.Instance.inventory.OnItemCollected -= InventoryOnItemCollected;
             }
         }
-
-        private void OnDisable()
-        {
-            
-            
-        }
         private void InventoryOnItemCollected(ItemCollectedData itemCollectedData)
         {
+            if (prefabItemCollected == null || itemCollectedParent == null) return; // bug da unity
             var item = Instantiate(prefabItemCollected,itemCollectedParent.transform);
             if (itemCollectedParent != null)
             {
@@ -100,10 +91,7 @@ namespace ForestReturn.Scripts.Managers
             
         }
 
-        private void PlayerHurt()
-        {
-            hurtAnimator.SetTrigger(HurtStringHash);
-        }
+
 
 
         public void OpenCanvas(CanvasType canvasType)

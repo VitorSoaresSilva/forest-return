@@ -14,6 +14,8 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void Start()
         {
             isActive = true;
+            interactables = new List<ObjectInteractable>();
+            CurrentInteractable = null;
             StartCoroutine(InteractUpdate());
         }
 
@@ -51,6 +53,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                     CurrentInteractable = closestInteractable;
                     CurrentInteractable.Interactable.SetStatusInteract(true);
                 }
+                
                 yield return new WaitForFixedUpdate();
             }
             yield return null;
@@ -58,9 +61,9 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnTriggerEnter(Collider other)
         {
-            other.transform.root.TryGetComponent(out IInteractable interactable);
+            if (!other.transform.root.TryGetComponent(out IInteractable interactable)) return;
             ObjectInteractable objectInteractable = new ObjectInteractable(other.transform.root,interactable);
-            if (interactable != null && !interactables.Contains(objectInteractable))
+            if (!interactables.Contains(objectInteractable))
             {
                 interactables.Add(objectInteractable);
             }
@@ -68,10 +71,10 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnTriggerExit(Collider other)
         {
-            other.transform.root.TryGetComponent(out IInteractable interactable);
+            if (!other.transform.root.TryGetComponent(out IInteractable interactable)) return;
             ObjectInteractable objectInteractable = new ObjectInteractable(other.transform.root,interactable);
             var index = interactables.FindIndex(a => a.Interactable == interactable);
-            if (interactable != null &&  index != -1)
+            if (index != -1)
             {
                 interactables.RemoveAt(index);
                 if (CurrentInteractable != null && objectInteractable.Interactable == CurrentInteractable.Interactable)
