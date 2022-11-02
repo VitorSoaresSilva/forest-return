@@ -1,6 +1,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using ForestReturn.Scripts.Inventory;
+using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 

@@ -75,7 +75,7 @@ namespace ForestReturn.Scripts.UI
             for (int i = 0; i < 3; i++)
             {
                 var saveGameData = GameManager.Instance.savedGameDataTemporary[i];
-                cardsLoadGame[i].Init(saveGameData.loadSuccess ? saveGameData.generalDataObject.LastSaveString : "New Game");
+                cardsLoadGame[i].Init(saveGameData.loadSuccess ? saveGameData.generalDataObject.lastSaveString : "New Game");
                 cardsLoadGame[i].SetState(false);
             }
             if (GameManager.Instance.IndexSaveSlot < 0)

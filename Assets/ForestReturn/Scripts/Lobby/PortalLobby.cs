@@ -15,6 +15,10 @@ namespace ForestReturn.Scripts.Interactable
         public UnityEvent SetAsNotInteractable;
         public void Interact()
         {
+            
+            /*
+             * if Level 01 started and not finished
+             */
             if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
                 if (InventoryManager.Instance.triggerInventory.Contains(Lv1Complete))

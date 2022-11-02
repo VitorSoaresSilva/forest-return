@@ -20,6 +20,7 @@ namespace ForestReturn.Scripts
                 var newValue = Mathf.Max(0, value);
                 newValue = Mathf.Min(newValue, MaxHealth);
                 _currentHealth = newValue;
+                OnLifeChanged?.Invoke();
             }
         }
         public int CurrentMana
@@ -30,6 +31,7 @@ namespace ForestReturn.Scripts
                 var newValue = Mathf.Max(0, value);
                 newValue = Mathf.Min(newValue, MaxMana);
                 _currentMana = newValue; 
+                OnManaChanged?.Invoke();
             }
         }
         public int MaxHealth { get; protected set; }
@@ -43,14 +45,18 @@ namespace ForestReturn.Scripts
         [SerializeField] private Attributes baseAttributes;
 
         public delegate void OnDeadEvent();
-        public event OnDeadEvent OnDead;
-        
         public delegate void OnHurtEvent();
-        public event OnHurtEvent OnHurt;
         public delegate void OnHealthHealedEvent();
-        public event OnHealthHealedEvent OnHealthHealed;
         public delegate void OnManaHealedEvent();
+        public delegate void OnLifeChangeEvent();
+        public delegate void OnManaChangeEvent();
+        public event OnDeadEvent OnDead;
+        public event OnHurtEvent OnHurt;
+        public event OnHealthHealedEvent OnHealthHealed;
         public event OnManaHealedEvent OnManaHealed;
+        public event OnLifeChangeEvent OnLifeChanged;
+        public event OnManaChangeEvent OnManaChanged;
+        
 
         protected virtual void Awake()
         {

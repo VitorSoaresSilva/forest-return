@@ -3,34 +3,64 @@ using ForestReturn.Scripts.Teleport;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 
-namespace ForestReturn.Scripts
+namespace ForestReturn.Scripts.Managers
 {
     [Serializable]
     [CreateAssetMenu(fileName = "new Game Data", menuName = "Items/GameData")]
     public class GeneralDataObject : ScriptableObject
     {
         // public string path;
-        public string LastSaveString;
-        public long LastSaveLong;
+        public string lastSaveString;
+        public long lastSaveLong;
         public Vector3 playerPosition;
-        public BaseCharacterData? playerCharacterData;
-        
         public Enums.Scenes currentLevel;
-        // public Vector3 pointToSpawn;
-        [SerializeField]public TeleportData? TeleportData;
-
+        [field: SerializeField] public Vector3 TeleportPointToSpawn {get; private set;}
+        [field: SerializeField] public Enums.Scenes TeleportScene {get; private set;}
+        [field: SerializeField] public bool HasTeleportData {get; private set;}
+        [field: SerializeField] public int PlayerCurrentHealth {get; private set;}
+        [field: SerializeField] public int PlayerCurrentMana {get; private set;}
+        [field: SerializeField] public bool HasPlayerData {get; private set;}
         public void Init()
         {
             currentLevel = Enums.Scenes.Lobby;
-            TeleportData = null;
+            // ClearTeleport();
+            // ClearPlayerData();
         }
 
         public void Clear()
         {
-            LastSaveString = String.Empty;
-            LastSaveLong = 0;
+            lastSaveString = String.Empty;
+            lastSaveLong = 0;
             currentLevel = Enums.Scenes.Lobby;
-            TeleportData = null;
+            ClearTeleport();
+            ClearPlayerData();
+        }
+
+        public void SetTeleportData(TeleportData newTeleportData)
+        {
+            TeleportPointToSpawn = newTeleportData.teleportPointToSpawn;
+            TeleportScene = newTeleportData.teleportScene;
+            HasTeleportData = true;
+        }
+
+        public void SetPlayerData()
+        {
+            PlayerCurrentHealth = LevelManager.Instance.PlayerScript.CurrentHealth;
+            PlayerCurrentMana = LevelManager.Instance.PlayerScript.CurrentMana;
+            HasPlayerData = true;
+        }
+        public void ClearTeleport()
+        {
+            TeleportPointToSpawn = Vector3.zero;
+            TeleportScene = Enums.Scenes.Lobby;
+            HasTeleportData = false;
+        }
+
+        public void ClearPlayerData()
+        {
+            PlayerCurrentHealth = 0;
+            PlayerCurrentMana = 0;
+            HasPlayerData = false;
         }
     }
 }

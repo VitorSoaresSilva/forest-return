@@ -48,21 +48,45 @@ namespace ForestReturn.Scripts.Managers
             {
                 pointToSpawn = GameManager.Instance.generalData.playerPosition;
                 GameManager.Instance.loadingFromCheckpoint = false;
-            }
-            else
+            }else if (GameManager.Instance.generalData.HasTeleportData)
             {
-                GameManager.Instance.Save();
+                if (sceneIndex != Enums.Scenes.Lobby)
+                {
+                    if (GameManager.Instance.generalData.TeleportScene == sceneIndex)
+                    {
+                        pointToSpawn = GameManager.Instance.generalData.TeleportPointToSpawn;
+                    }
+                    GameManager.Instance.generalData.ClearTeleport();
+                }
+                // GameManager.Instance.Save();
             }
-        }
-        
-        public void OnResumeGame()
-        {
-            _playerScript._playerInput.SwitchCurrentActionMap("gameplay");
-        }
+            // else
+            // {
+            //     GameManager.Instance.Save();
+            // }
+            
+            
 
-        public void OnPauseGame()
-        {
-            _playerScript._playerInput.SwitchCurrentActionMap("Menu");
+            // if (GameManager.Instance.loadingFromCheckpoint)
+            // {
+            //     pointToSpawn = GameManager.Instance.generalData.playerPosition;
+            //     GameManager.Instance.loadingFromCheckpoint = false;
+            // }else if (GameManager.Instance.generalData.HasTeleportData())
+            // {
+            //     if (GameManager.Instance.generalData.teleportScene != Enums.Scenes.Lobby)
+            //     {
+            //         if (GameManager.Instance.generalData.teleportScene == sceneIndex)
+            //         {
+            //             pointToSpawn = (Vector3)GameManager.Instance.generalData.teleportPointToSpawn;
+            //         }
+            //         GameManager.Instance.generalData.ClearTeleport();
+            //     }
+            //     
+            // }
+            // else
+            // {
+            //     GameManager.Instance.Save();
+            // }
         }
     }
 }

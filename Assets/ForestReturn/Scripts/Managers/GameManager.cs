@@ -2,14 +2,9 @@ using System;
 using System.Collections;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Teleport;
-using ForestReturn.Scripts.Triggers;
-using ForestReturn.Scripts.UI;
 using ForestReturn.Scripts.Utilities;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Enums = ForestReturn.Scripts.Utilities.Enums;
 
 
@@ -19,11 +14,17 @@ namespace ForestReturn.Scripts.Managers
     {
         [HideInInspector] public GeneralDataObject generalData;
         public int IndexSaveSlot { get; private set; } = -1;
-        public bool isPaused { get; private set; }
+        public bool IsPaused { get; private set; }
         public SaveGameData[] savedGameDataTemporary;
         public bool loadingFromCheckpoint;
         public delegate void OnGameManagerInitFinishedEvent();
+        public delegate void OnResumeGameEvent();
+        public delegate void OnPauseGameEvent();
         public event OnGameManagerInitFinishedEvent OnGameManagerInitFinished;
+        public event OnResumeGameEvent OnResumeGame;
+        public event OnPauseGameEvent OnPauseGame;
+        
+        
         public bool GameManagerInitFinished { get; private set; } = false;
 
         private void Start()
@@ -42,8 +43,8 @@ namespace ForestReturn.Scripts.Managers
                 savedGameDataTemporary[i].Load($"/gameData_{i}.data");
                 if (savedGameDataTemporary[i].loadSuccess)
                 {
-                    if (IndexSaveSlot == -1 || savedGameDataTemporary[i].generalDataObject.LastSaveLong >
-                        savedGameDataTemporary[IndexSaveSlot].generalDataObject.LastSaveLong)
+                    if (IndexSaveSlot == -1 || savedGameDataTemporary[i].generalDataObject.lastSaveLong >
+                        savedGameDataTemporary[IndexSaveSlot].generalDataObject.lastSaveLong)
                     {
                         IndexSaveSlot = i;
                     }
@@ -64,21 +65,16 @@ namespace ForestReturn.Scripts.Managers
         {
             if (IndexSaveSlot == -1) return;
             Init();
-            
         }
 
         [ContextMenu("Save")]
         public void Save()
         {
-            generalData.LastSaveString = DateTime.Now.ToLongTimeString();
-            generalData.LastSaveLong = DateTime.Now.ToFileTime();
+            generalData.lastSaveString = DateTime.Now.ToLongTimeString();
+            generalData.lastSaveLong = DateTime.Now.ToFileTime();
             generalData.playerPosition = LevelManager.Instance.PlayerScript.transform.position;
             generalData.currentLevel = LevelManager.Instance.sceneIndex;
-            generalData.playerCharacterData = new BaseCharacterData()
-            {
-                CurrentHealth = LevelManager.Instance.PlayerScript.CurrentHealth,
-                CurrentMana = LevelManager.Instance.PlayerScript.CurrentMana
-            };
+            generalData.SetPlayerData();
             savedGameDataTemporary[IndexSaveSlot].Save();
             //save skills
         }
@@ -88,7 +84,6 @@ namespace ForestReturn.Scripts.Managers
             InventoryManager.Instance.Clear();
             if (generalData != null)
             {
-                Debug.Log("Clear 2");
                 generalData.Clear();
             }
         }
@@ -99,36 +94,31 @@ namespace ForestReturn.Scripts.Managers
             InventoryManager.Instance.equippedItems = savedGameDataTemporary[IndexSaveSlot].equippedObject;
             InventoryManager.Instance.triggerInventory = savedGameDataTemporary[IndexSaveSlot].triggerInventoryObject;
             generalData = savedGameDataTemporary[IndexSaveSlot].generalDataObject;
-            Debug.Log("equals null on init " + generalData.TeleportData == null);
-
             if (savedGameDataTemporary[IndexSaveSlot].loadSuccess)
             {
                 loadingFromCheckpoint = true;
             }
             else
             {
-                Debug.Log("init");
                 InventoryManager.Instance.Init();
-                
-                // InventoryManager.Instance.triggerInventory.Init();
                 generalData.Init();
             }
             SceneManager.LoadScene((int)generalData.currentLevel);
         }
 
-        public void HandleTeleport(TeleportData? teleportData)
+        public void HandleTeleport(TeleportData? newTeleportData)
         {
-            if (teleportData != null)
+            generalData.SetPlayerData();
+            if (newTeleportData == null)
             {
-                generalData.TeleportData = teleportData.Value;
-                // generalData.currentLevel = Enums.Scenes.Lobby;
-                // StartCoroutine(LoadScene((int)Enums.Scenes.Lobby));
-                ChangeScene(Enums.Scenes.Lobby);
+                StartCoroutine(LoadScene((int)generalData.TeleportScene));
+                // ChangeScene(generalData.TeleportScene);
             }
             else
             {
-                ChangeScene(generalData.TeleportData.Value.SceneStartIndex);
-                generalData.TeleportData = null;
+                generalData.SetTeleportData((TeleportData)newTeleportData);
+                StartCoroutine(LoadScene((int)Enums.Scenes.Lobby));
+                // ChangeScene(Enums.Scenes.Lobby);
             }
         }
 
@@ -156,22 +146,24 @@ namespace ForestReturn.Scripts.Managers
         
         public void ResumeGame()
         {
-            isPaused = false;
+            IsPaused = false;
             Time.timeScale = 1;
-            LevelManager.Instance.OnResumeGame();
+            OnResumeGame?.Invoke();
+            // LevelManager.Instance.OnResumeGame();
             UiManager.Instance.OpenCanvas(CanvasType.Hud);
         }
 
         public void PauseGame()
         {
-            isPaused = true;
+            IsPaused = true;
             Time.timeScale = 0;
-            LevelManager.Instance.OnPauseGame();
+            OnPauseGame?.Invoke();
+            // LevelManager.Instance.OnPauseGame();
         }
 
         public void BackToMainMenu()
         {
-            if (isPaused)
+            if (IsPaused)
             {
                 ResumeGame();
             }
@@ -186,7 +178,7 @@ namespace ForestReturn.Scripts.Managers
 
         public void RestartFromCheckpoint()
         {
-            if (isPaused)
+            if (IsPaused)
             {
                 ResumeGame();
             }

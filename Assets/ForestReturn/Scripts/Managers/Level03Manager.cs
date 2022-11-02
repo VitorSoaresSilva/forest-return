@@ -8,18 +8,6 @@ namespace ForestReturn.Scripts.Managers
         protected override void Start()
         {
             base.Start();
-            if (GameManager.Instance != null)
-            {
-                if (GameManager.Instance.generalData.TeleportData != null)
-                {
-                    TeleportData teleportData = (TeleportData)GameManager.Instance.generalData.TeleportData;
-                    if (teleportData.SceneStartIndex == sceneIndex && !teleportData.AlreadyReturned)
-                    {
-                        pointToSpawn = teleportData.PositionToSpawn;
-                        GameManager.Instance.generalData.TeleportData = null;
-                    }
-                }
-            }
             PlayerScript.Init();
             if (UiManager.Instance != null)
             {
