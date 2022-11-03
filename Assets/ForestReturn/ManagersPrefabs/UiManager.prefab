@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 4072364860703543262}
-  hurtAnimator: {fileID: 4072364860229440815}
   menu: {fileID: 917134942956361866}
   pause: {fileID: 163572116875719525}
   death: {fileID: 4069942680772232180}
+  blacksmith: {fileID: 1531087107258631830}
   restartDeathButton: {fileID: 2704027021950415789}
   mainMenuDeathButton: {fileID: 411436075613907353}
   quitDeathButton: {fileID: 2392157987222534666}
@@ -66,6 +66,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2356876266845689818}
     m_Modifications:
+    - target: {fileID: 2612530574830547935, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612530574830547935, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3676327922883335203, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -238,6 +246,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5414068233297021666, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
   m_PrefabInstance: {fileID: 5159140557119181416}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1531087107258631830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5955852848363377918, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
+  m_PrefabInstance: {fileID: 5159140557119181416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2392157987222534666 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7397817711891671138, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
@@ -263,11 +276,6 @@ MonoBehaviour:
 --- !u!1 &4069942680772232180 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9215389914806817180, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
-  m_PrefabInstance: {fileID: 5159140557119181416}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &4072364860229440815 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9158915654540330823, guid: 629ae9e16662df9468a14f25a919ef07, type: 3}
   m_PrefabInstance: {fileID: 5159140557119181416}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4072364860703543262 stripped
