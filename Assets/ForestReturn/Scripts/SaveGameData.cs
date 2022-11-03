@@ -13,7 +13,7 @@ namespace ForestReturn.Scripts
         public string path = "";
         public bool loadSuccess;
         public InventoryObject inventoryObject;
-        public InventoryObject equippedObject;
+        public EquippedObject equippedObject;
         public GeneralDataObject generalDataObject;
         public TriggerInventoryObject triggerInventoryObject;
         public void Save()

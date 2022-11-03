@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ForestReturn.Scripts.Inventory
 {
     [System.Serializable]
@@ -18,6 +20,11 @@ namespace ForestReturn.Scripts.Inventory
         public void AddAmount(int value)
         {
             amount += value;
+        }
+
+        public void RemoveAmount(int value)
+        {
+            amount = Mathf.Max(0, amount - value);
         }
     }
 }

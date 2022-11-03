@@ -16,6 +16,7 @@ namespace ForestReturn.Scripts.Managers
         public GameObject menu;
         public GameObject pause;
         public GameObject death;
+        public GameObject blacksmith;
         [SerializeField] private Button restartDeathButton;
         [SerializeField] private Button mainMenuDeathButton;
         [SerializeField] private Button quitDeathButton;
@@ -91,6 +92,11 @@ namespace ForestReturn.Scripts.Managers
             
         }
 
+        [ContextMenu("Open Blacksmith")]
+        public void OpenBlacksmith()
+        {
+            OpenCanvas(CanvasType.Blacksmith);
+        }
 
 
 
@@ -119,6 +125,11 @@ namespace ForestReturn.Scripts.Managers
                     Cursor.lockState = CursorLockMode.None;
                     death.SetActive(true);
                     break;
+                case CanvasType.Blacksmith:
+                    CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
+                    blacksmith.SetActive(true);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
@@ -130,6 +141,7 @@ namespace ForestReturn.Scripts.Managers
             menu.SetActive(false);
             pause.SetActive(false);
             death.SetActive(false);
+            blacksmith.SetActive(false);
         }
     }
 
@@ -138,6 +150,7 @@ namespace ForestReturn.Scripts.Managers
         Menu,
         Hud,
         Pause,
-        Death
+        Death,
+        Blacksmith
     }
 }

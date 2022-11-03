@@ -8,12 +8,15 @@ namespace ForestReturn.Scripts.Inventory
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         [HideInInspector] public InventoryObject inventory;
-        [HideInInspector] public InventoryObject equippedItems;
+        // [HideInInspector] public InventoryObject equippedItems;
+        [HideInInspector] public EquippedObject equippedItems;
+        
         public ItemDatabaseObject Database;
         [Header("Triggers")] 
         public TriggerDatabaseObject triggerDatabase;
         [HideInInspector]
         public TriggerInventoryObject triggerInventory;
+        
         public void Clear()
         {
             if (inventory != null)
@@ -36,6 +39,16 @@ namespace ForestReturn.Scripts.Inventory
             inventory.Init();
             equippedItems.Init();
             triggerInventory.Init();
+        }
+
+        [ContextMenu("Money")]
+        public void DEBBUG_GetMoney()
+        {
+            
+            var seed = inventory.FindCurrencyByType(CurrencyType.Seed);
+            seed.AddAmount(50);
+            var scrap = inventory.FindCurrencyByType(CurrencyType.Scrap);
+            scrap.AddAmount(50);
         }
     }
 }

@@ -149,5 +149,17 @@ namespace ForestReturn.Scripts.Inventory
             var item = Items.Find(x => x.item == itemObject);
             return item;
         }
+
+        public InventorySlot FindCurrencyByType(CurrencyType currencyType)
+        {
+            var currency = GetItemsByType(ItemType.Currency)
+                .Find(x =>
+                {
+                    var a = (CurrencyObject)x.item;
+                    return a.type == currencyType;
+                });
+            return currency;
+            
+        }
     }
 }
