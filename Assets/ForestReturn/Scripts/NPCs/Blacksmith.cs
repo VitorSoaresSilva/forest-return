@@ -32,10 +32,12 @@ namespace ForestReturn.Scripts.NPCs
 
         public void Interact()
         {
+            
         }
 
         public void SetStatusInteract(bool status)
         {
+            
         }
         private void Update()
         {

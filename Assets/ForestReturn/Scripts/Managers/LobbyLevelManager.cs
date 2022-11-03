@@ -21,7 +21,11 @@ namespace ForestReturn.Scripts.Managers
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
-                    npc.GetComponent<IBaseNpc>().InitOnLobby();
+                    //npc.GetComponent<IBaseNpc>().InitOnLobby();
+                    if (npc.TryGetComponent(out IBaseNpc iBaseNpc))
+                    {
+                        iBaseNpc.InitOnLobby();
+                    }
                 }
             }
             PlayerScript.Init();

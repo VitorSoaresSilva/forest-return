@@ -70,6 +70,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _controller.enabled = false;
                 transform.position = LevelManager.Instance.pointToSpawn;
                 _controller.enabled = true;
+                _cam = LevelManager.Instance.CamerasHolder.mainCamera.transform;
+                _cinemachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
             }
 
             if (GameManager.InstanceExists)
@@ -89,8 +91,8 @@ namespace ForestReturn.Scripts.PlayerScripts
             GameManager.Instance.Save();
             _currentSpeed = normalSpeed;
             UpdateAttacks();
-            if (Camera.main != null) _cam = Camera.main.transform;
-            _cinemachine = _cam.transform.root.GetComponentInChildren<CinemachineFreeLook>();
+            // if (Camera.main != null) _cam = Camera.main.transform;
+            // _cinemachine = _cam.transform.root.GetComponentInChildren<CinemachineFreeLook>();
         }
 
         private void OnDestroy()

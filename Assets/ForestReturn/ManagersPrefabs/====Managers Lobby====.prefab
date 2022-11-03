@@ -78,12 +78,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneIndex: 2
-  pointToSpawn: {x: 8.22, y: 1.261, z: -46.98}
+  pointToSpawn: {x: 29.04, y: 0.20000005, z: 17.05}
   playerPrefab: {fileID: 6800021239049874354, guid: 53260944c6c198e4f8733299eac27308, type: 3}
   camerasHolderPrefab: {fileID: 0}
   npcSaved: {fileID: 11400000, guid: fdd9ed7b72d39144dbb773648d81fdc4, type: 2}
   cutsceneWatched: {fileID: 11400000, guid: 7070fbac4c2419f40a82e47bcf11b996, type: 2}
   NPCs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -94,6 +97,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 870319207560867682}
     m_Modifications:
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7256741007263978864}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ForestReturn.Scripts.UI.BlacksmithStore, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 66875790891683466, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2090603199424471540, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -150,8 +181,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: UiManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8402595145273808974, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00048828125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402595145617845226, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 36.10498
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402595145617845226, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 76.28198
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+--- !u!114 &7256741007263978864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3951965533168369004, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}
+  m_PrefabInstance: {fileID: 5939452726544738332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b0ad8e0f2f42449c149c75687f904a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8275472838330056646 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2356876266845689818, guid: d0ecf64c29d938f48bd75fb7ffe04cc4, type: 3}

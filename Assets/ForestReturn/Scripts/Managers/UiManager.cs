@@ -25,7 +25,8 @@ namespace ForestReturn.Scripts.Managers
         [SerializeField] private Button mainMenuPauseButton;
         [SerializeField] private Button closePauseButton;
         [SerializeField] private Button quitPauseButton;
-
+        [SerializeField] private Button quitFerreiroButton;
+        
         public GameObject prefabItemCollected;
         public GameObject itemCollectedParent;
         public void Init()
@@ -89,7 +90,7 @@ namespace ForestReturn.Scripts.Managers
             mainMenuPauseButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
             closePauseButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
             quitPauseButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
-            
+            quitFerreiroButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
         }
 
         [ContextMenu("Open Blacksmith")]

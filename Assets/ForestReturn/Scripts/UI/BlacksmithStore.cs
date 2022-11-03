@@ -1,6 +1,7 @@
 using System;
 using ForestReturn.GameConfig;
 using ForestReturn.Scripts.Inventory;
+using ForestReturn.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,6 +69,10 @@ namespace ForestReturn.Scripts.UI
             
             return hasEnoughScrap && hasEnoughSeed;
         }
-        
+
+        public void Close()
+        {
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
+        }
     }
 }
