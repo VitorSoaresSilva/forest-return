@@ -17,6 +17,8 @@ namespace ForestReturn.Scripts.Managers
         public GameObject pause;
         public GameObject death;
         public GameObject blacksmith;
+        public GameObject craftsman;
+        
         [SerializeField] private Button restartDeathButton;
         [SerializeField] private Button mainMenuDeathButton;
         [SerializeField] private Button quitDeathButton;
@@ -26,7 +28,7 @@ namespace ForestReturn.Scripts.Managers
         [SerializeField] private Button closePauseButton;
         [SerializeField] private Button quitPauseButton;
         [SerializeField] private Button quitFerreiroButton;
-        
+
         public GameObject prefabItemCollected;
         public GameObject itemCollectedParent;
         public void Init()
@@ -98,7 +100,11 @@ namespace ForestReturn.Scripts.Managers
         {
             OpenCanvas(CanvasType.Blacksmith);
         }
-
+        
+        public void OpenCraftsman()
+        {
+            OpenCanvas(CanvasType.Craftsman);
+        }
 
 
         public void OpenCanvas(CanvasType canvasType)
@@ -131,6 +137,11 @@ namespace ForestReturn.Scripts.Managers
                     Cursor.lockState = CursorLockMode.None;
                     blacksmith.SetActive(true);
                     break;
+                case CanvasType.Craftsman:
+                    CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
+                    craftsman.SetActive(true);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
@@ -143,6 +154,7 @@ namespace ForestReturn.Scripts.Managers
             pause.SetActive(false);
             death.SetActive(false);
             blacksmith.SetActive(false);
+            craftsman.SetActive(false);
         }
     }
 
@@ -152,6 +164,7 @@ namespace ForestReturn.Scripts.Managers
         Hud,
         Pause,
         Death,
-        Blacksmith
+        Blacksmith,
+        Craftsman
     }
 }

@@ -5,14 +5,14 @@ using ForestReturn.Scripts.Interactable;
 using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-public class BlacksmithFerreiro : MonoBehaviour, IInteractable
+public class CraftsmanCollider : MonoBehaviour, IInteractable
 {
     public GameObject alert;
     private object _playerInput;
 
     public void Interact()
     {
-        UiManager.Instance.OpenBlacksmith();
+        UiManager.Instance.OpenCraftsman();
         GameManager.Instance.PauseGame();
     }
 
