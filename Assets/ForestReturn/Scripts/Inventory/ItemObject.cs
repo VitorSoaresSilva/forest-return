@@ -22,7 +22,8 @@ namespace ForestReturn.Scripts.Inventory
         Weapon,
         Currency,
         Artifacts,
-        Teleport
+        Teleport,
+        Key
     }
 
     public enum PotionType
