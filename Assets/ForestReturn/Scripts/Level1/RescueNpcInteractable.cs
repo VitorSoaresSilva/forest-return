@@ -12,8 +12,11 @@ namespace ForestReturn.Scripts.Level1
     {
         public GameObject[] npcGameObjects;
         public TriggerObject npcRescued;
+        public TriggerObject keyCage;
         public UnityEvent onInteractableTrue;
         public UnityEvent onInteractableFalse;
+        public UnityEvent onKeyNeededTrue;
+        public UnityEvent onKeyNeededFalse;
 
         private void Start()
         {
@@ -25,7 +28,9 @@ namespace ForestReturn.Scripts.Level1
                 }
             }
         }
-
+        
+        
+        
         public void Interact()
         {
             
@@ -46,14 +51,30 @@ namespace ForestReturn.Scripts.Level1
 
         public void SetStatusInteract(bool status)
         {
-            if (status)
+            if (InventoryManager.Instance.triggerInventory.Contains(keyCage))
             {
-                onInteractableTrue?.Invoke();
+                if (status)
+                {
+                    onInteractableTrue?.Invoke();
+                }
+                else
+                {
+                    onInteractableFalse?.Invoke();
+                }
             }
             else
             {
-                onInteractableFalse?.Invoke();
+                if (status)
+                {
+                    onKeyNeededTrue?.Invoke();
+                }
+                else
+                {
+                    onKeyNeededFalse?.Invoke();
+                }
             }
+                
+                
         }
     }
 }
