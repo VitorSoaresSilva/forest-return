@@ -43,7 +43,10 @@ namespace ForestReturn.Scripts.Managers
                 InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
             }
             OpenCanvas(CanvasType.Hud);
-            SetListeners();
+            if (GameManager.InstanceExists)
+            {
+                SetListeners();
+            }
         }
 
         protected override void OnDestroy()
@@ -92,7 +95,7 @@ namespace ForestReturn.Scripts.Managers
             mainMenuPauseButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
             closePauseButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
             quitPauseButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
-            quitFerreiroButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
+            // quitFerreiroButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
         }
 
         [ContextMenu("Open Blacksmith")]

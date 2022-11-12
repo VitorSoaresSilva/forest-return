@@ -61,6 +61,8 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void Init()
         {
+            _cam = LevelManager.Instance.CamerasHolder.mainCamera.transform;
+            _cinemachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
             if (InventoryManager.InstanceExists)
             {
                 _inventoryObjectRef = InventoryManager.Instance.inventory;
@@ -70,8 +72,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _controller.enabled = false;
                 transform.position = LevelManager.Instance.pointToSpawn;
                 _controller.enabled = true;
-                _cam = LevelManager.Instance.CamerasHolder.mainCamera.transform;
-                _cinemachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
+                // _cam = LevelManager.Instance.CamerasHolder.mainCamera.transform;
+                // _cinemachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
             }
 
             if (GameManager.InstanceExists)
@@ -85,10 +87,10 @@ namespace ForestReturn.Scripts.PlayerScripts
                     GameManager.Instance.generalData.ClearPlayerData();
                     
                 }
+                GameManager.Instance.Save();
             }
             
             //equipamentos
-            GameManager.Instance.Save();
             _currentSpeed = normalSpeed;
             UpdateAttacks();
             // if (Camera.main != null) _cam = Camera.main.transform;
@@ -447,7 +449,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             _animator.SetTrigger(DeathHashAnimation);
             _playerInput.SwitchCurrentActionMap("Death");
         }
-        private void HandleHurt()
+        private void HandleHurt(int damageTaken)
         {
         }
         private void HandleHealthHealed()

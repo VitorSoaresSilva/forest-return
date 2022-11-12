@@ -45,7 +45,7 @@ namespace ForestReturn.Scripts
         [SerializeField] private Attributes baseAttributes;
 
         public delegate void OnDeadEvent();
-        public delegate void OnHurtEvent();
+        public delegate void OnHurtEvent(int damage);
         public delegate void OnHealthHealedEvent();
         public delegate void OnManaHealedEvent();
         public delegate void OnLifeChangeEvent();
@@ -75,7 +75,7 @@ namespace ForestReturn.Scripts
             if (damageTaken <= 0) return;
             StartCoroutine(IntangibleCooldown());
             CurrentHealth -= damageTaken;
-            OnHurt?.Invoke();
+            OnHurt?.Invoke(damageTaken);
             if (CurrentHealth <= 0)
             {
                 IsDead = true;

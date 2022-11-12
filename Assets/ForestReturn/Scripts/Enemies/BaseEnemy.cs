@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.PlayerScripts;
+using ForestReturn.Scripts.UI;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -18,6 +19,7 @@ namespace ForestReturn.Scripts.Enemies
         private Coroutine _updateCoroutine;
         protected NavMeshAgent NavMeshAgent;
         protected Animator Animator;
+        private DamageIndicatorManager _damageIndicatorManager;
         
         [Header("Nav Mesh")] 
         [SerializeField] private float chasingStoppingDistance;
@@ -38,6 +40,7 @@ namespace ForestReturn.Scripts.Enemies
         {
             _updateCoroutine = StartCoroutine(UpdateState());
             _myCollider = GetComponentInChildren<CapsuleCollider>();
+            _damageIndicatorManager = GetComponentInChildren<DamageIndicatorManager>();
             InitAttackRandomizer();
             foreach (var enemyAttack in Attacks)
             {
@@ -50,6 +53,12 @@ namespace ForestReturn.Scripts.Enemies
             }
             
             OnDead += HandleOnDead;
+            OnHurt += HandleOnHurt;
+        }
+
+        private void HandleOnHurt(int damageTaken)
+        {
+            _damageIndicatorManager.Spawn(damageTaken);
         }
 
         private void HandleOnDead()
