@@ -452,7 +452,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void HandleHurt(int damageTaken)
         {
         }
-        private void HandleHealthHealed()
+        private void HandleHealthHealed(int oldValue,int newValue)
         {
             // Debug.Log("Life healed");
         }
