@@ -9,16 +9,23 @@ namespace ForestReturn.Scripts.UI
 {
     public class Hud : MonoBehaviour
     {
-        public Slider lifeSliderFront;
-        public Slider lifeSliderBack;
+        public Slider lifeSliderCurrentHealth;
+        public Slider lifeSliderDamage;
+        public Slider lifeSliderHeal;
         public Animator hurtAnimator;
         private static readonly int HurtStringHash = Animator.StringToHash("Hurt");
         public float speedSecondLife = 2;
         public float timeSecondLife = 0.6f;
         private float minValue;
-        private Coroutine _coroutine;
+        private float maxValueOnHeal;
+        private float timeToSecondLifeDelay;
+        private float timeToHealDelay;
+        private Coroutine _coroutineDamage;
+        private Coroutine _coroutineHeal;
         private void Start()
         {
+            lifeSliderHeal.value = 0;
+            lifeSliderDamage.value = 0;
             UpdateHealthValue();
             UpdateManaValue();
             LevelManager.Instance.PlayerScript.OnHurt += PlayerScriptOnOnHurt;
@@ -39,27 +46,63 @@ namespace ForestReturn.Scripts.UI
         }
 
 
-        private void PlayerScriptOnOnHealthHealed()
+        private void PlayerScriptOnOnHealthHealed(int oldValue, int newValue)
         {
-            //TODO: add heal effect
+            if (_coroutineDamage != null)
+            {
+                StopCoroutine(_coroutineDamage);
+            }
+
+            maxValueOnHeal = newValue;
+            lifeSliderHeal.value =  maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
+            lifeSliderDamage.value = 0;
+            timeToHealDelay = Time.time + timeSecondLife;
+            if (_coroutineHeal == null)
+            {
+                _coroutineHeal = StartCoroutine(LifeSliderOnHeal(oldValue));
+            }
+
+            // var oldValue = lifeSliderCurrentHealth.value;
+            // maxValueOnHeal = LevelManager.Instance.PlayerScript.CurrentHealth;
+            // StopCoroutine(_coroutine);
+            // // lifeSliderDamage.value = maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
+            // lifeSliderHeal.value = LevelManager.Instance.PlayerScript.CurrentHealth;
+
         }
 
         private void PlayerScriptOnOnHurt(int damageTaken)
         {
             hurtAnimator.SetTrigger(HurtStringHash);
             minValue = LevelManager.Instance.PlayerScript.CurrentHealth;
+            timeToSecondLifeDelay = Time.time + timeSecondLife;
 
-            if (_coroutine == null)
+            if (_coroutineHeal != null)
             {
-                _coroutine = StartCoroutine(LifeSlider(LevelManager.Instance.PlayerScript.CurrentHealth + damageTaken));
+                StopCoroutine(_coroutineHeal);
+                lifeSliderCurrentHealth.value = minValue / LevelManager.Instance.PlayerScript.MaxHealth;
+                lifeSliderHeal.value = 0;
+            }
+            
+            if (_coroutineDamage == null)
+            {
+                _coroutineDamage = StartCoroutine(LifeSlider(LevelManager.Instance.PlayerScript.CurrentHealth + damageTaken));
             }
 
         }
 
         private void UpdateHealthValue()
         {
-            lifeSliderFront.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth / LevelManager.Instance.PlayerScript.MaxHealth;
-            lifeSliderBack.value = lifeSliderFront.value;
+            Debug.Log("Update");
+            lifeSliderCurrentHealth.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth / LevelManager.Instance.PlayerScript.MaxHealth;
+            if (_coroutineDamage == null)
+            {
+                lifeSliderDamage.value = lifeSliderCurrentHealth.value;
+            }
+
+            if (_coroutineHeal == null)
+            {
+                lifeSliderHeal.value = lifeSliderCurrentHealth.value;
+            }
         }
 
         private void UpdateManaValue()
@@ -69,18 +112,41 @@ namespace ForestReturn.Scripts.UI
 
         IEnumerator LifeSlider(float maxValue)
         {
-            lifeSliderBack.value = maxValue / LevelManager.Instance.PlayerScript.MaxHealth;
-            yield return new WaitForSeconds(timeSecondLife);
+            lifeSliderDamage.value = maxValue / LevelManager.Instance.PlayerScript.MaxHealth;
             float currentValue = maxValue;
             while (currentValue > minValue)
             {
-                currentValue -= Time.fixedDeltaTime * speedSecondLife;
-                lifeSliderBack.value = currentValue / LevelManager.Instance.PlayerScript.MaxHealth;
+                if (timeToSecondLifeDelay<Time.time)
+                {
+                    currentValue -= Time.fixedDeltaTime * speedSecondLife;
+                }
+                lifeSliderDamage.value = currentValue / LevelManager.Instance.PlayerScript.MaxHealth;
                 yield return new WaitForFixedUpdate();
             }
             currentValue = minValue / LevelManager.Instance.PlayerScript.MaxHealth;
-            lifeSliderBack.value = currentValue;
-            _coroutine = null;
+            lifeSliderDamage.value = currentValue;
+            _coroutineDamage = null;
+            yield return null;
+        }
+        IEnumerator LifeSliderOnHeal(float value)
+        {
+            float currentValue = value;
+            Debug.Log(currentValue + " " + maxValueOnHeal);
+            while (currentValue < maxValueOnHeal)
+            {
+                if (timeToHealDelay<Time.time)
+                {
+                    currentValue += Time.fixedDeltaTime * speedSecondLife;
+                }
+
+                Debug.Log("CurrValue " + currentValue);
+                lifeSliderCurrentHealth.value = currentValue / LevelManager.Instance.PlayerScript.MaxHealth;
+                // lifeSliderCurrentHealth.value = currentValue;
+                yield return new WaitForFixedUpdate();
+            }
+            currentValue = maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
+            lifeSliderCurrentHealth.value = currentValue;
+            _coroutineHeal = null;
             yield return null;
         }
     }

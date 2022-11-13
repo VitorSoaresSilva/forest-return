@@ -46,7 +46,7 @@ namespace ForestReturn.Scripts
 
         public delegate void OnDeadEvent();
         public delegate void OnHurtEvent(int damage);
-        public delegate void OnHealthHealedEvent();
+        public delegate void OnHealthHealedEvent(int oldValue, int newValue);
         public delegate void OnManaHealedEvent();
         public delegate void OnLifeChangeEvent();
         public delegate void OnManaChangeEvent();
@@ -93,8 +93,9 @@ namespace ForestReturn.Scripts
 
         protected void HealthHeal(int value)
         {
+            int oldValue = CurrentHealth;
             CurrentHealth += value;
-            OnHealthHealed?.Invoke();
+            OnHealthHealed?.Invoke(oldValue, CurrentHealth);
         }
 
         protected void ManaHeal(int value)
