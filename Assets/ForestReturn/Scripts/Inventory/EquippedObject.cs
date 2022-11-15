@@ -6,28 +6,61 @@ namespace ForestReturn.Scripts.Inventory
     public class EquippedObject : ScriptableObject
     {
         public SwordInventorySlot swordInventorySlot;
+        public MaskInventorySlot maskInventorySlot;
         public InventorySlot[] artifacts = new InventorySlot[3];
-        
-        
-        
-        
-        
-        [SerializeField] private WeaponObject initialWeapon;
         public void EquipWeapon(SwordInventorySlot newSwordInventorySlot)
         {
             if (newSwordInventorySlot.item.itemType == ItemType.Weapon)
             {
-                WeaponObject weaponObject = (WeaponObject)newSwordInventorySlot.item;
+                // unequip weapon, this game has only one weapon
                 swordInventorySlot = newSwordInventorySlot;
             }
         }
 
-        public void Init()
+        public void EquipMask(MaskInventorySlot newMaskInventorySlot)
         {
-            //TODO: Load item from database
-            // SwordInventorySlot a = new SwordInventorySlot(swordInventorySlot.id,);
-            EquipWeapon(new SwordInventorySlot(initialWeapon.id,1,initialWeapon,0));
-            // swordInventorySlot.item = InventoryManager.Instance.Database.items[swordInventorySlot.id];
+            if (newMaskInventorySlot.item.itemType == ItemType.Mask)
+            {
+                MaskObject maskObject = (MaskObject)newMaskInventorySlot.item;
+                maskInventorySlot = newMaskInventorySlot;
+            }
+        }
+
+        public void UnEquipMask()
+        {
+            if (maskInventorySlot != null)
+            {
+                //TODO: unEquip mask
+            }
+        }
+
+        public void Init() // new game
+        {
+            //find weapon - Our game will game only one weapon
+            foreach (var databaseItem in InventoryManager.Instance.Database.items)
+            {
+                if (databaseItem.itemType != ItemType.Weapon) continue;
+                swordInventorySlot = new SwordInventorySlot(databaseItem.id, 1, databaseItem, 0);
+                break;
+
+            }
+        }
+
+        public void Load()
+        {
+            swordInventorySlot = null;
+            maskInventorySlot = null;
+            
+            
+            var item = InventoryManager.Instance.Database.items[swordInventorySlot.id];
+            EquipWeapon(new SwordInventorySlot(swordInventorySlot.id,item,swordInventorySlot.slotsAmount));
+                // swordInventorySlot.item = InventoryManager.Instance.Database.items[swordInventorySlot.id];
+            
+
+            
+            EquipMask(new MaskInventorySlot(maskInventorySlot.id,InventoryManager.Instance.Database.items[maskInventorySlot.id]));
+            // maskInventorySlot.item = InventoryManager.Instance.Database.items[maskInventorySlot.id];
+            
         }
 
         public void Clear()

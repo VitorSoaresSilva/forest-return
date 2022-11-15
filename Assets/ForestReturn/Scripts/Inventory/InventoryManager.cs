@@ -41,6 +41,13 @@ namespace ForestReturn.Scripts.Inventory
             triggerInventory.Init();
         }
 
+        public void Load()
+        {
+            inventory.Load();
+            equippedItems.Load();
+            triggerInventory.Load();
+        }
+
         [ContextMenu("Money")]
         public void DEBBUG_GetMoney()
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.PlayerScripts;
 using UnityEngine;
@@ -16,12 +17,15 @@ namespace ForestReturn.Scripts.UI
         private static readonly int HurtStringHash = Animator.StringToHash("Hurt");
         public float speedSecondLife = 2;
         public float timeSecondLife = 0.6f;
-        private float minValue;
-        private float maxValueOnHeal;
-        private float timeToSecondLifeDelay;
-        private float timeToHealDelay;
+        public GameObject prefabItemCollected;
+        public GameObject itemCollectedParent;
+        private float _minValue;
+        private float _maxValueOnHeal;
+        private float _timeToSecondLifeDelay;
+        private float _timeToHealDelay;
         private Coroutine _coroutineDamage;
         private Coroutine _coroutineHeal;
+        
         private void Start()
         {
             lifeSliderHeal.value = 0;
@@ -32,6 +36,10 @@ namespace ForestReturn.Scripts.UI
             LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
             LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
             LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
+            if(InventoryManager.InstanceExists)
+            {
+                InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
+            }
         }
 
         private void OnDestroy()
@@ -43,6 +51,10 @@ namespace ForestReturn.Scripts.UI
                 LevelManager.Instance.PlayerScript.OnLifeChanged -= UpdateHealthValue;
                 LevelManager.Instance.PlayerScript.OnManaChanged -= UpdateManaValue;
             }
+            if ( InventoryManager.InstanceExists)
+            {
+                InventoryManager.Instance.inventory.OnItemCollected -= InventoryOnItemCollected;
+            }
         }
 
 
@@ -52,34 +64,38 @@ namespace ForestReturn.Scripts.UI
             {
                 StopCoroutine(_coroutineDamage);
             }
-
-            maxValueOnHeal = newValue;
-            lifeSliderHeal.value =  maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
+            _maxValueOnHeal = newValue;
+            lifeSliderHeal.value =  _maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
             lifeSliderDamage.value = 0;
-            timeToHealDelay = Time.time + timeSecondLife;
+            _timeToHealDelay = Time.time + timeSecondLife;
             if (_coroutineHeal == null)
             {
                 _coroutineHeal = StartCoroutine(LifeSliderOnHeal(oldValue));
             }
 
-            // var oldValue = lifeSliderCurrentHealth.value;
-            // maxValueOnHeal = LevelManager.Instance.PlayerScript.CurrentHealth;
-            // StopCoroutine(_coroutine);
-            // // lifeSliderDamage.value = maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
-            // lifeSliderHeal.value = LevelManager.Instance.PlayerScript.CurrentHealth;
-
+        }
+        private void InventoryOnItemCollected(ItemCollectedData itemCollectedData)
+        {
+            if (prefabItemCollected == null || itemCollectedParent == null) return; // bug da unity
+            var item = Instantiate(prefabItemCollected,itemCollectedParent.transform);
+            if (itemCollectedParent != null)
+            {
+                item.transform.SetParent(itemCollectedParent.transform);
+            }
+            var itemCollectedAlert = item.GetComponent<ItemCollectedAlert>();
+            itemCollectedAlert.SetText(itemCollectedData);
         }
 
         private void PlayerScriptOnOnHurt(int damageTaken)
         {
             hurtAnimator.SetTrigger(HurtStringHash);
-            minValue = LevelManager.Instance.PlayerScript.CurrentHealth;
-            timeToSecondLifeDelay = Time.time + timeSecondLife;
+            _minValue = LevelManager.Instance.PlayerScript.CurrentHealth;
+            _timeToSecondLifeDelay = Time.time + timeSecondLife;
 
             if (_coroutineHeal != null)
             {
                 StopCoroutine(_coroutineHeal);
-                lifeSliderCurrentHealth.value = minValue / LevelManager.Instance.PlayerScript.MaxHealth;
+                lifeSliderCurrentHealth.value = _minValue / LevelManager.Instance.PlayerScript.MaxHealth;
                 lifeSliderHeal.value = 0;
             }
             
@@ -92,7 +108,6 @@ namespace ForestReturn.Scripts.UI
 
         private void UpdateHealthValue()
         {
-            Debug.Log("Update");
             lifeSliderCurrentHealth.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth / LevelManager.Instance.PlayerScript.MaxHealth;
             if (_coroutineDamage == null)
             {
@@ -114,16 +129,16 @@ namespace ForestReturn.Scripts.UI
         {
             lifeSliderDamage.value = maxValue / LevelManager.Instance.PlayerScript.MaxHealth;
             float currentValue = maxValue;
-            while (currentValue > minValue)
+            while (currentValue > _minValue)
             {
-                if (timeToSecondLifeDelay<Time.time)
+                if (_timeToSecondLifeDelay<Time.time)
                 {
                     currentValue -= Time.fixedDeltaTime * speedSecondLife;
                 }
                 lifeSliderDamage.value = currentValue / LevelManager.Instance.PlayerScript.MaxHealth;
                 yield return new WaitForFixedUpdate();
             }
-            currentValue = minValue / LevelManager.Instance.PlayerScript.MaxHealth;
+            currentValue = _minValue / LevelManager.Instance.PlayerScript.MaxHealth;
             lifeSliderDamage.value = currentValue;
             _coroutineDamage = null;
             yield return null;
@@ -131,20 +146,17 @@ namespace ForestReturn.Scripts.UI
         IEnumerator LifeSliderOnHeal(float value)
         {
             float currentValue = value;
-            Debug.Log(currentValue + " " + maxValueOnHeal);
-            while (currentValue < maxValueOnHeal)
+            while (currentValue < _maxValueOnHeal)
             {
-                if (timeToHealDelay<Time.time)
+                if (_timeToHealDelay<Time.time)
                 {
                     currentValue += Time.fixedDeltaTime * speedSecondLife;
                 }
-
-                Debug.Log("CurrValue " + currentValue);
                 lifeSliderCurrentHealth.value = currentValue / LevelManager.Instance.PlayerScript.MaxHealth;
                 // lifeSliderCurrentHealth.value = currentValue;
                 yield return new WaitForFixedUpdate();
             }
-            currentValue = maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
+            currentValue = _maxValueOnHeal / LevelManager.Instance.PlayerScript.MaxHealth;
             lifeSliderCurrentHealth.value = currentValue;
             _coroutineHeal = null;
             yield return null;

@@ -97,6 +97,7 @@ namespace ForestReturn.Scripts.Managers
             if (savedGameDataTemporary[IndexSaveSlot].loadSuccess)
             {
                 loadingFromCheckpoint = true;
+                InventoryManager.Instance.Load();
             }
             else
             {

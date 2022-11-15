@@ -52,13 +52,18 @@ namespace ForestReturn.Scripts.Inventory
             return true;
         }
 
-        public void Init()
+        public void Load()
         {
             foreach (var inventorySlot in Items)
             {
                 var b = InventoryManager.Instance.Database.items[inventorySlot.id];
                 inventorySlot.item = b;
             }
+        }
+
+        public void Init() // new game
+        {
+            
         }
 
         // public bool SwitchSlots(InventorySlot oldObject, InventorySlot newObject)

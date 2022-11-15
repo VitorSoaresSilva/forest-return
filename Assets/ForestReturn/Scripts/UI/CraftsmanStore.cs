@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-public class CraftsmanStore : MonoBehaviour
+namespace ForestReturn.Scripts.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CraftsmanStore : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Close()
+        {
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
+        }
     }
 }
