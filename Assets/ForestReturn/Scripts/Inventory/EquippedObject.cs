@@ -42,16 +42,13 @@ namespace ForestReturn.Scripts.Inventory
                 if (databaseItem.itemType != ItemType.Weapon) continue;
                 swordInventorySlot = new SwordInventorySlot(databaseItem.id, 1, databaseItem, 0);
                 break;
-
             }
+            
+            maskInventorySlot = null;
         }
 
         public void Load()
         {
-            swordInventorySlot = null;
-            maskInventorySlot = null;
-            
-            
             var item = InventoryManager.Instance.Database.items[swordInventorySlot.id];
             EquipWeapon(new SwordInventorySlot(swordInventorySlot.id,item,swordInventorySlot.slotsAmount));
                 // swordInventorySlot.item = InventoryManager.Instance.Database.items[swordInventorySlot.id];
@@ -66,6 +63,7 @@ namespace ForestReturn.Scripts.Inventory
         public void Clear()
         {
             swordInventorySlot = null;
+            maskInventorySlot = null;
         }
     }
 }

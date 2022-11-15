@@ -1852,8 +1852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1440, y: -464.63928}
-  m_SizeDelta: {x: 960, y: 929.27856}
+  m_AnchoredPosition: {x: 1440, y: -465.2254}
+  m_SizeDelta: {x: 960, y: 930.4508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7988331768537222211
 CanvasRenderer:
@@ -2986,6 +2986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 917134942956361867}
+  - component: {fileID: 2912212129636282704}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -3016,6 +3017,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2912212129636282704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917134942956361866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dec62d75be64e29b1aec4c297e38c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedText: {fileID: 8402595146272135104}
+  scrapText: {fileID: 8402595146158314901}
 --- !u!1 &1048676103192188568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,8 +3753,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4623312509108676782}
   - {fileID: 863449597270692125}
+  - {fileID: 4623312509108676782}
   - {fileID: 585275716623503197}
   - {fileID: 6944700892396693859}
   - {fileID: 6508077527959062615}
@@ -3767,12 +3782,12 @@ MonoBehaviour:
   upgradeWeaponButton: {fileID: 3763914403475557082}
   costWeaponText: {fileID: 3555893816843375758}
   costSlotText: {fileID: 3493382538963531040}
-  OnWeaponCanUpgrade:
+  onWeaponCanUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3763914403475557082}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3782,12 +3797,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnWeaponCannotUpgrade:
+  onWeaponNotEnoughMoneyToUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3763914403475557082}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3797,12 +3812,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnSlotCanUpgrade:
+  onWeaponNotMoreLevelsToUpgrade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3360060675072558871}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onWeaponToUpgraded:
+    m_PersistentCalls:
+      m_Calls: []
+  onSlotCanUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8694751457222475950}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3812,12 +3845,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnSlotCannotUpgrade:
+  onSlotNotEnoughMoneyToUpgrade:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8694751457222475950}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3827,6 +3860,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onSlotNotMoreSlotsToUpgrade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8998004135322567829}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onSlotToUpgraded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1633562180054323923
 GameObject:
   m_ObjectHideFlags: 0
@@ -5038,7 +5089,7 @@ RectTransform:
   m_Children:
   - {fileID: 368162405389830275}
   m_Father: {fileID: 1972172873454592707}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9154,8 +9205,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -464.63928}
-  m_SizeDelta: {x: 960, y: 929.27856}
+  m_AnchoredPosition: {x: 480, y: -465.2254}
+  m_SizeDelta: {x: 960, y: 930.4508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6634475480234884497
 CanvasRenderer:
@@ -16371,7 +16422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8402595146904759042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17459,7 +17510,7 @@ RectTransform:
   m_Children:
   - {fileID: 89520727938658296}
   m_Father: {fileID: 1972172873454592707}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

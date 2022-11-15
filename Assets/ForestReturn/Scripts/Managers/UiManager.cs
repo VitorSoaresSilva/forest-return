@@ -81,36 +81,48 @@ namespace ForestReturn.Scripts.Managers
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     menu.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Hud:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     hud.SetActive(true);
                     Cursor.lockState = CursorLockMode.Locked;
+                    SetActionMap("gameplay");
                     break;
                 case CanvasType.Pause:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     pause.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Death:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     death.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Blacksmith:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     blacksmith.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Craftsman:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     craftsman.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
+        }
+
+        private void SetActionMap(string actionMap)
+        {
+            LevelManager.Instance.PlayerScript._playerInput.enabled = true;
+            LevelManager.Instance.PlayerScript._playerInput.SwitchCurrentActionMap(actionMap);
         }
 
         private void CloseAllMenu()

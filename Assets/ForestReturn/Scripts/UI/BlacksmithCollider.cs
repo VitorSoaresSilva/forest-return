@@ -13,7 +13,7 @@ public class BlacksmithCollider : MonoBehaviour, IInteractable
     public void Interact()
     {
         UiManager.Instance.OpenBlacksmith();
-        GameManager.Instance.PauseGame();
+        // GameManager.Instance.PauseGame();
     }
 
     public void SetStatusInteract(bool status)

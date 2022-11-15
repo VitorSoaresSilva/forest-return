@@ -115,18 +115,23 @@ namespace ForestReturn.Scripts.PlayerScripts
                 {
                     hitBox = playerAttack.hitBox.AddComponent<HitBox>();
                 }
-                hitBox.damage = Damage;
+                hitBox.damage = CalculateDamagePerWeaponLevel();
             }
+        }
+
+        private int CalculateDamagePerWeaponLevel()
+        {
+            return Damage + InventoryManager.Instance.equippedItems.swordInventorySlot.level * 2;
         }
         
-        // Damage
-        public DataDamage DataDamage
-        {
-            get
-            {
-                return new DataDamage(1);
-            }
-        }
+        // // Damage
+        // public DataDamage DataDamage
+        // {
+        //     get
+        //     {
+        //         return new DataDamage(1);
+        //     }
+        // }
 
         protected override void Awake()
         {
@@ -138,15 +143,15 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnResumeGame()
         {
             Debug.Log("resume");
-            _playerInput.enabled = true;
-            _playerInput.SwitchCurrentActionMap("gameplay");
+            // _playerInput.enabled = true;
+            // _playerInput.SwitchCurrentActionMap("gameplay");
         }
         
         public void OnPauseGame()
         {
             Debug.Log("pause");
-            _playerInput.enabled = true;
-            _playerInput.SwitchCurrentActionMap("Menu");
+            // _playerInput.enabled = true;
+            // _playerInput.SwitchCurrentActionMap("Menu");
         }
 
         private void Update()
