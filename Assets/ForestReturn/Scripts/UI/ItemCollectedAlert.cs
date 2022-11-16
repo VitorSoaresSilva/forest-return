@@ -25,7 +25,15 @@ namespace ForestReturn.Scripts.UI
 
         public void SetText(ItemCollectedData itemCollectedData)
         {
-            text.text = $"+{itemCollectedData.CollectedAmount} {itemCollectedData.Item.itemName} (x{itemCollectedData.CurrentAmount})";
+
+            if (itemCollectedData.CurrentAmount > 0)
+            {
+                text.text = $"+{itemCollectedData.CollectedAmount} {itemCollectedData.Item.itemName} (x{itemCollectedData.CurrentAmount})";
+            }
+            else
+            {
+                text.text = $"+{itemCollectedData.CollectedAmount} {itemCollectedData.Item.itemName}";
+            }
         }
     }
 }

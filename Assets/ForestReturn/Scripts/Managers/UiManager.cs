@@ -18,19 +18,6 @@ namespace ForestReturn.Scripts.Managers
         public GameObject death;
         public GameObject blacksmith;
         public GameObject craftsman;
-        
-        [SerializeField] private Button restartDeathButton;
-        [SerializeField] private Button mainMenuDeathButton;
-        [SerializeField] private Button quitDeathButton;
-        
-        [SerializeField] private Button resumeButton;
-        [SerializeField] private Button mainMenuPauseButton;
-        [SerializeField] private Button closePauseButton;
-        [SerializeField] private Button quitPauseButton;
-        [SerializeField] private Button quitFerreiroButton;
-
-        public GameObject prefabItemCollected;
-        public GameObject itemCollectedParent;
         public void Init()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -38,10 +25,7 @@ namespace ForestReturn.Scripts.Managers
             {
                 LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
             }
-            if(InventoryManager.InstanceExists)
-            {
-                InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
-            }
+            
             OpenCanvas(CanvasType.Hud);
             if (GameManager.InstanceExists)
             {
@@ -56,22 +40,9 @@ namespace ForestReturn.Scripts.Managers
             {
                 LevelManager.Instance.PlayerScript.OnDead -= PlayerScriptOnOnDead;
             }
-            if ( InventoryManager.InstanceExists)
-            {
-                InventoryManager.Instance.inventory.OnItemCollected -= InventoryOnItemCollected;
-            }
+            
         }
-        private void InventoryOnItemCollected(ItemCollectedData itemCollectedData)
-        {
-            if (prefabItemCollected == null || itemCollectedParent == null) return; // bug da unity
-            var item = Instantiate(prefabItemCollected,itemCollectedParent.transform);
-            if (itemCollectedParent != null)
-            {
-                item.transform.SetParent(itemCollectedParent.transform);
-            }
-            var itemCollectedAlert = item.GetComponent<ItemCollectedAlert>();
-            itemCollectedAlert.SetText(itemCollectedData);
-        }
+        
 
         private void PlayerScriptOnOnDead()
         {
@@ -86,16 +57,8 @@ namespace ForestReturn.Scripts.Managers
 
         private void SetListeners()
         {
-            
-            restartDeathButton.onClick.AddListener(() => {GameManager.Instance.RestartFromCheckpoint();});
-            mainMenuDeathButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
-            quitDeathButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
-            
-            resumeButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
-            mainMenuPauseButton.onClick.AddListener(() => {GameManager.Instance.BackToMainMenu();});
-            closePauseButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
-            quitPauseButton.onClick.AddListener(() => {GameManager.Instance.ExitGame();});
-            // quitFerreiroButton.onClick.AddListener(() => {GameManager.Instance.ResumeGame();});
+            death.GetComponent<DeathCanvas>().SetListeners();
+            pause.GetComponent<PauseCanvas>().SetListeners();
         }
 
         [ContextMenu("Open Blacksmith")]
@@ -118,36 +81,48 @@ namespace ForestReturn.Scripts.Managers
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     menu.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Hud:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     hud.SetActive(true);
                     Cursor.lockState = CursorLockMode.Locked;
+                    SetActionMap("gameplay");
                     break;
                 case CanvasType.Pause:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     pause.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Death:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     death.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Blacksmith:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     blacksmith.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 case CanvasType.Craftsman:
                     CloseAllMenu();
                     Cursor.lockState = CursorLockMode.None;
                     craftsman.SetActive(true);
+                    SetActionMap("Menu");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
+        }
+
+        private void SetActionMap(string actionMap)
+        {
+            LevelManager.Instance.PlayerScript._playerInput.enabled = true;
+            LevelManager.Instance.PlayerScript._playerInput.SwitchCurrentActionMap(actionMap);
         }
 
         private void CloseAllMenu()

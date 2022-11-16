@@ -23,10 +23,22 @@ namespace ForestReturn.Scripts.UI
 
         public TextMeshProUGUI costWeaponText;
         public TextMeshProUGUI costSlotText;
-        public UnityEvent OnWeaponCanUpgrade;
-        public UnityEvent OnWeaponCannotUpgrade;
-        public UnityEvent OnSlotCanUpgrade;
-        public UnityEvent OnSlotCannotUpgrade;
+        public UnityEvent onWeaponCanUpgrade;
+        public UnityEvent onWeaponNotEnoughMoneyToUpgrade;
+        public UnityEvent onWeaponNotMoreLevelsToUpgrade;
+        public UnityEvent onWeaponToUpgraded;
+        public UnityEvent onSlotCanUpgrade;
+        public UnityEvent onSlotNotEnoughMoneyToUpgrade;
+        public UnityEvent onSlotNotMoreSlotsToUpgrade;
+        public UnityEvent onSlotToUpgraded;
+        
+        
+        
+        
+        
+        
+        
+        
         public void OnEnable()
         {
             UpdateData();
@@ -37,34 +49,54 @@ namespace ForestReturn.Scripts.UI
         {
             //TODO: até então está desligando o texto quando nao tem dinheiro. Mudar pra desligar so quando nao tem mais nivel
             _swordInventorySlot = InventoryManager.Instance.equippedItems.swordInventorySlot;
-            _weaponLevelCost = _swordInventorySlot.slotsAmount < BlacksmithConfigData.LevelsCost.Length
+            _weaponLevelCost = _swordInventorySlot.level < BlacksmithConfigData.LevelsCost.Length
                 ? BlacksmithConfigData.LevelsCost[_swordInventorySlot.level]
                 : null;   
             _slotsCost = _swordInventorySlot.slotsAmount < BlacksmithConfigData.SlotsCost.Length
-                ? BlacksmithConfigData.SlotsCost[_swordInventorySlot.level]
-                : null;   
+                ? BlacksmithConfigData.SlotsCost[_swordInventorySlot.slotsAmount]
+                : null;
+
+
+            Debug.Log(_weaponLevelCost.Value.ScrapCost);
+            Debug.Log(_slotsCost.Value.ScrapCost);
             _seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
             _scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             if (CanUpgradeWeapon())
             {
-                costWeaponText.text = $"Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
-                OnWeaponCanUpgrade?.Invoke();
+                costWeaponText.text = $"Level: Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
+                onWeaponCanUpgrade?.Invoke();
             }
             else
             {
-                costWeaponText.text = String.Empty;
-                OnWeaponCannotUpgrade?.Invoke();
+                if (_weaponLevelCost == null)
+                {
+                    costWeaponText.text = "Level Max";
+                    onWeaponNotMoreLevelsToUpgrade?.Invoke();
+                }
+                else
+                {
+                    costWeaponText.text = $"Level: Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
+                    onWeaponNotEnoughMoneyToUpgrade?.Invoke();
+                }
             }
 
             if (CanUpgradeSlots())
             {
-                costSlotText.text = $"Seed: {_slotsCost?.SeedCost} - Scrap: {_slotsCost?.ScrapCost}";
-                OnSlotCanUpgrade?.Invoke();
+                costSlotText.text = $"Slots: Seed: {_slotsCost?.SeedCost} - Scrap: {_slotsCost?.ScrapCost}";
+                onSlotCanUpgrade?.Invoke();
             }
             else
             {
-                costSlotText.text = String.Empty;
-                OnSlotCannotUpgrade?.Invoke();
+                if (_slotsCost == null)
+                {
+                    costSlotText.text = "Level Max";
+                    onSlotNotEnoughMoneyToUpgrade?.Invoke();
+                }
+                else
+                {
+                    costSlotText.text = $"Slots: Seed: {_slotsCost?.SeedCost} - Scrap: {_slotsCost?.ScrapCost}";
+                    onSlotNotEnoughMoneyToUpgrade?.Invoke();
+                }
             }
         }
 
@@ -73,9 +105,10 @@ namespace ForestReturn.Scripts.UI
         {
             if (CanUpgradeWeapon())
             {
+                onWeaponToUpgraded?.Invoke();
                 _seed.RemoveAmount((int)_weaponLevelCost?.SeedCost);
                 _scrap.RemoveAmount((int)_weaponLevelCost?.ScrapCost);
-                _swordInventorySlot.slotsAmount++;
+                _swordInventorySlot.level++;
                 UpdateData();
             }
         }
@@ -85,9 +118,10 @@ namespace ForestReturn.Scripts.UI
         {
             if (CanUpgradeSlots())
             {
+                onSlotToUpgraded?.Invoke();
                 _seed.RemoveAmount((int)_slotsCost?.SeedCost);
                 _scrap.RemoveAmount((int)_slotsCost?.ScrapCost);
-                _swordInventorySlot.level++;
+                _swordInventorySlot.slotsAmount++;
                 UpdateData();
             }
         }

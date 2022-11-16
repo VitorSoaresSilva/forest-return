@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts.UI
 {
-    public class DisplayInventory : MonoBehaviour
+    public class InventoryCanvas : MonoBehaviour
     {
         public GameObject prefab;
         public Transform grid;
