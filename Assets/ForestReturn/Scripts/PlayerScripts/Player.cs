@@ -160,15 +160,15 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void OnResumeGame()
         {
             Debug.Log("resume");
-            // _playerInput.enabled = true;
-            // _playerInput.SwitchCurrentActionMap("gameplay");
+            _playerInput.enabled = true;
+            _playerInput.SwitchCurrentActionMap("gameplay");
         }
         
         public void OnPauseGame()
         {
             Debug.Log("pause");
-            // _playerInput.enabled = true;
-            // _playerInput.SwitchCurrentActionMap("Menu");
+            _playerInput.enabled = true;
+            _playerInput.SwitchCurrentActionMap("Menu");
         }
 
         private void Update()
@@ -361,20 +361,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         IEnumerator VineSkillCooldown()
         {
             var time = delayTimeVineSkill;
-
-            
-            /* 3 - 3 = 0
-             *
-             *
-             *
-             * 3 - 0 = 3/3
-             */
-            
-            
             while (time > 0)
             {
                 time -= Time.fixedDeltaTime;
-                Debug.Log("time:" + time + " value: " + (delayTimeVineSkill - time)/delayTimeVineSkill);
                 CooldownValue = (delayTimeVineSkill - time)/delayTimeVineSkill;
                 yield return new WaitForFixedUpdate();
             }
