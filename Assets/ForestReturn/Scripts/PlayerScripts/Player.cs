@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
@@ -57,7 +58,24 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         [Header("Skills")] 
         [SerializeField] private GameObject vinesSkillPrefab;
-        
+
+        // private float timeToCastVineSkill;
+        private float delayTimeVineSkill = 3;
+
+        public delegate void OnVineSkillCoolDownChangedEvent(float value);
+        public event OnVineSkillCoolDownChangedEvent OnVineSkillCoolDownChanged;
+
+        private float _cooldownVinesSkillValue;
+        public float CooldownValue
+        {
+            get => _cooldownVinesSkillValue;
+            private set
+            {
+                _cooldownVinesSkillValue = value;
+                OnVineSkillCoolDownChanged?.Invoke(value);
+            }
+        }
+
 
         public void Init()
         {
@@ -88,7 +106,11 @@ namespace ForestReturn.Scripts.PlayerScripts
                     
                 }
                 GameManager.Instance.Save();
+
+                InitSkill();
             }
+
+            
             
             //equipamentos
             _currentSpeed = normalSpeed;
@@ -105,8 +127,12 @@ namespace ForestReturn.Scripts.PlayerScripts
                 GameManager.Instance.OnPauseGame -= OnPauseGame;
             }
         }
+        private void InitSkill()
+        {
+            CooldownValue = 1;
+        }
 
-        public void UpdateAttacks()
+        private void UpdateAttacks()
         {
             foreach (PlayerAttack playerAttack in attacks)
             {
@@ -124,15 +150,6 @@ namespace ForestReturn.Scripts.PlayerScripts
             return Damage + InventoryManager.Instance.equippedItems.swordInventorySlot.level * 2;
         }
         
-        // // Damage
-        // public DataDamage DataDamage
-        // {
-        //     get
-        //     {
-        //         return new DataDamage(1);
-        //     }
-        // }
-
         protected override void Awake()
         {
             base.Awake();
@@ -332,11 +349,39 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void OnVinesSkill(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (!context.performed) return;
+
+            if (_cooldownVinesSkillValue >= 0.99f && UseMana())
             {
                 Instantiate(vinesSkillPrefab, transform.position, transform.rotation);
+                StartCoroutine(VineSkillCooldown());
             }
         }
+
+        IEnumerator VineSkillCooldown()
+        {
+            var time = delayTimeVineSkill;
+
+            
+            /* 3 - 3 = 0
+             *
+             *
+             *
+             * 3 - 0 = 3/3
+             */
+            
+            
+            while (time > 0)
+            {
+                time -= Time.fixedDeltaTime;
+                Debug.Log("time:" + time + " value: " + (delayTimeVineSkill - time)/delayTimeVineSkill);
+                CooldownValue = (delayTimeVineSkill - time)/delayTimeVineSkill;
+                yield return new WaitForFixedUpdate();
+            }
+            CooldownValue = 1;
+            yield return null;
+        }
+        
         public void OnDefense(InputAction.CallbackContext context)
         {
             if (context.performed)

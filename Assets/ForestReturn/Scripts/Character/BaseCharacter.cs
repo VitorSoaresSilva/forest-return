@@ -50,12 +50,14 @@ namespace ForestReturn.Scripts
         public delegate void OnManaHealedEvent();
         public delegate void OnLifeChangeEvent();
         public delegate void OnManaChangeEvent();
+        public delegate void OnNotEnoughManaEvent();
         public event OnDeadEvent OnDead;
         public event OnHurtEvent OnHurt;
         public event OnHealthHealedEvent OnHealthHealed;
         public event OnManaHealedEvent OnManaHealed;
         public event OnLifeChangeEvent OnLifeChanged;
         public event OnManaChangeEvent OnManaChanged;
+        public event OnNotEnoughManaEvent OnNotEnoughMana;
         
 
         protected virtual void Awake()
@@ -102,6 +104,20 @@ namespace ForestReturn.Scripts
         {
             CurrentMana += value;
             OnManaHealed?.Invoke();
+        }
+
+        protected bool UseMana(int value = 1)
+        {
+            if (CurrentMana >= value)
+            {
+                CurrentMana -= value;
+                return true;
+            }
+            else
+            {
+                OnNotEnoughMana?.Invoke();
+                return false;
+            }
         }
     }
 }

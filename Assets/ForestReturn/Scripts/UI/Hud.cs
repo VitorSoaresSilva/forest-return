@@ -13,6 +13,7 @@ namespace ForestReturn.Scripts.UI
         public Slider lifeSliderCurrentHealth;
         public Slider lifeSliderDamage;
         public Slider lifeSliderHeal;
+        public Slider cooldownVineSlider;
         public Animator hurtAnimator;
         private static readonly int HurtStringHash = Animator.StringToHash("Hurt");
         public float speedSecondLife = 2;
@@ -36,10 +37,23 @@ namespace ForestReturn.Scripts.UI
             LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
             LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
             LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
+            LevelManager.Instance.PlayerScript.OnNotEnoughMana += PlayerScriptOnOnNotEnoughMana;
+            LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged += PlayerScriptOnOnVineSkillCoolDownChanged;
             if(InventoryManager.InstanceExists)
             {
                 InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
             }
+        }
+
+        private void PlayerScriptOnOnVineSkillCoolDownChanged(float value)
+        {
+            cooldownVineSlider.value = value;
+        }
+
+        private void PlayerScriptOnOnNotEnoughMana()
+        {
+            Debug.Log("Not enough Mana");
+            //TODO: Adicionar aviso para o player que nao tem mana
         }
 
         private void OnDestroy()
@@ -50,6 +64,8 @@ namespace ForestReturn.Scripts.UI
                 LevelManager.Instance.PlayerScript.OnHealthHealed -= PlayerScriptOnOnHealthHealed;
                 LevelManager.Instance.PlayerScript.OnLifeChanged -= UpdateHealthValue;
                 LevelManager.Instance.PlayerScript.OnManaChanged -= UpdateManaValue;
+                LevelManager.Instance.PlayerScript.OnNotEnoughMana -= PlayerScriptOnOnNotEnoughMana;
+                LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged -= PlayerScriptOnOnVineSkillCoolDownChanged;
             }
             if ( InventoryManager.InstanceExists)
             {
@@ -160,6 +176,12 @@ namespace ForestReturn.Scripts.UI
             lifeSliderCurrentHealth.value = currentValue;
             _coroutineHeal = null;
             yield return null;
+        }
+
+
+        public void UpdateCooldownVinesSlider(float value01)
+        {
+            cooldownVineSlider.value = value01;
         }
     }
 }
