@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4845559802659414268, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: maxPosition
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845559802659414268, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: activeEventPath.Path
       value: event:/SFX/pistao
       objectReference: {fileID: 0}
@@ -69,19 +73,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.502003
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1122837
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 124.78
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000058114523
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -89,15 +93,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 4845559802659414271, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -123,5 +127,43 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 1.6414125
       objectReference: {fileID: 0}
+    - target: {fileID: 4845559802885515687, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6034068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845559802885515687, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.62108195
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845559802885515687, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845559802885515687, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845559802885515687, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.975
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+--- !u!1 &6982650556507052557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4845559802885515684, guid: 4ce3c1ee3f6bf59459f2943e53ab72c1, type: 3}
+  m_PrefabInstance: {fileID: 2583299652097831849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4396320937571417279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982650556507052557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
