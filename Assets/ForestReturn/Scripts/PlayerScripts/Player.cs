@@ -18,19 +18,15 @@ namespace ForestReturn.Scripts.PlayerScripts
         private bool _isAttacking;
         private bool _isDashing;
         private float _turnSmoothVelocity;
-        [HideInInspector] public PlayerInput _playerInput;
+        [HideInInspector] public PlayerInput playerInput;
         private InventoryObject _inventoryObjectRef;
 
         [Header("Movement")]
         private float _currentSpeed; 
         [SerializeField] private float normalSpeed; 
-        // [SerializeField] private float attackForwardStepSpeed;
         [SerializeField] private float turnSmoothTime = 0.1f;
-        private bool _isMovingForwardByAttack;
-        private Vector2 _move; 
-        private Vector2 _look;
         private Transform _cam;
-        private CinemachineFreeLook _cinemachine;
+        private CinemachineFreeLook _cineMachine;
 
         [Header("Interact")] 
         [SerializeField] private PlayerInteractableHandler playerInteractableHandler;
@@ -62,14 +58,21 @@ namespace ForestReturn.Scripts.PlayerScripts
         // private float timeToCastVineSkill;
         private float delayTimeVineSkill = 3;
 
+
+
+
+        
+        
+
         public delegate void OnVineSkillCoolDownChangedEvent(float value);
         public event OnVineSkillCoolDownChangedEvent OnVineSkillCoolDownChanged;
 
         private float _cooldownVinesSkillValue;
-        public float CooldownValue
+
+        private float CooldownValue
         {
             get => _cooldownVinesSkillValue;
-            private set
+            set
             {
                 _cooldownVinesSkillValue = value;
                 OnVineSkillCoolDownChanged?.Invoke(value);
@@ -80,7 +83,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void Init()
         {
             _cam = LevelManager.Instance.CamerasHolder.mainCamera.transform;
-            _cinemachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
+            _cineMachine = LevelManager.Instance.CamerasHolder.cineMachineFreeLook;
             if (InventoryManager.InstanceExists)
             {
                 _inventoryObjectRef = InventoryManager.Instance.inventory;
@@ -155,36 +158,34 @@ namespace ForestReturn.Scripts.PlayerScripts
             base.Awake();
             _controller = GetComponent<CharacterController>();
             _animator = GetComponentInChildren<Animator>();
-            _playerInput = GetComponent<PlayerInput>();
-        }
-        public void OnResumeGame()
-        {
-            Debug.Log("resume");
-            _playerInput.enabled = true;
-            _playerInput.SwitchCurrentActionMap("gameplay");
+            playerInput = GetComponent<PlayerInput>();
         }
         
-        public void OnPauseGame()
-        {
-            Debug.Log("pause");
-            _playerInput.enabled = true;
-            _playerInput.SwitchCurrentActionMap("Menu");
-        }
 
         private void Update()
         {
-            // if (_isMovingForwardByAttack)
-            // {
-            //     _controller.Move(transform.forward * (attackForwardStepSpeed * Time.deltaTime));
-            // }
-            // if (!_isAttacking)
-            // {
-            // }
-                Move();
-            _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
-            _animator.SetBool(WalkingHashAnimation,_move.sqrMagnitude > 0.01f);
+            Move();
+            // _controller.Move(Vector3.down * (-Physics.gravity.y * Time.deltaTime)); // Add Gravity
+            // _animator.SetBool(WalkingHashAnimation,_move.sqrMagnitude > 0.01f);
         }
 
+        private void Move()
+        {
+            
+            
+            
+            
+            //old version
+            // if (_move.sqrMagnitude < 0.01) //  || _isAttacking
+            //     return;
+            // float targetAngle = Mathf.Atan2(_move.x,_move.y) * Mathf.Rad2Deg + _cam.eulerAngles.y;
+            // float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
+            //     turnSmoothTime);
+            // transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            // Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            // _controller.Move(moveDirection.normalized * (_currentSpeed * Time.deltaTime));
+        }
+        #region Gameplay
         private void OnEnable()
         {
             OnDead += HandleDeath;
@@ -200,23 +201,21 @@ namespace ForestReturn.Scripts.PlayerScripts
             OnManaHealed -= HandleManaHealed;
             OnHealthHealed -= HandleHealthHealed;
         }
-
-        private void Move()
+        public void OnResumeGame()
         {
-            if (_move.sqrMagnitude < 0.01) //  || _isAttacking
-                return;
-            float targetAngle = Mathf.Atan2(_move.x,_move.y) * Mathf.Rad2Deg + _cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(moveDirection.normalized * (_currentSpeed * Time.deltaTime));
+            playerInput.enabled = true;
+            playerInput.SwitchCurrentActionMap("gameplay");
         }
-        #region Gameplay
-        public void OnMove(InputAction.CallbackContext context)
+        
+        public void OnPauseGame()
         {
-            _move = context.ReadValue<Vector2>();
+            playerInput.enabled = true;
+            playerInput.SwitchCurrentActionMap("Menu");
         }
+        // public void OnMove(InputAction.CallbackContext context)
+        // {
+        //     _move = context.ReadValue<Vector2>();
+        // }
 
         public void OnAttack(InputAction.CallbackContext context)
         {
@@ -268,7 +267,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
             var value = context.ReadValue<Vector2>();
-            _cinemachine.m_YAxis.Value += value.y * Time.deltaTime * _cinemachine.m_YAxis.m_MaxSpeed;
+            _cineMachine.m_YAxis.Value += value.y * Time.deltaTime * _cineMachine.m_YAxis.m_MaxSpeed;
         }
 
         public void OnInventory(InputAction.CallbackContext context)
@@ -320,7 +319,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             {
                 if (GameManager.Instance.generalData.HasTeleportData)
                 {
-                    _playerInput.enabled = false;
+                    playerInput.enabled = false;
                     IsIntangible = true;
                     foreach (var particle in _particleSystemsTeleport)
                     {
@@ -334,7 +333,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
                 if (teleportItems.Count > 0)
                 {
-                    _playerInput.enabled = false;
+                    playerInput.enabled = false;
                     IsIntangible = true;
                     foreach (var particle in _particleSystemsTeleport)
                     {
@@ -351,7 +350,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (!context.performed) return;
 
-            if (_cooldownVinesSkillValue >= 0.99f && UseMana())
+            if (CooldownValue >= 0.99f && UseMana())
             {
                 Instantiate(vinesSkillPrefab, transform.position, transform.rotation);
                 StartCoroutine(VineSkillCooldown());
@@ -486,7 +485,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             // _playerInput.enabled = false;
             _animator.SetTrigger(DeathHashAnimation);
-            _playerInput.SwitchCurrentActionMap("Death");
+            playerInput.SwitchCurrentActionMap("Death");
         }
         private void HandleHurt(int damageTaken)
         {

@@ -33,12 +33,12 @@ namespace ForestReturn.Scripts.UI
             lifeSliderDamage.value = 0;
             UpdateHealthValue();
             UpdateManaValue();
-            LevelManager.Instance.PlayerScript.OnHurt += PlayerScriptOnOnHurt;
-            LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
-            LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
-            LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
-            LevelManager.Instance.PlayerScript.OnNotEnoughMana += PlayerScriptOnOnNotEnoughMana;
-            LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged += PlayerScriptOnOnVineSkillCoolDownChanged;
+            // LevelManager.Instance.PlayerScript.OnHurt += PlayerScriptOnOnHurt;
+            // LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
+            // LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
+            // LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
+            // LevelManager.Instance.PlayerScript.OnNotEnoughMana += PlayerScriptOnOnNotEnoughMana;
+            // LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged += PlayerScriptOnOnVineSkillCoolDownChanged;
             if(InventoryManager.InstanceExists)
             {
                 InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
@@ -60,12 +60,12 @@ namespace ForestReturn.Scripts.UI
         {
             if (LevelManager.InstanceExists)
             {
-                LevelManager.Instance.PlayerScript.OnHurt -= PlayerScriptOnOnHurt;
-                LevelManager.Instance.PlayerScript.OnHealthHealed -= PlayerScriptOnOnHealthHealed;
-                LevelManager.Instance.PlayerScript.OnLifeChanged -= UpdateHealthValue;
-                LevelManager.Instance.PlayerScript.OnManaChanged -= UpdateManaValue;
-                LevelManager.Instance.PlayerScript.OnNotEnoughMana -= PlayerScriptOnOnNotEnoughMana;
-                LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged -= PlayerScriptOnOnVineSkillCoolDownChanged;
+                // LevelManager.Instance.PlayerScript.OnHurt -= PlayerScriptOnOnHurt;
+                // LevelManager.Instance.PlayerScript.OnHealthHealed -= PlayerScriptOnOnHealthHealed;
+                // LevelManager.Instance.PlayerScript.OnLifeChanged -= UpdateHealthValue;
+                // LevelManager.Instance.PlayerScript.OnManaChanged -= UpdateManaValue;
+                // LevelManager.Instance.PlayerScript.OnNotEnoughMana -= PlayerScriptOnOnNotEnoughMana;
+                // LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged -= PlayerScriptOnOnVineSkillCoolDownChanged;
             }
             if ( InventoryManager.InstanceExists)
             {

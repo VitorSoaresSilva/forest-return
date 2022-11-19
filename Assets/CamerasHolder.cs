@@ -11,7 +11,7 @@ public class CamerasHolder : MonoBehaviour
 
     private void Awake()
     {
-        mainCamera = GetComponentInChildren<Camera>();
-        cineMachineFreeLook = GetComponentInChildren<CinemachineFreeLook>();
+        // mainCamera = GetComponentInChildren<Camera>();
+        // cineMachineFreeLook = GetComponentInChildren<CinemachineFreeLook>();
     }
 }

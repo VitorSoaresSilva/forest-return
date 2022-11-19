@@ -47,12 +47,12 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""6f28ed6d-f1c3-4b21-81ad-bf15fb4761be"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Interact"",
@@ -100,15 +100,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""cameraControl"",
-                    ""type"": ""Value"",
-                    ""id"": ""9fce4190-f711-425b-9a9b-3cb9a9f8c7da"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""LifePotion"",
                     ""type"": ""Button"",
                     ""id"": ""54789a2f-e485-4053-860a-1ee4cbb92088"",
@@ -145,27 +136,27 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TesteCamera"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""265c5fde-df34-4bd8-9f04-f8f6d6681576"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2,StickDeadzone(min=0.2),ScaleVector2(y=0)"",
+                    ""name"": ""VinesSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e02f270-96c0-4f03-9df9-0e35fe30c6ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ZoomCamera"",
+                    ""name"": ""Camera"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""70759857-cc0d-4c7c-8254-06b064816e0e"",
+                    ""id"": ""aa8c50b1-57b3-4088-aa92-80f4d6ec6ac0"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""VinesSkill"",
+                    ""name"": ""Roll"",
                     ""type"": ""Button"",
-                    ""id"": ""3e02f270-96c0-4f03-9df9-0e35fe30c6ea"",
+                    ""id"": ""2b6bcdc0-d583-452b-b164-c7e284707c51"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -209,7 +200,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Dpad"",
                     ""id"": ""e3200bae-668e-496a-a352-9ad83defbb72"",
-                    ""path"": ""Dpad"",
+                    ""path"": ""Dpad(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -328,61 +319,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""9d44f2b3-4d5c-49f9-8c0c-f76fc9965749"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""cameraControl"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""9906c9fc-18a9-463a-84b7-21f9aa131a19"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""cameraControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""fff681fe-6444-4ce4-90cd-897334c45021"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""cameraControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""4c7e3f1f-cb91-40bd-af8d-20f055d18f6e"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""cameraControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""64a2be48-8fe8-4abe-becf-7b5be5dd7812"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""cameraControl"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""9f8c7cc5-d016-4b23-b53e-a5f559fd72b9"",
                     ""path"": ""<Mouse>/rightButton"",
@@ -440,33 +376,11 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8a712f53-3523-4d1f-a21b-27ff6c877791"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/leftAlt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Defense"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""347a2f8d-e613-4e9b-a698-2b4e2ead0917"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TesteCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8561b8b8-db08-45a0-a598-e3fea6a80e4d"",
-                    ""path"": ""<Mouse>/scroll"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=0),NormalizeVector2"",
-                    ""groups"": """",
-                    ""action"": ""ZoomCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -478,6 +392,39 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""VinesSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e12d8b5-958c-43aa-b318-026ba4ad6310"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78247181-8a01-4e39-b001-b1f3eaeb91a2"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1bbc93d-8ed7-4347-8ed3-f816c5521226"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -747,14 +694,13 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_pause = m_gameplay.FindAction("pause", throwIfNotFound: true);
         m_gameplay_inventory = m_gameplay.FindAction("inventory", throwIfNotFound: true);
         m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
-        m_gameplay_cameraControl = m_gameplay.FindAction("cameraControl", throwIfNotFound: true);
         m_gameplay_LifePotion = m_gameplay.FindAction("LifePotion", throwIfNotFound: true);
         m_gameplay_ManaPotion = m_gameplay.FindAction("ManaPotion", throwIfNotFound: true);
         m_gameplay_Teleport = m_gameplay.FindAction("Teleport", throwIfNotFound: true);
         m_gameplay_Defense = m_gameplay.FindAction("Defense", throwIfNotFound: true);
-        m_gameplay_TesteCamera = m_gameplay.FindAction("TesteCamera", throwIfNotFound: true);
-        m_gameplay_ZoomCamera = m_gameplay.FindAction("ZoomCamera", throwIfNotFound: true);
         m_gameplay_VinesSkill = m_gameplay.FindAction("VinesSkill", throwIfNotFound: true);
+        m_gameplay_Camera = m_gameplay.FindAction("Camera", throwIfNotFound: true);
+        m_gameplay_Roll = m_gameplay.FindAction("Roll", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -832,14 +778,13 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_pause;
     private readonly InputAction m_gameplay_inventory;
     private readonly InputAction m_gameplay_menu;
-    private readonly InputAction m_gameplay_cameraControl;
     private readonly InputAction m_gameplay_LifePotion;
     private readonly InputAction m_gameplay_ManaPotion;
     private readonly InputAction m_gameplay_Teleport;
     private readonly InputAction m_gameplay_Defense;
-    private readonly InputAction m_gameplay_TesteCamera;
-    private readonly InputAction m_gameplay_ZoomCamera;
     private readonly InputAction m_gameplay_VinesSkill;
+    private readonly InputAction m_gameplay_Camera;
+    private readonly InputAction m_gameplay_Roll;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -852,14 +797,13 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @pause => m_Wrapper.m_gameplay_pause;
         public InputAction @inventory => m_Wrapper.m_gameplay_inventory;
         public InputAction @menu => m_Wrapper.m_gameplay_menu;
-        public InputAction @cameraControl => m_Wrapper.m_gameplay_cameraControl;
         public InputAction @LifePotion => m_Wrapper.m_gameplay_LifePotion;
         public InputAction @ManaPotion => m_Wrapper.m_gameplay_ManaPotion;
         public InputAction @Teleport => m_Wrapper.m_gameplay_Teleport;
         public InputAction @Defense => m_Wrapper.m_gameplay_Defense;
-        public InputAction @TesteCamera => m_Wrapper.m_gameplay_TesteCamera;
-        public InputAction @ZoomCamera => m_Wrapper.m_gameplay_ZoomCamera;
         public InputAction @VinesSkill => m_Wrapper.m_gameplay_VinesSkill;
+        public InputAction @Camera => m_Wrapper.m_gameplay_Camera;
+        public InputAction @Roll => m_Wrapper.m_gameplay_Roll;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -893,9 +837,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
-                @cameraControl.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
-                @cameraControl.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
-                @cameraControl.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @LifePotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
                 @LifePotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
                 @LifePotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLifePotion;
@@ -908,15 +849,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Defense.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
                 @Defense.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
                 @Defense.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDefense;
-                @TesteCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
-                @TesteCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
-                @TesteCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTesteCamera;
-                @ZoomCamera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
-                @ZoomCamera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
-                @ZoomCamera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnZoomCamera;
                 @VinesSkill.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
                 @VinesSkill.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
                 @VinesSkill.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnVinesSkill;
+                @Camera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @Roll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -945,9 +886,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @menu.started += instance.OnMenu;
                 @menu.performed += instance.OnMenu;
                 @menu.canceled += instance.OnMenu;
-                @cameraControl.started += instance.OnCameraControl;
-                @cameraControl.performed += instance.OnCameraControl;
-                @cameraControl.canceled += instance.OnCameraControl;
                 @LifePotion.started += instance.OnLifePotion;
                 @LifePotion.performed += instance.OnLifePotion;
                 @LifePotion.canceled += instance.OnLifePotion;
@@ -960,15 +898,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Defense.started += instance.OnDefense;
                 @Defense.performed += instance.OnDefense;
                 @Defense.canceled += instance.OnDefense;
-                @TesteCamera.started += instance.OnTesteCamera;
-                @TesteCamera.performed += instance.OnTesteCamera;
-                @TesteCamera.canceled += instance.OnTesteCamera;
-                @ZoomCamera.started += instance.OnZoomCamera;
-                @ZoomCamera.performed += instance.OnZoomCamera;
-                @ZoomCamera.canceled += instance.OnZoomCamera;
                 @VinesSkill.started += instance.OnVinesSkill;
                 @VinesSkill.performed += instance.OnVinesSkill;
                 @VinesSkill.canceled += instance.OnVinesSkill;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -1108,14 +1046,13 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnCameraControl(InputAction.CallbackContext context);
         void OnLifePotion(InputAction.CallbackContext context);
         void OnManaPotion(InputAction.CallbackContext context);
         void OnTeleport(InputAction.CallbackContext context);
         void OnDefense(InputAction.CallbackContext context);
-        void OnTesteCamera(InputAction.CallbackContext context);
-        void OnZoomCamera(InputAction.CallbackContext context);
         void OnVinesSkill(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
