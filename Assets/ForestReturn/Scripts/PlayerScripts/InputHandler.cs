@@ -41,11 +41,9 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _inputActions.gameplay.move.performed += i => _movementInput = i.ReadValue<Vector2>();
                 _inputActions.gameplay.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
                 _inputActions.gameplay.Attack.performed += i => _playerAttacker.HandleLightAttack();
-                // _inputActions.gameplay.VinesSkill.performed += i => _playerAttacker.HandleVinesAttack();
-                // _inputActions.gameplay.Interact.performed += i => HandleInteraction();
-                _inputActions.gameplay.Interact.performed += i => Debug.Log("Interact");
+                _inputActions.gameplay.Interact.performed += i => HandleInteraction();
                 _inputActions.gameplay.inventory.performed += i => HandleInventory();
-                _inputActions.gameplay.VinesSkill.performed += i => Debug.Log("VinesSkill");
+                _inputActions.gameplay.VinesSkill.performed += i => _playerManager.OnVinesSkill();
                 
             }
             _inputActions.Enable();

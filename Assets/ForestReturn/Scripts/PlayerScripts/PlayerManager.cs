@@ -24,7 +24,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public bool isInAir;
         public bool isGrounded;
         [Header("Damage")] 
-        [SerializeField] private GameObject swordHitBox;
+        // [SerializeField] private GameObject swordHitBox;
         [SerializeField] private PlayerAttack[] attacks;
         [Header("Skills")]
         [SerializeField] private GameObject vinesSkillPrefab;
@@ -32,7 +32,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public event OnVineSkillCoolDownChangedEvent OnVineSkillCoolDownChanged;
         private float _cooldownVinesSkillValue;
         
-        public string vinesAttackAnimationName = "Vines";
+        // public string vinesAttackAnimationName = "Vines";
 
         private float CooldownValue
         {
@@ -57,6 +57,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             _cameraHandler = CameraHandler.Instance;
             _playerLocomotion.Init();
+            
+            OnHurt += HandleHurt;
+            
             if (InventoryManager.InstanceExists)
             {
                 _inventoryObjectRef = InventoryManager.Instance.inventory;
@@ -78,10 +81,15 @@ namespace ForestReturn.Scripts.PlayerScripts
                 }
                 GameManager.Instance.Save();
 
-                InitSkill();
             }
+            InitSkill();
             
             UpdateAttacks();
+        }
+
+        private void HandleHurt(int damage)
+        {
+            _animatorHandler.PlayerTargetAnimation("Hurt",true);
         }
 
         private void Update()
