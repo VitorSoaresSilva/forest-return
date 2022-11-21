@@ -5,12 +5,12 @@ namespace ForestReturn.Scripts.Managers
 {
     public class PlayerAnimationManager : MonoBehaviour
     {
-        [SerializeField] private Player player;
+        [SerializeField] private PlayerManager player;
         // public Rigidbody playerRigidbody;
 
         private void Awake()
         {
-            player = GetComponentInParent<Player>();
+            player = GetComponentInParent<PlayerManager>();
         }
 
         public void EnableHitBox()
@@ -29,14 +29,14 @@ namespace ForestReturn.Scripts.Managers
             player.HandleEndComboAttack();
         }
 
-        public void StartAcceptComboAttack()
-        {
-            player.HandleStartRangeSecondAttack();
-        }
-        public void StopAcceptComboAttack()
-        {
-            player.HandleEndRangeSecondAttack();
-        }
+        // public void StartAcceptComboAttack()
+        // {
+        //     player.HandleStartRangeSecondAttack();
+        // }
+        // public void StopAcceptComboAttack()
+        // {
+        //     player.HandleEndRangeSecondAttack();
+        // }
         
 
         // public void AttackEnd()

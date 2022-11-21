@@ -17,7 +17,7 @@ namespace ForestReturn.Scripts.Interactable
         [ContextMenu("Interact")]
         public void Interact()
         {
-            
+            Debug.Log("Interact");
             /*
              * if Level 01 started and not finished
              */

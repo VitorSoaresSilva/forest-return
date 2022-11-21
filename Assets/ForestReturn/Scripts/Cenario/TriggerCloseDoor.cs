@@ -9,6 +9,7 @@ public class TriggerCloseDoor : MonoBehaviour
     public RoomEnemiesManager room;
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Enter");
         room.CloseDoors();
     }
 }

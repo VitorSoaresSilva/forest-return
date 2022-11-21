@@ -24,13 +24,14 @@ namespace ForestReturn.Scripts.PlayerScripts
         public bool isInAir;
         public bool isGrounded;
         [Header("Damage")] 
-        // [SerializeField] private GameObject swordHitBox;
+        [SerializeField] private GameObject swordHitBox;
         [SerializeField] private PlayerAttack[] attacks;
         [Header("Skills")]
         [SerializeField] private GameObject vinesSkillPrefab;
         public delegate void OnVineSkillCoolDownChangedEvent(float value);
         public event OnVineSkillCoolDownChangedEvent OnVineSkillCoolDownChanged;
         private float _cooldownVinesSkillValue;
+        [SerializeField] private GameObject swordEffect;
         
         // public string vinesAttackAnimationName = "Vines";
 
@@ -225,6 +226,21 @@ namespace ForestReturn.Scripts.PlayerScripts
                 InventoryManager.Instance.inventory.RemoveItem(potion);
                 HealthHeal(potion.value); 
             }
+        }
+        public void EnableHitBox()
+        {
+            swordHitBox.SetActive(true);
+        }
+
+        public void DisableHitBox()
+        {
+            swordHitBox.SetActive(false);
+        }
+        public void HandleEndComboAttack()
+        {
+            // _isAttacking = false;
+            swordEffect.SetActive(false);
+            swordHitBox.SetActive(false);
         }
     }
 }
