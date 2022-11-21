@@ -265,17 +265,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5d5a62f4-a7e0-4cea-9580-06249e139b00"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b229e68c-f7cb-4916-92e8-5b686a69a15e"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
@@ -390,7 +379,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""VinesSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -1,5 +1,6 @@
 using System;
 using ForestReturn.Scripts.Cameras;
+using ForestReturn.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,29 +13,24 @@ namespace ForestReturn.Scripts.PlayerScripts
         public float moveAmount;
         public float mouseX;
         public float mouseY;
+        
         public bool bInput;
         public bool rollFlag;
-        public bool isInteracting;
+        
         
         private PlayerInputAction _inputActions;
-        private CameraHandler _cameraHandler; 
+        private PlayerAttacker _playerAttacker;
+        private PlayerManager _playerManager;
+        private PlayerInteractableHandler _playerInteractableHandler;
         
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
 
         private void Awake()
         {
-            _cameraHandler = CameraHandler.Instance;
-        }
-
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-            if (_cameraHandler != null)
-            {
-                _cameraHandler.FollowTarget(delta);
-                _cameraHandler.HandleCameraRotation(delta,mouseX,mouseY);
-            }
+            _playerAttacker = GetComponent<PlayerAttacker>();
+            _playerManager = GetComponent<PlayerManager>();
+            _playerInteractableHandler = GetComponentInChildren<PlayerInteractableHandler>();
         }
 
         private void OnEnable()
@@ -44,6 +40,13 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _inputActions = new PlayerInputAction();
                 _inputActions.gameplay.move.performed += i => _movementInput = i.ReadValue<Vector2>();
                 _inputActions.gameplay.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
+                _inputActions.gameplay.Attack.performed += i => _playerAttacker.HandleLightAttack();
+                // _inputActions.gameplay.VinesSkill.performed += i => _playerAttacker.HandleVinesAttack();
+                // _inputActions.gameplay.Interact.performed += i => HandleInteraction();
+                _inputActions.gameplay.Interact.performed += i => Debug.Log("Interact");
+                _inputActions.gameplay.inventory.performed += i => HandleInventory();
+                _inputActions.gameplay.VinesSkill.performed += i => Debug.Log("VinesSkill");
+                
             }
             _inputActions.Enable();
         }
@@ -76,5 +79,20 @@ namespace ForestReturn.Scripts.PlayerScripts
                 rollFlag = true;
             }
         }
+        private void HandleInteraction()
+        {
+            if (_playerManager.isInteracting) return;
+            _playerInteractableHandler.CurrentInteractable?.Interactable?.Interact();
+            _playerInteractableHandler.Reset();
+        }
+
+        private void HandleInventory()
+        {
+            if (_playerManager.isInteracting) return;
+            GameManager.Instance.PauseGame();
+            UiManager.Instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
+        }
+
+        
     }
 }

@@ -6,8 +6,9 @@ namespace ForestReturn.Scripts.PlayerScripts
     public class AnimatorHandler : MonoBehaviour
     {
         public Animator anim;
-        public InputHandler InputHandler;
-        public PlayerLocomotion playerLocomotion;
+        private InputHandler _inputHandler;
+        private PlayerLocomotion _playerLocomotion;
+        private PlayerManager _playerManager;
 
         private int _vertical;
         private int _horizontal;
@@ -16,8 +17,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void Initialize()
         {
             anim = GetComponent<Animator>();
-            InputHandler = GetComponentInParent<InputHandler>();
-            playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            _inputHandler = GetComponentInParent<InputHandler>();
+            _playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            _playerManager = GetComponentInParent<PlayerManager>();
             _vertical = Animator.StringToHash("Vertical");
             _horizontal = Animator.StringToHash("Horizontal");
 
@@ -74,7 +76,6 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void PlayerTargetAnimation(string targetAnim, bool isInteracting)
         {
-            Debug.Log("PlayerTargetAnimation");
             anim.applyRootMotion = isInteracting;
             anim.SetBool("isInteracting",isInteracting);
             anim.CrossFade(targetAnim, 0.2f);
@@ -92,14 +93,14 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnAnimatorMove()
         {
-            if (InputHandler.isInteracting == false) return;
+            if (_playerManager.isInteracting == false) return;
             
             float delta = Time.deltaTime;
-            playerLocomotion.rigidbody.drag = 0;
+            _playerLocomotion.rigidbody.drag = 0;
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
-            playerLocomotion.rigidbody.velocity = velocity;
+            _playerLocomotion.rigidbody.velocity = velocity;
 
         }
     }
