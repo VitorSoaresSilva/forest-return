@@ -179,7 +179,6 @@ namespace ForestReturn.Scripts.PlayerScripts
         
         public void OnVinesSkill()
         {
-            Debug.Log("opa");
             if (isInteracting) return;
             if (CooldownValue >= 0.99f && UseMana())
             {

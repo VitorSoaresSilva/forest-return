@@ -16,7 +16,6 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void HandleLightAttack()
         {
-            Debug.Log("Attack");
             _animatorHandler.PlayerTargetAnimation(lightAttackAnimationName, true);
         }
 

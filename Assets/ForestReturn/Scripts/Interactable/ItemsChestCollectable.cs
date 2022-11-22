@@ -11,14 +11,17 @@ public class ItemsChestCollectable : MonoBehaviour, IInteractable
     public GameObject alert;
     public TriggerObject triggerObject;
     public bool isOpen;
+    private Animator _animator;
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         SetStatusInteract(false);
         if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(triggerObject))
         {
             isOpen = true;
             //animação aberto
+            _animator.SetTrigger("Open");
             enabled = false;
         }
         else
@@ -38,6 +41,7 @@ public class ItemsChestCollectable : MonoBehaviour, IInteractable
             }
             isOpen = true;
             //animação aberto
+            _animator.SetTrigger("Open");
             SetStatusInteract(false);
             enabled = false;
         }
