@@ -1,6 +1,7 @@
 using System;
 using ForestReturn.Scripts.Cameras;
 using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.UI.TabSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,9 +45,21 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _inputActions.gameplay.Interact.performed += i => HandleInteraction();
                 _inputActions.gameplay.inventory.performed += i => HandleInventory();
                 _inputActions.gameplay.VinesSkill.performed += i => _playerManager.OnVinesSkill();
+                _inputActions.gameplay.Roll.performed += i => rollFlag = true;
+                _inputActions.gameplay.pause.performed += i => HandlePause();
+                _inputActions.gameplay.LifePotion.performed += i => _playerManager.HandleLifePotion();
+                _inputActions.gameplay.ManaPotion.performed += i => _playerManager.HandleManaPotion();
                 
+                
+                _inputActions.Menu.Exit.performed += i => _playerManager.HandleResumeGame();
+                // _inputActions.Menu.ChangeTab.performed += i => HandleChangeTab(i.ReadValue<float>());
+                
+                
+                
+                // _inputActions.Menu.Exit.performed += i => HandlePause();
+
             }
-            _inputActions.Enable();
+            _inputActions.gameplay.Enable();
         }
 
         private void OnDisable()
@@ -57,7 +70,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            HandleRollInput(delta);
+            // HandleRollInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -69,14 +82,14 @@ namespace ForestReturn.Scripts.PlayerScripts
             mouseY = _cameraInput.y;
         }
 
-        private void HandleRollInput(float delta)
-        {
-            bInput = _inputActions.gameplay.Roll.phase == InputActionPhase.Performed;
-            if (bInput)
-            {
-                rollFlag = true;
-            }
-        }
+        // private void HandleRollInput(float delta)
+        // {
+        //     bInput = _inputActions.gameplay.Roll.phase == InputActionPhase.Performed;
+        //     if (bInput)
+        //     {
+        //         rollFlag = true;
+        //     }
+        // }
         private void HandleInteraction()
         {
             if (_playerManager.isInteracting) return;
@@ -87,8 +100,29 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void HandleInventory()
         {
             if (_playerManager.isInteracting) return;
-            GameManager.Instance.PauseGame();
+            if (!GameManager.InstanceExists) return;
             UiManager.Instance.OpenCanvas(CanvasType.Menu); /*troca inventário - menu*/
+            GameManager.Instance.PauseGame();
+        }
+        private void HandlePause()
+        {
+            if (_playerManager.isInteracting) return;
+            if (!GameManager.InstanceExists) return;
+            if (GameManager.Instance.IsPaused)
+            {
+                GameManager.Instance.ResumeGame();
+            }
+            else
+            {
+                GameManager.Instance.PauseGame();
+                UiManager.Instance.OpenCanvas(CanvasType.Pause);
+            }
+        }
+
+        private void HandleChangeTab(float value)
+        {
+            if (!TabGroup.InstanceExists) return;
+            TabGroup.Instance.ChangeTab((int)value);
         }
 
         

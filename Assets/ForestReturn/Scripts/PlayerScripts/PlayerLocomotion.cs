@@ -75,7 +75,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             if (_inputHandler.rollFlag) return;
             if (_playerManager.isInteracting) return;
-            
+            moveDirection = Vector3.zero;
             moveDirection = _cameraObject.forward * _inputHandler.vertical;
             moveDirection += _cameraObject.right * _inputHandler.horizontal;
             moveDirection.y = 0;
@@ -85,6 +85,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             moveDirection *= speed;
             
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection,_normalVector);
+            Debug.Log(projectedVelocity + " " + rigidbody.velocity);
             rigidbody.velocity = projectedVelocity;
             animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
 

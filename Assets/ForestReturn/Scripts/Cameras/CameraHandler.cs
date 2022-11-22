@@ -35,9 +35,7 @@ namespace ForestReturn.Scripts.Cameras
             base.Awake();
             _myTransform = transform;
             _defaultPosition = cameraTransform.localPosition.z;
-            _ignoreLayers = (1 << 0
-                
-                ); // TODO: change
+            _ignoreLayers = (1 << 0); // TODO: change
         }
 
         public void FollowTarget(float delta)

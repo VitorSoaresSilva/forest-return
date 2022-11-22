@@ -97,19 +97,12 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             float delta = Time.deltaTime;
             isInteracting = _animator.GetBool("isInteracting");
-            
             _inputHandler.TickInput(delta);
-            _playerLocomotion.HandleMovement(delta);
-            _playerLocomotion.HandleRollingAndSprinting(delta);
-            _playerLocomotion.HandleFalling(delta, _playerLocomotion.moveDirection);
-        }
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-            if (_cameraHandler != null)
+            if (GameManager.InstanceExists && !GameManager.Instance.IsPaused)
             {
-                _cameraHandler.FollowTarget(delta);
-                _cameraHandler.HandleCameraRotation(delta,_inputHandler.mouseX,_inputHandler.mouseY);
+                _playerLocomotion.HandleMovement(delta);
+                _playerLocomotion.HandleRollingAndSprinting(delta);
+                _playerLocomotion.HandleFalling(delta, _playerLocomotion.moveDirection);
             }
         }
 
@@ -216,7 +209,28 @@ namespace ForestReturn.Scripts.PlayerScripts
             
             playerInput.SwitchCurrentActionMap("Death");
         }
-        private void HandleLifePotion()
+
+        public void HandleManaPotion()
+        {
+            if (!(CurrentMana < MaxMana)) return;
+            var potions = _inventoryObjectRef.GetPotionByType(PotionType.Mana);
+            if (potions.Count > 0)
+            {
+                var potion = (PotionObject)potions[0].item;
+                InventoryManager.Instance.inventory.RemoveItem(potion);
+                ManaHeal(potion.value);
+            }
+        }
+
+        public void HandleResumeGame()
+        {
+            if (GameManager.Instance.IsPaused)
+            {
+                GameManager.Instance.ResumeGame();
+            }
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
+        }
+        public void HandleLifePotion()
         {
             if (!(CurrentHealth < MaxHealth)) return;
             var potions = _inventoryObjectRef.GetPotionByType(PotionType.Life);
@@ -230,11 +244,13 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void EnableHitBox()
         {
             swordHitBox.SetActive(true);
+            swordEffect.SetActive(true);
         }
 
         public void DisableHitBox()
         {
             swordHitBox.SetActive(false);
+            swordEffect.SetActive(false);
         }
         public void HandleEndComboAttack()
         {
