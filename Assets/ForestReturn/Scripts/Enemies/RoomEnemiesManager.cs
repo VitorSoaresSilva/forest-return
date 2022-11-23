@@ -26,7 +26,6 @@ namespace ForestReturn.Scripts.Enemies
 
         private void Start()
         {
-            Debug.Log("Rooom manager");
             if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(roomCleared))
             {
                 foreach (var enemy in enemies)

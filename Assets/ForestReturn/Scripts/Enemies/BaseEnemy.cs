@@ -15,7 +15,7 @@ namespace ForestReturn.Scripts.Enemies
         public EnemyState state { get; private set; }
         public EnemyAttack[] Attacks;
         
-        private Player _playerRef;
+        private PlayerManager _playerRef;
         private Coroutine _updateCoroutine;
         protected NavMeshAgent NavMeshAgent;
         protected Animator Animator;

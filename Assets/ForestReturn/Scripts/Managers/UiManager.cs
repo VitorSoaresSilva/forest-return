@@ -121,8 +121,8 @@ namespace ForestReturn.Scripts.Managers
 
         private void SetActionMap(string actionMap)
         {
-            LevelManager.Instance.PlayerScript._playerInput.enabled = true;
-            LevelManager.Instance.PlayerScript._playerInput.SwitchCurrentActionMap(actionMap);
+            // LevelManager.Instance.PlayerScript.playerInput.enabled = true;
+            // LevelManager.Instance.PlayerScript.playerInput.SwitchCurrentActionMap(actionMap);
         }
 
         private void CloseAllMenu()

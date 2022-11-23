@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using ForestReturn.Scripts.Inventory;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ForestReturn.Scripts.UI
 {
@@ -18,10 +20,15 @@ namespace ForestReturn.Scripts.UI
 
         private void CreateSlots()
         {
+            GameObject a = new GameObject();
             itemsDisplayed = new();
             for (int i = 0; i < InventoryManager.Instance.inventory.Items.Count; i++)
             {
                 var itemUI = Instantiate(prefab,grid);
+                if (i == 0)
+                {
+                    a = itemUI;
+                }
                 var inventorySlotUI = itemUI.GetComponent<InventorySlotUI>();
                 if (itemUI != null)
                 {
@@ -29,6 +36,7 @@ namespace ForestReturn.Scripts.UI
                     itemsDisplayed.Add(inventorySlotUI, InventoryManager.Instance.inventory.Items[i]);
                 }
             }
+            EventSystem.current.SetSelectedGameObject(a);
         }
 
         private void OnDisable()
@@ -43,6 +51,11 @@ namespace ForestReturn.Scripts.UI
         public void SetAsSelected(InventorySlot inventorySlot)
         {
             inventoryItemDescription.UpdateData(inventorySlot);
+        }
+
+        public void Deselect()
+        {
+            inventoryItemDescription.Deselect();
         }
         
     }

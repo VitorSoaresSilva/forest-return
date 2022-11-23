@@ -70,7 +70,9 @@ namespace ForestReturn.Scripts.Managers
         [ContextMenu("Save")]
         public void Save()
         {
-            generalData.lastSaveString = DateTime.Now.ToLongTimeString();
+            Debug.Log(DateTime.Now);
+
+            generalData.lastSaveString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
             generalData.lastSaveLong = DateTime.Now.ToFileTime();
             generalData.playerPosition = LevelManager.Instance.PlayerScript.transform.position;
             generalData.currentLevel = LevelManager.Instance.sceneIndex;

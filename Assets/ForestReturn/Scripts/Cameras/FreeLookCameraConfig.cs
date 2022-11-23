@@ -2,7 +2,7 @@ using Cinemachine;
 using ForestReturn.Scripts.Managers;
 using UnityEngine;
 
-namespace _Developers.Vitor.Scripts.Camera
+namespace ForestReturn.Scripts.Cameras
 {
     public class FreeLookCameraConfig : MonoBehaviour
     {

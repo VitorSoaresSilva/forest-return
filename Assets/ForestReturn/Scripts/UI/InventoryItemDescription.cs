@@ -1,17 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using ForestReturn.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
 
-public class InventoryItemDescription : MonoBehaviour
+namespace ForestReturn.Scripts.UI
 {
-    public TextMeshProUGUI textName;
-    public TextMeshProUGUI textDescription;
-    
-    public void UpdateData(InventorySlot itemObject)
+    public class InventoryItemDescription : MonoBehaviour
     {
-        textName.text = itemObject.item.itemName;
-        textDescription.text = itemObject.item.itemDescription;
+        public TextMeshProUGUI textName;
+        public TextMeshProUGUI textDescription;
+    
+        public void UpdateData(InventorySlot itemObject)
+        {
+            textName.text = itemObject.item.itemName;
+            textDescription.text = itemObject.item.itemDescription;
+        }
+
+        public void Deselect()
+        {
+            textName.text = string.Empty;
+            textDescription.text = string.Empty;
+        }
     }
 }
