@@ -7,6 +7,7 @@ namespace ForestReturn.Scripts.PlayerScripts
     {
         private AnimatorHandler _animatorHandler;
         public string lightAttackAnimationName = "LightAttack";
+        public string rangedAttackAnimationName = "LightAttack";
         
 
         private void Awake()
@@ -17,6 +18,11 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void HandleLightAttack()
         {
             _animatorHandler.PlayerTargetAnimation(lightAttackAnimationName, true);
+        }
+
+        public void HandleRangedAttack()
+        {
+            _animatorHandler.PlayerTargetAnimation(rangedAttackAnimationName, true);
         }
 
         // public void HandleVinesAttack()

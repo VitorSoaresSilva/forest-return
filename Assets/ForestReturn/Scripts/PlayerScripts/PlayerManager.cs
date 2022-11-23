@@ -3,6 +3,8 @@ using System.Collections;
 using ForestReturn.Scripts.Cameras;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
+using ForestReturn.Scripts.Teleport;
+using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,7 +34,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         public event OnVineSkillCoolDownChangedEvent OnVineSkillCoolDownChanged;
         private float _cooldownVinesSkillValue;
         [SerializeField] private GameObject swordEffect;
-        
+        public ParticleSystem[] particleSystemsTeleport;
         // public string vinesAttackAnimationName = "Vines";
 
         private float CooldownValue
@@ -167,14 +169,16 @@ namespace ForestReturn.Scripts.PlayerScripts
         }
         public void OnResumeGame()
         {
-            playerInput.enabled = true;
-            playerInput.SwitchCurrentActionMap("gameplay");
+            // playerInput.enabled = true;
+            // playerInput.SwitchCurrentActionMap("gameplay");
+            _inputHandler.SwitchActionMap("gameplay");
         }
         
         public void OnPauseGame()
         {
-            playerInput.enabled = true;
-            playerInput.SwitchCurrentActionMap("Menu");
+            // playerInput.enabled = true;
+            _inputHandler.SwitchActionMap("UI");
+            // playerInput.SwitchCurrentActionMap("UI");
         }
         
         public void OnVinesSkill()
@@ -202,10 +206,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         }
         private void HandleDeath()
         {
-            // _playerInput.enabled = false;
-            // _animator.SetTrigger(DeathHashAnimation);
             _animatorHandler.PlayerTargetAnimation("Death",true);
-            
             playerInput.SwitchCurrentActionMap("Death");
         }
 
@@ -220,7 +221,6 @@ namespace ForestReturn.Scripts.PlayerScripts
                 ManaHeal(potion.value);
             }
         }
-
         public void HandleResumeGame()
         {
             if (GameManager.Instance.IsPaused)
@@ -229,6 +229,41 @@ namespace ForestReturn.Scripts.PlayerScripts
             }
             UiManager.Instance.OpenCanvas(CanvasType.Hud);
         }
+        public void HandleTeleport()
+        {
+            if (!GameManager.InstanceExists || !LevelManager.InstanceExists) return;
+            
+            if (LevelManager.Instance.sceneIndex == Enums.Scenes.Lobby)
+            {
+                if (GameManager.Instance.generalData.HasTeleportData)
+                {
+                    playerInput.enabled = false;
+                    IsIntangible = true;
+                    foreach (var particle in particleSystemsTeleport)
+                    {
+                        particle.Play();
+                    }
+                    GameManager.Instance.HandleTeleport(null);
+                }
+            }
+            else
+            {
+                var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
+                if (teleportItems.Count > 0)
+                {
+                    playerInput.enabled = false;
+                    IsIntangible = true;
+                    foreach (var particle in particleSystemsTeleport)
+                    {
+                        particle.Play();
+                    }
+                    var teleportItem = teleportItems[0].item;
+                    InventoryManager.Instance.inventory.RemoveItem(teleportItem);
+                    GameManager.Instance.HandleTeleport(new TeleportData(transform.position, LevelManager.Instance.sceneIndex));
+                }
+            }
+        }
+        
         public void HandleLifePotion()
         {
             if (!(CurrentHealth < MaxHealth)) return;
@@ -239,6 +274,21 @@ namespace ForestReturn.Scripts.PlayerScripts
                 InventoryManager.Instance.inventory.RemoveItem(potion);
                 HealthHeal(potion.value); 
             }
+        }
+        public void HandleEndComboAttack() // Disabled for a while
+        {
+            // _isAttacking = false;
+            swordEffect.SetActive(false);
+            swordHitBox.SetActive(false);
+        }
+
+        public void HandleResume()
+        {
+            if (GameManager.Instance.IsPaused)
+            {
+                GameManager.Instance.ResumeGame();
+            }
+            UiManager.Instance.OpenCanvas(CanvasType.Hud);
         }
         public void EnableHitBox()
         {
@@ -251,11 +301,6 @@ namespace ForestReturn.Scripts.PlayerScripts
             swordHitBox.SetActive(false);
             swordEffect.SetActive(false);
         }
-        public void HandleEndComboAttack()
-        {
-            // _isAttacking = false;
-            swordEffect.SetActive(false);
-            swordHitBox.SetActive(false);
-        }
+        
     }
 }
