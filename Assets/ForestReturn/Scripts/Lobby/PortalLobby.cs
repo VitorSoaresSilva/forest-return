@@ -13,9 +13,11 @@ namespace ForestReturn.Scripts.Interactable
         public TriggerObject Lv2Complete;
         public UnityEvent SetAsInteractable;
         public UnityEvent SetAsNotInteractable;
+        
+        [ContextMenu("Interact")]
         public void Interact()
         {
-            
+            Debug.Log("Interact");
             /*
              * if Level 01 started and not finished
              */

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.PlayerScripts;
+using ForestReturn.Scripts.UI;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -14,10 +15,11 @@ namespace ForestReturn.Scripts.Enemies
         public EnemyState state { get; private set; }
         public EnemyAttack[] Attacks;
         
-        private Player _playerRef;
+        private PlayerManager _playerRef;
         private Coroutine _updateCoroutine;
         protected NavMeshAgent NavMeshAgent;
         protected Animator Animator;
+        private DamageIndicatorManager _damageIndicatorManager;
         
         [Header("Nav Mesh")] 
         [SerializeField] private float chasingStoppingDistance;
@@ -38,6 +40,7 @@ namespace ForestReturn.Scripts.Enemies
         {
             _updateCoroutine = StartCoroutine(UpdateState());
             _myCollider = GetComponentInChildren<CapsuleCollider>();
+            _damageIndicatorManager = GetComponentInChildren<DamageIndicatorManager>();
             InitAttackRandomizer();
             foreach (var enemyAttack in Attacks)
             {
@@ -50,6 +53,12 @@ namespace ForestReturn.Scripts.Enemies
             }
             
             OnDead += HandleOnDead;
+            OnHurt += HandleOnHurt;
+        }
+
+        private void HandleOnHurt(int damageTaken)
+        {
+            _damageIndicatorManager.Spawn(damageTaken);
         }
 
         private void HandleOnDead()
@@ -133,18 +142,18 @@ namespace ForestReturn.Scripts.Enemies
         {
             NavMeshAgent.destination = _playerRef.gameObject.transform.position;
             if (!_isAttacking && Vector3.Distance(_playerRef.transform.position, transform.position) <
-                Attacks[_nextAttackIndex].stopDistance)
+                Attacks[_attackRandomizer[_nextAttackIndex]].stopDistance)
             {
                 _isAttacking = true;
                 NavMeshAgent.isStopped = true;
                 
-                Animator.SetTrigger(Attacks[_nextAttackIndex].animationTrigger);
+                Animator.SetTrigger(Attacks[_attackRandomizer[_nextAttackIndex]].animationTrigger);
             }
         }
         private void SetAttackingState()
         {
             state = EnemyState.Attacking;
-            NavMeshAgent.stoppingDistance = Attacks[_nextAttackIndex].stopDistance;
+            NavMeshAgent.stoppingDistance = Attacks[_attackRandomizer[_nextAttackIndex]].stopDistance;
         }
 
         private void SetChasingState()
@@ -166,9 +175,9 @@ namespace ForestReturn.Scripts.Enemies
 
         public void HandleStartHitBox()
         {
-            if (Attacks[_nextAttackIndex].hitBox != null)
+            if (Attacks[_attackRandomizer[_nextAttackIndex]].hitBox != null)
             {
-                Attacks[_nextAttackIndex].hitBox.SetActive(true);
+                Attacks[_attackRandomizer[_nextAttackIndex]].hitBox.SetActive(true);
             }
         }
 
@@ -186,8 +195,8 @@ namespace ForestReturn.Scripts.Enemies
 
         private void SetNextAttack()
         {
-            _nextAttackIndex = _attackRandomizer[Random.Range(0, _attackRandomizer.Length)];
-            _nextTimeAttack = Time.time + Attacks[_nextAttackIndex].cooldown;
+            _nextAttackIndex = (_nextAttackIndex + 1) % (_attackRandomizer.Length);
+            _nextTimeAttack = Time.time + Attacks[_attackRandomizer[_nextAttackIndex]].cooldown;
         }
 
 

@@ -27,13 +27,13 @@ namespace ForestReturn.Scripts.Inventory
                 {
                     if (inventorySlot.item == item)
                     {
-                        OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = inventorySlot.amount, Item = item});
+                        OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = inventorySlot.amount + amount, Item = item});
                         inventorySlot.AddAmount(amount);
                         return;
                     }
                 }
             }
-            OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = amount,Item = item});
+            OnItemCollected?.Invoke(new ItemCollectedData{CollectedAmount = amount, CurrentAmount = 0,Item = item});
             Items.Add(new InventorySlot(item.id,amount,item));
         }
 
@@ -52,13 +52,18 @@ namespace ForestReturn.Scripts.Inventory
             return true;
         }
 
-        public void Init()
+        public void Load()
         {
             foreach (var inventorySlot in Items)
             {
                 var b = InventoryManager.Instance.Database.items[inventorySlot.id];
                 inventorySlot.item = b;
             }
+        }
+
+        public void Init() // new game
+        {
+            
         }
 
         // public bool SwitchSlots(InventorySlot oldObject, InventorySlot newObject)
@@ -158,6 +163,7 @@ namespace ForestReturn.Scripts.Inventory
                     var a = (CurrencyObject)x.item;
                     return a.type == currencyType;
                 });
+            
             return currency;
             
         }

@@ -11,6 +11,10 @@ namespace ForestReturn.Scripts.Inventory
         {
             this.slotsAmount = slotsAmount;
         }
+        public SwordInventorySlot(int id, ItemObject item, int slotsAmount) : base(id, 1, item)
+        {
+            this.slotsAmount = slotsAmount;
+        }
 
         public void AddSlot()
         {

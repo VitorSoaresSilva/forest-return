@@ -4,17 +4,41 @@ using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace ForestReturn.Scripts.UI
 {
     public class BlacksmithStore : MonoBehaviour
     {
-        private ItemObject[] items;
+        // private ItemObject[] items;
         public Button upgradeSlotsButton;
         public Button upgradeWeaponButton;
 
+        private InventorySlot _seed;
+        private InventorySlot _scrap;
+        private SwordInventorySlot _swordInventorySlot;
+        private CostByLevel? _weaponLevelCost;
+        private CostByLevel? _slotsCost;
+
         public TextMeshProUGUI costWeaponText;
+        public TextMeshProUGUI costSlotText;
+        public UnityEvent onWeaponCanUpgrade;
+        public UnityEvent onWeaponNotEnoughMoneyToUpgrade;
+        public UnityEvent onWeaponNotMoreLevelsToUpgrade;
+        public UnityEvent onWeaponToUpgraded;
+        public UnityEvent onSlotCanUpgrade;
+        public UnityEvent onSlotNotEnoughMoneyToUpgrade;
+        public UnityEvent onSlotNotMoreSlotsToUpgrade;
+        public UnityEvent onSlotToUpgraded;
+        
+        
+        
+        
+        
+        
+        
+        
         public void OnEnable()
         {
             UpdateData();
@@ -23,50 +47,95 @@ namespace ForestReturn.Scripts.UI
 
         public void UpdateData()
         {
-            var currentWeapon = InventoryManager.Instance.equippedItems.swordInventorySlot;
-            var currentCostLevel = BlacksmithConfigData.LevelsCost[Mathf.Min(currentWeapon.level,BlacksmithConfigData.LevelsCost.Length)];   
-            costWeaponText.text = $"Seed: {currentCostLevel.SeedCost} - Scrap: {currentCostLevel.ScrapCost}";
+            //TODO: até então está desligando o texto quando nao tem dinheiro. Mudar pra desligar so quando nao tem mais nivel
+            _swordInventorySlot = InventoryManager.Instance.equippedItems.swordInventorySlot;
+            _weaponLevelCost = _swordInventorySlot.level < BlacksmithConfigData.LevelsCost.Length
+                ? BlacksmithConfigData.LevelsCost[_swordInventorySlot.level]
+                : null;   
+            _slotsCost = _swordInventorySlot.slotsAmount < BlacksmithConfigData.SlotsCost.Length
+                ? BlacksmithConfigData.SlotsCost[_swordInventorySlot.slotsAmount]
+                : null;
 
+
+            Debug.Log(_weaponLevelCost.Value.ScrapCost);
+            Debug.Log(_slotsCost.Value.ScrapCost);
+            _seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
+            _scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             if (CanUpgradeWeapon())
             {
-                Debug.Log("Can upgrade");
+                costWeaponText.text = $"Level: Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
+                onWeaponCanUpgrade?.Invoke();
             }
             else
             {
-                Debug.Log("Cannot Upgrade");
+                if (_weaponLevelCost == null)
+                {
+                    costWeaponText.text = "Level Max";
+                    onWeaponNotMoreLevelsToUpgrade?.Invoke();
+                }
+                else
+                {
+                    costWeaponText.text = $"Level: Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
+                    onWeaponNotEnoughMoneyToUpgrade?.Invoke();
+                }
             }
-            
-            
-            
+
+            if (CanUpgradeSlots())
+            {
+                costSlotText.text = $"Slots: Seed: {_slotsCost?.SeedCost} - Scrap: {_slotsCost?.ScrapCost}";
+                onSlotCanUpgrade?.Invoke();
+            }
+            else
+            {
+                if (_slotsCost == null)
+                {
+                    costSlotText.text = "Level Max";
+                    onSlotNotEnoughMoneyToUpgrade?.Invoke();
+                }
+                else
+                {
+                    costSlotText.text = $"Slots: Seed: {_slotsCost?.SeedCost} - Scrap: {_slotsCost?.ScrapCost}";
+                    onSlotNotEnoughMoneyToUpgrade?.Invoke();
+                }
+            }
         }
 
         [ContextMenu("Upgrade weapon")]
         public void UpgradeWeapon()
         {
-            Debug.Log("Upgrade");
             if (CanUpgradeWeapon())
             {
-                Debug.Log("if Upgrade");
-                var seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
-                var currentWeapon = InventoryManager.Instance.equippedItems.swordInventorySlot;
-                var currentCostLevel = BlacksmithConfigData.LevelsCost[Mathf.Min(currentWeapon.level,BlacksmithConfigData.LevelsCost.Length)];
-                var scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
-                seed.RemoveAmount(currentCostLevel.SeedCost);
-                scrap.RemoveAmount(currentCostLevel.ScrapCost);
-                currentWeapon.level++;
+                onWeaponToUpgraded?.Invoke();
+                _seed.RemoveAmount((int)_weaponLevelCost?.SeedCost);
+                _scrap.RemoveAmount((int)_weaponLevelCost?.ScrapCost);
+                _swordInventorySlot.level++;
+                UpdateData();
             }
         }
 
-        public bool CanUpgradeWeapon()
+        [ContextMenu("Upgrade Slots")]
+        public void UpgradeSlots()
         {
-            var currentWeapon = InventoryManager.Instance.equippedItems.swordInventorySlot;
-            var currentCostLevel = BlacksmithConfigData.LevelsCost[Mathf.Min(currentWeapon.level,BlacksmithConfigData.LevelsCost.Length)];
+            if (CanUpgradeSlots())
+            {
+                onSlotToUpgraded?.Invoke();
+                _seed.RemoveAmount((int)_slotsCost?.SeedCost);
+                _scrap.RemoveAmount((int)_slotsCost?.ScrapCost);
+                _swordInventorySlot.slotsAmount++;
+                UpdateData();
+            }
+        }
 
-            var seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
-            var hasEnoughSeed = seed != null && seed.amount >= currentCostLevel.SeedCost;
-            var scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
-            var hasEnoughScrap = scrap != null && scrap.amount >= currentCostLevel.ScrapCost;
-            
+        private bool CanUpgradeWeapon()
+        {
+            var hasEnoughSeed =  _seed != null && _weaponLevelCost != null && _seed.amount >= _weaponLevelCost?.SeedCost;
+            var hasEnoughScrap = _scrap != null && _weaponLevelCost != null && _scrap.amount >= _weaponLevelCost?.ScrapCost;
+            return hasEnoughScrap && hasEnoughSeed;
+        }
+        private bool CanUpgradeSlots()
+        {
+            var hasEnoughSeed = _seed != null && _slotsCost != null && _seed.amount >= _slotsCost?.SeedCost;
+            var hasEnoughScrap = _scrap != null && _slotsCost != null && _scrap.amount >= _slotsCost?.ScrapCost;
             return hasEnoughScrap && hasEnoughSeed;
         }
 

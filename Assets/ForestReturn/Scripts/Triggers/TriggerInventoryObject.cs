@@ -43,6 +43,10 @@ namespace ForestReturn.Scripts.Triggers
 
         public void Init()
         {
+            
+        }
+        public void Load()
+        {
             foreach (var trigger in Triggers)
             {
                 trigger.TriggerObject = InventoryManager.Instance.triggerDatabase.triggers[trigger.Id];

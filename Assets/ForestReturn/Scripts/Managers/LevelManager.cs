@@ -12,19 +12,26 @@ namespace ForestReturn.Scripts.Managers
         public Vector3 pointToSpawn;
         public GameObject playerPrefab;
         public GameObject camerasHolderPrefab;
-        public Player PlayerScript
+        public PlayerManager PlayerScript
         {
             get
             {
+                // if (_playerScript != null) return _playerScript;
+                // _playerScript = FindObjectOfType<Player>();
+                // if (_playerScript != null) return _playerScript;
+                // var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
+                // _playerScript = player.GetComponent<Player>();
+                // return _playerScript;
+                
                 if (_playerScript != null) return _playerScript;
-                _playerScript = FindObjectOfType<Player>();
+                _playerScript = FindObjectOfType<PlayerManager>();
                 if (_playerScript != null) return _playerScript;
                 var player = Instantiate(playerPrefab,pointToSpawn,Quaternion.identity);
-                _playerScript = player.GetComponent<Player>();
+                _playerScript = player.GetComponent<PlayerManager>();
                 return _playerScript;
             }
         }
-        private Player _playerScript;
+        private PlayerManager _playerScript;
 
         public CamerasHolder CamerasHolder
         {

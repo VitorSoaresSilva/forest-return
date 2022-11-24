@@ -45,17 +45,19 @@ namespace ForestReturn.Scripts
         [SerializeField] private Attributes baseAttributes;
 
         public delegate void OnDeadEvent();
-        public delegate void OnHurtEvent();
-        public delegate void OnHealthHealedEvent();
+        public delegate void OnHurtEvent(int damage);
+        public delegate void OnHealthHealedEvent(int oldValue, int newValue);
         public delegate void OnManaHealedEvent();
         public delegate void OnLifeChangeEvent();
         public delegate void OnManaChangeEvent();
+        public delegate void OnNotEnoughManaEvent();
         public event OnDeadEvent OnDead;
         public event OnHurtEvent OnHurt;
         public event OnHealthHealedEvent OnHealthHealed;
         public event OnManaHealedEvent OnManaHealed;
         public event OnLifeChangeEvent OnLifeChanged;
         public event OnManaChangeEvent OnManaChanged;
+        public event OnNotEnoughManaEvent OnNotEnoughMana;
         
 
         protected virtual void Awake()
@@ -75,7 +77,7 @@ namespace ForestReturn.Scripts
             if (damageTaken <= 0) return;
             StartCoroutine(IntangibleCooldown());
             CurrentHealth -= damageTaken;
-            OnHurt?.Invoke();
+            OnHurt?.Invoke(damageTaken);
             if (CurrentHealth <= 0)
             {
                 IsDead = true;
@@ -93,14 +95,29 @@ namespace ForestReturn.Scripts
 
         protected void HealthHeal(int value)
         {
+            int oldValue = CurrentHealth;
             CurrentHealth += value;
-            OnHealthHealed?.Invoke();
+            OnHealthHealed?.Invoke(oldValue, CurrentHealth);
         }
 
         protected void ManaHeal(int value)
         {
             CurrentMana += value;
             OnManaHealed?.Invoke();
+        }
+
+        protected bool UseMana(int value = 1)
+        {
+            if (CurrentMana >= value)
+            {
+                CurrentMana -= value;
+                return true;
+            }
+            else
+            {
+                OnNotEnoughMana?.Invoke();
+                return false;
+            }
         }
     }
 }
