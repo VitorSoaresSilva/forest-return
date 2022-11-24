@@ -33,19 +33,16 @@ namespace ForestReturn.Scripts.Level1
         
         public void Interact()
         {
-            
-            //Todo: Get npc NavMeshAgent and set to the begin of level
-            foreach (var npcGameObject in npcGameObjects)
-            {
-                npcGameObject.TryGetComponent(out NavMeshAgent navMeshAgent);
-                navMeshAgent.enabled = true;
-                navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway);
-                navMeshAgent.stoppingDistance = 0;
-            }
-
-            if (InventoryManager.InstanceExists)
+            if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(keyCage))
             {
                 InventoryManager.Instance.triggerInventory.AddTrigger(npcRescued);
+                foreach (var npcGameObject in npcGameObjects)
+                {
+                    npcGameObject.TryGetComponent(out NavMeshAgent navMeshAgent);
+                    navMeshAgent.enabled = true;
+                    navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway);
+                    navMeshAgent.stoppingDistance = 0;
+                }
             }
         }
 
