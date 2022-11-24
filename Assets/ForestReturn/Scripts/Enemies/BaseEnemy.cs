@@ -64,6 +64,7 @@ namespace ForestReturn.Scripts.Enemies
         private void HandleOnDead()
         {
             StopCoroutine(_updateCoroutine);
+            NavMeshAgent.isStopped = true;
             Animator.SetTrigger(DeadHashAnimation);
             foreach (var enemyAttack in Attacks)
             {
