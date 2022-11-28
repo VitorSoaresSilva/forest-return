@@ -14,8 +14,8 @@ namespace ForestReturn.Scripts.UI
         // public Button playButton;
         private int _currentSlotIndexActive = -1;
 
-        public Button continueBtn;
-        public Button loadGameBtn;
+        // public Button continueBtn;
+        // public Button loadGameBtn;
 
         private void Start()
         {
@@ -29,22 +29,6 @@ namespace ForestReturn.Scripts.UI
                 {
                     GameManager.Instance.OnGameManagerInitFinished += UpdateAll;
                 }
-            }
-        }
-
-        private void UpdateUIMenu()
-        {
-            if (!GameManager.InstanceExists) return;
-            if (GameManager.Instance.IndexSaveSlot != -1)
-            {
-                continueBtn.enabled = true; 
-                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
-            }
-            else
-            {
-                // continueBtn.enabled = true; 
-                // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
-                continueBtn.enabled = false;
             }
         }
         public void SetLoadIndex(int index)
@@ -81,7 +65,7 @@ namespace ForestReturn.Scripts.UI
             if (GameManager.Instance.IndexSaveSlot < 0)
             {
                 // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
-                continueBtn.gameObject.SetActive(false);
+                // continueBtn.gameObject.SetActive(false);
                 _currentSlotIndexActive = 0;
                 cardsLoadGame[_currentSlotIndexActive].SetState(true);
                 GameManager.Instance.SelectIndexSaveSlot(_currentSlotIndexActive);
@@ -89,7 +73,7 @@ namespace ForestReturn.Scripts.UI
             else
             { 
                 // loadGameBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Load Game";
-                continueBtn.gameObject.SetActive(true);
+                // continueBtn.gameObject.SetActive(true);
                 
                 _currentSlotIndexActive = GameManager.Instance.IndexSaveSlot;
                 cardsLoadGame[_currentSlotIndexActive].SetState(true);
