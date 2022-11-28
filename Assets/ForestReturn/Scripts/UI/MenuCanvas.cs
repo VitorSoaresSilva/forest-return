@@ -2,6 +2,9 @@ using System;
 using ForestReturn.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
+using System.Collections;
+using UnityEditor.EditorTools;
+using UnityEngine.InputSystem;
 
 namespace ForestReturn.Scripts.UI
 {
@@ -18,5 +21,7 @@ namespace ForestReturn.Scripts.UI
             var scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             scrapText.text = scrap!=null ? $"{scrap.amount}" : "0";
         }
+
+
     }
 }
