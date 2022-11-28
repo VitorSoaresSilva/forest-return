@@ -1218,6 +1218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4547438340343812263}
+  - component: {fileID: 7437378073252569597}
   m_Layer: 0
   m_Name: Lasers Beam
   m_TagString: Untagged
@@ -1242,6 +1243,22 @@ Transform:
   m_Father: {fileID: 7031567118066005989}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7437378073252569597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417788429018209270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_IgnoreFromBuild: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &3527397073333054076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2626,7 @@ GameObject:
   - component: {fileID: 6213558584977602624}
   - component: {fileID: 8205006382936345738}
   - component: {fileID: 6263209317634575980}
+  - component: {fileID: 354291575}
   m_Layer: 0
   m_Name: Trap_Laser1
   m_TagString: Untagged
@@ -2705,6 +2723,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &354291575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700862503547596127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ddc61f05004a8745b7991cc42f52480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserGameObject: {fileID: 7904556352429577926}
 --- !u!1 &7707918546710450607
 GameObject:
   m_ObjectHideFlags: 0
