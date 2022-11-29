@@ -56,10 +56,11 @@ namespace ForestReturn.Scripts.PlayerScripts
                 
                 
                 
-                _inputActions.Menu.Exit.performed += i => _playerManager.HandleResume();
+                // _inputActions.Menu.Exit.performed += i => _playerManager.HandleResume();
                 _inputActions.Menu.Move.performed += i => Debug.Log("Move");
-                _inputActions.Menu.ChangeTab.performed += i => HandleChangeTab(i.ReadValue<float>());
-                _inputActions.UI.Cancel.performed += i => Debug.Log("Cancel");
+                // _inputActions.Menu.ChangeTab.performed += i => HandleChangeTab(i.ReadValue<float>());
+                _inputActions.UI.ChangeTab.performed += i => HandleChangeTab(i.ReadValue<float>());
+                _inputActions.UI.Cancel.performed += i => _playerManager.HandleResume();
                 
                 
                 
@@ -152,7 +153,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                     _inputActions.gameplay.Enable();
                     break;
                 case "UI":
-                    // _inputActions.UI.Enable();
+                    _inputActions.UI.Enable();
                     break;
             }
             // _inputActions.UI.

@@ -12,6 +12,9 @@ namespace ForestReturn.Scripts.Managers
         public TriggerObject cutsceneWatched;
         public GameObject[] NPCs;
         public Forja forja;
+        public Vector3 pointToSpawnIntro;
+        public Vector3 pointToSpawnLobby;
+        public GameObject doorToIntro;
         
         protected override void Start()
         {
@@ -20,6 +23,8 @@ namespace ForestReturn.Scripts.Managers
             {
                 bool npcState = InventoryManager.Instance.triggerInventory.Contains(npcSaved);
                 forja.ChangeState(npcState);
+                doorToIntro.SetActive(npcState);
+                pointToSpawn = npcState ? pointToSpawnLobby : pointToSpawnIntro;
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
