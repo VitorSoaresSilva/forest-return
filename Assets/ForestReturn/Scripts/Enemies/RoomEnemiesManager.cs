@@ -14,7 +14,7 @@ namespace ForestReturn.Scripts.Enemies
         public TriggerObject roomCleared;
         public UnityEvent openDoorsEvent;
         public UnityEvent closeDoorsEvent;
-
+        public Action RoomClearedAction;
 
         private void Awake()
         {
@@ -74,6 +74,7 @@ namespace ForestReturn.Scripts.Enemies
 
         private void RoomCleared()
         {
+            RoomClearedAction?.Invoke();
             if (InventoryManager.InstanceExists)
             {
                 InventoryManager.Instance.triggerInventory.AddTrigger(roomCleared);

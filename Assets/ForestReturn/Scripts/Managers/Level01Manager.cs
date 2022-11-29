@@ -5,7 +5,7 @@ namespace ForestReturn.Scripts.Managers
 {
     public class Level01Manager : LevelManager
     {
-        public Vector3 pointToNpcGoAway;
+        public Vector3[] pointToNpcGoAway;
         protected override void Start()
         {
             base.Start();

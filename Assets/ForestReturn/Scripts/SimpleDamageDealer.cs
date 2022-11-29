@@ -6,9 +6,7 @@ namespace ForestReturn.Scripts
     {
         public int damage;
         
-        
-        
-        
+
         // private void OnTriggerStay(Collider other)
         private void OnTriggerEnter(Collider other)
         {
