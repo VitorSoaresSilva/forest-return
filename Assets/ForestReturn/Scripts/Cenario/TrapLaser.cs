@@ -6,12 +6,15 @@ namespace ForestReturn.Scripts.Cenario
     public class TrapLaser : MonoBehaviour
     {
         [SerializeField] private GameObject laserGameObject;
-
+        [SerializeField] private bool isClockwise = true;
         private readonly List<Material[]> _materialsRefs = new();
         private Animator _animator;
+        private static readonly int IsClockwise = Animator.StringToHash("isClockwise");
+
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _animator.SetBool(IsClockwise,isClockwise);
             var meshRenderers = GetComponentsInChildren<MeshRenderer>();
             foreach (var meshRendererChild in meshRenderers)
             {

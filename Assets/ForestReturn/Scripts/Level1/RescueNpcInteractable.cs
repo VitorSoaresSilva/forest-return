@@ -1,3 +1,4 @@
+using System;
 using ForestReturn.Scripts.Interactable;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
@@ -10,40 +11,36 @@ namespace ForestReturn.Scripts.Level1
 {
     public class RescueNpcInteractable : MonoBehaviour, IInteractable
     {
-        public GameObject[] npcGameObjects;
-        public TriggerObject npcRescued;
+        [SerializeField] private NpcRescueManager npcRescueManager; 
         public TriggerObject keyCage;
         public UnityEvent onInteractableTrue;
         public UnityEvent onInteractableFalse;
         public UnityEvent onKeyNeededTrue;
         public UnityEvent onKeyNeededFalse;
+        [SerializeField] private NavMeshAgent navMeshAgent;
+        
 
-        private void Start()
-        {
-            if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(npcRescued))
-            {
-                foreach (var npcGameObject in npcGameObjects)
-                {
-                    Destroy(npcGameObject);
-                }
-            }
-        }
-        
-        
-        
         public void Interact()
         {
             if (InventoryManager.InstanceExists && InventoryManager.Instance.triggerInventory.Contains(keyCage))
             {
-                InventoryManager.Instance.triggerInventory.AddTrigger(npcRescued);
-                foreach (var npcGameObject in npcGameObjects)
-                {
-                    npcGameObject.TryGetComponent(out NavMeshAgent navMeshAgent);
-                    navMeshAgent.enabled = true;
-                    navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway);
-                    navMeshAgent.stoppingDistance = 0;
-                }
+                npcRescueManager.OnEnemyKilled += OnEnemyKilled;
+                npcRescueManager.Rescue();
+                navMeshAgent.enabled = true;
+                navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway[0]);
+                navMeshAgent.stoppingDistance = 1;
             }
+        }
+
+        private void OnEnemyKilled()
+        {
+            navMeshAgent.SetDestination(((Level01Manager)LevelManager.Instance).pointToNpcGoAway[1]);
+            navMeshAgent.stoppingDistance = 1;
+        }
+
+        private void OnDestroy()
+        {
+            npcRescueManager.OnEnemyKilled -= OnEnemyKilled;
         }
 
         public void SetStatusInteract(bool status)
