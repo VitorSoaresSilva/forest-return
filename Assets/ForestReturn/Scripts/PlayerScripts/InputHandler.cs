@@ -48,6 +48,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _inputActions.gameplay.LifePotion.performed += i => _playerManager.HandleLifePotion();
                 _inputActions.gameplay.ManaPotion.performed += i => _playerManager.HandleManaPotion();
                 _inputActions.gameplay.Teleport.performed += i => _playerManager.HandleTeleport();
+                //_inputActions.gameplay.OnHealthHealed.performed += i => _playerManager.HandleTeleport();
                 // _inputActions.gameplay.Defense.performed += i => _playerManager.HandleTeleport();
                 _inputActions.gameplay.VinesSkill.performed += i => _playerManager.OnVinesSkill();
                 _inputActions.gameplay.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();

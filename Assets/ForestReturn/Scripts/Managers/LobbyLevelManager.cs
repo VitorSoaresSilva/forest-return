@@ -11,6 +11,7 @@ namespace ForestReturn.Scripts.Managers
         public TriggerObject npcSaved;
         public TriggerObject cutsceneWatched;
         public GameObject[] NPCs;
+        public Forja forja;
         
         protected override void Start()
         {
@@ -18,6 +19,7 @@ namespace ForestReturn.Scripts.Managers
             if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
                 bool npcState = InventoryManager.Instance.triggerInventory.Contains(npcSaved);
+                forja.ChangeState(npcState);
                 foreach (var npc in NPCs)
                 {
                     npc.SetActive(npcState);
