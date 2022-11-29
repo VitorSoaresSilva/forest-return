@@ -342,8 +342,6 @@ GameObject:
   - component: {fileID: 5358175426677875445}
   - component: {fileID: 4246309511411993423}
   - component: {fileID: 1757697415519787663}
-  - component: {fileID: 8458861657115309584}
-  - component: {fileID: 6233734570865082417}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -521,7 +519,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 746
+  m_VersionIndex: 312
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -606,32 +604,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4411699230818771199}
   m_Mesh: {fileID: 0}
---- !u!65 &8458861657115309584
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411699230818771199}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.554467, y: 0.5109274, z: 2.833004}
-  m_Center: {x: 0.27713373, y: -0.24453548, z: 0.28186575}
---- !u!114 &6233734570865082417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411699230818771199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!1 &5022057936259844905
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +827,7 @@ GameObject:
   - component: {fileID: 4442335161653037625}
   - component: {fileID: 4592553009830018573}
   - component: {fileID: 4934488494179501776}
-  - component: {fileID: 650241734112137663}
+  - component: {fileID: 1205300495}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -872,7 +844,7 @@ Transform:
   m_GameObject: {fileID: 8519530114924342021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.54, y: -0.251, z: 12.69}
-  m_LocalScale: {x: 9.8771, y: 0.63602, z: 17.772491}
+  m_LocalScale: {x: 10.71, y: 0.63602, z: 19.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6727115948073468480}
@@ -941,7 +913,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.4474143, z: 1}
   m_Center: {x: 0, y: 0.0667596, z: 0}
---- !u!114 &650241734112137663
+--- !u!114 &1205300495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -950,10 +922,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8519530114924342021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
+  m_Script: {fileID: 11500000, guid: 12768fb1753e438f8d7abdd0e907ac32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  timeBetweenDamages: 1
 --- !u!1 &8558929398285605070
 GameObject:
   m_ObjectHideFlags: 0

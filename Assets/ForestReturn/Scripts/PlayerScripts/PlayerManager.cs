@@ -35,6 +35,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private float _cooldownVinesSkillValue;
         [SerializeField] private GameObject swordEffect;
         public ParticleSystem[] particleSystemsTeleport;
+        public ParticleSystem[] particleSystemsHealth;
         // public string vinesAttackAnimationName = "Vines";
 
         private float CooldownValue
@@ -232,12 +233,11 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void HandleTeleport()
         {
             if (!GameManager.InstanceExists || !LevelManager.InstanceExists) return;
-            
             if (LevelManager.Instance.sceneIndex == Enums.Scenes.Lobby)
             {
                 if (GameManager.Instance.generalData.HasTeleportData)
                 {
-                    playerInput.enabled = false;
+                    //playerInput.enabled = false;
                     IsIntangible = true;
                     foreach (var particle in particleSystemsTeleport)
                     {
@@ -251,7 +251,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 var teleportItems = InventoryManager.Instance.inventory.GetItemsByType(ItemType.Teleport);
                 if (teleportItems.Count > 0)
                 {
-                    playerInput.enabled = false;
+                    //playerInput.enabled = false;
                     IsIntangible = true;
                     foreach (var particle in particleSystemsTeleport)
                     {
@@ -273,6 +273,10 @@ namespace ForestReturn.Scripts.PlayerScripts
                 var potion = (PotionObject)potions[0].item;
                 InventoryManager.Instance.inventory.RemoveItem(potion);
                 HealthHeal(potion.value); 
+                foreach (var particle in particleSystemsHealth)
+                {
+                    particle.Play();
+                }
             }
         }
         public void HandleEndComboAttack() // Disabled for a while
