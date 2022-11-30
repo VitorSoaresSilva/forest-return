@@ -100,6 +100,7 @@ namespace ForestReturn.Scripts.PlayerScripts
 
             if (_inputHandler.rollFlag)
             {
+                _playerManager.SetRollingIntangibility(true);
                 moveDirection = _cameraObject.forward * _inputHandler.vertical;
                 moveDirection += _cameraObject.right * _inputHandler.horizontal;
                 if (_inputHandler.moveAmount > 0)

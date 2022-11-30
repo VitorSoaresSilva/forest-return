@@ -142,7 +142,6 @@ namespace ForestReturn.Scripts.UI
 
         private void UpdateManaValue()
         {
-            Debug.Log("Mana Updated");
             int maxMana = LevelManager.Instance.PlayerScript.MaxMana;
             int currentMana = LevelManager.Instance.PlayerScript.CurrentMana;
 /*
@@ -153,7 +152,6 @@ namespace ForestReturn.Scripts.UI
             
             for (int i = 0; i < manaObjectsActive.Length; i++)
             {
-                Debug.Log($"Max {maxMana} cur: {currentMana} i: {i}");
                 manaObjectsActive[i].SetActive(false);
                 manaObjectsUsed[i].SetActive(false);
                 

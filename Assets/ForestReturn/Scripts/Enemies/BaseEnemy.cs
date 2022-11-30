@@ -23,7 +23,8 @@ namespace ForestReturn.Scripts.Enemies
         
         [Header("Nav Mesh")] 
         [SerializeField] private float chasingStoppingDistance;
-        
+
+        protected float MoveSpeed;
         
         [Header("Attack")]
         private bool _isAttacking;
@@ -36,11 +37,22 @@ namespace ForestReturn.Scripts.Enemies
         private static readonly int IsMoving = Animator.StringToHash("isMoving");
         private static readonly int DeadHashAnimation = Animator.StringToHash("IsDead");
 
+        protected override void Awake()
+        {
+            base.Awake();
+            NavMeshAgent = GetComponent<NavMeshAgent>();
+            MoveSpeed = NavMeshAgent.speed;
+            Animator = GetComponentInChildren<Animator>();
+            
+            
+        }
+
         private void Start()
         {
             _updateCoroutine = StartCoroutine(UpdateState());
             _myCollider = GetComponentInChildren<CapsuleCollider>();
             _damageIndicatorManager = GetComponentInChildren<DamageIndicatorManager>();
+            
             InitAttackRandomizer();
             foreach (var enemyAttack in Attacks)
             {
@@ -54,6 +66,18 @@ namespace ForestReturn.Scripts.Enemies
             
             OnDead += HandleOnDead;
             OnHurt += HandleOnHurt;
+            OnMoveSpeedReduced += OnOnMoveSpeedReduced;
+            OnMoveSpeedNormalized += OnOnMoveSpeedNormalized;
+        }
+
+        private void OnOnMoveSpeedNormalized()
+        {
+            NavMeshAgent.speed = MoveSpeed;
+        }
+
+        private void OnOnMoveSpeedReduced()
+        {
+            NavMeshAgent.speed = 1;
         }
 
         private void HandleOnHurt(int damageTaken)

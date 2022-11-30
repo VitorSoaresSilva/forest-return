@@ -305,6 +305,10 @@ namespace ForestReturn.Scripts.PlayerScripts
             swordHitBox.SetActive(false);
             swordEffect.SetActive(false);
         }
-        
+
+        public void SetRollingIntangibility(bool state)
+        {
+            IsIntangible = state;
+        }
     }
 }

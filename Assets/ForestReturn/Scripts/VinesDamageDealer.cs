@@ -2,20 +2,17 @@ using UnityEngine;
 
 namespace ForestReturn.Scripts
 {
-    public class SimpleContinuousDamageDealer : MonoBehaviour
+    public class VinesDamageDealer : SimpleContinuousDamageDealer
     {
-        public int damage;
-        [SerializeField] protected float timeBetweenDamages = 1;
-        protected bool _canDoDamage = true;
-        
-        
+        public float timeToReduceMoveSpeed = 0.5f;
         private void OnTriggerStay(Collider other)
         {
+            
             if (_canDoDamage)
             {
                 _canDoDamage = false;
                 var damageable = other.gameObject.transform.root.GetComponent<IDamageable>();
-                damageable?.TakeDamage(damage);
+                damageable?.TakeDamage(damage,false,timeToReduceMoveSpeed);
                 Invoke(nameof(EnableDamage),timeBetweenDamages);
             }
         }

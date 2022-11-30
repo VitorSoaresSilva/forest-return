@@ -51,6 +51,8 @@ namespace ForestReturn.Scripts
         public delegate void OnLifeChangeEvent();
         public delegate void OnManaChangeEvent();
         public delegate void OnNotEnoughManaEvent();
+        public delegate void OnMoveSpeedReducedEvent();
+        public delegate void OnMoveSpeedNormalizedEvent();
         public event OnDeadEvent OnDead;
         public event OnHurtEvent OnHurt;
         public event OnHealthHealedEvent OnHealthHealed;
@@ -58,6 +60,8 @@ namespace ForestReturn.Scripts
         public event OnLifeChangeEvent OnLifeChanged;
         public event OnManaChangeEvent OnManaChanged;
         public event OnNotEnoughManaEvent OnNotEnoughMana;
+        public event OnMoveSpeedReducedEvent OnMoveSpeedReduced;
+        public event OnMoveSpeedNormalizedEvent OnMoveSpeedNormalized;
         
 
         protected virtual void Awake()
@@ -83,6 +87,31 @@ namespace ForestReturn.Scripts
                 IsDead = true;
                 OnDead?.Invoke();
             }
+        }
+        public void TakeDamage(int damage,bool ignoreIntangibility, float timeToReduceMoveSpeed)
+        {
+            if ((!ignoreIntangibility && IsIntangible) || IsDead) return;
+            var damageTaken = IsDefending ? Mathf.Max(damage - Defense, 0) : damage;
+            if (damageTaken <= 0) return;
+            StartCoroutine(IntangibleCooldown());
+            CurrentHealth -= damageTaken;
+            OnHurt?.Invoke(damageTaken);
+            if (timeToReduceMoveSpeed > 0)
+            {
+                OnMoveSpeedReduced?.Invoke();
+            }
+            StartCoroutine(MoveSpeedReducedCooldown(timeToReduceMoveSpeed));
+            if (CurrentHealth <= 0)
+            {
+                IsDead = true;
+                OnDead?.Invoke();
+            }
+        }
+
+        private IEnumerator MoveSpeedReducedCooldown(float time)
+        {
+            yield return new WaitForSeconds(time);
+            OnMoveSpeedNormalized?.Invoke();
         }
         private IEnumerator IntangibleCooldown()
         {

@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 7319453133802271295}
   - component: {fileID: 7460186854591193886}
   - component: {fileID: 6612834374161196574}
-  - component: {fileID: 7945057891992137803}
+  - component: {fileID: 4191197731030664196}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -1064,7 +1064,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.89600205, y: 5.081989, z: 1.0000001}
   m_Center: {x: -0.05199819, y: 2.040994, z: -0.00000003017064}
---- !u!114 &7945057891992137803
+--- !u!114 &4191197731030664196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1073,10 +1073,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3019511944392960519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
+  m_Script: {fileID: 11500000, guid: 92c4f073fe2e4270bb569e04d266f009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  timeBetweenDamages: 0.5
 --- !u!1 &3034695296951086427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,7 +1623,7 @@ GameObject:
   - component: {fileID: 8663958367356119375}
   - component: {fileID: 6008687037744513431}
   - component: {fileID: 2260917565853709502}
-  - component: {fileID: 5847899694401165123}
+  - component: {fileID: 5866109917787974531}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -1708,7 +1709,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.90453666, y: 5.081989, z: 1.0000001}
   m_Center: {x: -0.047731984, y: 2.040994, z: 0.000000046238892}
---- !u!114 &5847899694401165123
+--- !u!114 &5866109917787974531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1717,10 +1718,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5186651847272114442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
+  m_Script: {fileID: 11500000, guid: 92c4f073fe2e4270bb569e04d266f009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  timeBetweenDamages: 0.5
 --- !u!1 &5268797683419489545
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,7 +2402,7 @@ GameObject:
   - component: {fileID: 6601358677445723968}
   - component: {fileID: 5911719512317506107}
   - component: {fileID: 1849039081683905805}
-  - component: {fileID: 14749198320497542}
+  - component: {fileID: 6117626553842144003}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -2486,7 +2488,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9088409, y: 5.081989, z: 1.0000001}
   m_Center: {x: -0.045579325, y: 2.040994, z: -6.0438286e-13}
---- !u!114 &14749198320497542
+--- !u!114 &6117626553842144003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2495,10 +2497,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7637623378837773181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2408971d946d681a38f8f46e5f584, type: 3}
+  m_Script: {fileID: 11500000, guid: 92c4f073fe2e4270bb569e04d266f009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  timeBetweenDamages: 0.5
 --- !u!1 &7664037016797876720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,6 +2689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserGameObject: {fileID: 7904556352429577926}
+  isClockwise: 1
 --- !u!1 &7707918546710450607
 GameObject:
   m_ObjectHideFlags: 0
