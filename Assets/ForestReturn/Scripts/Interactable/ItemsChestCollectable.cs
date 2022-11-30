@@ -12,6 +12,7 @@ public class ItemsChestCollectable : MonoBehaviour, IInteractable
     public TriggerObject triggerObject;
     public bool isOpen;
     private Animator _animator;
+    public ParticleSystem[] particleSystems;
 
     private void Start()
     {
@@ -44,6 +45,10 @@ public class ItemsChestCollectable : MonoBehaviour, IInteractable
             _animator.SetTrigger("Open");
             SetStatusInteract(false);
             enabled = false;
+            foreach (var particle in particleSystems)
+            {
+                particle.Play();
+            }
         }
     }
 
