@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.PlayerScripts;
@@ -26,6 +27,8 @@ namespace ForestReturn.Scripts.UI
         private float _timeToHealDelay;
         private Coroutine _coroutineDamage;
         private Coroutine _coroutineHeal;
+        public GameObject[] manaObjectsActive;
+        public GameObject[] manaObjectsUsed;
         
         private void Start()
         {
@@ -38,6 +41,7 @@ namespace ForestReturn.Scripts.UI
             LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
             LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
             LevelManager.Instance.PlayerScript.OnNotEnoughMana += PlayerScriptOnOnNotEnoughMana;
+            
             LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged += PlayerScriptOnOnVineSkillCoolDownChanged;
             if(InventoryManager.InstanceExists)
             {
@@ -138,6 +142,31 @@ namespace ForestReturn.Scripts.UI
 
         private void UpdateManaValue()
         {
+            Debug.Log("Mana Updated");
+            int maxMana = LevelManager.Instance.PlayerScript.MaxMana;
+            int currentMana = LevelManager.Instance.PlayerScript.CurrentMana;
+/*
+ * total 6
+ * max 3
+ * cur 3
+ */
+            
+            for (int i = 0; i < manaObjectsActive.Length; i++)
+            {
+                Debug.Log($"Max {maxMana} cur: {currentMana} i: {i}");
+                manaObjectsActive[i].SetActive(false);
+                manaObjectsUsed[i].SetActive(false);
+                
+                
+                
+                if (i < currentMana)
+                {
+                    manaObjectsActive[i].SetActive(true);
+                }else if (i < maxMana)
+                {
+                    manaObjectsUsed[i].SetActive(true);
+                }
+            }
             
         }
 
