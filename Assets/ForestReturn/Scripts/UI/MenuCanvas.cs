@@ -1,10 +1,6 @@
-using System;
 using ForestReturn.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
-using System.Collections;
-using UnityEditor.EditorTools;
-using UnityEngine.InputSystem;
 
 namespace ForestReturn.Scripts.UI
 {
