@@ -54,10 +54,12 @@ namespace ForestReturn.Scripts.Enemies
         [ContextMenu("CloseDoors")]
         public void CloseDoors()
         {
+            Debug.Log("1");
             if (InventoryManager.InstanceExists && !InventoryManager.Instance.triggerInventory.Contains(roomCleared))
             {
+                Debug.Log("1,1");
                 if (enemies.Length <= 0) return;
-                
+                Debug.Log("1,2");
                 closeDoorsEvent.Invoke();
                 foreach (BaseEnemy baseEnemy in enemies)
                 {
