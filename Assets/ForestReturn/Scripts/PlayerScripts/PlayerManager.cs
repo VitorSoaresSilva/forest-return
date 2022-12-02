@@ -44,6 +44,13 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         [SerializeField] private GameObject lifeMask;
         [SerializeField] private GameObject manaMask;
+        
+        [Header("Capsule")] 
+        [SerializeField] private GameObject capsule;
+        [SerializeField] private GameObject flower;
+        
+        [SerializeField] private TriggerObject capsuleTrigger;
+        [SerializeField] private TriggerObject flowerTrigger;
         // public string vinesAttackAnimationName = "Vines";
 
         private float CooldownValue
@@ -96,6 +103,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             }
             InitSkill();
             UpdateMask();
+            UpdateCapsule();
             UpdateAttacks();
         }
 
@@ -109,7 +117,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             float delta = Time.deltaTime;
             isInteracting = _animator.GetBool("isInteracting");
             _inputHandler.TickInput(delta);
-            if (GameManager.InstanceExists && !GameManager.Instance.IsPaused)
+            if (GameManager.InstanceExists && !GameManager.Instance.IsPaused && !IsDead)
             {
                 _playerLocomotion.HandleMovement(delta);
                 _playerLocomotion.HandleRollingAndSprinting(delta);
@@ -216,7 +224,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private void HandleDeath()
         {
             _animatorHandler.PlayerTargetAnimation("Death",true);
-            playerInput.SwitchCurrentActionMap("Death");
+            _inputHandler.SwitchActionMap("UI");
         }
 
         public void HandleManaPotion()
@@ -335,5 +343,20 @@ namespace ForestReturn.Scripts.PlayerScripts
                 MaxHealth = baseAttributes.health;
             }
         }
+
+        public void UpdateCapsule()
+        {
+            capsule.SetActive(false);
+            flower.SetActive(false);
+            if (InventoryManager.Instance.triggerInventory.Contains(capsuleTrigger))
+            {
+                capsule.SetActive(true);
+                if (InventoryManager.Instance.triggerInventory.Contains(flowerTrigger))
+                {
+                    flower.SetActive(true);
+                }
+            }
+        }
+        
     }
 }
