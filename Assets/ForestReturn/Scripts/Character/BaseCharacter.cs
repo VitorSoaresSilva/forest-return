@@ -12,6 +12,8 @@ namespace ForestReturn.Scripts
     {
         private int _currentHealth;
         private int _currentMana;
+        private int _maxHealth;
+        private int _maxMana;
         public int CurrentHealth
         {
             get => _currentHealth;
@@ -34,28 +36,51 @@ namespace ForestReturn.Scripts
                 OnManaChanged?.Invoke();
             }
         }
-        public int MaxHealth { get; protected set; }
-        public int MaxMana { get; private set; }
+
+        public int MaxHealth
+        {
+            get => _maxHealth;
+            protected set
+            {
+                _maxHealth = Mathf.Max(0, value);
+                OnMaxHealthChanged?.Invoke();
+            }
+        }
+
+        public int MaxMana
+        {
+            get => _maxMana;
+            protected set
+            {
+                _maxMana = Mathf.Max(0, value);
+                OnMaxManaChanged?.Invoke();
+            }
+        }
+
         public int Defense { get; private set; }
         public int Damage { get; private set; }
         public bool IsIntangible { get; protected set; }
         public bool IsDead { get; private set; }
         public bool IsDefending { get; protected set; }
         [SerializeField] private float intangibleCoolDown = 0.5f;
-        [SerializeField] private Attributes baseAttributes;
+        [SerializeField] protected Attributes baseAttributes;
 
         public delegate void OnDeadEvent();
         public delegate void OnHurtEvent(int damage);
         public delegate void OnHealthHealedEvent(int oldValue, int newValue);
-        public delegate void OnManaHealedEvent();
         public delegate void OnLifeChangeEvent();
+        public delegate void OnManaHealedEvent();
         public delegate void OnManaChangeEvent();
         public delegate void OnNotEnoughManaEvent();
+        public delegate void OnMaxHealthChangedEvent();
         public delegate void OnMoveSpeedReducedEvent();
         public delegate void OnMoveSpeedNormalizedEvent();
+        public delegate void OnMaxManaChangedEvent();
         public event OnDeadEvent OnDead;
         public event OnHurtEvent OnHurt;
         public event OnHealthHealedEvent OnHealthHealed;
+        public event OnMaxHealthChangedEvent OnMaxHealthChanged;
+        public event OnMaxManaChangedEvent OnMaxManaChanged;
         public event OnManaHealedEvent OnManaHealed;
         public event OnLifeChangeEvent OnLifeChanged;
         public event OnManaChangeEvent OnManaChanged;

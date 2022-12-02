@@ -4,6 +4,7 @@ using ForestReturn.Scripts.Cameras;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.Teleport;
+using ForestReturn.Scripts.Triggers;
 using ForestReturn.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,6 +37,13 @@ namespace ForestReturn.Scripts.PlayerScripts
         [SerializeField] private GameObject swordEffect;
         public ParticleSystem[] particleSystemsTeleport;
         public ParticleSystem[] particleSystemsHealth;
+
+        [Header("Masks")] 
+        [SerializeField] private TriggerObject lifeMaskTrigger;
+        [SerializeField] private TriggerObject manaMaskTrigger;
+
+        [SerializeField] private GameObject lifeMask;
+        [SerializeField] private GameObject manaMask;
         // public string vinesAttackAnimationName = "Vines";
 
         private float CooldownValue
@@ -87,7 +95,7 @@ namespace ForestReturn.Scripts.PlayerScripts
 
             }
             InitSkill();
-            
+            UpdateMask();
             UpdateAttacks();
         }
 
@@ -309,6 +317,23 @@ namespace ForestReturn.Scripts.PlayerScripts
         public void SetRollingIntangibility(bool state)
         {
             IsIntangible = state;
+        }
+
+        public void UpdateMask()
+        {
+            lifeMask.SetActive(false);
+            manaMask.SetActive(false);
+            if (InventoryManager.Instance.triggerInventory.Contains(lifeMaskTrigger))
+            {
+                lifeMask.SetActive(true);
+                MaxHealth = 15;
+                MaxMana = baseAttributes.mana;
+            }else if (InventoryManager.Instance.triggerInventory.Contains(manaMaskTrigger))
+            {
+                manaMask.SetActive(true);
+                MaxMana = 6;
+                MaxHealth = baseAttributes.health;
+            }
         }
     }
 }

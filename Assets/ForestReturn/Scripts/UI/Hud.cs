@@ -4,6 +4,7 @@ using System.Linq;
 using ForestReturn.Scripts.Inventory;
 using ForestReturn.Scripts.Managers;
 using ForestReturn.Scripts.PlayerScripts;
+using ForestReturn.Scripts.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace ForestReturn.Scripts.UI
 {
     public class Hud : MonoBehaviour
     {
+        [SerializeField] private RectTransform lifeParent; 
         public Slider lifeSliderCurrentHealth;
         public Slider lifeSliderDamage;
         public Slider lifeSliderHeal;
@@ -29,6 +31,12 @@ namespace ForestReturn.Scripts.UI
         private Coroutine _coroutineHeal;
         public GameObject[] manaObjectsActive;
         public GameObject[] manaObjectsUsed;
+
+        [Header("Life Portrait")] 
+        [SerializeField] private GameObject fullLifeImage;
+        [SerializeField] private GameObject lowLifeImage;
+
+        [SerializeField] private TriggerObject lifeMask;
         
         private void Start()
         {
@@ -40,6 +48,8 @@ namespace ForestReturn.Scripts.UI
             LevelManager.Instance.PlayerScript.OnHealthHealed += PlayerScriptOnOnHealthHealed;
             LevelManager.Instance.PlayerScript.OnLifeChanged += UpdateHealthValue;
             LevelManager.Instance.PlayerScript.OnManaChanged += UpdateManaValue;
+            LevelManager.Instance.PlayerScript.OnMaxHealthChanged += PlayerScriptOnOnMaxHealthChanged;
+            LevelManager.Instance.PlayerScript.OnMaxManaChanged += UpdateManaValue;
             LevelManager.Instance.PlayerScript.OnNotEnoughMana += PlayerScriptOnOnNotEnoughMana;
             
             LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged += PlayerScriptOnOnVineSkillCoolDownChanged;
@@ -47,6 +57,28 @@ namespace ForestReturn.Scripts.UI
             {
                 InventoryManager.Instance.inventory.OnItemCollected += InventoryOnItemCollected;
             }
+        }
+
+        // private void OnEnable()
+        // {
+        //     UpdateHealthValue();
+        //     UpdateManaValue();
+        //     PlayerScriptOnOnMaxHealthChanged();
+        // }
+
+        private void PlayerScriptOnOnMaxHealthChanged()
+        {
+            if (!InventoryManager.InstanceExists) return;
+            if (InventoryManager.Instance.triggerInventory.Contains(lifeMask))
+            {
+                lifeParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,900);
+            }
+            else
+            {
+                lifeParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,600);
+            }
+
+            UpdateHealthValue();
         }
 
         private void PlayerScriptOnOnVineSkillCoolDownChanged(float value)
@@ -70,6 +102,8 @@ namespace ForestReturn.Scripts.UI
                 LevelManager.Instance.PlayerScript.OnManaChanged -= UpdateManaValue;
                 LevelManager.Instance.PlayerScript.OnNotEnoughMana -= PlayerScriptOnOnNotEnoughMana;
                 LevelManager.Instance.PlayerScript.OnVineSkillCoolDownChanged -= PlayerScriptOnOnVineSkillCoolDownChanged;
+                LevelManager.Instance.PlayerScript.OnMaxHealthChanged -= PlayerScriptOnOnMaxHealthChanged;
+                LevelManager.Instance.PlayerScript.OnMaxManaChanged -= UpdateManaValue;
             }
             if ( InventoryManager.InstanceExists)
             {
@@ -128,7 +162,20 @@ namespace ForestReturn.Scripts.UI
 
         private void UpdateHealthValue()
         {
-            lifeSliderCurrentHealth.value = (float)LevelManager.Instance.PlayerScript.CurrentHealth / LevelManager.Instance.PlayerScript.MaxHealth;
+            var currentHealth = (float) LevelManager.Instance.PlayerScript.CurrentHealth;
+            var maxHealth = (float) LevelManager.Instance.PlayerScript.MaxHealth;
+
+            if (currentHealth < (maxHealth * 0.8f))
+            {
+                fullLifeImage.SetActive(false);
+                lowLifeImage.SetActive(true);
+            }
+            else
+            {
+                fullLifeImage.SetActive(true);
+                lowLifeImage.SetActive(false);
+            }
+            lifeSliderCurrentHealth.value = currentHealth / maxHealth;
             if (_coroutineDamage == null)
             {
                 lifeSliderDamage.value = lifeSliderCurrentHealth.value;
@@ -144,19 +191,10 @@ namespace ForestReturn.Scripts.UI
         {
             int maxMana = LevelManager.Instance.PlayerScript.MaxMana;
             int currentMana = LevelManager.Instance.PlayerScript.CurrentMana;
-/*
- * total 6
- * max 3
- * cur 3
- */
-            
             for (int i = 0; i < manaObjectsActive.Length; i++)
             {
                 manaObjectsActive[i].SetActive(false);
                 manaObjectsUsed[i].SetActive(false);
-                
-                
-                
                 if (i < currentMana)
                 {
                     manaObjectsActive[i].SetActive(true);
