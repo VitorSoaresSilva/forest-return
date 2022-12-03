@@ -23,6 +23,7 @@ namespace ForestReturn.Scripts.Interactable
             SetStatusInteract(false);
         }
 
+        
         public void Interact()
         {
             if (InventoryManager.InstanceExists)

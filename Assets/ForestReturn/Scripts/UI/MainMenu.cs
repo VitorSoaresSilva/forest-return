@@ -16,6 +16,7 @@ namespace ForestReturn.Scripts.UI
 
         // public Button continueBtn;
         // public Button loadGameBtn;
+        
 
         private void Start()
         {
@@ -51,6 +52,11 @@ namespace ForestReturn.Scripts.UI
         public void Play()
         {
             GameManager.Instance.Play();
+        }
+
+        public void QuitGame()
+        {
+            GameManager.Instance.ExitGame();
         }
 
         private void UpdateAll()

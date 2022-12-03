@@ -334,6 +334,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             lifeMask.SetActive(false);
             manaMask.SetActive(false);
+            if (!LevelManager.InstanceExists) return;
             if (InventoryManager.Instance.triggerInventory.Contains(lifeMaskTrigger))
             {
                 lifeMask.SetActive(true);

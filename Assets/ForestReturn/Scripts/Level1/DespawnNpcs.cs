@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DespawnNpcs : MonoBehaviour
 {
-    public TriggerObject Lv1Complete;
+    
     public GameObject portalToLobby;
     private void OnTriggerEnter(Collider other)
     {
@@ -13,8 +13,8 @@ public class DespawnNpcs : MonoBehaviour
         if (baseNpc != null)
         {
             Destroy(other.transform.root.gameObject);
-            InventoryManager.Instance.triggerInventory.AddTrigger(Lv1Complete);
-           if (!portalToLobby.activeSelf)
+            
+            if (!portalToLobby.activeSelf)
             {
                 portalToLobby.SetActive(true);
             }

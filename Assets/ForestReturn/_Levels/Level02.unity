@@ -2968,6 +2968,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7950934216049785517, guid: 361c3c156363c5d4abb0d68718235745, type: 3}
+      propertyPath: Attacks.Array.data[0].stopDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950934216049785517, guid: 361c3c156363c5d4abb0d68718235745, type: 3}
+      propertyPath: Attacks.Array.data[1].stopDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950934216049785517, guid: 361c3c156363c5d4abb0d68718235745, type: 3}
       propertyPath: Attacks.Array.data[1].weightPriority
       value: 3
       objectReference: {fileID: 0}
@@ -7826,13 +7834,14 @@ GameObject:
   - component: {fileID: 775894283}
   - component: {fileID: 775894282}
   - component: {fileID: 775894281}
+  - component: {fileID: 775894285}
   m_Layer: 16
   m_Name: PortalLv2
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &775894280
 Transform:
   m_ObjectHideFlags: 0
@@ -7908,7 +7917,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 775894279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c0d84e13b55e942b94e46d044f0c29, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dc4ecf3e2d44ec390a1589a21262959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SetAsInteractable:
@@ -7941,6 +7950,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  levelCompleteTrigger: {fileID: 11400000, guid: 83426745dd628ad488808e1f02916f88, type: 2}
 --- !u!65 &775894284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7954,6 +7964,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &775894285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775894279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e131e9a5ba18f6a48ae0331e8f6ae759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationObject: {fileID: 794586712}
 --- !u!4 &791850794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4448645726583722913, guid: 4a317484c5e5d9f419aee13b588a7797, type: 3}
@@ -7977,7 +8000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &794586713
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12398,7 +12421,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108614716}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -12406,7 +12429,7 @@ RectTransform:
   - {fileID: 6973064}
   m_Father: {fileID: 794586713}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}

@@ -55,10 +55,7 @@ namespace ForestReturn.Scripts.UI
             _slotsCost = _swordInventorySlot.slotsAmount < BlacksmithConfigData.SlotsCost.Length
                 ? BlacksmithConfigData.SlotsCost[_swordInventorySlot.slotsAmount]
                 : null;
-
-
-            Debug.Log(_weaponLevelCost.Value.ScrapCost);
-            Debug.Log(_slotsCost.Value.ScrapCost);
+            
             _seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
             _scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             if (CanUpgradeWeapon())

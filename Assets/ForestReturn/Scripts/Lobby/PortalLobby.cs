@@ -11,6 +11,7 @@ namespace ForestReturn.Scripts.Interactable
     {
         public TriggerObject Lv1Complete;
         public TriggerObject Lv2Complete;
+        public TriggerObject Lv3Complete;
         public UnityEvent SetAsInteractable;
         public UnityEvent SetAsNotInteractable;
         
@@ -23,13 +24,17 @@ namespace ForestReturn.Scripts.Interactable
              */
             if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
-                if (InventoryManager.Instance.triggerInventory.Contains(Lv1Complete))
+                if (InventoryManager.Instance.triggerInventory.Contains(Lv3Complete))
                 {
-                    GameManager.Instance.ChangeScene(Enums.Scenes.Level02);
+                    //level 4 or end game
                 }
-                else if(InventoryManager.Instance.triggerInventory.Contains(Lv2Complete))
+                else if (InventoryManager.Instance.triggerInventory.Contains(Lv2Complete))
                 {
                     GameManager.Instance.ChangeScene(Enums.Scenes.Level03);
+                }
+                else if (InventoryManager.Instance.triggerInventory.Contains(Lv1Complete))
+                {
+                    GameManager.Instance.ChangeScene(Enums.Scenes.Level02);
                 }
                 else
                 {

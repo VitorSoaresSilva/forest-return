@@ -25,6 +25,7 @@ namespace ForestReturn.Scripts
                 GeneralDataObjectJson = JsonUtility.ToJson(generalDataObject, true),
                 TriggerInventoryObjectJson = JsonUtility.ToJson(triggerInventoryObject, true),
             };
+            Debug.Log("Equipped" + dataSerialized.EquippedObjectJson);
             string saveData = JsonUtility.ToJson(dataSerialized,true);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(string.Concat(Application.persistentDataPath, path));

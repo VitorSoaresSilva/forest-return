@@ -85,8 +85,6 @@ namespace ForestReturn.Scripts.PlayerScripts
             moveDirection *= speed;
             
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection,_normalVector);
-
-            Debug.Log("projectedVelocity: " + projectedVelocity);
             rigidbody.velocity = projectedVelocity;
             animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
 
