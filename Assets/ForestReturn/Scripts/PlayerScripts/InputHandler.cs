@@ -26,6 +26,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
+        private Vector2 _mouseScrollInput;
 
         private void Awake()
         {
@@ -53,6 +54,7 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _inputActions.gameplay.VinesSkill.performed += i => _playerManager.OnVinesSkill();
                 _inputActions.gameplay.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
                 _inputActions.gameplay.Roll.performed += i => rollFlag = true;
+                _inputActions.gameplay.MouseScroll.performed += i =>_mouseScrollInput = i.ReadValue<Vector2>();
                 
                 
                 
@@ -103,7 +105,7 @@ namespace ForestReturn.Scripts.PlayerScripts
             vertical = _movementInput.y;
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = _cameraInput.x;
-            mouseY = _cameraInput.y;
+            mouseY = _mouseScrollInput.y;
         }
         private void HandleInteraction()
         {
@@ -140,6 +142,19 @@ namespace ForestReturn.Scripts.PlayerScripts
             TabGroup.Instance.ChangeTab((int)value);
         }
 
+        private void ResetInputs()
+        {
+            horizontal = 0;
+            vertical = 0;
+            moveAmount = 0;
+            mouseX = 0;
+            mouseY = 0;
+            _movementInput = Vector2.zero;
+            _cameraInput = Vector2.zero;
+            _mouseScrollInput = Vector2.zero;
+            
+        }
+        
         public void SwitchActionMap(string actionType)
         {
             _inputActions.UI.Disable();
@@ -150,9 +165,11 @@ namespace ForestReturn.Scripts.PlayerScripts
             switch (actionType)
             {
                 case "gameplay":
+                    ResetInputs();
                     _inputActions.gameplay.Enable();
                     break;
                 case "UI":
+                    ResetInputs();
                     _inputActions.UI.Enable();
                     break;
             }

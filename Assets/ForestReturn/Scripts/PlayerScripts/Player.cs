@@ -196,7 +196,7 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnDisable()
         {
-            OnDead -= HandleDeath;
+            // OnDead -= HandleDeath;
             OnHurt -= HandleHurt;
             OnManaHealed -= HandleManaHealed;
             OnHealthHealed -= HandleHealthHealed;

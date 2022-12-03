@@ -51,7 +51,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         private Vector3 _normalVector;
         private Vector3 _targetPosition;
 
-        private void HandlerRotation(float delta)
+        private void HandleRotation(float delta)
         {
             float moveOverride = _inputHandler.moveAmount;
             var targetDir = _cameraObject.forward * _inputHandler.vertical;
@@ -85,12 +85,14 @@ namespace ForestReturn.Scripts.PlayerScripts
             moveDirection *= speed;
             
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection,_normalVector);
+
+            Debug.Log("projectedVelocity: " + projectedVelocity);
             rigidbody.velocity = projectedVelocity;
             animatorHandler.UpdateAnimatorValue(_inputHandler.moveAmount, 0);
 
             if (animatorHandler.canRotate)
             {
-                HandlerRotation(delta);
+                HandleRotation(delta);
             }
         }
 
@@ -196,6 +198,11 @@ namespace ForestReturn.Scripts.PlayerScripts
                 }
             }
             
+        }
+
+        public void HandleDeath()
+        {
+            rigidbody.velocity = Vector3.zero;
         }
 
         #endregion

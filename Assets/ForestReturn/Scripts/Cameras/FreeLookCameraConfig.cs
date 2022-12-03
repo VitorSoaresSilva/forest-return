@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using ForestReturn.Scripts.Managers;
 using UnityEngine;
@@ -16,10 +17,11 @@ namespace ForestReturn.Scripts.Cameras
                 CinemachineFreeLook.Follow = playerScriptTransform;
                 CinemachineFreeLook.LookAt = playerScriptTransform;
             }
-
             var mYAxis = CinemachineFreeLook.m_YAxis;
             mYAxis.Value = 0.5f;
             CinemachineFreeLook.m_YAxis = mYAxis;
         }
+
+
     }
 }

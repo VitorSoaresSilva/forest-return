@@ -143,6 +143,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3f65cb89-7c2c-4373-a846-da93d8307707"",
+                    ""expectedControlType"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -398,6 +407,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a665760-d862-4180-b0a6-39a2766efc21"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1272,6 +1292,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_gameplay_VinesSkill = m_gameplay.FindAction("VinesSkill", throwIfNotFound: true);
         m_gameplay_Camera = m_gameplay.FindAction("Camera", throwIfNotFound: true);
         m_gameplay_Roll = m_gameplay.FindAction("Roll", throwIfNotFound: true);
+        m_gameplay_MouseScroll = m_gameplay.FindAction("MouseScroll", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -1367,6 +1388,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_VinesSkill;
     private readonly InputAction m_gameplay_Camera;
     private readonly InputAction m_gameplay_Roll;
+    private readonly InputAction m_gameplay_MouseScroll;
     public struct GameplayActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -1384,6 +1406,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         public InputAction @VinesSkill => m_Wrapper.m_gameplay_VinesSkill;
         public InputAction @Camera => m_Wrapper.m_gameplay_Camera;
         public InputAction @Roll => m_Wrapper.m_gameplay_Roll;
+        public InputAction @MouseScroll => m_Wrapper.m_gameplay_MouseScroll;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1432,6 +1455,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Roll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
                 @Roll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
                 @Roll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRoll;
+                @MouseScroll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseScroll;
+                @MouseScroll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseScroll;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -1475,6 +1501,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
+                @MouseScroll.started += instance.OnMouseScroll;
+                @MouseScroll.performed += instance.OnMouseScroll;
+                @MouseScroll.canceled += instance.OnMouseScroll;
             }
         }
     }
@@ -1732,6 +1761,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         void OnVinesSkill(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

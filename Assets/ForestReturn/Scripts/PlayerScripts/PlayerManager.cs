@@ -16,8 +16,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         private InputHandler _inputHandler;
         private AnimatorHandler _animatorHandler;
         private PlayerLocomotion _playerLocomotion;
-        [HideInInspector] public PlayerInput playerInput;
+        // [HideInInspector] public PlayerInput playerInput;
         private Animator _animator;
+        // private CameraHandlerSoulsLike _cameraHandlerSoulsLike;
         private CameraHandler _cameraHandler;
         private InventoryObject _inventoryObjectRef;
         [Header("Player config")]
@@ -65,17 +66,17 @@ namespace ForestReturn.Scripts.PlayerScripts
         protected override void Awake()
         {
             base.Awake();
-            playerInput = GetComponent<PlayerInput>();
             _inputHandler = GetComponent<InputHandler>();
             _playerLocomotion = GetComponent<PlayerLocomotion>();
             _animator = GetComponentInChildren<Animator>();
             _animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            _cameraHandler = GetComponent<CameraHandler>();
         }
 
         public void Init()
         {
-            _cameraHandler = CameraHandler.Instance;
             _playerLocomotion.Init();
+            _cameraHandler.Init();
             
             OnHurt += HandleHurt;
             
@@ -122,6 +123,8 @@ namespace ForestReturn.Scripts.PlayerScripts
                 _playerLocomotion.HandleMovement(delta);
                 _playerLocomotion.HandleRollingAndSprinting(delta);
                 _playerLocomotion.HandleFalling(delta, _playerLocomotion.moveDirection);
+                _cameraHandler.HandleCameraRotation(delta);
+                _cameraHandler.HandleCameraZoom(delta);
             }
         }
 
@@ -132,6 +135,8 @@ namespace ForestReturn.Scripts.PlayerScripts
             {
                 _playerLocomotion.inAirTimer += Time.deltaTime;
             }
+
+
         }
         private void InitSkill()
         {
@@ -186,16 +191,13 @@ namespace ForestReturn.Scripts.PlayerScripts
         }
         public void OnResumeGame()
         {
-            // playerInput.enabled = true;
-            // playerInput.SwitchCurrentActionMap("gameplay");
             _inputHandler.SwitchActionMap("gameplay");
+            
         }
         
         public void OnPauseGame()
         {
-            // playerInput.enabled = true;
             _inputHandler.SwitchActionMap("UI");
-            // playerInput.SwitchCurrentActionMap("UI");
         }
         
         public void OnVinesSkill()
@@ -223,8 +225,9 @@ namespace ForestReturn.Scripts.PlayerScripts
         }
         private void HandleDeath()
         {
-            _animatorHandler.PlayerTargetAnimation("Death",true);
             _inputHandler.SwitchActionMap("UI");
+            _playerLocomotion.HandleDeath();
+            _animatorHandler.PlayerTargetAnimation("Death",false);
         }
 
         public void HandleManaPotion()
