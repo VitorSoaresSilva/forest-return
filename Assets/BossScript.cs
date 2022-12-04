@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using ForestReturn.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,9 +19,8 @@ public class BossScript : MonoBehaviour, IDamageable
     private Animator _animator;
     private BossState _state;
     public float timeToWaitAfterHandOnGround = 10;
-    public float timeToWaitAfterDamage = 4;
+    public float timeToWaitAfterDamage = 2;
     public float timeToWaitForNewAttack = 8;
-    // private Coroutine _coroutine;
     private static readonly int AttackAnimationHash = Animator.StringToHash("Attack");
     private static readonly int DeathAnimationHash = Animator.StringToHash("Death");
     private static readonly int HandBackAnimationHash = Animator.StringToHash("HandBack");
@@ -33,6 +30,7 @@ public class BossScript : MonoBehaviour, IDamageable
     public GameObject hitBox;
 
     public UnityEvent onBossDead;
+    public UnityEvent onBossStart;
 
     private float _timeToAttack;
     private float _timeToWaitBeforeReturnHand;
@@ -56,7 +54,6 @@ public class BossScript : MonoBehaviour, IDamageable
             case BossState.CoolDownAttack:
                 if (_timeToAttack < Time.time)
                 {
-                    // DOAttack
                     DoAttack();
                 }
                 break;
@@ -81,14 +78,12 @@ public class BossScript : MonoBehaviour, IDamageable
     public void StartBoss()
     {
         door.SetActive(true);
-        Debug.Log("Start");
+        onBossStart?.Invoke();
         _timeToAttack = Time.time + 2;
         _state = BossState.CoolDownAttack;
     }
     private void DoAttack()
     {
-        
-        Debug.Log("Do Attack");
         _state = BossState.Idle;
         _currentDamageTaken = 0;
         hurtBox.SetActive(false);
@@ -97,7 +92,6 @@ public class BossScript : MonoBehaviour, IDamageable
     }
     public void HandleBossWaitingAttack()
     {
-        Debug.Log("HandleBossWaitingAttack");
         hurtBox.SetActive(true);
         hitBox.SetActive(false);
         _state = BossState.Waiting;
@@ -106,7 +100,6 @@ public class BossScript : MonoBehaviour, IDamageable
 
     private void HandleBossReturnAttack()
     {
-        Debug.Log("HandleBossReturnAttack");
         hitBox.SetActive(false);
         _state = BossState.CoolDownAttack;
         _timeToAttack = Time.time + timeToWaitForNewAttack;
@@ -121,18 +114,15 @@ public class BossScript : MonoBehaviour, IDamageable
         life--;
         if (life <= 0)
         {
-            Debug.Log("Dead");
             HandleDeath();
             return;
         }
         
         if (_currentDamageTaken == 3)
         {
-            Debug.Log("3 damage taken");
             HandleBossReturnAttack();
             return;
         }
-        Debug.Log("Damage comum");
         _timeToWaitBeforeReturnHand = Time.time + timeToWaitAfterDamage;
     }
 
