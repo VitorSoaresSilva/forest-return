@@ -12,7 +12,7 @@ namespace ForestReturn.Scripts.Cameras
         private InputHandler _inputHandler;
         private CinemachineFreeLook _cineMachine;
 
-        private void Start()
+        private void Awake()
         {
             _inputHandler = GetComponent<InputHandler>();
         }
@@ -27,12 +27,14 @@ namespace ForestReturn.Scripts.Cameras
 
         public void HandleCameraRotation(float delta)
         {
+            if (_cineMachine == null) return;
             // _cineMachine.m_YAxis.Value += _inputHandler.mouseY * delta * _cineMachine.m_YAxis.m_MaxSpeed;
             _cineMachine.m_XAxis.Value += _inputHandler.mouseX * delta * _cineMachine.m_XAxis.m_MaxSpeed;
         }
 
         public void HandleCameraZoom(float delta)
         {
+            if (_cineMachine == null) return;
             _cineMachine.m_YAxis.Value += _inputHandler.mouseY * delta * _cineMachine.m_YAxis.m_MaxSpeed;
         }
     }
