@@ -18,9 +18,13 @@ namespace ForestReturn.Scripts.Managers
         public GameObject death;
         public GameObject blacksmith;
         public GameObject craftsman;
+        public GameObject dialog;
+
+        private DialogScreen _dialogScreen;
         public void Init()
         {
             Cursor.lockState = CursorLockMode.Locked;
+            _dialogScreen = GetComponentInChildren<DialogScreen>();
             if (LevelManager.InstanceExists)
             {
                 LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
@@ -72,6 +76,16 @@ namespace ForestReturn.Scripts.Managers
             OpenCanvas(CanvasType.Craftsman);
         }
 
+        public void OpenHud()
+        {
+            OpenCanvas(CanvasType.Hud);
+        }
+
+        public void SetDialogText(string text)
+        {
+            _dialogScreen.SetDialogText(text);
+        }
+
 
         public void OpenCanvas(CanvasType canvasType)
         {
@@ -114,6 +128,11 @@ namespace ForestReturn.Scripts.Managers
                     craftsman.SetActive(true);
                     // SetActionMap("Menu");
                     break;
+                case CanvasType.Dialog:
+                    CloseAllMenu();
+                    Cursor.lockState = CursorLockMode.None;
+                    dialog.SetActive(true);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(canvasType), canvasType, null);
             }
@@ -133,6 +152,7 @@ namespace ForestReturn.Scripts.Managers
             death.SetActive(false);
             blacksmith.SetActive(false);
             craftsman.SetActive(false);
+            dialog.SetActive(false);
         }
     }
 
@@ -143,6 +163,7 @@ namespace ForestReturn.Scripts.Managers
         Pause,
         Death,
         Blacksmith,
-        Craftsman
+        Craftsman,
+        Dialog
     }
 }
