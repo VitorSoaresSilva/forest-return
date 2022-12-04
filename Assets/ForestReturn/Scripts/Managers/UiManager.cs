@@ -85,7 +85,7 @@ namespace ForestReturn.Scripts.Managers
                     break;
                 case CanvasType.Hud:
                     CloseAllMenu();
-                    Cursor.lockState = CursorLockMode.None;
+                    // Cursor.lockState = CursorLockMode.None;
                     hud.SetActive(true);
                     Cursor.lockState = CursorLockMode.Locked;
                     // SetActionMap("gameplay");
