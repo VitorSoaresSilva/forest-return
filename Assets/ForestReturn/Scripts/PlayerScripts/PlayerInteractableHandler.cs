@@ -61,7 +61,6 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Trigger enter");
             if (!other.transform.root.TryGetComponent(out IInteractable interactable)) return;
             ObjectInteractable objectInteractable = new ObjectInteractable(other.transform.root,interactable);
             if (!interactables.Contains(objectInteractable))

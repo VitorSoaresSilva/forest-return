@@ -9,5 +9,6 @@ public class DoorActiveBoss : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         bossScript.StartBoss();
+        Destroy(gameObject);
     }
 }
