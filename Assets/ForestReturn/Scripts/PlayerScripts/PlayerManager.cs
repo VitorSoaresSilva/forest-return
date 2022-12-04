@@ -75,8 +75,8 @@ namespace ForestReturn.Scripts.PlayerScripts
 
         public void Init()
         {
-            _playerLocomotion.Init();
             _cameraHandler.Init();
+            _playerLocomotion.Init();
             
             OnHurt += HandleHurt;
             
@@ -334,7 +334,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             lifeMask.SetActive(false);
             manaMask.SetActive(false);
-            if (!LevelManager.InstanceExists) return;
+            if (!LevelManager.InstanceExists || !InventoryManager.InstanceExists) return;
             if (InventoryManager.Instance.triggerInventory.Contains(lifeMaskTrigger))
             {
                 lifeMask.SetActive(true);
@@ -352,6 +352,7 @@ namespace ForestReturn.Scripts.PlayerScripts
         {
             capsule.SetActive(false);
             flower.SetActive(false);
+            if (!InventoryManager.InstanceExists) return;
             if (InventoryManager.Instance.triggerInventory.Contains(capsuleTrigger))
             {
                 capsule.SetActive(true);
