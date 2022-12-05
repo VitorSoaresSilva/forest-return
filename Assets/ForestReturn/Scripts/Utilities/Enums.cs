@@ -13,6 +13,7 @@ namespace ForestReturn.Scripts.Utilities
             Level01,
             Level02,
             Level03,
+            EndGame
         }
     }
 }

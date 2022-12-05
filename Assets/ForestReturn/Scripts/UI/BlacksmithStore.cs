@@ -26,6 +26,7 @@ namespace ForestReturn.Scripts.UI
         //private CostByLevel? _slotsCost;
 
         public TextMeshProUGUI costWeaponText;
+        public TextMeshProUGUI levelWeaponText;
         //public TextMeshProUGUI costSlotText;
         public UnityEvent onWeaponCanUpgrade;
         public UnityEvent onWeaponNotEnoughMoneyToUpgrade;
@@ -51,6 +52,7 @@ namespace ForestReturn.Scripts.UI
         {
             //TODO: até então está desligando o texto quando nao tem dinheiro. Mudar pra desligar so quando nao tem mais nivel
             _swordInventorySlot = InventoryManager.Instance.equippedItems.swordInventorySlot;
+            levelWeaponText.text = $"Weapon level: {_swordInventorySlot.level}";
             _weaponLevelCost = _swordInventorySlot.level < BlacksmithConfigData.LevelsCost.Length
                 ? BlacksmithConfigData.LevelsCost[_swordInventorySlot.level]
                 : null;   
@@ -62,7 +64,7 @@ namespace ForestReturn.Scripts.UI
             _scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             if (CanUpgradeWeapon())
             {
-                costWeaponText.text = $"Level: Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
+                costWeaponText.text = $"Seed: {_weaponLevelCost?.SeedCost} - Scrap: {_weaponLevelCost?.ScrapCost}";
                 onWeaponCanUpgrade?.Invoke();
             }
             else
