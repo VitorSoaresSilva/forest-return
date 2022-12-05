@@ -24,7 +24,7 @@ namespace ForestReturn.Scripts.Managers
         public void Init()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            _dialogScreen = GetComponentInChildren<DialogScreen>();
+            _dialogScreen = GetComponentInChildren<DialogScreen>(true);
             if (LevelManager.InstanceExists)
             {
                 LevelManager.Instance.PlayerScript.OnDead += PlayerScriptOnOnDead;
@@ -78,11 +78,14 @@ namespace ForestReturn.Scripts.Managers
 
         public void OpenHud()
         {
-            OpenCanvas(CanvasType.Hud);
+            GameManager.Instance.ResumeGame();
+            // OpenCanvas(CanvasType.Hud);
         }
 
         public void SetDialogText(string text)
         {
+            GameManager.Instance.PauseGame();
+            OpenCanvas(CanvasType.Dialog);
             _dialogScreen.SetDialogText(text);
         }
 

@@ -11,24 +11,26 @@ namespace ForestReturn.Scripts.Interactable
     {
         public TriggerObject Lv1Complete;
         public TriggerObject Lv2Complete;
-        public TriggerObject Lv3Complete;
+        // public TriggerObject Lv3Complete;
+        public TriggerObject dialogTree1;
+        public TriggerObject dialogTree2;
+        public TriggerObject dialogTree3;
         public UnityEvent SetAsInteractable;
+        public UnityEvent SetAsInteractableCantUserPortal;
         public UnityEvent SetAsNotInteractable;
+        public UnityEvent SetAsNotInteractableCantUserPortal;
+
+
+        
+        
         
         [ContextMenu("Interact")]
         public void Interact()
         {
-            Debug.Log("Interact");
-            /*
-             * if Level 01 started and not finished
-             */
+            if (!CanUsePortal()) return;
             if (GameManager.InstanceExists && InventoryManager.InstanceExists)
             {
-                if (InventoryManager.Instance.triggerInventory.Contains(Lv3Complete))
-                {
-                    //level 4 or end game
-                }
-                else if (InventoryManager.Instance.triggerInventory.Contains(Lv2Complete))
+                if (InventoryManager.Instance.triggerInventory.Contains(Lv2Complete))
                 {
                     GameManager.Instance.ChangeScene(Enums.Scenes.Level03);
                 }
@@ -45,14 +47,46 @@ namespace ForestReturn.Scripts.Interactable
 
         public void SetStatusInteract(bool status)
         {
-            if (status)
+            if (!CanUsePortal())
             {
-                SetAsInteractable.Invoke();
+                if (status)
+                {
+                    SetAsInteractableCantUserPortal.Invoke();
+                }
+                else
+                {
+                    SetAsNotInteractableCantUserPortal.Invoke();
+                }
             }
             else
             {
-                SetAsNotInteractable.Invoke();
+                if (status)
+                {
+                    SetAsInteractable.Invoke();
+                }
+                else
+                {
+                    SetAsNotInteractable.Invoke();
+                }
             }
+        }
+
+        private bool CanUsePortal()
+        {
+            if (InventoryManager.Instance.triggerInventory.Contains(Lv2Complete) && InventoryManager.Instance.triggerInventory.Contains(dialogTree3))
+            {
+                return true;
+            }
+            if (InventoryManager.Instance.triggerInventory.Contains(Lv1Complete) && InventoryManager.Instance.triggerInventory.Contains(dialogTree2))
+            {
+                return true;
+            }
+            if(InventoryManager.Instance.triggerInventory.Contains(dialogTree1))
+            {
+                return true;
+            }
+            return false;
+            
         }
     }
 }
