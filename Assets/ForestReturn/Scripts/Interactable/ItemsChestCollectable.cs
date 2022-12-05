@@ -38,7 +38,7 @@ public class ItemsChestCollectable : MonoBehaviour, IInteractable
             InventoryManager.Instance.triggerInventory.AddTrigger(triggerObject);
             foreach (var items in chestObjects)
             {
-                InventoryManager.Instance.inventory.AddItem(items.item);
+                InventoryManager.Instance.inventory.AddItem(items.item,items.amount);
             }
             isOpen = true;
             //animação aberto
