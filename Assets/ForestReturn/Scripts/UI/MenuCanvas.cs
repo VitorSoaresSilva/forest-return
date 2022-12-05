@@ -17,7 +17,5 @@ namespace ForestReturn.Scripts.UI
             var scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
             scrapText.text = scrap!=null ? $"{scrap.amount}" : "0";
         }
-
-
     }
 }

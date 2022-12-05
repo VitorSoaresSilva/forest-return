@@ -19,6 +19,10 @@ namespace ForestReturn.Scripts.UI
         private InventorySlot _scrap;
         private SwordInventorySlot _swordInventorySlot;
         private CostByLevel? _weaponLevelCost;
+        
+        [SerializeField] private TextMeshProUGUI seedText;
+        [SerializeField] private TextMeshProUGUI scrapText;
+
         //private CostByLevel? _slotsCost;
 
         public TextMeshProUGUI costWeaponText;
@@ -31,11 +35,15 @@ namespace ForestReturn.Scripts.UI
         //public UnityEvent onSlotNotEnoughMoneyToUpgrade;
         // public UnityEvent onSlotNotMoreSlotsToUpgrade;
         // public UnityEvent onSlotToUpgraded;
-        
-        
+
         public void OnEnable()
         {
             UpdateData();
+            
+            var seed = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Seed);
+            seedText.text = seed!=null ? $"{seed.amount}" : "0";
+            var scrap = InventoryManager.Instance.inventory.FindCurrencyByType(CurrencyType.Scrap);
+            scrapText.text = scrap!=null ? $"{scrap.amount}" : "0";
         }
 
 
