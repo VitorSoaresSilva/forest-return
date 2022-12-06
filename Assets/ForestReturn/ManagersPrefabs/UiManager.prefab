@@ -2667,82 +2667,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &325279708702667825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4583493477181753291}
-  - component: {fileID: 3811228432447877407}
-  - component: {fileID: 4389956867364784853}
-  m_Layer: 5
-  m_Name: VidaBaixa
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &4583493477181753291
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325279708702667825}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5383328543329927768}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.3, y: 25.28}
-  m_SizeDelta: {x: -21.53, y: 243.59}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3811228432447877407
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325279708702667825}
-  m_CullTransparentMesh: 1
---- !u!114 &4389956867364784853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325279708702667825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9827859c19ef09446b17d23b611f88f7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &329889132120783003
 GameObject:
   m_ObjectHideFlags: 0
@@ -8066,9 +7990,15 @@ MonoBehaviour:
   - {fileID: 2576203912903108921}
   - {fileID: 1909906375265179043}
   - {fileID: 2993029316506057545}
-  fullLifeImage: {fileID: 4664757403450653966}
-  lowLifeImage: {fileID: 325279708702667825}
-  lifeMask: {fileID: 11400000, guid: 1f7e5771301ccda44b2d4540fc4af131, type: 2}
+  portrait: {fileID: 1160463273952769691}
+  fullSimple: {fileID: 21300000, guid: b4891e18df4019d4b8e881c4fe663dc6, type: 3}
+  lowSimple: {fileID: 21300000, guid: 9827859c19ef09446b17d23b611f88f7, type: 3}
+  fullLifeMask: {fileID: 21300000, guid: 0ca97a1ef35c81e439e9d319188c1e25, type: 3}
+  lowLifeMask: {fileID: 21300000, guid: 8e78816ded5d3444b8ae75ab86531d86, type: 3}
+  fullManaMask: {fileID: 21300000, guid: 1bb6c6f429995604e9a599e9b9ab78d0, type: 3}
+  lowManaMask: {fileID: 21300000, guid: 8d9c96a073f430744aff796b2507e9d0, type: 3}
+  lifeMaskTrigger: {fileID: 11400000, guid: 1f7e5771301ccda44b2d4540fc4af131, type: 2}
+  manaMaskTrigger: {fileID: 11400000, guid: 8fbb97a653c9653449b710b3eca230fd, type: 2}
 --- !u!1 &4152447752953491722
 GameObject:
   m_ObjectHideFlags: 0
@@ -10957,7 +10887,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2213786061346490958}
-  - {fileID: 4583493477181753291}
   m_Father: {fileID: 6595558648225842007}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -32,11 +32,20 @@ namespace ForestReturn.Scripts.UI
         public GameObject[] manaObjectsActive;
         public GameObject[] manaObjectsUsed;
 
-        [Header("Life Portrait")] 
-        [SerializeField] private GameObject fullLifeImage;
-        [SerializeField] private GameObject lowLifeImage;
+        [Header("Life Portrait")]
+        [SerializeField] private Image portrait;
 
-        [SerializeField] private TriggerObject lifeMask;
+        [SerializeField] private Sprite fullSimple;
+        [SerializeField] private Sprite lowSimple;
+        [SerializeField] private Sprite fullLifeMask;
+        [SerializeField] private Sprite lowLifeMask;
+        [SerializeField] private Sprite fullManaMask;
+        [SerializeField] private Sprite lowManaMask;
+        // [SerializeField] private GameObject fullLifeImage;
+        // [SerializeField] private GameObject lowLifeImage;
+
+        [SerializeField] private TriggerObject lifeMaskTrigger;
+        [SerializeField] private TriggerObject manaMaskTrigger;
         
         private void Start()
         {
@@ -69,7 +78,7 @@ namespace ForestReturn.Scripts.UI
         private void PlayerScriptOnOnMaxHealthChanged()
         {
             if (!InventoryManager.InstanceExists) return;
-            if (InventoryManager.Instance.triggerInventory.Contains(lifeMask))
+            if (InventoryManager.Instance.triggerInventory.Contains(lifeMaskTrigger))
             {
                 lifeParent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,900);
             }
@@ -164,17 +173,23 @@ namespace ForestReturn.Scripts.UI
         {
             var currentHealth = (float) LevelManager.Instance.PlayerScript.CurrentHealth;
             var maxHealth = (float) LevelManager.Instance.PlayerScript.MaxHealth;
+            var hasManaMask = InventoryManager.Instance.triggerInventory.Contains(lifeMaskTrigger);
+            var hasLifeMask = InventoryManager.Instance.triggerInventory.Contains(manaMaskTrigger);
 
-            if (currentHealth < (maxHealth * 0.8f))
+            bool isLowLife = currentHealth < maxHealth * 0.3f;
+            if (hasLifeMask)
             {
-                fullLifeImage.SetActive(false);
-                lowLifeImage.SetActive(true);
+                portrait.sprite = isLowLife ? lowLifeMask : fullLifeMask;
+            }else if (hasManaMask)
+            {
+                portrait.sprite = isLowLife ? lowManaMask : fullManaMask;
             }
             else
             {
-                fullLifeImage.SetActive(true);
-                lowLifeImage.SetActive(false);
+                portrait.sprite = isLowLife ? lowSimple : fullSimple;
             }
+            
+
             lifeSliderCurrentHealth.value = currentHealth / maxHealth;
             if (_coroutineDamage == null)
             {
